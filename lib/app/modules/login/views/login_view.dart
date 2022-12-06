@@ -74,7 +74,8 @@ class LoginView extends GetView<LoginController> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(width: 1, color: AppColor.secondaryExtraSoft),
+                    border: Border.all(
+                        width: 1, color: AppColor.secondaryExtraSoft),
                   ),
                   child: TextField(
                     style: TextStyle(fontSize: 14, fontFamily: 'poppins'),
@@ -107,7 +108,8 @@ class LoginView extends GetView<LoginController> {
                     margin: EdgeInsets.only(bottom: 24),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(width: 1, color: AppColor.secondaryExtraSoft),
+                      border: Border.all(
+                          width: 1, color: AppColor.secondaryExtraSoft),
                     ),
                     child: Obx(
                       () => TextField(
@@ -127,9 +129,12 @@ class LoginView extends GetView<LoginController> {
                           border: InputBorder.none,
                           hintText: "*************",
                           suffixIcon: IconButton(
-                            icon: (controller.obsecureText != false) ? SvgPicture.asset('assets/icons/show.svg') : SvgPicture.asset('assets/icons/hide.svg'),
+                            icon: (controller.obsecureText != false)
+                                ? SvgPicture.asset('assets/icons/show.svg')
+                                : SvgPicture.asset('assets/icons/hide.svg'),
                             onPressed: () {
-                              controller.obsecureText.value = !(controller.obsecureText.value);
+                              controller.obsecureText.value =
+                                  !(controller.obsecureText.value);
                             },
                           ),
                           hintStyle: TextStyle(
@@ -148,12 +153,14 @@ class LoginView extends GetView<LoginController> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
-                        if (controller.isLoading.isFalse) {
-                          await controller.login();
-                        }
+                        // if (controller.isLoading.isFalse) {
+                        //   await controller.login();
+                        // }
                       },
                       child: Text(
-                        (controller.isLoading.isFalse) ? 'Log in' : 'Loading...',
+                        (controller.isLoading.isFalse)
+                            ? 'Log in'
+                            : 'Loading...',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'poppins',
@@ -162,8 +169,8 @@ class LoginView extends GetView<LoginController> {
                       ),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 18),
+                        backgroundColor: AppColor.primary,
                         elevation: 0,
-                        primary: AppColor.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -179,7 +186,7 @@ class LoginView extends GetView<LoginController> {
                     onPressed: () => Get.toNamed(Routes.FORGOT_PASSWORD),
                     child: Text("Forgot your password?"),
                     style: TextButton.styleFrom(
-                      primary: AppColor.secondarySoft,
+                      foregroundColor: AppColor.secondarySoft,
                     ),
                   ),
                 ),
