@@ -46,10 +46,12 @@ class LoginController extends GetxController {
                 try {
                   await credential.user!.sendEmailVerification();
                   Get.back();
-                  CustomToast.successToast("Success", "We've send email verification to your email");
+                  CustomToast.successToast(
+                      "Success", "We've send email verification to your email");
                   isLoading.value = false;
                 } catch (e) {
-                  CustomToast.errorToast("Error", "Cant send email verification. Error because : ${e.toString()}");
+                  CustomToast.errorToast("Error",
+                      "Cant send email verification. Error because : ${e.toString()}");
                 }
               },
             );
@@ -67,7 +69,8 @@ class LoginController extends GetxController {
         CustomToast.errorToast("Error", "Error because : ${e.toString()}");
       }
     } else {
-      CustomToast.errorToast("Error", "You need to fill email and password form");
+      CustomToast.errorToast(
+          "Error", "You need to fill email and password form");
     }
   }
 }

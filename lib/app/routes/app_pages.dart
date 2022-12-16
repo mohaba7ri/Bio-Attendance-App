@@ -18,6 +18,8 @@ import 'package:presence/app/modules/new_password/bindings/new_password_binding.
 import 'package:presence/app/modules/new_password/views/new_password_view.dart';
 import 'package:presence/app/modules/profile/bindings/profile_binding.dart';
 import 'package:presence/app/modules/profile/views/profile_view.dart';
+import 'package:presence/app/modules/sign_up/bindings/sign_up_binding.dart';
+import 'package:presence/app/modules/sign_up/views/sign_up_view.dart';
 import 'package:presence/app/modules/update_pofile/bindings/update_pofile_binding.dart';
 import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart';
 
@@ -81,5 +83,7 @@ class AppPages {
       page: () => AllPresenceView(),
       binding: AllPresenceBinding(),
     ),
+    GetPage(
+        name: _Paths.SIGNUP, page: () => SignUpView(), binding: SignUpBinding())
   ];
 }

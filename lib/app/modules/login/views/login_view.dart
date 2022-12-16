@@ -153,9 +153,9 @@ class LoginView extends GetView<LoginController> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       onPressed: () async {
-                        // if (controller.isLoading.isFalse) {
-                        //   await controller.login();
-                        // }
+                        if (controller.isLoading.isFalse) {
+                          await controller.login();
+                        }
                       },
                       child: Text(
                         (controller.isLoading.isFalse)
