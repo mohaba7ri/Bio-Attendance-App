@@ -40,37 +40,25 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(20),
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomInput(
-              controller: controller.idC,
-              label: 'Employee ID',
-              hint: '1000000001',
-            ),
+          CustomInput(
+            controller: controller.idC,
+            label: 'Employee ID',
+            hint: '1000000001',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomInput(
-              controller: controller.nameC,
-              label: 'Full Name',
-              hint: 'Johnn Doe',
-            ),
+          CustomInput(
+            controller: controller.nameC,
+            label: 'Full Name',
+            hint: 'Johnn Doe',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomInput(
-              controller: controller.emailC,
-              label: 'Email',
-              hint: 'youremail@email.com',
-            ),
+          CustomInput(
+            controller: controller.emailC,
+            label: 'Email',
+            hint: 'youremail@email.com',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomInput(
-              controller: controller.jobC,
-              label: 'Job',
-              hint: 'Employee Job',
-            ),
+          CustomInput(
+            controller: controller.jobC,
+            label: 'Job',
+            hint: 'Employee Job',
           ),
           SizedBox(height: 8),
           Container(

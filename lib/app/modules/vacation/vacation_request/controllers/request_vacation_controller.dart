@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
+import '../../../../widgets/toast/custom_toast.dart';
 
 class VacationRequestController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -22,8 +23,7 @@ class VacationRequestController extends GetxController {
   // FilePickerResult? vacationFile;
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
-  var leaveType = ['please select', 'Sick', 'Causal', 'Travel'];
-
+  var leaveType = ['please select', 'sick', 'causal'];
   CollectionReference vacationRequest =
       FirebaseFirestore.instance.collection('vacationrequest');
   Future uploadFile() async {
@@ -110,21 +110,15 @@ class VacationRequestController extends GetxController {
     final date = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime.now(),
+      firstDate: DateTime(1900),
       lastDate: DateTime(2100),
     );
     return date!;
   }
 
-  leaveTypeValidate() {
-    if (leaveTypeValue.value == 'please select') {
-      return 'Please choos leave type';
-    }
-  }
-
   startDayValdate() {
     if (startDateController.value.text.isEmpty) {
-      return 'Please pick date';
+      return 'fuck pick date';
     }
   }
 

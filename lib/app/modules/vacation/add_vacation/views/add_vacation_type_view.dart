@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:presence/app/modules/vacation/add_vacation/controllers/add_vacation_controller.dart';
+
 import 'package:presence/app/widgets/custom_input.dart';
 import 'package:get/get.dart';
+
+import '../controllers/add_vacation_type_controller.dart';
 
 class AddVacationTypeView extends GetView<AddVacationTypeController> {
   @override
