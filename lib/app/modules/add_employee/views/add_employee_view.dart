@@ -40,25 +40,37 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(20),
         children: [
-          CustomInput(
-            controller: controller.idC,
-            label: 'Employee ID',
-            hint: '1000000001',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomInput(
+              controller: controller.idC,
+              label: 'Employee ID',
+              hint: '1000000001',
+            ),
           ),
-          CustomInput(
-            controller: controller.nameC,
-            label: 'Full Name',
-            hint: 'Johnn Doe',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomInput(
+              controller: controller.nameC,
+              label: 'Full Name',
+              hint: 'Johnn Doe',
+            ),
           ),
-          CustomInput(
-            controller: controller.emailC,
-            label: 'Email',
-            hint: 'youremail@email.com',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomInput(
+              controller: controller.emailC,
+              label: 'Email',
+              hint: 'youremail@email.com',
+            ),
           ),
-          CustomInput(
-            controller: controller.jobC,
-            label: 'Job',
-            hint: 'Employee Job',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomInput(
+              controller: controller.jobC,
+              label: 'Job',
+              hint: 'Employee Job',
+            ),
           ),
           SizedBox(height: 8),
           Container(
@@ -71,14 +83,16 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                   }
                 },
                 child: Text(
-                  (controller.isLoading.isFalse) ? 'Add Employee' : 'Loading...',
+                  (controller.isLoading.isFalse)
+                      ? 'Add Employee'
+                      : 'Loading...',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'poppins',
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: AppColor.primary,
+                  backgroundColor: AppColor.primary,
                   padding: EdgeInsets.symmetric(vertical: 18),
                   elevation: 0,
                   shape: RoundedRectangleBorder(

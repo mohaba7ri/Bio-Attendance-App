@@ -18,10 +18,19 @@ import 'package:presence/app/modules/new_password/bindings/new_password_binding.
 import 'package:presence/app/modules/new_password/views/new_password_view.dart';
 import 'package:presence/app/modules/profile/bindings/profile_binding.dart';
 import 'package:presence/app/modules/profile/views/profile_view.dart';
-import 'package:presence/app/modules/sign_up/bindings/sign_up_binding.dart';
-import 'package:presence/app/modules/sign_up/views/sign_up_view.dart';
+import 'package:presence/app/modules/sign_up/admin/bindings/admin_sign_up_binding.dart';
+import 'package:presence/app/modules/sign_up/company/bindings/company_sign_up_binding.dart';
+import 'package:presence/app/modules/sign_up/company/views/company_sign_up_view.dart';
 import 'package:presence/app/modules/update_pofile/bindings/update_pofile_binding.dart';
 import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart';
+import 'package:presence/app/modules/vacation/add_vacation/bindings/add_vacation_binding.dart';
+import 'package:presence/app/modules/vacation/add_vacation/views/add_vacation_view.dart';
+
+import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
+import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
+import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
+import '../modules/vacation/view_vacation/bindings/vacation_binding.dart';
+import '../modules/vacation/view_vacation/views/vacation_view.dart';
 
 part 'app_routes.dart';
 
@@ -84,6 +93,28 @@ class AppPages {
       binding: AllPresenceBinding(),
     ),
     GetPage(
-        name: _Paths.SIGNUP, page: () => SignUpView(), binding: SignUpBinding())
+        name: _Paths.COMPANYSIGNUP,
+        page: () => CompanySignUpView(),
+        binding: SignUpBinding()),
+    GetPage(
+        name: _Paths.ADMINSIGNUP,
+        page: () => AdminSignUpView(),
+        binding: AdminSignUpBinding()),
+    GetPage(
+        name: _Paths.ADMINSIGNUP,
+        page: () => AdminSignUpView(),
+        binding: AdminSignUpBinding()),
+    GetPage(
+        name: _Paths.ADD_VACATION_TYPE,
+        page: () => AddVacationTypeView(),
+        binding: AddVacationTypeBinding()),
+    GetPage(
+        name: _Paths.VACATION_TYPE,
+        page: () => VacationTypeView(),
+        binding: VacationTypeBinding()),
+    GetPage(
+        name: _Paths.ADD_VACATION_REQUEST,
+        page: () => RequestVacationView(),
+        binding: RequestVacationBinding()),
   ];
 }

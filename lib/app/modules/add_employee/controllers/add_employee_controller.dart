@@ -36,11 +36,15 @@ class AddEmployeeController extends GetxController {
   }
 
   Future<void> addEmployee() async {
-    if (idC.text.isNotEmpty && nameC.text.isNotEmpty && emailC.text.isNotEmpty && jobC.text.isNotEmpty) {
+    if (idC.text.isNotEmpty &&
+        nameC.text.isNotEmpty &&
+        emailC.text.isNotEmpty &&
+        jobC.text.isNotEmpty) {
       isLoading.value = true;
       CustomAlertDialog.confirmAdmin(
         title: 'Admin confirmation',
-        message: 'you need to confirm that you are an administrator by inputting your password',
+        message:
+            'you need to confirm that you are an administrator by inputting your password',
         onCancel: () {
           isLoading.value = false;
           Get.back();
@@ -65,19 +69,22 @@ class AddEmployeeController extends GetxController {
       String adminEmail = auth.currentUser!.email!;
       try {
         //checking if the pass is match
-        await auth.signInWithEmailAndPassword(email: adminEmail, password: adminPassC.text);
+        await auth.signInWithEmailAndPassword(
+            email: adminEmail, password: adminPassC.text);
         //get default password
         String defaultPassword = getDefaultPassword();
         String defaultRole = getDefaultRole();
         // if the password is match, then continue the create user process
-        UserCredential employeeCredential = await auth.createUserWithEmailAndPassword(
+        UserCredential employeeCredential =
+            await auth.createUserWithEmailAndPassword(
           email: emailC.text,
           password: defaultPassword,
         );
 
         if (employeeCredential.user != null) {
           String uid = employeeCredential.user!.uid;
-          DocumentReference employee = firestore.collection("employee").doc(uid);
+          DocumentReference employee =
+              firestore.collection("employee").doc(uid);
           await employee.set({
             "employee_id": idC.text,
             "name": nameC.text,
@@ -92,7 +99,8 @@ class AddEmployeeController extends GetxController {
           //need to logout because the current user is changed after adding new user
           auth.signOut();
           // need to relogin to admin account
-          await auth.signInWithEmailAndPassword(email: adminEmail, password: adminPassC.text);
+          await auth.signInWithEmailAndPassword(
+              email: adminEmail, password: adminPassC.text);
 
           // clear form
 
