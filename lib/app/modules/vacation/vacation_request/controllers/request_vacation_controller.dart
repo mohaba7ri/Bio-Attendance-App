@@ -23,6 +23,7 @@ class VacationRequestController extends GetxController {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
   var leaveType = ['please select', 'Sick', 'Causal', 'Travel'];
+
   CollectionReference vacationRequest =
       FirebaseFirestore.instance.collection('vacationrequest');
   Future uploadFile() async {
