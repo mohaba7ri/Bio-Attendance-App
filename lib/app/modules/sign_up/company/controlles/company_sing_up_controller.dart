@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-import '../../../../company_data.dart';
-import '../../../routes/app_pages.dart';
-import '../../../widgets/toast/custom_toast.dart';
+import '../../../../../company_data.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 
-class SignUpController extends GetxController {
+class CompanySignUpController extends GetxController {
   RxBool isLoading = false.obs;
+  late String name;
+  late String phone;
+  late String address;
+  late String latitude;
+  late String longitude;
   CollectionReference company =
       FirebaseFirestore.instance.collection('company');
   launchOfficeOnMap() {
@@ -22,8 +27,7 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> signUp(String name, String phone, String address,
-      String latitude, String longitude) async {
+  Future<void> signUp() async {
     if (name.isNotEmpty &&
         phone.isNotEmpty &&
         address.isNotEmpty &&

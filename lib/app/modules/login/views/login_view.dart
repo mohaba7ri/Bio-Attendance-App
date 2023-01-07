@@ -15,7 +15,7 @@ class LoginView extends GetView<LoginController> {
         shrinkWrap: true,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 35 / 100,
+            height: MediaQuery.of(context).size.height * 20 / 100,
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.only(left: 32),
             decoration: BoxDecoration(
@@ -29,32 +29,33 @@ class LoginView extends GetView<LoginController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Open Source\nPresence App",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontFamily: 'poppins',
-                    height: 150 / 100,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                // Text(
+                //   "Open Source\nPresence App",
+                //   style: TextStyle(
+                //     fontSize: 28,
+                //     color: Colors.white,
+                //     fontFamily: 'poppins',
+                //     height: 150 / 100,
+                //     fontWeight: FontWeight.w600,
+                //   ),
+                // ),
                 SizedBox(height: 10),
-                Text(
-                  "by github.com/mrezkys",
-                  style: TextStyle(color: Colors.white),
-                ),
+                // Text(
+                //   "by github.com/mrezkys",
+                //   style: TextStyle(color: Colors.white),
+                // ),
               ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 65 / 100,
+            height: MediaQuery.of(context).size.height * 80 / 100,
             width: MediaQuery.of(context).size.width,
             color: Colors.white,
             padding: EdgeInsets.only(left: 20, right: 20, top: 36, bottom: 84),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 24),

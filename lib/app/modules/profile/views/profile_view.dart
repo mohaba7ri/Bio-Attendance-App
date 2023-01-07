@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
@@ -41,7 +42,10 @@ class ProfileView extends GetView<ProfileController> {
                           height: 124,
                           color: Colors.blue,
                           child: Image.network(
-                            (userData["avatar"] == null || userData['avatar'] == "") ? "https://ui-avatars.com/api/?name=${userData['name']}/" : userData['avatar'],
+                            (userData["avatar"] == null ||
+                                    userData['avatar'] == "")
+                                ? "https://ui-avatars.com/api/?name=${userData['name']}/"
+                                : userData['avatar'],
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -50,7 +54,8 @@ class ProfileView extends GetView<ProfileController> {
                         margin: EdgeInsets.only(top: 16, bottom: 4),
                         child: Text(
                           userData["name"],
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                       ),
                       Text(
@@ -65,44 +70,370 @@ class ProfileView extends GetView<ProfileController> {
                     margin: EdgeInsets.only(top: 42),
                     child: Column(
                       children: [
-                        MenuTile(
-                          title: 'Update Profile',
-                          icon: SvgPicture.asset(
-                            'assets/icons/profile-1.svg',
-                          ),
-                          onTap: () => Get.toNamed(Routes.UPDATE_POFILE, arguments: userData),
-                        ),
                         (userData["role"] == "admin")
-                            ? MenuTile(
-                                title: 'Add Employee',
-                                icon: SvgPicture.asset(
-                                  'assets/icons/people.svg',
+                            ? ExpansionTile(
+                                expandedAlignment: Alignment.topLeft,
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: SvgPicture.asset(
+                                        'assets/icons/company.svg',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text('company management'),
+                                  ],
                                 ),
-                                onTap: () => Get.toNamed(Routes.ADD_EMPLOYEE),
+                                children: [
+                                  ExpansionTile(
+                                    expandedAlignment: Alignment.topLeft,
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 30,
+                                          width: 30,
+                                          child: SvgPicture.asset(
+                                            'assets/icons/company.svg',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text('company'),
+                                      ],
+                                    ),
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            MenuTile(
+                                              title: 'Update company',
+                                              icon: SvgPicture.asset(
+                                                'assets/icons/update.svg',
+                                              ),
+                                              onTap: () => Get.toNamed(
+                                                  Routes.UPDATE_POFILE,
+                                                  arguments: userData),
+                                            ),
+                                            MenuTile(
+                                              title: 'Company settings',
+                                              icon: SvgPicture.asset(
+                                                'assets/icons/setting.svg',
+                                              ),
+                                              onTap: () => Get.toNamed(
+                                                  Routes.CHANGE_PASSWORD),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    expandedAlignment: Alignment.topLeft,
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 30,
+                                          width: 30,
+                                          child: SvgPicture.asset(
+                                            'assets/icons/company.svg',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 3,
+                                        ),
+                                        Text('Branch'),
+                                      ],
+                                    ),
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            MenuTile(
+                                              title: 'Add Brach',
+                                              icon: SvgPicture.asset(
+                                                'assets/icons/update.svg',
+                                              ),
+                                              onTap: () => Get.toNamed(
+                                                  Routes.UPDATE_POFILE,
+                                                  arguments: userData),
+                                            ),
+                                            MenuTile(
+                                              title: 'Branch List',
+                                              icon: SvgPicture.asset(
+                                                'assets/icons/company.svg',
+                                              ),
+                                              onTap: () => Get.toNamed(
+                                                  Routes.CHANGE_PASSWORD),
+                                            ),
+                                            MenuTile(
+                                              title: 'Branch Settings',
+                                              icon: SvgPicture.asset(
+                                                'assets/icons/setting.svg',
+                                              ),
+                                              onTap: () => Get.toNamed(
+                                                  Routes.CHANGE_PASSWORD),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(left: 10),
+                                  //   child: Column(
+                                  //     crossAxisAlignment:
+                                  //         CrossAxisAlignment.start,
+                                  //     children: [
+                                  //       MenuTile(
+                                  //         title: 'Update company',
+                                  //         icon: SvgPicture.asset(
+                                  //           'assets/icons/update.svg',
+                                  //         ),
+                                  //         onTap: () => Get.toNamed(
+                                  //             Routes.UPDATE_POFILE,
+                                  //             arguments: userData),
+                                  //       ),
+                                  //       MenuTile(
+                                  //         title: 'Add company branch',
+                                  //         icon: SvgPicture.asset(
+                                  //           'assets/icons/company.svg',
+                                  //         ),
+                                  //         onTap: () => Get.toNamed(
+                                  //             Routes.CHANGE_PASSWORD),
+                                  //       ),
+                                  //       MenuTile(
+                                  //         title: 'Company settings',
+                                  //         icon: SvgPicture.asset(
+                                  //           'assets/icons/setting.svg',
+                                  //         ),
+                                  //         onTap: () => Get.toNamed(
+                                  //             Routes.CHANGE_PASSWORD),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                ],
                               )
                             : SizedBox(),
-                        MenuTile(
-                          title: 'Change Password',
-                          icon: SvgPicture.asset(
-                            'assets/icons/password.svg',
+                        (userData["role"] == "admin")
+                            ? ExpansionTile(
+                                expandedAlignment: Alignment.topLeft,
+                                title: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: SvgPicture.asset(
+                                        'assets/icons/manage-employee.svg',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text('Employee Management'),
+                                  ],
+                                ),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MenuTile(
+                                          title: 'Employee List',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/employee-list.png'),
+                                          ),
+                                          onTap: () =>
+                                              Get.toNamed(Routes.ADD_EMPLOYEE),
+                                        ),
+                                        MenuTile(
+                                          title: 'Add Employee',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/add-employee.png'),
+                                          ),
+                                          onTap: () =>
+                                              Get.toNamed(Routes.ADD_EMPLOYEE),
+                                        ),
+                                        MenuTile(
+                                          title: 'Request vacation',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/update-employee.png'),
+                                          ),
+                                          onTap: () =>
+                                              Get.toNamed(Routes.ADD_EMPLOYEE),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox(),
+                        (userData["role"] == "admin")
+                            ? ExpansionTile(
+                                expandedAlignment: Alignment.topLeft,
+                                title: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: SvgPicture.asset(
+                                        'assets/icons/manage-employee.svg',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text('Vacation Management'),
+                                  ],
+                                ),
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MenuTile(
+                                          title: 'Vacation type',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/employee-list.png'),
+                                          ),
+                                          onTap: () =>
+                                              Get.toNamed(Routes.VACATION_TYPE),
+                                        ),
+                                        MenuTile(
+                                          title: 'Vacation Request',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/add-employee.png'),
+                                          ),
+                                          onTap: () => Get.toNamed(
+                                              Routes.ADD_VACATION_REQUEST),
+                                        ),
+                                        MenuTile(
+                                          title: 'Request vacation',
+                                          icon: Image(
+                                            image: AssetImage(
+                                                'assets/icons/update-employee.png'),
+                                          ),
+                                          onTap: () =>
+                                              Get.toNamed(Routes.ADD_EMPLOYEE),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox(),
+                        ExpansionTile(
+                          expandedAlignment: Alignment.topLeft,
+                          title: Row(
+                            children: [
+                              SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: Image(
+                                  image: AssetImage('assets/icons/profile.png'),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text('Manage Profile'),
+                            ],
                           ),
-                          onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
-                        ),
-                        MenuTile(
-                          isDanger: true,
-                          title: 'Sign Out',
-                          icon: SvgPicture.asset(
-                            'assets/icons/logout.svg',
-                          ),
-                          onTap: controller.logout,
-                        ),
-                        Container(
-                          height: 1,
-                          color: AppColor.primaryExtraSoft,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MenuTile(
+                                    title: 'Update Profile',
+                                    icon: SvgPicture.asset(
+                                      'assets/icons/profile-1.svg',
+                                    ),
+                                    onTap: () => Get.toNamed(
+                                        Routes.UPDATE_POFILE,
+                                        arguments: userData),
+                                  ),
+                                  MenuTile(
+                                    title: 'Change Password',
+                                    icon: SvgPicture.asset(
+                                      'assets/icons/password.svg',
+                                    ),
+                                    onTap: () =>
+                                        Get.toNamed(Routes.CHANGE_PASSWORD),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
+                  MenuTile(
+                    isDanger: true,
+                    title: 'Theme',
+                    icon: Container(
+                      color: Colors.red,
+                      child: Icon(
+                        Ionicons.sunny,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: controller.logout,
+                  ),
+                  MenuTile(
+                    isDanger: true,
+                    title: 'Language',
+                    icon: Icon(
+                      Ionicons.globe_outline,
+                    ),
+                    onTap: controller.logout,
+                  ),
+                  MenuTile(
+                    isDanger: true,
+                    title: 'Sign Out',
+                    icon: SvgPicture.asset(
+                      'assets/icons/logout.svg',
+                    ),
+                    onTap: controller.logout,
+                  ),
+
+                  Container(
+                    height: 1,
+                    color: AppColor.primaryExtraSoft,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  )
                 ],
               );
             default:
@@ -131,7 +462,7 @@ class MenuTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
@@ -158,7 +489,7 @@ class MenuTile extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  color: (isDanger == false) ? AppColor.secondary : AppColor.error,
+                  color: AppColor.secondary,
                 ),
               ),
             ),
@@ -166,7 +497,8 @@ class MenuTile extends StatelessWidget {
               margin: EdgeInsets.only(left: 24),
               child: SvgPicture.asset(
                 'assets/icons/arrow-right.svg',
-                color: (isDanger == false) ? AppColor.secondary : AppColor.error,
+                color:
+                    (isDanger == false) ? AppColor.secondary : AppColor.error,
               ),
             ),
           ],

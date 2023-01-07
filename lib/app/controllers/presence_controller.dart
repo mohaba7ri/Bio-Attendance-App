@@ -19,9 +19,15 @@ class PresenceController extends GetxController {
     Map<String, dynamic> determinePosition = await _determinePosition();
     if (!determinePosition["error"]) {
       Position position = determinePosition["position"];
-      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
-      String address = "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
-      double distance = Geolocator.distanceBetween(CompanyData.office['latitude'], CompanyData.office['longitude'], position.latitude, position.longitude);
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      String address =
+          "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
+      double distance = Geolocator.distanceBetween(
+          CompanyData.office['latitude'],
+          CompanyData.office['longitude'],
+          position.latitude,
+          position.longitude);
 
       // update position ( store to database )
       await updatePosition(position, address);
@@ -44,7 +50,7 @@ class PresenceController extends GetxController {
     bool in_area,
   ) async {
     CustomAlertDialog.showPresenceAlert(
-      title: "Are you want to check in?",
+      title: "Do you want to check in?",
       message: "you need to confirm before you\ncan do presence now",
       onCancel: () => Get.back(),
       onConfirm: () async {
@@ -76,7 +82,7 @@ class PresenceController extends GetxController {
     bool in_area,
   ) async {
     CustomAlertDialog.showPresenceAlert(
-      title: "Are you want to check in?",
+      title: "Do you want to check in?",
       message: "you need to confirm before you\ncan do presence now",
       onCancel: () => Get.back(),
       onConfirm: () async {
@@ -108,7 +114,7 @@ class PresenceController extends GetxController {
     bool in_area,
   ) async {
     CustomAlertDialog.showPresenceAlert(
-      title: "Are you want to check out?",
+      title: "Do you want to check out?",
       message: "you need to confirm before you\ncan do presence now",
       onCancel: () => Get.back(),
       onConfirm: () async {
@@ -130,12 +136,16 @@ class PresenceController extends GetxController {
     );
   }
 
-  Future<void> processPresence(Position position, String address, double distance) async {
+  Future<void> processPresence(
+      Position position, String address, double distance) async {
     String uid = auth.currentUser!.uid;
-    String todayDocId = DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
+    String todayDocId =
+        DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
 
-    CollectionReference<Map<String, dynamic>> presenceCollection = await firestore.collection("employee").doc(uid).collection("presence");
-    QuerySnapshot<Map<String, dynamic>> snapshotPreference = await presenceCollection.get();
+    CollectionReference<Map<String, dynamic>> presenceCollection =
+        await firestore.collection("employee").doc(uid).collection("presence");
+    QuerySnapshot<Map<String, dynamic>> snapshotPreference =
+        await presenceCollection.get();
 
     bool in_area = false;
     if (distance <= 200) {
@@ -144,23 +154,28 @@ class PresenceController extends GetxController {
 
     if (snapshotPreference.docs.length == 0) {
       //case :  never presence -> set check in presence
-      firstPresence(presenceCollection, todayDocId, position, address, distance, in_area);
+      firstPresence(
+          presenceCollection, todayDocId, position, address, distance, in_area);
     } else {
-      DocumentSnapshot<Map<String, dynamic>> todayDoc = await presenceCollection.doc(todayDocId).get();
+      DocumentSnapshot<Map<String, dynamic>> todayDoc =
+          await presenceCollection.doc(todayDocId).get();
       // already presence before ( another day ) -> have been check in today or check out?
       if (todayDoc.exists == true) {
         Map<String, dynamic>? dataPresenceToday = todayDoc.data();
         // case : already check in
         if (dataPresenceToday?["keluar"] != null) {
           // case : already check in and check out
-          CustomToast.successToast("Success", "you already check in and check out");
+          CustomToast.successToast(
+              "Success", "you already check in and check out");
         } else {
           // case : already check in and not yet check out ( check out )
-          checkoutPresence(presenceCollection, todayDocId, position, address, distance, in_area);
+          checkoutPresence(presenceCollection, todayDocId, position, address,
+              distance, in_area);
         }
       } else {
         // case : not yet check in today
-        checkinPresence(presenceCollection, todayDocId, position, address, distance, in_area);
+        checkinPresence(presenceCollection, todayDocId, position, address,
+            distance, in_area);
       }
     }
   }
@@ -200,7 +215,8 @@ class PresenceController extends GetxController {
         // your App should show an explanatory UI now.
         // return Future.error('Location permissions are denied');
         return {
-          "message": "Tidak dapat mengakses karena anda menolak permintaan lokasi",
+          "message":
+              "Tidak dapat mengakses karena anda menolak permintaan lokasi",
           "error": true,
         };
       }
@@ -209,14 +225,16 @@ class PresenceController extends GetxController {
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       return {
-        "message": "Location permissions are permanently denied, we cannot request permissions.",
+        "message":
+            "Location permissions are permanently denied, we cannot request permissions.",
         "error": true,
       };
     }
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
     return {
       "position": position,
       "message": "Berhasil mendapatkan posisi device",

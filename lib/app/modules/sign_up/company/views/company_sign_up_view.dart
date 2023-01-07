@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/sign_up/controlles/sing_up_controller.dart';
+import 'package:presence/app/modules/profile/views/profile.dart';
+import 'package:presence/app/modules/sign_up/company/controlles/company_sing_up_controller.dart';
 
-import '../../../style/app_color.dart';
+import '../../../../style/app_color.dart';
 
-class SignUpView extends GetView<SignUpController> {
-  SignUpController _signUpController = SignUpController();
+class CompanySignUpView extends GetView<CompanySignUpController> {
+  CompanySignUpController _signUpController = CompanySignUpController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late String name;
-  late String phone;
-  late String address;
-  late String latitude;
-  late String longitude;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +33,7 @@ class SignUpView extends GetView<SignUpController> {
                       children: [
                         TextFormField(
                           onChanged: ((value) {
-                            name = value;
+                            _signUpController.name = value;
                           }),
                           decoration: _signUpController.textDecoration.copyWith(
                               hintText: 'Company Name',
@@ -53,7 +50,7 @@ class SignUpView extends GetView<SignUpController> {
                         ),
                         TextFormField(
                           onChanged: ((value) {
-                            phone = value;
+                            _signUpController.phone = value;
                           }),
                           decoration: _signUpController.textDecoration.copyWith(
                               hintText: 'Phone Number',
@@ -70,7 +67,7 @@ class SignUpView extends GetView<SignUpController> {
                         ),
                         TextFormField(
                           onChanged: ((value) {
-                            address = value;
+                            _signUpController.address = value;
                           }),
                           decoration: _signUpController.textDecoration.copyWith(
                               hintText: 'Address', labelText: 'Address'),
@@ -84,11 +81,13 @@ class SignUpView extends GetView<SignUpController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            height: 220,
+                            height: 180,
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: Colors.brown.shade300)),
                             child: Column(
                               children: [
                                 Center(child: Text('Set Company Location ')),
@@ -111,7 +110,8 @@ class SignUpView extends GetView<SignUpController> {
                                                   0.5,
                                               child: TextFormField(
                                                 onChanged: ((value) {
-                                                  latitude = value;
+                                                  _signUpController.latitude =
+                                                      value;
                                                 }),
                                                 decoration: _signUpController
                                                     .textDecoration
@@ -136,7 +136,8 @@ class SignUpView extends GetView<SignUpController> {
                                                   0.5,
                                               child: TextFormField(
                                                 onChanged: ((value) {
-                                                  longitude = value;
+                                                  _signUpController.longitude =
+                                                      value;
                                                 }),
                                                 decoration: _signUpController
                                                     .textDecoration
@@ -191,6 +192,54 @@ class SignUpView extends GetView<SignUpController> {
                         ),
                       ],
                     ),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       child: SizedBox(
+                    //         width: MediaQuery.of(context).size.width * 0.1,
+                    //         child: TextFormField(
+                    //           onChanged: ((value) {
+                    //             _signUpController.latitude = value;
+                    //           }),
+                    //           decoration: _signUpController.textDecoration
+                    //               .copyWith(
+                    //                   hintText: 'Start time',
+                    //                   labelText: 'Start time'),
+                    //           validator: (value) {
+                    //             if (value!.isEmpty) {
+                    //               return 'please enter start time';
+                    //             }
+                    //             return null;
+                    //           },
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //     Expanded(
+                    //       child: SizedBox(
+                    //         width: MediaQuery.of(context).size.width * 0.1,
+                    //         child: TextFormField(
+                    //           onChanged: ((value) {
+                    //             _signUpController.latitude = value;
+                    //           }),
+                    //           decoration: _signUpController.textDecoration
+                    //               .copyWith(
+                    //                   hintText: 'End Time',
+                    //                   labelText: 'End Time'),
+                    //           validator: (value) {
+                    //             if (value!.isEmpty) {
+                    //               return 'please enter latitude';
+                    //             }
+                    //             return null;
+                    //           },
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+
                     SizedBox(
                       height: 8,
                     ),
@@ -199,17 +248,20 @@ class SignUpView extends GetView<SignUpController> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              if (controller.isLoading.isFalse) {
-                                await controller.signUp(
-                                    name, phone, address, latitude, longitude);
-                                print('thename is${name}');
-                              }
-                            }
+                            navigator!.pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => ProfileScreen()),
+                                (route) => false);
+                            // if (_formKey.currentState!.validate()) {
+                            //   if (controller.isLoading.isFalse) {
+                            //     await controller.signUp();
+                            //     //   print('thename is${name}');
+                            //   }
+                            // }
                           },
                           child: Text(
                             (controller.isLoading.isFalse)
-                                ? 'Log in'
+                                ? 'Sign Up'
                                 : 'Loading...',
                             style: TextStyle(
                               fontSize: 16,

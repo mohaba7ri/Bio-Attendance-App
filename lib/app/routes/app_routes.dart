@@ -5,7 +5,8 @@ abstract class Routes {
   Routes._();
 
   static const HOME = _Paths.HOME;
-  static const SIGNUP = _Paths.SIGNUP;
+  static const ADMINSIGNUP = _Paths.ADMINSIGNUP;
+  static const COMPANYSIGNUP = _Paths.COMPANYSIGNUP;
   static const LOGIN = _Paths.LOGIN;
   static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
@@ -15,11 +16,17 @@ abstract class Routes {
   static const ADD_EMPLOYEE = _Paths.ADD_EMPLOYEE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const ALL_PRESENCE = _Paths.ALL_PRESENCE;
+  static const profile = _Paths.profile;
+  static const ADD_VACATION_TYPE = _Paths.ADD_VACATION_TYPE;
+  static const VACATION_TYPE = _Paths.VACATION_TYPE;
+  static const ADD_VACATION_REQUEST = _Paths.ADD_VACATION_REQUEST;
 }
 
 abstract class _Paths {
+  static const profile = '/profile_screen';
   static const HOME = '/home';
-  static const SIGNUP = '/sign-up';
+  static const ADMINSIGNUP = '/admin_sign-up';
+  static const COMPANYSIGNUP = '/company-sign-up';
   static const LOGIN = '/login';
   static const NEW_PASSWORD = '/new-password';
   static const FORGOT_PASSWORD = '/forgot-password';
@@ -29,4 +36,7 @@ abstract class _Paths {
   static const ADD_EMPLOYEE = '/add-employee';
   static const CHANGE_PASSWORD = '/change-password';
   static const ALL_PRESENCE = '/all-presence';
+  static const ADD_VACATION_TYPE = '/add-vacation-type';
+  static const VACATION_TYPE = '/vacation-type';
+  static const ADD_VACATION_REQUEST = '/vacation-request';
 }

@@ -21,10 +21,11 @@ class PresenceTile extends StatelessWidget {
             color: AppColor.primaryExtraSoft,
           ),
         ),
-        padding: EdgeInsets.only(left: 24, top: 20, right: 29, bottom: 20),
+        padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               children: [
@@ -69,11 +70,16 @@ class PresenceTile extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              "${DateFormat.yMMMMEEEEd().format(DateTime.parse(presenceData["date"]))}",
-              style: TextStyle(
-                fontSize: 10,
-                color: AppColor.secondarySoft,
+            SizedBox(
+              width: 5,
+            ),
+            Expanded(
+              child: Text(
+                "${DateFormat.yMMMMEEEEd().format(DateTime.parse(presenceData["date"]))}",
+                style: TextStyle(
+                  fontSize: 10,
+                  color: AppColor.secondarySoft,
+                ),
               ),
             ),
           ],

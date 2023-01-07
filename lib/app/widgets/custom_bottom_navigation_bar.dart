@@ -38,7 +38,10 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                child: (controller.pageIndex.value == 0) ? SvgPicture.asset('assets/icons/home-active.svg') : SvgPicture.asset('assets/icons/home.svg'),
+                                child: (controller.pageIndex.value == 0)
+                                    ? SvgPicture.asset(
+                                        'assets/icons/home-active.svg')
+                                    : SvgPicture.asset('assets/icons/home.svg'),
                                 margin: EdgeInsets.only(bottom: 4),
                               ),
                               Text(
@@ -74,11 +77,15 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                child: (controller.pageIndex.value == 2) ? SvgPicture.asset('assets/icons/profile-active.svg') : SvgPicture.asset('assets/icons/profile.svg'),
+                                child: (controller.pageIndex.value == 2)
+                                    ? SvgPicture.asset(
+                                        'assets/icons/profile-active.svg')
+                                    : SvgPicture.asset(
+                                        'assets/icons/profile.svg'),
                                 margin: EdgeInsets.only(bottom: 4),
                               ),
                               Text(
-                                "Profile",
+                                "Dashboard",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppColor.secondary,

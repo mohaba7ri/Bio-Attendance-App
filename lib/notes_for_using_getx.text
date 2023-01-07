@@ -1,0 +1,55 @@
+
+
+1- to move from one page to another we use 
+   navigation.of(context).push(MaterialPageRout(builder:(context)=>NameOfPage()));
+   in GetX we use get.to(NameOfPage());
+
+2- to use push Replacement in GetX
+    Get.off(NameOfPage());
+3- to use pushAndRemoveUntil in GetX
+   Get.offAll(NameOfPage());
+4- to use navigation.of(context).pup();
+   Get.Back(); or exactly like navigation.of(context).MaybePup();   MaybePup use if threr is away to pup will pup otherwise no
+
+5-  the structure of the  Getbuilder  
+   Getbuilder<Name of the controller>(
+      init:Name of the controller ,Builder:(context)=>Widget
+   )
+Note: "with Getbuilder we use update() in the controller whenever want to do any event in the UI
+Note :" Getbuilder is fast than getX of Obx less memory consumer but GetX and Obx good for stream"
+Note :"when using for example Getbuilder with out dependency injection after we left any page in the and we came back the date will be _dirtyElementsNeedsResorting"
+Note: " the Update() function in the build Controller will rebuild all the Getbuilder that use the controller"
+ 
+
+6- the structure of the GetX    
+    GetX<the name of the controller> (builder:(context){}), because GetX deal with stream so 
+    when decelerating variable in the controller use obs  Ex: RxString name='ameen'.obs;
+    GetX only build the the code the have been called not like the GetBuilder 
+    if you use GetX in place there is no need to change it will yield an error
+Note: "after we Get.Back() from a page the data will be deleted So to keep data we have to pass the parameter
+       called permanent in the Get.Put(the name of the controller,permanent:true) this will keep the data  
+Note: "the controller should be initialize once often if it being used in many screen if it is initialize 
+       in one screen the other screen will be effected by it"
+7- dependency injection: 
+
+8- the difference between the Get.put() and Get.lazyPut() is that .Get.put() initialize the controller in the beginning
+   but lazyPut initialize it when it's needed
+Note: Get.lazyPut() can be called once  so when it being cleared it will not be initialized another time 
+      but if the Get.find() and lazyPut in the same page it will call the controller whenever it needed 
+Note: when using fenix in lazyPut the data will be removed but the controller still in the memory
+
+
+the GetX life cycle   
+void onInit(){  like the initial state
+   super.onInit();
+}
+// this method will be called in widget is bing rendering mains build the weight
+void onReady(){
+   super.onReady();
+}
+void onClose(){
+   super.onClose();
+}
+
+9- middleware   
+
