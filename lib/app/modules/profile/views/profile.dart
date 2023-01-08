@@ -80,7 +80,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextButton(
                       onPressed: () {}, child: Text('Almohanad profile')),
                   TextButton(
-                      onPressed: () {}, child: Text('Al mohanad password'))
+                      onPressed: () {}, child: Text('Al mohanad password')),
+                  TextButton(onPressed: () {}, child: Text('Ameen profile')),
+                  TextButton(onPressed: () {}, child: Text('Ameen password')),
+                  TextButton(onPressed: () {}, child: Text('Ameen password')),
                 ],
               ),
             ),
