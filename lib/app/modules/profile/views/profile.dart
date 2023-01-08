@@ -78,11 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextButton(
-                      onPressed: () {}, child: Text('Almohanad profile')),
-                  TextButton(
                       onPressed: () {}, child: Text('Al mohanad password')),
                   TextButton(onPressed: () {}, child: Text('Ameen profile')),
-                  TextButton(onPressed: () {}, child: Text('Ameen password')),
                   TextButton(onPressed: () {}, child: Text('Ameen password')),
                 ],
               ),
