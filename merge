@@ -1,0 +1,17 @@
+[1mdiff --git a/lib/main.dart b/lib/main.dart[m
+[1mindex d0e6982..1926425 100644[m
+[1m--- a/lib/main.dart[m
+[1m+++ b/lib/main.dart[m
+[36m@@ -54,4 +54,9 @@[m [mvoid main() async {[m
+     ),[m
+   );[m
+ }[m
+[31m-//ameen branch[m
+\ No newline at end of file[m
+[32m+[m[32m//the main controller[m
+[32m+[m[32m//the deve branch[m
+[32m+[m[32m//hello[m
+[32m+[m[32m//slam[m
+[32m+[m[32m//al mohanad[m
+[32m+[m[32m//please you have to do hello[m
+\ No newline at end of file[m

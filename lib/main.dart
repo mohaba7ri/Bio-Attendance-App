@@ -54,10 +54,3 @@ void main() async {
     ),
   );
 }
-//the main controller
-//the deve branch
-//hello
-
-//hi 
-
-//update this in the main
