@@ -58,6 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   TextButton(onPressed: () {}, child: Text('Add ameen')),
                   TextButton(onPressed: () {}, child: Text('Update Ameen')),
+                  Text('ameen branch'),
                 ],
               ),
             ),
