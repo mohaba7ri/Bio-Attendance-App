@@ -56,9 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextButton(onPressed: () {}, child: Text('Add ameen')),
-                  TextButton(
-                      onPressed: () {}, child: Text('Update Al mohanad')),
+                  TextButton(onPressed: () {}, child: Text('Add employee')),
+                  TextButton(onPressed: () {}, child: Text('Update employee')),
                 ],
               ),
             ),
@@ -79,9 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextButton(onPressed: () {}, child: Text('Update profile')),
-                  TextButton(onPressed: () {}, child: Text('Change password')),
-                  TextButton(
-                      onPressed: () {}, child: Text('Al mohanad password'))
+                  TextButton(onPressed: () {}, child: Text('Change password'))
                 ],
               ),
             ),
