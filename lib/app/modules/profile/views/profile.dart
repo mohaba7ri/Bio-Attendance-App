@@ -58,12 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   TextButton(onPressed: () {}, child: Text('Add employee')),
                   TextButton(onPressed: () {}, child: Text('Update employee')),
-                  TextButton(onPressed: () {}, child: Text('Employees List')),
-                  TextButton(onPressed: () {}, child: Text('Add employee')),
-                  TextButton(onPressed: () {}, child: Text('Update employee')),
-                  TextButton(onPressed: () {}, child: Text('Employees List')),
-                  TextButton(onPressed: () {}, child: Text('Add employee')),
-                  TextButton(onPressed: () {}, child: Text('Update employee')),
                 ],
               ),
             ),
