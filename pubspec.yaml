@@ -3,37 +3,37 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: '>=2.16.1 <3.0.0'
+  sdk: '>=2.18.6 <3.0.0'
 
 dependencies:
-  cloud_firestore: 3.1.12
-  convex_bottom_bar: 3.0.0
+  cloud_firestore: ^4.3.1
+  convex_bottom_bar: ^3.1.0+1
   cupertino_icons: ^1.0.2
-  firebase_auth: 3.3.14
-  firebase_core: 1.14.1
-  firebase_storage: 10.2.12
+  firebase_auth: ^4.2.5
+  firebase_core: ^2.4.1
+  firebase_storage: ^11.0.10
   flutter:
     sdk: flutter
   
-  flutter_secure_storage: ^4.1.0
-  flutter_svg: 1.0.3
-  geocoding: 2.0.4
-  geolocator: 8.2.0
-  get: 4.6.1
+  flutter_secure_storage: ^7.0.1
+  flutter_svg: ^1.1.6
+  geocoding: ^2.0.5
+  geolocator: ^9.0.2
+  get: ^4.6.5
   get_storage: ^2.0.3
   helpers: ^1.2.0
-  image_picker: 0.8.5
+  image_picker: ^0.8.6
   intl: 0.17.0
   ionicons: ^0.2.1
-  local_auth: 
+  local_auth: ^2.1.3
   localize_and_translate: ^4.1.1
   maps_launcher: ^2.0.1
   syncfusion_flutter_datepicker: ^20.1.51
   timeago: ^3.3.0
-  file_picker: ^4.6.1
+  file_picker: ^5.2.4
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
   flutter_launcher_icons: ^0.11.0
   flutter_test:
     sdk: flutter
