@@ -23,7 +23,9 @@ class UpdatePofileController extends GetxController {
 
   Future<void> updateProfile() async {
     String uid = auth.currentUser!.uid;
-    if (employeeidC.text.isNotEmpty && nameC.text.isNotEmpty && emailC.text.isNotEmpty) {
+    if (employeeidC.text.isNotEmpty &&
+        nameC.text.isNotEmpty &&
+        emailC.text.isNotEmpty) {
       isLoading.value = true;
       try {
         Map<String, dynamic> data = {
@@ -39,12 +41,13 @@ class UpdatePofileController extends GetxController {
 
           data.addAll({"avatar": "$avatarUrl"});
         }
-        await firestore.collection("employee").doc(uid).update(data);
+        await firestore.collection("user").doc(uid).update(data);
         image = null;
         Get.back();
         CustomToast.successToast('Success', 'Success Update Profile');
       } catch (e) {
-        CustomToast.errorToast('Error', 'Cant Update Profile. Err : ${e.toString()}');
+        CustomToast.errorToast(
+            'Error', 'Cant Update Profile. Err : ${e.toString()}');
       } finally {
         isLoading.value = false;
       }
@@ -65,14 +68,15 @@ class UpdatePofileController extends GetxController {
   void deleteProfile() async {
     String uid = auth.currentUser!.uid;
     try {
-      await firestore.collection("employee").doc(uid).update({
+      await firestore.collection("user").doc(uid).update({
         "avatar": FieldValue.delete(),
       });
       Get.back();
 
-      Get.snackbar("Berhasil", "Berhasil delete avatar profile");
+      Get.snackbar("Successfully", "Successfully deleted avatar profile");
     } catch (e) {
-      Get.snackbar("Terjadi Kesalahan", "Tidak dapat delete avatar profile. Karena ${e.toString()}");
+      Get.snackbar("There is an error",
+          "Unable to delete avatar profile. Because ${e.toString()}");
     } finally {
       update();
     }

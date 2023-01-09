@@ -182,7 +182,7 @@ class PresenceController extends GetxController {
 
   Future<void> updatePosition(Position position, String address) async {
     String uid = auth.currentUser!.uid;
-    await firestore.collection("employee").doc(uid).update({
+    await firestore.collection("user").doc(uid).update({
       "position": {
         "latitude": position.latitude,
         "longitude": position.longitude,

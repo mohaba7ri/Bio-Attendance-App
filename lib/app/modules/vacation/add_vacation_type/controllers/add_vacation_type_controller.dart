@@ -31,6 +31,9 @@ class AddVacationTypeController extends GetxController {
         'isPaid': isPaidValue.value,
         'vacationStatus': vacationStatus.value,
         'vacationDays': isPaid.value == true ? vacationDays.value.text : '',
+      }).whenComplete(() {
+        isPaid.value = false;
+        vacationType.value.text = '';
       });
     }
   }
