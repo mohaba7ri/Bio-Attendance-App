@@ -20,16 +20,16 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
         child: ListView(
           children: [
             CustomInput(
-              controller: controller.vacationType,
+              controller: controller.vacationType.value,
               label: 'Vacation Type',
               hint: 'Vacation Type',
             ),
             Obx(
-              () => controller.isPaid == false
+              () => controller.isPaid.value == false
                   ? SizedBox()
                   : CustomInput(
                       type: TextInputType.number,
-                      controller: controller.vacationType,
+                      controller: controller.vacationDays.value,
                       label: 'Vacation Days',
                       hint: 'Vacation Days',
                     ),
@@ -45,8 +45,9 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: DropdownButton(
                             alignment: Alignment.center,
-                            value: controller.statusValue.value,
-                            items: controller.statusItems.map((String items) {
+                            value: controller.vacationStatus.value,
+                            items: controller.vacationStatusItems
+                                .map((String items) {
                               return DropdownMenuItem(
                                 child: Text(items),
                                 value: items,
@@ -66,7 +67,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: DropdownButton(
-                            value: controller.isPiadValue.value,
+                            value: controller.isPaidValue.value,
                             items: controller.isPaidItems.map((String items) {
                               return DropdownMenuItem(
                                 child: Text(items),

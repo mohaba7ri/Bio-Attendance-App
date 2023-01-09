@@ -197,7 +197,7 @@ class LoginView extends GetView<LoginController> {
                     Text('Copy Email and Password'),
                     IconButton(
                       onPressed: () {
-                        controller.emailC.text = 'en.ameenalsharafi@gmail.com';
+                        controller.emailC.text = 'codetech2023@gmail.com';
                         controller.passC.text = "123456";
                       },
                       icon: Icon(Icons.copy_outlined),

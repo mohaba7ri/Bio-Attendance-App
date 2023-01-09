@@ -45,7 +45,11 @@ class HomeController extends GetxController {
     Map<String, dynamic> determinePosition = await _determinePosition();
     if (!determinePosition["error"]) {
       Position position = determinePosition["position"];
-      double distance = Geolocator.distanceBetween(CompanyData.office['latitude'], CompanyData.office['longitude'], position.latitude, position.longitude);
+      double distance = Geolocator.distanceBetween(
+          CompanyData.office['latitude'],
+          CompanyData.office['longitude'],
+          position.latitude,
+          position.longitude);
       if (distance > 1000) {
         return "${(distance / 1000).toStringAsFixed(2)}km";
       } else {
@@ -85,7 +89,7 @@ class HomeController extends GetxController {
         // your App should show an explanatory UI now.
         // return Future.error('Location permissions are denied');
         return {
-          "message": "Tidak dapat mengakses karena anda menolak permintaan lokasi",
+          "message": "Unable to access because you denied the location request",
           "error": true,
         };
       }
@@ -94,34 +98,48 @@ class HomeController extends GetxController {
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       return {
-        "message": "Location permissions are permanently denied, we cannot request permissions.",
+        "message":
+            "Location permissions are permanently denied, we cannot request permissions.",
         "error": true,
       };
     }
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
     return {
       "position": position,
-      "message": "Berhasil mendapatkan posisi device",
+      "message": "Managed to get the position of the device",
       "error": false,
     };
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
     String uid = auth.currentUser!.uid;
-    yield* firestore.collection("employee").doc(uid).snapshots();
+    yield* firestore.collection("user").doc(uid).snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastPresence() async* {
     String uid = auth.currentUser!.uid;
-    yield* firestore.collection("employee").doc(uid).collection("presence").orderBy("date", descending: true).limitToLast(5).snapshots();
+    yield* firestore
+        .collection("user")
+        .doc(uid)
+        .collection("presence")
+        .orderBy("date", descending: true)
+        .limitToLast(5)
+        .snapshots();
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamTodayPresence() async* {
     String uid = auth.currentUser!.uid;
-    String todayDocId = DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
-    yield* firestore.collection("employee").doc(uid).collection("presence").doc(todayDocId).snapshots();
+    String todayDocId =
+        DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
+    yield* firestore
+        .collection("user")
+        .doc(uid)
+        .collection("presence")
+        .doc(todayDocId)
+        .snapshots();
   }
 }

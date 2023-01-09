@@ -52,13 +52,20 @@ class VacationTypeView extends GetView<VacationTypeController> {
                       child: Row(
                         children: [
                           Text(snapshot.data!.docs[index]['vacationstatus']),
+                          Spacer(),
                           Obx(
                             () => Switch(
-                                activeColor: Colors.green,
+                                activeColor: snapshot.data!.docs[index]
+                                            ['vacationstatus'] ==
+                                        'active'
+                                    ? Colors.green
+                                    : Colors.red,
                                 inactiveThumbColor: Colors.red,
                                 value: controller.switchValue.value,
                                 onChanged: (value) {
-                                  controller.switchValue.value = value;
+                                  controller.changeSwitchValue(snapshot
+                                      .data!.docs[index]['vacationstatus']);
+                                  // controller.switchValue.value = value;
                                 }),
                           ),
                         ],

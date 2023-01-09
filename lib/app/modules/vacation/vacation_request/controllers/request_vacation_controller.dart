@@ -66,7 +66,7 @@ class VacationRequestController extends GetxController {
 
   void storeVacationData() {
     vacationRequest.doc().set({
-      'vacationid': 'uid',
+      'vacationId': 'uid',
       'leavetype': leaveTypeValue.value,
       'startday': startDateController.value.text,
       'endday': endDateController.value.text,

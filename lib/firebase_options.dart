@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBfcKK9lH4AXCkYWfNVrQAMft8cOWR7PNk',
-    appId: '1:1074133312441:web:abe42e7b05b283d3f54c68',
-    messagingSenderId: '1074133312441',
-    projectId: 'presence-82a2f',
-    authDomain: 'presence-82a2f.firebaseapp.com',
-    storageBucket: 'presence-82a2f.appspot.com',
-    measurementId: 'G-K3HSPFTBWW',
+    apiKey: 'AIzaSyBkRhlaXqbPbYCai45Cc9Wo7cPasT62BfY',
+    appId: '1:388900619387:web:a0734290bc47aa4fe98ede',
+    messagingSenderId: '388900619387',
+    projectId: 'biometri-app',
+    authDomain: 'biometri-app.firebaseapp.com',
+    storageBucket: 'biometri-app.appspot.com',
+    measurementId: 'G-R7GP9Y6PPQ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB0YiyADvMCxuOmCIXLkvxhcM963IHq7IQ',
-    appId: '1:1074133312441:android:8f852340e74d0e09f54c68',
-    messagingSenderId: '1074133312441',
-    projectId: 'presence-82a2f',
-    storageBucket: 'presence-82a2f.appspot.com',
+    apiKey: 'AIzaSyB8jC_78cfavAQb0roxGd8xI-8QbF-wTAc',
+    appId: '1:388900619387:android:753c4932407db9e2e98ede',
+    messagingSenderId: '388900619387',
+    projectId: 'biometri-app',
+    storageBucket: 'biometri-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDjRvguA9XCr15Dh21Uw5DIyZpY5-xvttY',
-    appId: '1:1074133312441:ios:1f2add810e2231bef54c68',
-    messagingSenderId: '1074133312441',
-    projectId: 'presence-82a2f',
-    storageBucket: 'presence-82a2f.appspot.com',
-    iosClientId: '1074133312441-u9lj57eemuekshib3v6oh7uafo7hm1b4.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDa43FLAFIA5Fueopc6x736zBHb1JQ30RY',
+    appId: '1:388900619387:ios:a11ea8ac4c73a320e98ede',
+    messagingSenderId: '388900619387',
+    projectId: 'biometri-app',
+    storageBucket: 'biometri-app.appspot.com',
+    iosClientId: '388900619387-d8dh8a0s4m0t26jp1635dbb8dnsal3so.apps.googleusercontent.com',
     iosBundleId: 'com.mrezkys.presence',
   );
 }

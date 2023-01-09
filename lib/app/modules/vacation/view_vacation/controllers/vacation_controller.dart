@@ -8,4 +8,12 @@ class VacationTypeController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationType() async* {
     yield* firestore.collection('vacationtype').snapshots();
   }
+
+  changeSwitchValue(String value) {
+    if (value == 'active') {
+      switchValue.value = true;
+    } else {
+      switchValue.value = false;
+    }
+  }
 }

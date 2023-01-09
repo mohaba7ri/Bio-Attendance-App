@@ -1,77 +1,34 @@
 {
   "project_info": {
-    "project_number": "1074133312441",
-    "project_id": "presence-82a2f",
-    "storage_bucket": "presence-82a2f.appspot.com"
+    "project_number": "388900619387",
+    "project_id": "biometri-app",
+    "storage_bucket": "biometri-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1074133312441:android:78c9a2947fb56de1f54c68",
-        "android_client_info": {
-          "package_name": "com.example.presence"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1074133312441-hk1bleog3q19se2pv53enkl8crch0mff.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB0YiyADvMCxuOmCIXLkvxhcM963IHq7IQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1074133312441-hk1bleog3q19se2pv53enkl8crch0mff.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1074133312441-73gh057f7fsdd78k3t5gco6ck76a4os1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.presence"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1074133312441:android:8f852340e74d0e09f54c68",
+        "mobilesdk_app_id": "1:388900619387:android:753c4932407db9e2e98ede",
         "android_client_info": {
           "package_name": "com.mrezkys.presence"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1074133312441-hk1bleog3q19se2pv53enkl8crch0mff.apps.googleusercontent.com",
+          "client_id": "388900619387-j4as2ri4sdbggead7v511h2movucdv32.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB0YiyADvMCxuOmCIXLkvxhcM963IHq7IQ"
+          "current_key": "AIzaSyB8jC_78cfavAQb0roxGd8xI-8QbF-wTAc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1074133312441-hk1bleog3q19se2pv53enkl8crch0mff.apps.googleusercontent.com",
+              "client_id": "388900619387-j4as2ri4sdbggead7v511h2movucdv32.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "1074133312441-73gh057f7fsdd78k3t5gco6ck76a4os1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.presence"
-              }
             }
           ]
         }

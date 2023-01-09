@@ -83,15 +83,14 @@ class AddEmployeeController extends GetxController {
 
         if (employeeCredential.user != null) {
           String uid = employeeCredential.user!.uid;
-          DocumentReference employee =
-              firestore.collection("employee").doc(uid);
+          DocumentReference employee = firestore.collection("user").doc(uid);
           await employee.set({
-            "employee_id": idC.text,
+            "usrId": idC.text,
             "name": nameC.text,
             "email": emailC.text,
             "role": defaultRole,
             "job": jobC.text,
-            "created_at": DateTime.now().toIso8601String(),
+            "createdAt": DateTime.now().toIso8601String(),
           });
 
           await employeeCredential.user!.sendEmailVerification();
