@@ -35,7 +35,7 @@ class PresenceCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: 4, bottom: 12),
             child: Text(
-              userData["employee_id"],
+              userData["userId"],
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'poppins',
@@ -70,7 +70,9 @@ class PresenceCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        (todayPresenceData?["masuk"] == null) ? "-" : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["masuk"]["date"]))}",
+                        (todayPresenceData?["checkIn"] == null)
+                            ? "-"
+                            : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkIn"]["date"]))}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -100,7 +102,9 @@ class PresenceCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        (todayPresenceData?["keluar"] == null) ? "-" : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["keluar"]["date"]))}",
+                        (todayPresenceData?["checkOut"] == null)
+                            ? "-"
+                            : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkOut"]["date"]))}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,

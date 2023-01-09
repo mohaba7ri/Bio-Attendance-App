@@ -15,7 +15,7 @@ class AdminSignUpController extends GetxController {
   late String password;
   late String job;
   final String role = 'superadmin';
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference users = FirebaseFirestore.instance.collection('user');
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> signUp() async {

@@ -36,7 +36,7 @@ class PresenceController extends GetxController {
       isLoading.value = false;
     } else {
       isLoading.value = false;
-      Get.snackbar("Terjadi kesalahan", determinePosition["message"]);
+      Get.snackbar("There is an error", determinePosition["message"]);
       print(determinePosition["error"]);
     }
   }
@@ -57,7 +57,7 @@ class PresenceController extends GetxController {
         await presenceCollection.doc(todayDocId).set(
           {
             "date": DateTime.now().toIso8601String(),
-            "masuk": {
+            "checkIn": {
               "date": DateTime.now().toIso8601String(),
               "latitude": position.latitude,
               "longitude": position.longitude,
@@ -89,7 +89,7 @@ class PresenceController extends GetxController {
         await presenceCollection.doc(todayDocId).set(
           {
             "date": DateTime.now().toIso8601String(),
-            "masuk": {
+            "checkIn": {
               "date": DateTime.now().toIso8601String(),
               "latitude": position.latitude,
               "longitude": position.longitude,
@@ -120,7 +120,7 @@ class PresenceController extends GetxController {
       onConfirm: () async {
         await presenceCollection.doc(todayDocId).update(
           {
-            "keluar": {
+            "checkOut": {
               "date": DateTime.now().toIso8601String(),
               "latitude": position.latitude,
               "longitude": position.longitude,
@@ -143,7 +143,7 @@ class PresenceController extends GetxController {
         DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
 
     CollectionReference<Map<String, dynamic>> presenceCollection =
-        await firestore.collection("employee").doc(uid).collection("presence");
+        await firestore.collection("user").doc(uid).collection("presence");
     QuerySnapshot<Map<String, dynamic>> snapshotPreference =
         await presenceCollection.get();
 
@@ -163,7 +163,7 @@ class PresenceController extends GetxController {
       if (todayDoc.exists == true) {
         Map<String, dynamic>? dataPresenceToday = todayDoc.data();
         // case : already check in
-        if (dataPresenceToday?["keluar"] != null) {
+        if (dataPresenceToday?["checkOut"] != null) {
           // case : already check in and check out
           CustomToast.successToast(
               "Success", "you already check in and check out");
@@ -215,8 +215,7 @@ class PresenceController extends GetxController {
         // your App should show an explanatory UI now.
         // return Future.error('Location permissions are denied');
         return {
-          "message":
-              "Tidak dapat mengakses karena anda menolak permintaan lokasi",
+          "message": "Unable to access because you denied the location request",
           "error": true,
         };
       }
@@ -237,7 +236,7 @@ class PresenceController extends GetxController {
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     return {
       "position": position,
-      "message": "Berhasil mendapatkan posisi device",
+      "message": "Managed to get the position of the device",
       "error": false,
     };
   }

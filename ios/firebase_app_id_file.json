@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:1074133312441:ios:1f2add810e2231bef54c68",
-  "FIREBASE_PROJECT_ID": "presence-82a2f",
-  "GCM_SENDER_ID": "1074133312441"
+  "GOOGLE_APP_ID": "1:388900619387:ios:a11ea8ac4c73a320e98ede",
+  "FIREBASE_PROJECT_ID": "biometri-app",
+  "GCM_SENDER_ID": "388900619387"
 }

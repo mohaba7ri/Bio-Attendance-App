@@ -23,8 +23,8 @@ import 'package:presence/app/modules/sign_up/company/bindings/company_sign_up_bi
 import 'package:presence/app/modules/sign_up/company/views/company_sign_up_view.dart';
 import 'package:presence/app/modules/update_pofile/bindings/update_pofile_binding.dart';
 import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart';
-import 'package:presence/app/modules/vacation/add_vacation/bindings/add_vacation_binding.dart';
-import 'package:presence/app/modules/vacation/add_vacation/views/add_vacation_type_view.dart';
+import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart';
+import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
 
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';

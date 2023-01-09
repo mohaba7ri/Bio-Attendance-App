@@ -13,7 +13,7 @@ class AllPresenceController extends GetxController {
     String uid = auth.currentUser!.uid;
     if (start == null) {
       QuerySnapshot<Map<String, dynamic>> query = await firestore
-          .collection("employee")
+          .collection("user")
           .doc(uid)
           .collection("presence")
           .where("date", isLessThan: end.toIso8601String())
@@ -25,11 +25,12 @@ class AllPresenceController extends GetxController {
       return query;
     } else {
       QuerySnapshot<Map<String, dynamic>> query = await firestore
-          .collection("employee")
+          .collection("user")
           .doc(uid)
           .collection("presence")
           .where("date", isGreaterThan: start!.toIso8601String())
-          .where("date", isLessThan: end.add(Duration(days: 1)).toIso8601String())
+          .where("date",
+              isLessThan: end.add(Duration(days: 1)).toIso8601String())
           .orderBy(
             "date",
             descending: true,
