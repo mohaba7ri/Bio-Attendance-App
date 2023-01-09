@@ -26,6 +26,8 @@ import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart
 import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart';
 import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
 
+import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
+import '../modules/Branches/add_Branch/views/add_branch_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
 import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
@@ -116,5 +118,9 @@ class AppPages {
         name: _Paths.ADD_VACATION_REQUEST,
         page: () => RequestVacationView(),
         binding: RequestVacationBinding()),
+    GetPage(
+        name: _Paths.Add_Branch,
+        page: () => AddBranchView(),
+        binding: AddBranchBinding()),
   ];
 }

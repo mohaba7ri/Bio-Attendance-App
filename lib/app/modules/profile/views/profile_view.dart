@@ -172,7 +172,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 'assets/icons/update.svg',
                                               ),
                                               onTap: () => Get.toNamed(
-                                                  Routes.UPDATE_POFILE,
+                                                  Routes.Add_Branch,
                                                   arguments: userData),
                                             ),
                                             MenuTile(
