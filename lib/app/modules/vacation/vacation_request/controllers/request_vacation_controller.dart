@@ -24,13 +24,28 @@ class VacationRequestController extends GetxController {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
   var leaveType = ['please select', 'sick', 'causal'];
+
+  final vacationTypeList = <DropdownMenuItem<String>>[].obs;
+
   CollectionReference vacationRequest =
       FirebaseFirestore.instance.collection('vacationrequest');
+  CollectionReference leaveTypeStore =
+      FirebaseFirestore.instance.collection('vacationType');
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+    returnVacationType();
+  }
+
   Future uploadFile() async {
     // setState(() => file = File(path));
     final result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
     );
+
     if (result == null) {
       print('error');
       return null;
@@ -40,6 +55,21 @@ class VacationRequestController extends GetxController {
     fileController.value.text = fileName!;
     // fileController.value = fileName;
     print('the file name${fileName}');
+  }
+
+  void returnVacationType() {
+    final leaveTypeStore = FirebaseFirestore.instance
+        .collection('vacationType')
+        .where('vacationStatus', isEqualTo: 'active');
+    leaveTypeStore.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        vacationTypeList.add(DropdownMenuItem(
+          child: Text(data['vacationType']),
+          value: data['vacationType'],
+        ));
+      });
+    });
   }
 
   Future<void> storeFile(
