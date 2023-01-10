@@ -45,4 +45,10 @@ class AppColor {
 
   /// qr code scanner screen
   static Color containerColor = const Color(0xFFD1D1D6);
+  MyWidget() {
+    int colorHex = int.parse("92BCEA", radix: 16);
+    color = new Color(colorHex);
+  }
+
+  Color? color;
 }
