@@ -15,4 +15,34 @@ class AppColor {
   static Color error = Color(0xFFD00E0E);
   static Color success = Color(0xFF16AE26);
   static Color warning = Color(0xFFEB8600);
+  static Color secondaryColor = const Color(0xFFE0EC53);
+  static const Color primaryColor = const Color(0xFF003E47);
+  static Color whiteColor = const Color(0xFFFFFFFF);
+  static Color blackColor = const Color(0xFF000000);
+  static Color gradientColor = const Color(0xFF45A735);
+  static Color backgroundColor = const Color(0xFFE5E5E5);
+  static Color balanceTextColor = const Color(0xFF393939);
+  static Color cardOrangeColor = const Color(0xFFFFCB66);
+  static Color cardPinkColor = const Color(0xFFF6BDE9);
+  static Color cardPestColor = const Color(0xFFACD9B3);
+  static Color containerShedow = const Color(0xFF757575);
+  static Color websiteTextColor = const Color(0xFF344968);
+  static Color nevDefaultColor = const Color(0xFFAAAAAA);
+  static Color blueColor = const Color(0xFF5680F9);
+  static Color textFieldColor = const Color(0xFFF2F2F6);
+  static Color otpFieldColor = const Color(0xFFF2F2F7);
+  static Color redColor = const Color(0xFFFF0000);
+  static Color phoneNumberColor = const Color(0xFF484848);
+  static Color themeLightBackgroundColor = const Color(0xFFFAFAFA);
+  static Color themeDarkBackgroundColor = const Color(0xFF343636);
+  //other info
+  //#6a6e81
+  static Color genderDefaultColor = const Color(0xFFe3f3fd);
+  static Color hintColor = const Color(0xFF8E8E93);
+  static Color textFieldBorderColor = const Color(0xFFD1D1D6);
+
+//shimmer Color
+
+  /// qr code scanner screen
+  static Color containerColor = const Color(0xFFD1D1D6);
 }

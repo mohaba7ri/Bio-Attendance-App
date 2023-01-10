@@ -12,8 +12,14 @@ class RequestVacationView extends GetView<VacationRequestController> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading:
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_outlined)),
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_outlined,
+              color: Colors.black,
+            )),
         title: Text('Vacation Request', style: TextStyle(color: Colors.black)),
       ),
       body: Padding(
@@ -33,17 +39,27 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Spacer(),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          child: DropdownButton(
-                              value: controller.leaveTypeValue.value,
-                              items: controller.leaveType.map((String items) {
-                                return DropdownMenuItem(
-                                  child: Text(items),
-                                  value: items,
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                controller.changeLeaveValue(value!);
-                              }),
+                          child: SizedBox(
+                            width: 20,
+                            child: DropdownButton(
+                                value: controller.leaveTypeValue.value,
+                                items: controller.vacationTypeList,
+                                onChanged: (String? selectedValue) {
+                                  controller.leaveTypeValue.value =
+                                      selectedValue!;
+                                }),
+                          ),
+                          // child: DropdownButton(
+                          //    value: controller.leaveTypeValue.value,
+                          //     items: controller.leaveType.map((String items) {
+                          //       return DropdownMenuItem(
+                          //         child: Text(items),
+                          //         value: items,
+                          //       );
+                          //     }).toList(),
+                          //     onChanged: (String? value) {
+                          //       controller.changeLeaveValue(value!);
+                          //     }),
                         ),
                       ],
                     ),
@@ -147,6 +163,12 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: CustomInput(
+                              valdate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please Pick File';
+                                }
+                                return null;
+                              },
                               disabled: true,
                               controller: controller.fileController.value,
                               label: '',

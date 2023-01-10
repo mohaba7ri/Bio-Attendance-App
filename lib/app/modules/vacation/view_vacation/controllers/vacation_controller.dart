@@ -6,7 +6,7 @@ class VacationTypeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationType() async* {
-    yield* firestore.collection('vacationtype').snapshots();
+    yield* firestore.collection('vacationType').snapshots();
   }
 
   changeSwitchValue(String value) {
