@@ -1,135 +1,116 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+import 'package:presence/app/controllers/presence_controller.dart';
+
+import '../../../../../branch_data.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 
 class AddBranchController extends GetxController {
   @override
-  onClose() {
-    idC.dispose();
-    nameC.dispose();
-    AddressC.dispose();
-    latitudeC.dispose();
-    longitudeC.dispose();
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    determineBranchPosition();
   }
 
+  final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
-  RxBool isLoadingCreatePegawai = false.obs;
+  RxBool isLoadingPosition = false.obs;
+  final nameC = TextEditingController().obs;
+  final phoneC = TextEditingController().obs;
+  final AddressC = TextEditingController().obs;
+  final latitudeC = TextEditingController().obs;
+  final longitudeC = TextEditingController().obs;
 
-  TextEditingController idC = TextEditingController();
-  TextEditingController nameC = TextEditingController();
-  TextEditingController AddressC = TextEditingController();
-  TextEditingController latitudeC = TextEditingController();
-  TextEditingController longitudeC = TextEditingController();
-
-  FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  String getDefaultPassword() {
-    return CompanyData.defaultPassword;
-  }
-
-  String getDefaultRole() {
-    return CompanyData.defaultRole;
-  }
-
-  Future<void> addEmployee() async {
-    if (idC.text.isNotEmpty &&
-        nameC.text.isNotEmpty &&
-        AddressC.text.isNotEmpty &&
-        latitudeC.text.isNotEmpty) {
-      isLoading.value = true;
-      CustomAlertDialog.confirmAdmin(
-        title: 'Admin confirmation',
-        message:
-            'you need to confirm that you are an administrator by inputting your password',
-        onCancel: () {
-          isLoading.value = false;
-          Get.back();
-        },
-        onConfirm: () async {
-          if (isLoadingCreatePegawai.isFalse) {
-            await createEmployeeData();
-            isLoading.value = false;
-          }
-        },
-        controller: latitudeC,
+  CollectionReference branch = FirebaseFirestore.instance.collection('branch');
+  launchOfficeOnMap() {
+    try {
+      MapsLauncher.launchCoordinates(
+        BranchData.office['latitude'],
+        BranchData.office['longitude'],
       );
-    } else {
-      isLoading.value = false;
-      CustomToast.errorToast('Error', 'you need to fill all form');
+    } catch (e) {
+      CustomToast.errorToast('Error', 'Error : ${e}');
     }
   }
 
-  createEmployeeData() async {
-    if (latitudeC.text.isNotEmpty) {
-      isLoadingCreatePegawai.value = true;
-      String adminEmail = auth.currentUser!.email!;
+  determineBranchPosition() async {
+    // isLoadingPosition.value = true;
+    Map<String, dynamic> _determinePosition =
+        await presenceController.determinePosition();
+    if (!_determinePosition['error']) {
+      Position position = _determinePosition['position'];
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude)
+              .whenComplete(() {
+        latitudeC.value =
+            TextEditingController(text: position.latitude.toString());
+        longitudeC.value =
+            TextEditingController(text: position.longitude.toString());
+        isLoadingPosition.value = false;
+      });
+      String address =
+          "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
+      AddressC.value.text = address;
+    }
+  }
+
+  Future<void> storePosition(Position position, String address) async {
+    //  String uid = auth.currentUser!.uid;
+    await branch.doc().set({
+      "position": {
+        "latitude": position.latitude,
+        "longitude": position.longitude,
+      },
+      "address": address,
+    });
+  }
+
+  Future<void> create() async {
+    if (nameC.value.text.isNotEmpty &&
+        phoneC.value.text.isNotEmpty &&
+        AddressC.value.text.isNotEmpty &&
+        latitudeC.value.text.isNotEmpty &&
+        longitudeC.value.text.isNotEmpty) {
+      isLoading.value = true;
       try {
-        //checking if the pass is match
-        await auth.signInWithEmailAndPassword(
-            email: adminEmail, password: latitudeC.text);
-        //get default password
-        String defaultPassword = getDefaultPassword();
-        String defaultRole = getDefaultRole();
-        // if the password is match, then continue the create user process
-        UserCredential employeeCredential =
-            await auth.createUserWithEmailAndPassword(
-          email: latitudeC.text,
-          password: defaultPassword,
-        );
-
-        if (employeeCredential.user != null) {
-          String uid = employeeCredential.user!.uid;
-          DocumentReference employee =
-              firestore.collection("employee").doc(uid);
-          await employee.set({
-            "employee_id": idC.text,
-            "name": nameC.text,
-            "email": latitudeC.text,
-            "role": defaultRole,
-            "job": latitudeC.text,
-            "created_at": DateTime.now().toIso8601String(),
-          });
-
-          await employeeCredential.user!.sendEmailVerification();
-
-          //need to logout because the current user is changed after adding new user
-          auth.signOut();
-          // need to relogin to admin account
-          await auth.signInWithEmailAndPassword(
-              email: adminEmail, password: latitudeC.text);
-
-          // clear form
-
-          Get.back(); //close dialog
-          Get.back(); //close form screen
-          CustomToast.successToast('Success', 'success adding employee');
-
-          isLoadingCreatePegawai.value = false;
-        }
-      } on FirebaseAuthException catch (e) {
-        isLoadingCreatePegawai.value = false;
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-          CustomToast.errorToast('Error', 'default password too short');
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-          CustomToast.errorToast('Error', 'Employee already exist');
-        } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast('Error', 'wrong passowrd');
-        } else {
-          CustomToast.errorToast('Error', 'error : ${e.code}');
-        }
+        await branch.doc().set({
+          'name': nameC.value.text,
+          'phone': phoneC.value.text,
+          'address': AddressC.value.text,
+          'position': {
+            ' latitude': latitudeC.value.text,
+            'longitude': longitudeC.value.text,
+          },
+        });
+        CustomToast.successToast("Success", "Added branch successfully");
+        Get.toNamed(Routes.profile);
       } catch (e) {
-        isLoadingCreatePegawai.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.toString()}');
+        print('error');
       }
     } else {
-      CustomToast.errorToast('Error', 'you need to input password');
+      CustomToast.errorToast("Error", "You need to fill all fields");
     }
   }
+
+  var textDecoration = InputDecoration(
+    labelText: 'Full name',
+    hintText: 'Enter branch name',
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: const BorderSide(color: Colors.purple, width: 1),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: const BorderSide(color: Colors.deepPurpleAccent, width: 2),
+    ),
+  );
 }
