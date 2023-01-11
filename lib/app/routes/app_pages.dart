@@ -126,7 +126,7 @@ class AppPages {
         binding: AddBranchBinding()),
     GetPage(
         name: _Paths.list_Branch,
-        page: () => list_Branches_view(),
+        page: () => listBranchView(),
         binding: listBranchBinding()),
   ];
 }

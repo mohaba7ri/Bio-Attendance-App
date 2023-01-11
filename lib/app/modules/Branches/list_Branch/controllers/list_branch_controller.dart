@@ -1,19 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 
-class list_Branches_controller extends GetxController {
- 
-
-  FirebaseAuth auth = FirebaseAuth.instance;
+class listBranchController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getAllBranches() async {
-   
-    QuerySnapshot<Map<String, dynamic>> query =
-        await firestore.collection("branch").get();
-    return query;
+  Stream<QuerySnapshot<Map<String, dynamic>>> branch() async* {
+    yield* firestore.collection('branch').snapshots();
   }
-
-  
 }

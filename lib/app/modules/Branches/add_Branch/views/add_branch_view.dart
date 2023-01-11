@@ -76,21 +76,6 @@ class AddBranchView extends GetView<AddBranchController> {
                                     return null;
                                   },
                                 ),
-                                // TextFormField(
-                                //   onChanged: ((value) {
-                                //     _signUpController.phoneController.value.text = value;
-                                //   }),
-                                //   decoration: _signUpController.textDecoration
-                                //       .copyWith(
-                                //           hintText: 'Phone Number',
-                                //           labelText: 'Phone Number'),
-                                //   validator: (value) {
-                                //     if (value!.isEmpty) {
-                                //       return 'please enter  a Phone Number';
-                                //     }
-                                //     return null;
-                                //   },
-                                // ),
 
                                 SizedBox(
                                   height: 5,
@@ -100,20 +85,6 @@ class AddBranchView extends GetView<AddBranchController> {
                                   label: 'address',
                                   hint: 'address',
                                 ),
-
-                                // TextFormField(
-                                //   onChanged: ((value) {
-                                //     _signUpController.addressController.value.text = value;
-                                //   }),
-                                //   decoration: _signUpController.textDecoration.copyWith(
-                                //       hintText: 'Address', labelText: 'Address'),
-                                //   validator: (value) {
-                                //     if (value!.isEmpty) {
-                                //       return 'please enter  an address';
-                                //     }
-                                //     return null;
-                                //   },
-                                // ),
 
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -155,23 +126,6 @@ class AddBranchView extends GetView<AddBranchController> {
                                                         hint: '4.35424',
                                                         disabled: true,
                                                       ),
-                                                      // TextFormField(
-                                                      //   onChanged: ((String value) {
-                                                      //     _signUpController.latitudeController.value.text =
-                                                      //         value;
-                                                      //   }),
-                                                      //   decoration: _signUpController
-                                                      //       .textDecoration
-                                                      //       .copyWith(
-                                                      //           hintText: 'Latitude',
-                                                      //           labelText: 'Latitude'),
-                                                      //   validator: (value) {
-                                                      //     if (value!.isEmpty) {
-                                                      //       return 'please enter latitude';
-                                                      //     }
-                                                      //     return null;
-                                                      //   },
-                                                      // ),
                                                     ),
                                                     SizedBox(
                                                       height: 8,
@@ -189,23 +143,6 @@ class AddBranchView extends GetView<AddBranchController> {
                                                         hint: '4.35424',
                                                         disabled: true,
                                                       ),
-                                                      //  TextFormField(
-                                                      //   onChanged: ((value) {
-                                                      //     _signUpController.longitudeController.value.text =
-                                                      //         value;
-                                                      //   }),
-                                                      //   decoration: _signUpController
-                                                      //       .textDecoration
-                                                      //       .copyWith(
-                                                      //           hintText: 'Longitude',
-                                                      //           labelText: 'Longitude'),
-                                                      //   validator: (value) {
-                                                      //     if (value!.isEmpty) {
-                                                      //       return 'please enter longitude';
-                                                      //     }
-                                                      //     return null;
-                                                      //   },
-                                                      // ),
                                                     ),
                                                   ],
                                                 ),
@@ -252,54 +189,6 @@ class AddBranchView extends GetView<AddBranchController> {
                               ],
                             ),
                           ),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: SizedBox(
-                          //         width: MediaQuery.of(context).size.width * 0.1,
-                          //         child: TextFormField(
-                          //           onChanged: ((value) {
-                          //             _signUpController.latitude = value;
-                          //           }),
-                          //           decoration: _signUpController.textDecoration
-                          //               .copyWith(
-                          //                   hintText: 'Start time',
-                          //                   labelText: 'Start time'),
-                          //           validator: (value) {
-                          //             if (value!.isEmpty) {
-                          //               return 'please enter start time';
-                          //             }
-                          //             return null;
-                          //           },
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(
-                          //       width: 5,
-                          //     ),
-                          //     Expanded(
-                          //       child: SizedBox(
-                          //         width: MediaQuery.of(context).size.width * 0.1,
-                          //         child: TextFormField(
-                          //           onChanged: ((value) {
-                          //             _signUpController.latitude = value;
-                          //           }),
-                          //           decoration: _signUpController.textDecoration
-                          //               .copyWith(
-                          //                   hintText: 'End Time',
-                          //                   labelText: 'End Time'),
-                          //           validator: (value) {
-                          //             if (value!.isEmpty) {
-                          //               return 'please enter latitude';
-                          //             }
-                          //             return null;
-                          //           },
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-
                           SizedBox(
                             height: 8,
                           ),

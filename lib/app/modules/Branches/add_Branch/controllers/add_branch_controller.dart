@@ -88,7 +88,7 @@ class AddBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.errorToast("success", "Added branch successfully");
+        CustomToast.successToast("Success", "Added branch successfully");
         Get.toNamed(Routes.profile);
       } catch (e) {
         print('error');
