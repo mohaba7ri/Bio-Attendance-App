@@ -6,6 +6,8 @@ import 'package:presence/app/modules/all_presence/bindings/all_presence_binding.
 import 'package:presence/app/modules/all_presence/views/all_presence_view.dart';
 import 'package:presence/app/modules/change_password/bindings/change_password_binding.dart';
 import 'package:presence/app/modules/change_password/views/change_password_view.dart';
+import 'package:presence/app/modules/company_settings/binding/company_setting_binding.dart';
+import 'package:presence/app/modules/company_settings/view/company_setting_view.dart';
 import 'package:presence/app/modules/detail_presence/bindings/detail_presence_binding.dart';
 import 'package:presence/app/modules/detail_presence/views/detail_presence_view.dart';
 import 'package:presence/app/modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -122,5 +124,9 @@ class AppPages {
         name: _Paths.Add_Branch,
         page: () => AddBranchView(),
         binding: AddBranchBinding()),
+        GetPage(
+        name: _Paths.ADD_COMPANY_SETTING,
+        page: () => CompanySettingView(),
+        binding: CompanySettingBinding()),
   ];
 }

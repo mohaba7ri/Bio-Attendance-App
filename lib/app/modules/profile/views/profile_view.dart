@@ -132,7 +132,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 'assets/icons/setting.svg',
                                               ),
                                               onTap: () => Get.toNamed(
-                                                  Routes.CHANGE_PASSWORD),
+                                                  Routes.ADD_COMPANY_SETTING),
                                             ),
                                           ],
                                         ),

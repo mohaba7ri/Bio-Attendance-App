@@ -41,23 +41,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Open Source\nPresence App",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontFamily: 'poppins',
-                    height: 150 / 100,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "by github.com/mrezkys",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
+              children: [],
             ),
           ),
           Container(
@@ -100,7 +84,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(width: 1, color: AppColor.secondaryExtraSoft),
+                    border: Border.all(
+                        width: 1, color: AppColor.secondaryExtraSoft),
                   ),
                   child: TextField(
                     style: TextStyle(fontSize: 14, fontFamily: 'poppins'),
@@ -136,7 +121,9 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         }
                       },
                       child: Text(
-                        (controller.isLoading.isFalse) ? 'Send to email' : 'Loading...',
+                        (controller.isLoading.isFalse)
+                            ? 'Send to email'
+                            : 'Loading...',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'poppins',
@@ -145,8 +132,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       ),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 18),
+                        backgroundColor: AppColor.primary,
                         elevation: 0,
-                        primary: AppColor.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
