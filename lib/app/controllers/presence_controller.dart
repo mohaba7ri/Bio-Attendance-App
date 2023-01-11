@@ -16,9 +16,9 @@ class PresenceController extends GetxController {
 
   presence() async {
     isLoading.value = true;
-    Map<String, dynamic> determinePosition = await _determinePosition();
-    if (!determinePosition["error"]) {
-      Position position = determinePosition["position"];
+    Map<String, dynamic> _determinePosition = await determinePosition();
+    if (!_determinePosition["error"]) {
+      Position position = _determinePosition["position"];
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
       String address =
@@ -36,8 +36,8 @@ class PresenceController extends GetxController {
       isLoading.value = false;
     } else {
       isLoading.value = false;
-      Get.snackbar("There is an error", determinePosition["message"]);
-      print(determinePosition["error"]);
+      Get.snackbar("There is an error", _determinePosition["message"]);
+      print(_determinePosition["error"]);
     }
   }
 
@@ -191,7 +191,7 @@ class PresenceController extends GetxController {
     });
   }
 
-  Future<Map<String, dynamic>> _determinePosition() async {
+  Future<Map<String, dynamic>> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 

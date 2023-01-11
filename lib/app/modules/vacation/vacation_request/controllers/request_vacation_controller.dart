@@ -23,8 +23,7 @@ class VacationRequestController extends GetxController {
   // FilePickerResult? vacationFile;
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
-  var leaveType = ['please select', 'sick', 'causal'];
-
+ 
   final vacationTypeList = <DropdownMenuItem<String>>[].obs;
 
   CollectionReference vacationRequest =
