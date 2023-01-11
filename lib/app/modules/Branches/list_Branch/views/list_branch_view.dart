@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../controllers/list_branch_controller.dart';
 
@@ -12,6 +14,30 @@ class listBranchView extends GetView<listBranchController> {
   Widget build(BuildContext context) {
     listBranchController _listBranchController = listBranchController();
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Branches',
+          style: TextStyle(
+            color: AppColor.secondary,
+            fontSize: 16,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 1,
+            color: AppColor.secondaryExtraSoft,
+          ),
+        ),
+      ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: _listBranchController.branch(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -68,6 +94,20 @@ class listBranchView extends GetView<listBranchController> {
                                             letterSpacing: 2,
                                           ),
                                         ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          IconButton(
+                                            alignment: Alignment.centerLeft,
+                                            onPressed: () {
+                                              Get.toNamed(
+                                                  Routes.Branch_Options);
+                                            },
+                                            icon: Icon(Icons.settings_outlined),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

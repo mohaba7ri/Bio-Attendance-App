@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
-import '../controllers/add_branch_controller.dart';
+import '../controllers/update_branch_controller.dart';
 
-class AddBranchView extends GetView<AddBranchController> {
-  AddBranchController _addController = AddBranchController();
+class UpdateBranchView extends GetView<UpdateBranchController> {
+  UpdateBranchController _updateController = UpdateBranchController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -15,7 +15,7 @@ class AddBranchView extends GetView<AddBranchController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Branch',
+          'Update Branch',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -52,7 +52,7 @@ class AddBranchView extends GetView<AddBranchController> {
                           SizedBox(
                               height: 40,
                               child: Text(
-                                'Enter Branch Information',
+                                'Edit Branch Information',
                                 style: TextStyle(fontSize: 20),
                               )),
                           Obx(
@@ -61,7 +61,8 @@ class AddBranchView extends GetView<AddBranchController> {
                                 CustomInput(
                                   controller: controller.nameC.value,
                                   label: 'Branch Name',
-                                  hint: 'Code Tech',
+                                  hint: '',
+
                                   valdate: (value) {
                                     if (value!.isEmpty) {
                                       return 'please enter the branch name';
@@ -69,22 +70,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                     return null;
                                   },
                                 ),
-                                // TextFormField(
-                                //   onChanged: ((value) {
-                                //     _signUpController.name = value;
-                                //   }),
-                                //   decoration: _signUpController.textDecoration
-                                //       .copyWith(
-                                //           hintText: 'Company Name',
-                                //           labelText: 'Company Name'),
-                                //   validator: (value) {
-                                //     if (value!.isEmpty) {
-                                //       return 'please enter  a company name';
-                                //     }
-                                //     return null;
-                                //   },
-                                // ),
-
+                               
                                 SizedBox(
                                   height: 5,
                                 ),
