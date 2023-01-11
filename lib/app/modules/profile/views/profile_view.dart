@@ -86,7 +86,7 @@ class ProfileView extends GetView<ProfileController> {
                                     SizedBox(
                                       width: 3,
                                     ),
-                                    Text('company management'),
+                                    Text('Management'),
                                   ],
                                 ),
                                 children: [
@@ -181,7 +181,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 'assets/icons/company.svg',
                                               ),
                                               onTap: () => Get.toNamed(
-                                                  Routes.CHANGE_PASSWORD),
+                                                  Routes.list_Branch),
                                             ),
                                             MenuTile(
                                               title: 'Branch Settings',

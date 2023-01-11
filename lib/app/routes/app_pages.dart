@@ -28,6 +28,8 @@ import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacati
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
 import '../modules/Branches/add_Branch/views/add_branch_view.dart';
+import '../modules/Branches/list_Branch/bindings/list_branch_binding.dart';
+import '../modules/Branches/list_Branch/views/list_branch_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
 import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
@@ -122,5 +124,9 @@ class AppPages {
         name: _Paths.Add_Branch,
         page: () => AddBranchView(),
         binding: AddBranchBinding()),
+    GetPage(
+        name: _Paths.list_Branch,
+        page: () => list_Branches_view(),
+        binding: listBranchBinding()),
   ];
 }
