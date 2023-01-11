@@ -41,6 +41,29 @@ class PresenceController extends GetxController {
     }
   }
 
+  Future<bool> checkVacationStatus(String userId) async {
+    final vacatioRequest = FirebaseFirestore.instance
+        .collection('vacationRequest')
+        .where('userId', isEqualTo: userId);
+    final vacationSnapshot = await vacatioRequest.get();
+    final documents = vacationSnapshot.docs;
+    for (var doc in documents) {
+      var status = doc.data()['status'];
+      var startDate = DateFormat("MMM dd, yyyy").parse(doc.data()['startDate']);
+      var endDate = DateFormat("MMM dd, yyyy").parse(doc.data()['endDate']);
+      print('thesartDate$startDate');
+      var currentDate = DateTime.now();
+      if (status == 'approved' &&
+          currentDate.isAfter(startDate) &&
+          currentDate.isBefore(endDate)) {
+        print('satus$status');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   firstPresence(
     CollectionReference<Map<String, dynamic>> presenceCollection,
     String todayDocId,
@@ -49,28 +72,38 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    CustomAlertDialog.showPresenceAlert(
-      title: "Do you want to check in?",
-      message: "you need to confirm before you\ncan do presence now",
-      onCancel: () => Get.back(),
-      onConfirm: () async {
-        await presenceCollection.doc(todayDocId).set(
-          {
-            "date": DateTime.now().toIso8601String(),
-            "checkIn": {
+    bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
+    if (allowCheckIn) {
+      CustomAlertDialog.showPresenceAlert(
+        title: "Do you want to check in?",
+        message: "you need to confirm before you\ncan do presence now",
+        onCancel: () => Get.back(),
+        onConfirm: () async {
+          await presenceCollection.doc(todayDocId).set(
+            {
               "date": DateTime.now().toIso8601String(),
-              "latitude": position.latitude,
-              "longitude": position.longitude,
-              "address": address,
-              "in_area": in_area,
-              "distance": distance,
-            }
-          },
-        );
-        Get.back();
-        CustomToast.successToast("Success", "success check in");
-      },
-    );
+              "checkIn": {
+                "date": DateTime.now().toIso8601String(),
+                "latitude": position.latitude,
+                "longitude": position.longitude,
+                "address": address,
+                "in_area": in_area,
+                "distance": distance,
+              }
+            },
+          );
+          Get.back();
+          CustomToast.successToast("Success", "success check in");
+        },
+      );
+    } else {
+      CustomAlertDialog.showPresenceAlert(
+          title: 'Vacation Request',
+          message:
+              'Sorry you can\'t check in because you have vacation\n Do you want to cancel vacation request',
+          onConfirm: () {},
+          onCancel: () => Get.back());
+    }
   }
 
   checkinPresence(
@@ -81,28 +114,38 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    CustomAlertDialog.showPresenceAlert(
-      title: "Do you want to check in?",
-      message: "you need to confirm before you\ncan do presence now",
-      onCancel: () => Get.back(),
-      onConfirm: () async {
-        await presenceCollection.doc(todayDocId).set(
-          {
-            "date": DateTime.now().toIso8601String(),
-            "checkIn": {
+    bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
+    if (allowCheckIn) {
+      CustomAlertDialog.showPresenceAlert(
+        title: "Do you want to check in?",
+        message: "you need to confirm before you\ncan do presence now",
+        onCancel: () => Get.back(),
+        onConfirm: () async {
+          await presenceCollection.doc(todayDocId).set(
+            {
               "date": DateTime.now().toIso8601String(),
-              "latitude": position.latitude,
-              "longitude": position.longitude,
-              "address": address,
-              "in_area": in_area,
-              "distance": distance,
-            }
-          },
-        );
-        Get.back();
-        CustomToast.successToast("Success", "success check in");
-      },
-    );
+              "checkIn": {
+                "date": DateTime.now().toIso8601String(),
+                "latitude": position.latitude,
+                "longitude": position.longitude,
+                "address": address,
+                "in_area": in_area,
+                "distance": distance,
+              }
+            },
+          );
+          Get.back();
+          CustomToast.successToast("Success", "success check in");
+        },
+      );
+    } else {
+      CustomAlertDialog.showPresenceAlert(
+          title: 'Vacation Request',
+          message:
+              'Sorry you can\'check in because you have vacation\n Do you want to cancel vacation request',
+          onConfirm: () {},
+          onCancel: () => Get.back());
+    }
   }
 
   checkoutPresence(
@@ -113,27 +156,37 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    CustomAlertDialog.showPresenceAlert(
-      title: "Do you want to check out?",
-      message: "you need to confirm before you\ncan do presence now",
-      onCancel: () => Get.back(),
-      onConfirm: () async {
-        await presenceCollection.doc(todayDocId).update(
-          {
-            "checkOut": {
-              "date": DateTime.now().toIso8601String(),
-              "latitude": position.latitude,
-              "longitude": position.longitude,
-              "address": address,
-              "in_area": in_area,
-              "distance": distance,
-            }
-          },
-        );
-        Get.back();
-        CustomToast.successToast("Success", "success check out");
-      },
-    );
+    bool allowCheckOut = await checkVacationStatus(auth.currentUser!.uid);
+    if (allowCheckOut) {
+      CustomAlertDialog.showPresenceAlert(
+        title: "Do you want to check out?",
+        message: "you need to confirm before you\ncan do presence now",
+        onCancel: () => Get.back(),
+        onConfirm: () async {
+          await presenceCollection.doc(todayDocId).update(
+            {
+              "checkOut": {
+                "date": DateTime.now().toIso8601String(),
+                "latitude": position.latitude,
+                "longitude": position.longitude,
+                "address": address,
+                "in_area": in_area,
+                "distance": distance,
+              }
+            },
+          );
+          Get.back();
+          CustomToast.successToast("Success", "success check out");
+        },
+      );
+    } else {
+      CustomAlertDialog.showPresenceAlert(
+          title: 'Vacation Request',
+          message:
+              'Sorry you can\'t check out because you have vacation\n Do you want to cancel vacation request',
+          onConfirm: () {},
+          onCancel: () => Get.back());
+    }
   }
 
   Future<void> processPresence(

@@ -22,6 +22,7 @@ abstract class Routes {
   static const ADD_VACATION_REQUEST = _Paths.ADD_VACATION_REQUEST;
   static const Add_Branch = _Paths.Add_Branch;
    static const list_Branch = _Paths.list_Branch;
+  static const ADD_COMPANY_SETTING = _Paths.ADD_COMPANY_SETTING;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const ADD_VACATION_REQUEST = '/vacation-request';
   static const Add_Branch = '/add-branch';
  static const list_Branch = '/list_Branch';
+  static const ADD_COMPANY_SETTING = '/add-company-setting';
 }

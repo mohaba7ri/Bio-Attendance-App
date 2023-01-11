@@ -23,11 +23,11 @@ class VacationRequestController extends GetxController {
   // FilePickerResult? vacationFile;
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
- 
+
   final vacationTypeList = <DropdownMenuItem<String>>[].obs;
 
   CollectionReference vacationRequest =
-      FirebaseFirestore.instance.collection('vacationrequest');
+      FirebaseFirestore.instance.collection('vacationRequest');
   CollectionReference leaveTypeStore =
       FirebaseFirestore.instance.collection('vacationType');
 
@@ -96,16 +96,16 @@ class VacationRequestController extends GetxController {
   void storeVacationData() {
     vacationRequest.doc().set({
       'vacationId': 'uid',
-      'leavetype': leaveTypeValue.value,
-      'startday': startDateController.value.text,
-      'endday': endDateController.value.text,
-      'requestday': DateTime.now().toIso8601String(),
-      'userid': uid,
-      'vacationnum': 1,
+      'vacationType': leaveTypeValue.value,
+      'startDate': startDateController.value.text,
+      'endDate': endDateController.value.text,
+      'requestDate': DateTime.now().toIso8601String(),
+      'userId': uid,
+      'vacationNum': 1,
       'days': daysController.value.text,
       'file': vacationUrl,
-      'status': '',
-      'cancelledd': '',
+      'status': 'pending',
+      'cancelled': '',
     }).whenComplete(() {
       isloading!.value = false;
       fileName = '';
@@ -139,11 +139,14 @@ class VacationRequestController extends GetxController {
     final date = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(1900),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
+
     return date!;
   }
+
+ 
 
   startDayValdate() {
     if (startDateController.value.text.isEmpty) {

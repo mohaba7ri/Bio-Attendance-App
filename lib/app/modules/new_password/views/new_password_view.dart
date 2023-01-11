@@ -42,23 +42,7 @@ class NewPasswordView extends GetView<NewPasswordController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Open Source\nPresence App",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontFamily: 'poppins',
-                    height: 150 / 100,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "by github.com/mrezkys",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
+              children: [],
             ),
           ),
           Container(
@@ -101,9 +85,12 @@ class NewPasswordView extends GetView<NewPasswordController> {
                     hint: '*****************',
                     obsecureText: controller.newPassObs.value,
                     suffixIcon: IconButton(
-                      icon: (controller.newPassObs.value != false) ? SvgPicture.asset('assets/icons/show.svg') : SvgPicture.asset('assets/icons/hide.svg'),
+                      icon: (controller.newPassObs.value != false)
+                          ? SvgPicture.asset('assets/icons/show.svg')
+                          : SvgPicture.asset('assets/icons/hide.svg'),
                       onPressed: () {
-                        controller.newPassObs.value = !(controller.newPassObs.value);
+                        controller.newPassObs.value =
+                            !(controller.newPassObs.value);
                       },
                     ),
                   ),
@@ -115,9 +102,12 @@ class NewPasswordView extends GetView<NewPasswordController> {
                     hint: '*****************',
                     obsecureText: controller.newPassCObs.value,
                     suffixIcon: IconButton(
-                      icon: (controller.newPassCObs.value != false) ? SvgPicture.asset('assets/icons/show.svg') : SvgPicture.asset('assets/icons/hide.svg'),
+                      icon: (controller.newPassCObs.value != false)
+                          ? SvgPicture.asset('assets/icons/show.svg')
+                          : SvgPicture.asset('assets/icons/hide.svg'),
                       onPressed: () {
-                        controller.newPassCObs.value = !(controller.newPassCObs.value);
+                        controller.newPassCObs.value =
+                            !(controller.newPassCObs.value);
                       },
                     ),
                   ),
@@ -134,7 +124,9 @@ class NewPasswordView extends GetView<NewPasswordController> {
                         }
                       },
                       child: Text(
-                        (controller.isLoading.isFalse) ? 'Continue' : 'Loading...',
+                        (controller.isLoading.isFalse)
+                            ? 'Continue'
+                            : 'Loading...',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'poppins',
@@ -143,8 +135,8 @@ class NewPasswordView extends GetView<NewPasswordController> {
                       ),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 18),
+                        backgroundColor: AppColor.primary,
                         elevation: 0,
-                        primary: AppColor.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),

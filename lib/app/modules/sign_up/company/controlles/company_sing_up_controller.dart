@@ -7,7 +7,6 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:presence/app/controllers/presence_controller.dart';
 
 import '../../../../../company_data.dart';
-import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class CompanySignUpController extends GetxController {
@@ -89,7 +88,7 @@ class CompanySignUpController extends GetxController {
           },
         });
 
-        Get.toNamed(Routes.LOGIN);
+        //  Get.toNamed(Routes.LOGIN);
       } catch (e) {
         print('error');
       }
