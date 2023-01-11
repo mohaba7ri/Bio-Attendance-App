@@ -53,7 +53,6 @@ class CompanySignUpController extends GetxController {
         longitudeController.value =
             TextEditingController(text: position.longitude.toString());
         isLoadingPosition.value = false;
-        print('the latitude:${latitudeController.value.text}');
       });
       String address =
           "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
