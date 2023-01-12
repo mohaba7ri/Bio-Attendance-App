@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/modules/menu/management_screen.dart';
 
 class CustomBottomNavigationBar extends GetView<PageIndexController> {
   @override
@@ -95,6 +96,16 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                           ),
                         ),
                       ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                          onTap: () => controller.changePage(2),
+                          child: IconButton(
+                              onPressed: () {
+                                Get.bottomSheet(ManagementScreen(),
+                                    backgroundColor: Colors.transparent);
+                              },
+                              icon: Icon(Icons.menu))),
                     ),
                   ],
                 ),

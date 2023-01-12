@@ -26,6 +26,7 @@ void main() async {
   );
   Get.put(PresenceController(), permanent: true);
   Get.put(PageIndexController(), permanent: true);
+  // Get.put(CompanySignUpController(), permanent: true);
   //Get.put(AddVacationTypeController());
   runApp(
     StreamBuilder<User?>(

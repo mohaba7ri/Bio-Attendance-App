@@ -98,6 +98,7 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                   height: 5,
                                 ),
                                 CustomInput(
+                                  disabled: true,
                                   controller:
                                       controller.addressController.value,
                                   label: 'address',
