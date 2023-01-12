@@ -26,6 +26,7 @@ abstract class Routes {
   static const Branch_Options = _Paths.Branch_Options;
   static const Update_Branch = _Paths.Update_Branch;
   static const Branch_Setting = _Paths.Branch_Setting;
+  static const Branch_Details = _Paths.Branch_Details;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const Update_Branch = '/update-Branch';
   static const Branch_Options = '/Branch_Options';
   static const Branch_Setting = '/Branch_Setting';
+  static const Branch_Details = '/Branch_Details';
 }
