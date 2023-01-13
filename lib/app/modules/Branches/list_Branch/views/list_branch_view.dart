@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../branch_Details/controllers/branch_details_controller.dart';
 import '../controllers/list_branch_controller.dart';
 
-final conttroler = Get.put(listBranchController(), permanent: true);
-
 class listBranchView extends GetView<listBranchController> {
+  final detialBranch = Get.put(detailBranchController(), permanent: true);
   @override
   Widget build(BuildContext context) {
     listBranchController _listBranchController = listBranchController();
@@ -57,7 +57,12 @@ class listBranchView extends GetView<listBranchController> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                               onTap: () {
-                                Get.toNamed(Routes.Branch_Details);
+                               
+                               detialBranch.brancList =
+                                    snapshot.data!.docs[index];
+                               
+                                print(detialBranch.brancList['name']);
+                                 Get.toNamed(Routes.Branch_Details);
                               },
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(15, 24, 24, 16),

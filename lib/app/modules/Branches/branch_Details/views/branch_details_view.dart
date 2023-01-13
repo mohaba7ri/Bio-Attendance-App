@@ -38,22 +38,7 @@ class detailBranchView extends GetView<detailBranchController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _detailBranchController.branch(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return ListView.builder(
-                itemCount: 1, //snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var date = snapshot.data!.docs;
-
-                  return date[index]['name'] == 'name'
-                      ? SizedBox()
-                      : Padding(
+      body:       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
@@ -85,7 +70,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                       margin:
                                           EdgeInsets.only(top: 4, bottom: 12),
                                       child: Text(
-                                        date[index]['name'],
+                                        controller.brancList['name'],
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'poppins',
@@ -117,7 +102,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                       margin:
                                           EdgeInsets.only(top: 4, bottom: 12),
                                       child: Text(
-                                        snapshot.data!.docs[index]['address'],
+                                        '${controller.brancList['address']}',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Inter',
@@ -187,7 +172,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                               ),
                                             ),
                                             Text(
-                                              date[index]['phone'],
+                                              '',
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,
@@ -376,15 +361,10 @@ class detailBranchView extends GetView<detailBranchController> {
                               ],
                             ),
                           ),
-                        );
-                },
-              );
-
-            default:
-              return SizedBox();
-          }
-        },
-      ),
+                        ),
+               
+              
+   
     );
   }
 }
