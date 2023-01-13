@@ -12,12 +12,12 @@ class MenuButton extends StatelessWidget {
     double _size = Dimensions.PADDING_SIZE_DEFAULT;
     return Column(children: [
       Container(
-        height: _size - (_size * 0.2),
+        height: 50,
         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_DEFAULT),
         margin: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
-          color: Colors.green,
+          color: Color.fromARGB(255, 223, 235, 223),
           boxShadow: [
             BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 5)
           ],

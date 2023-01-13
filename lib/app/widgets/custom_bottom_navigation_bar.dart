@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/modules/menu/management_screen.dart';
+import 'package:presence/app/style/app_color.dart';
 
 class CustomBottomNavigationBar extends GetView<PageIndexController> {
   @override
