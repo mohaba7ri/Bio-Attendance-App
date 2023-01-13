@@ -39,55 +39,6 @@ class VacationTypeView extends GetView<VacationTypeController> {
                 itemBuilder: (context, index) {
                   var date = snapshot.data!.docs;
 
-                  // return Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Container(
-                  //     width: double.infinity,
-                  //     height: 60,
-                  //     decoration: BoxDecoration(
-                  //       border: Border.all(width: 1, color: Colors.blueGrey),
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: Colors.white,
-                  //           offset: const Offset(
-                  //             2.0,
-                  //             2.0,
-                  //           ), //Offset
-                  //           blurRadius: 10.0,
-                  //           spreadRadius: 2.0,
-                  //         ), //BoxShadow
-                  //         BoxShadow(
-                  //           color: Colors.white,
-                  //           offset: const Offset(0.0, 0.0),
-                  //           blurRadius: 0.0,
-                  //           spreadRadius: 0.0,
-                  //         ), //BoxShadow
-                  //       ],
-                  //     ),
-                  //     child: Row(
-                  //       children: [
-                  //         Text(snapshot.data!.docs[index]['vacationstatus']),
-                  //         Spacer(),
-                  //         Obx(
-                  //           () => Switch(
-                  //               activeColor: snapshot.data!.docs[index]
-                  //                           ['vacationstatus'] ==
-                  //                       'active'
-                  //                   ? Colors.green
-                  //                   : Colors.red,
-                  //               inactiveThumbColor: Colors.red,
-                  //               value: controller.switchValue.value,
-                  //               onChanged: (value) {
-                  //                 controller.changeSwitchValue(snapshot
-                  //                     .data!.docs[index]['vacationstatus']);
-                  //                 // controller.switchValue.value = value;
-                  //               }),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // );
                   return date[index]['vacationType'] == 'please select'
                       ? SizedBox()
                       : Padding(

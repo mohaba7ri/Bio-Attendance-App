@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:presence/app/modules/Branches/update_Branch/bindings/update_branch_binding.dart';
+import 'package:presence/app/modules/Branches/update_Branch/views/update_branch_view.dart';
 
 import 'package:presence/app/modules/add_employee/bindings/add_employee_binding.dart';
 import 'package:presence/app/modules/add_employee/views/add_employee_view.dart';
@@ -30,6 +32,11 @@ import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacati
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
 import '../modules/Branches/add_Branch/views/add_branch_view.dart';
+import '../modules/Branches/branch_Details/bindings/branch_details_binding.dart';
+import '../modules/Branches/branch_Details/views/branch_details_view.dart';
+
+import '../modules/Branches/general_settings/binding/branch_setting_binding.dart';
+import '../modules/Branches/general_settings/view/branch_setting_view.dart';
 import '../modules/Branches/list_Branch/bindings/list_branch_binding.dart';
 import '../modules/Branches/list_Branch/views/list_branch_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
@@ -130,9 +137,21 @@ class AppPages {
         name: _Paths.list_Branch,
         page: () => listBranchView(),
         binding: listBranchBinding()),
-        GetPage(
+    GetPage(
         name: _Paths.ADD_COMPANY_SETTING,
         page: () => CompanySettingView(),
         binding: CompanySettingBinding()),
+    GetPage(
+        name: _Paths.Update_Branch,
+        page: () => UpdateBranchView(),
+        binding: UpdateBranchBinding()),
+    GetPage(
+        name: _Paths.Branch_Setting,
+        page: () => BranchSettingView(),
+        binding: BranchSettingBinding()),
+    GetPage(
+        name: _Paths.Branch_Details,
+        page: () => detailBranchView(),
+        binding: detailBranchBinding()),
   ];
 }
