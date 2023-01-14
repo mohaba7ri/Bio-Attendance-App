@@ -57,19 +57,23 @@ class listBranchView extends GetView<listBranchController> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                               onTap: () {
-                               
-                               detialBranch.brancList =
+                                detialBranch.brancList =
                                     snapshot.data!.docs[index];
-                               
+
                                 print(detialBranch.brancList['name']);
-                                 Get.toNamed(Routes.Branch_Details);
+                                Get.toNamed(Routes.Branch_Details);
                               },
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
+                                  color: AppColor.primarySoft,
                                   borderRadius: BorderRadius.circular(8),
-                                  color: AppColor.containerColor,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/pattern-1.png'),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 child: Column(
                                     crossAxisAlignment:
@@ -83,9 +87,9 @@ class listBranchView extends GetView<listBranchController> {
                                             child: Text(
                                               'Branch Name: ',
                                               style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.white,
                                                 fontFamily: 'poppins',
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w700,
                                                 letterSpacing: 2,
                                               ),
@@ -97,54 +101,30 @@ class listBranchView extends GetView<listBranchController> {
                                             child: Text(
                                               date[index]['name'],
                                               style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.white,
                                                 fontFamily: 'poppins',
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w700,
+                                                fontWeight: FontWeight.w800,
                                                 letterSpacing: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Container(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Icon(
+                                                (Icons
+                                                    .arrow_forward_ios_outlined),
+                                                color: Colors.white,
+                                                size: 40.0,
                                               ),
                                             ),
                                           ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
-                                            children: [
-                                              // IconButton(
-                                              //   alignment: Alignment.centerLeft,
-                                              //   onPressed: () {
-                                              //     // Get.toNamed(
-                                              //     //     Routes.Branch_Options);
-                                              //     showDialog(
-                                              //       context: context,
-                                              //       builder:
-                                              //           (BuildContext context) {
-                                              //         return AlertDialog(
-                                              //           title: Text(
-                                              //               'Choose an option'),
-                                              //           actions: [
-                                              //             ElevatedButton(
-                                              //                 onPressed: () {
-                                              //                   Get.toNamed(Routes
-                                              //                       .Update_Branch);
-                                              //                 },
-                                              //                 child: Text(
-                                              //                     "Branch Settings")),
-                                              //             ElevatedButton(
-                                              //                 onPressed: () {
-                                              //                   Get.toNamed(Routes
-                                              //                       .Update_Branch);
-                                              //                 },
-                                              //                 child: Text(
-                                              //                     "Edit Information")),
-                                              //           ],
-                                              //         );
-                                              //       },
-                                              //     );
-                                              //   },
-                                              //   icon: Icon(
-                                              //       Icons.settings_outlined),
-                                              // ),
-                                            ],
                                           ),
                                         ],
                                       ),
@@ -156,9 +136,9 @@ class listBranchView extends GetView<listBranchController> {
                                             child: Text(
                                               'Address:',
                                               style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.white,
                                                 fontFamily: 'poppins',
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w700,
                                                 letterSpacing: 2,
                                               ),
@@ -171,10 +151,10 @@ class listBranchView extends GetView<listBranchController> {
                                               snapshot.data!.docs[index]
                                                   ['address'],
                                               style: TextStyle(
-                                                color: Colors.black,
-                                                fontFamily: 'Inter',
+                                                color: Colors.white,
+                                                fontFamily: 'poppins',
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.w700,
+                                                fontWeight: FontWeight.w800,
                                                 letterSpacing: 2,
                                               ),
                                             ),
