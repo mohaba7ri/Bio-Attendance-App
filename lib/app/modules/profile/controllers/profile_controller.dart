@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
 
 class ProfileController extends GetxController {
+  bool isLougout = false;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -14,6 +15,7 @@ class ProfileController extends GetxController {
   }
 
   void logout() async {
+    isLougout = true;
     await auth.signOut();
     Get.offAllNamed(Routes.LOGIN);
   }

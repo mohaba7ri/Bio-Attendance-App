@@ -130,11 +130,11 @@ class AppPages {
         page: () => RequestVacationView(),
         binding: RequestVacationBinding()),
     GetPage(
-        name: _Paths.Add_Branch,
+        name: _Paths.ADD_BRANCH,
         page: () => AddBranchView(),
         binding: AddBranchBinding()),
     GetPage(
-        name: _Paths.list_Branch,
+        name: _Paths.LIST_BRANCH,
         page: () => listBranchView(),
         binding: listBranchBinding()),
     GetPage(

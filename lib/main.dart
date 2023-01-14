@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/controllers/presence_controller.dart';
+import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -26,6 +27,7 @@ void main() async {
   );
   Get.put(PresenceController(), permanent: true);
   Get.put(PageIndexController(), permanent: true);
+  Get.put(ProfileController());
   // Get.put(CompanySignUpController(), permanent: true);
   //Get.put(AddVacationTypeController());
   runApp(
@@ -44,8 +46,7 @@ void main() async {
         return GetMaterialApp(
           title: "Application",
           debugShowCheckedModeBanner: false,
-          initialRoute:
-              snapshot.data != null ? Routes.list_Branch : Routes.list_Branch,
+          initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
           getPages: AppPages.routes,
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
