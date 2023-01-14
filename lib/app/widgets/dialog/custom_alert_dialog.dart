@@ -63,10 +63,10 @@ class CustomAlertDialog {
                       style: TextStyle(color: AppColor.secondarySoft),
                     ),
                     style: ElevatedButton.styleFrom(
+                      foregroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      primary: AppColor.primaryExtraSoft,
+                      backgroundColor: AppColor.primaryExtraSoft,
                       elevation: 0,
-                      onPrimary: AppColor.primary,
                     ),
                   ),
                 ),
@@ -77,7 +77,7 @@ class CustomAlertDialog {
                     onPressed: onConfirm,
                     child: Text("confirm"),
                     style: ElevatedButton.styleFrom(
-                      primary: AppColor.primary,
+                      backgroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
                     ),
@@ -142,10 +142,10 @@ class CustomAlertDialog {
                       style: TextStyle(color: AppColor.secondarySoft),
                     ),
                     style: ElevatedButton.styleFrom(
+                      foregroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      primary: AppColor.primaryExtraSoft,
+                      backgroundColor: AppColor.primaryExtraSoft,
                       elevation: 0,
-                      onPrimary: AppColor.primary,
                     ),
                   ),
                 ),
@@ -156,7 +156,84 @@ class CustomAlertDialog {
                     onPressed: onConfirm,
                     child: Text("confirm"),
                     style: ElevatedButton.styleFrom(
-                      primary: AppColor.primary,
+                      backgroundColor: AppColor.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      elevation: 0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static customAlert(
+      {required String icon,
+      required String message,
+      required void Function() onConfirm,
+      required void Function() onCancel}) {
+    Get.defaultDialog(
+      title: "",
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      radius: 8,
+      titlePadding: EdgeInsets.zero,
+      titleStyle: TextStyle(fontSize: 0),
+      content: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 32, top: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(icon,
+                    width: 25, height: 25, color: AppColor.tealShade300),
+                SizedBox(height: 16),
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: AppColor.secondarySoft,
+                    height: 150 / 100,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: ElevatedButton(
+                    onPressed: onCancel,
+                    child: Text(
+                      "No",
+                      style:
+                          TextStyle(color: AppColor.blackColor, fontSize: 20),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      backgroundColor: AppColor.tealShade300,
+                      elevation: 0,
+                      // foregroundColor: AppColor.primary,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  flex: 6,
+                  child: ElevatedButton(
+                    onPressed: onConfirm,
+                    child: Text(
+                      "Yes",
+                      style:
+                          TextStyle(color: AppColor.blackColor, fontSize: 20),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.greyColor,
                       padding: EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
                     ),

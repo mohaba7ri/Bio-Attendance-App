@@ -142,7 +142,7 @@ class PresenceController extends GetxController {
       CustomAlertDialog.showPresenceAlert(
           title: 'Vacation Request',
           message:
-              'Sorry you can\'check in because you have vacation\n Do you want to cancel vacation request',
+              'Sorry you can\'t check in because you have vacation\n Do you want to cancel vacation request',
           onConfirm: () {},
           onCancel: () => Get.back());
     }

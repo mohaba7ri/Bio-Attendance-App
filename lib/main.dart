@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/controllers/presence_controller.dart';
+import 'package:presence/app/modules/home/controllers/home_controller.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,7 @@ void main() async {
   Get.put(PresenceController(), permanent: true);
   Get.put(PageIndexController(), permanent: true);
   Get.put(ProfileController());
+  Get.put(HomeController(), permanent: true);
   // Get.put(CompanySignUpController(), permanent: true);
   //Get.put(AddVacationTypeController());
   runApp(

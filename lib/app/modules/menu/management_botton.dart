@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/model/menu_model.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
+import 'package:presence/app/routes/app_pages.dart';
+import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 
 import '../../util/dinmensions.dart';
+import '../../util/images.dart';
 
 class MenuButton extends StatelessWidget {
   final MenuModel menu;
@@ -15,7 +18,17 @@ class MenuButton extends StatelessWidget {
     double _size = Dimensions.PADDING_SIZE_DEFAULT;
     return InkWell(
       onTap: () {
-        Get.toNamed(menu.route);
+        if (isLogout) {
+          Get.back();
+          CustomAlertDialog.customAlert(
+              icon: Images.support,
+              message: 'Are you sure to logout ?',
+              onConfirm: () {},
+              onCancel: () {
+                Get.back();
+              });
+        } else
+          Get.toNamed(menu.route);
       },
       child: Column(children: [
         Container(
@@ -26,7 +39,7 @@ class MenuButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
             color: isLogout
-                ? Get.find<ProfileController>().isLougout == true
+                ? Get.find<ProfileController>().isLogout()
                     ? Colors.red
                     : Colors.teal
                 : Theme.of(context).primaryColor,

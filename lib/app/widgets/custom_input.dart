@@ -30,34 +30,36 @@ class CustomInput extends StatefulWidget {
 class _CustomInputState extends State<CustomInput> {
   @override
   Widget build(BuildContext context) {
-    print("builded");
-    return TextFormField(
-      validator: widget.valdate,
-      keyboardType: widget.type,
-      readOnly: widget.disabled,
-      obscureText: widget.obsecureText,
-      style: TextStyle(fontSize: 14, fontFamily: 'poppins'),
-      maxLines: 1,
-      controller: widget.controller,
-      decoration: InputDecoration(
-        suffixIcon: widget.suffixIcon ?? SizedBox(),
-        label: Text(
-          widget.label,
-          style: TextStyle(
-            color: AppColor.secondarySoft,
-            fontSize: 14,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        validator: widget.valdate,
+        keyboardType: widget.type,
+        readOnly: widget.disabled,
+        obscureText: widget.obsecureText,
+        style: TextStyle(fontSize: 14, fontFamily: 'poppins'),
+        maxLines: 1,
+        controller: widget.controller,
+        decoration: InputDecoration(
+          suffixIcon: widget.suffixIcon ?? SizedBox(),
+          label: Text(
+            widget.label,
+            style: TextStyle(
+              color: AppColor.secondarySoft,
+              fontSize: 14,
+            ),
           ),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        hintText: widget.hint,
-        hintStyle: TextStyle(
-          fontSize: 14,
-          fontFamily: 'poppins',
-          fontWeight: FontWeight.w500,
-          color: AppColor.secondarySoft,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: widget.hint,
+          hintStyle: TextStyle(
+            fontSize: 14,
+            fontFamily: 'poppins',
+            fontWeight: FontWeight.w500,
+            color: AppColor.secondarySoft,
+          ),
         ),
       ),
     );

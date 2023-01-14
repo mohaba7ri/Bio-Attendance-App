@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:presence/app/model/menu_model.dart';
 import 'package:presence/app/modules/menu/management_botton.dart';
-import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
 
 import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
@@ -40,7 +39,7 @@ class ManagementScreen extends StatelessWidget {
       MenuModel(
           icon: Images.profile,
           title: 'profile',
-          route: Routes.ADD_COMPANY_SETTING),
+          route: Routes.PROFILE),
       MenuModel(
           icon: Images.office,
           title: 'Company',
@@ -50,7 +49,7 @@ class ManagementScreen extends StatelessWidget {
           title: 'Employees',
           route: Routes.ADD_EMPLOYEE),
       MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
-      MenuModel(icon: Images.profile, title: 'Logout', route: Routes.LOGIN),
+      MenuModel(icon: Images.profile, title: 'Logout', route: ''),
     ];
     return PointerInterceptor(
       child: Container(
@@ -78,8 +77,7 @@ class ManagementScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return MenuButton(
                   menu: _menuList![index],
-                  isLogout: Get.find<ProfileController>().isLougout == true &&
-                      index == _menuList!.length - 1,
+                  isLogout: index == _menuList!.length - 1,
                 );
               }),
           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
