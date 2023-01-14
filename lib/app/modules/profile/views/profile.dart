@@ -1,199 +1,85 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:helpers/helpers.dart';
-import 'package:ionicons/ionicons.dart';
+// import 'package:flutter/material.dart';
 
-import '../../../widgets/dialog/app_dialog.dart';
+// import '../../../util/dinmensions.dart';
 
-class ProfileScreen extends StatefulWidget {
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
+// class ProfileBgWidget extends StatelessWidget {
+//   final Widget circularImage;
+//   final Widget mainWidget;
+//   final bool backButton;
+//   ProfileBgWidget(
+//       {required this.mainWidget,
+//       required this.circularImage,
+//       required this.backButton});
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(actions: []),
-      body: Column(children: [
-        ExpansionTile(
-          expandedAlignment: Alignment.topLeft,
-          title: Row(
-            children: [
-              Icon(Icons.home_filled),
-              Text('Manage company'),
-            ],
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextButton(onPressed: () {}, child: Text('Update company')),
-                  TextButton(
-                      onPressed: () {}, child: Text('Add company branch')),
-                  TextButton(onPressed: () {}, child: Text('Company Settings')),
-                ],
-              ),
-            ),
-          ],
-        ),
-        ExpansionTile(
-          expandedAlignment: Alignment.topLeft,
-          title: Row(
-            children: [
-              Icon(
-                Ionicons.person_add_outline,
-                color: Colors.teal,
-              ),
-              Text('Manage Employee'),
-            ],
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextButton(onPressed: () {}, child: Text('Add employee')),
-                  TextButton(onPressed: () {}, child: Text('Update employee')),
-                ],
-              ),
-            ),
-          ],
-        ),
-        ExpansionTile(
-          expandedAlignment: Alignment.topLeft,
-          title: Row(
-            children: [
-              Icon(Icons.person_outline),
-              Text('Manage Profile'),
-            ],
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextButton(
-                      onPressed: () {}, child: Text('Al mohanad password')),
-                  TextButton(onPressed: () {}, child: Text('Ameen profile')),
-                  TextButton(onPressed: () {}, child: Text('Ameen password')),
-                ],
-              ),
-            ),
-          ],
-        ),
-        profileItem(
-            icon: Ionicons.globe_outline,
-            title: "language",
-            subtitle: 'translator.activeLanguageCode',
-            iconBackground: const Color(0xff3DB2FF),
-            onTap: () {
-              // translator.setNewLanguage(
-              //   context,
-              //   newLanguage:
-              //       translator.activeLanguageCode == 'ar' ? 'en' : 'ar',
-              //   remember: true,
-              // );
-            }),
-        profileItem(
-            icon: Ionicons.sunny,
-            title: "theme",
-            subtitle: 'them',
-            iconBackground: const Color(0xffFC5404),
-            onTap: () {
-              // if (GetStorage().read("darkMode")) {
-              //   setState(() {
-              //     Get.changeThemeMode(ThemeMode.light);
-              //     GetStorage().write("darkMode", false);
-              //   });
-              // } else {
-              //   setState(() {
-              //     Get.changeThemeMode(ThemeMode.dark);
-              //     GetStorage().write("darkMode", true);
-              //   });
-              // }
-            }),
-        profileItem(
-            icon: Ionicons.log_out_outline,
-            title: "logout",
-            subtitle: "logoutDescription",
-            iconBackground: const Color(0xffDF2E2E),
-            onTap: () {
-              AppWidgets().MyDialog(
-                  context: context,
-                  asset: const Icon(
-                    Ionicons.information_circle,
-                    size: 80,
-                    color: Colors.white,
-                  ),
-                  background: const Color(0xff3DB2FF),
-                  title: "logout",
-                  subtitle: "logoutConfirm",
-                  confirm: ElevatedButton(
-                      onPressed: () async {
-                        // await FirebaseMessaging.instance
-                        //     .unsubscribeFromTopic("user");
-                        // await FirebaseMessaging.instance.unsubscribeFromTopic(
-                        //     FirebaseAuth.instance.currentUser!.uid);
-
-                        // await FirebaseAuth.instance.signOut().then(
-                        //     (value) => Get.offAll(() => const SplashPage()));
-                      },
-                      child: Text("yes")),
-                  cancel: ElevatedButton(
-                      onPressed: () async {
-                        Get.back();
-                      },
-                      style: Get.theme.elevatedButtonTheme.style!.copyWith(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xffDF2E2E))),
-                      child: Text("no")));
-            }),
-      ]),
-    );
-  }
-
-  Widget profileItem(
-      {required IconData icon,
-      required Color iconBackground,
-      required String title,
-      required String subtitle,
-      Function()? onTap}) {
-    return StatefulBuilder(builder: (context, _) {
-      return Card(
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(borderRadius: EdgeRadius.all(10)),
-        child: ListTile(
-          shape: RoundedRectangleBorder(borderRadius: EdgeRadius.all(10)),
-          onTap: onTap,
-          trailing: Icon(Ionicons.chevron_forward),
-          // trailing: onTap != null
-          //     ? Icon(translator.activeLanguageCode == 'ar'
-          //         ? Ionicons.chevron_back
-          //         : Ionicons.chevron_forward)
-          //     : null,
-          leading: Card(
-            shape: RoundedRectangleBorder(borderRadius: EdgeRadius.all(10)),
-            color: iconBackground,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          title:
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Text(
-            subtitle,
-          ),
-        ),
-      );
-    });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(children: [
+//       Stack(clipBehavior: Clip.none, children: [
+//         Center(
+//           child: Container(
+//             width: Dimensions.WEB_MAX_WIDTH,
+//             height: 260,
+//             color: Theme.of(context).primaryColor,
+//           ),
+//         ),
+//         SizedBox(
+//           width: context.width,
+//           height: 260,
+//           child: Center(
+//               child: Image.asset(Images.profile_bg,
+//                   height: 260,
+//                   width: Dimensions.WEB_MAX_WIDTH,
+//                   fit: BoxFit.fill)),
+//         ),
+//         Positioned(
+//           top: 200,
+//           left: 0,
+//           right: 0,
+//           bottom: 0,
+//           child: Center(
+//             child: Container(
+//               width: Dimensions.WEB_MAX_WIDTH,
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.vertical(
+//                     top: Radius.circular(Dimensions.RADIUS_EXTRA_LARGE)),
+//                 color: Theme.of(context).cardColor,
+//               ),
+//             ),
+//           ),
+//         ),
+//         Positioned(
+//           top: MediaQuery.of(context).padding.top + 10,
+//           left: 0,
+//           right: 0,
+//           child: Text(
+//             'profile'.tr,
+//             textAlign: TextAlign.center,
+//             style: robotoRegular.copyWith(
+//                 fontSize: Dimensions.fontSizeLarge,
+//                 color: Theme.of(context).cardColor),
+//           ),
+//         ),
+//         backButton
+//             ? Positioned(
+//                 top: MediaQuery.of(context).padding.top,
+//                 left: 10,
+//                 child: IconButton(
+//                   icon: Icon(Icons.arrow_back_ios,
+//                       color: Theme.of(context).cardColor, size: 20),
+//                   onPressed: () => Get.back(),
+//                 ),
+//               )
+//             : SizedBox(),
+//         Positioned(
+//           top: 150,
+//           left: 0,
+//           right: 0,
+//           child: circularImage,
+//         ),
+//       ]),
+//       Expanded(
+//         child: mainWidget,
+//       ),
+//     ]);
+//   }
+// }

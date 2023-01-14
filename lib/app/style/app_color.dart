@@ -35,6 +35,8 @@ class AppColor {
   static Color phoneNumberColor = const Color(0xFF484848);
   static Color themeLightBackgroundColor = const Color(0xFFFAFAFA);
   static Color themeDarkBackgroundColor = const Color(0xFF343636);
+  static Color greyColor = const Color(0xFFEEEEEE);
+  static Color tealShade300 = const Color(0xFF4DB6AC);
   //other info
   //#6a6e81
   static Color genderDefaultColor = const Color(0xFFe3f3fd);

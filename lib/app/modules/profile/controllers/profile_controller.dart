@@ -14,9 +14,15 @@ class ProfileController extends GetxController {
     yield* firestore.collection("user").doc(uid).snapshots();
   }
 
+  bool isLogout() {
+
+    return isLougout = true; }
+
   void logout() async {
-    isLougout = true;
-    await auth.signOut();
+   if(!isLougout){
+     await auth.signOut();
     Get.offAllNamed(Routes.LOGIN);
+   }
+   
   }
 }

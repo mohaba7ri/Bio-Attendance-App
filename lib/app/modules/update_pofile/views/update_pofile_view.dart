@@ -13,7 +13,7 @@ class UpdatePofileView extends GetView<UpdatePofileController> {
   final Map<String, dynamic> user = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    controller.employeeidC.text = user["employee_id"];
+    controller.employeeidC.text = user["userId"];
     controller.nameC.text = user["name"];
     controller.emailC.text = user["email"];
     return Scaffold(
