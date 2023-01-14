@@ -20,8 +20,8 @@ abstract class Routes {
   static const ADD_VACATION_TYPE = _Paths.ADD_VACATION_TYPE;
   static const VACATION_TYPE = _Paths.VACATION_TYPE;
   static const ADD_VACATION_REQUEST = _Paths.ADD_VACATION_REQUEST;
-  static const Add_Branch = _Paths.Add_Branch;
-  static const list_Branch = _Paths.list_Branch;
+  static const ADD_BRANCH = _Paths.ADD_BRANCH;
+  static const list_Branch = _Paths.LIST_BRANCH;
   static const ADD_COMPANY_SETTING = _Paths.ADD_COMPANY_SETTING;
   static const Branch_Options = _Paths.Branch_Options;
   static const Update_Branch = _Paths.Update_Branch;
@@ -46,8 +46,8 @@ abstract class _Paths {
   static const ADD_VACATION_TYPE = '/add-vacation-type';
   static const VACATION_TYPE = '/vacation-type';
   static const ADD_VACATION_REQUEST = '/vacation-request';
-  static const Add_Branch = '/add-branch';
-  static const list_Branch = '/list_Branch';
+  static const ADD_BRANCH = '/add-branch';
+  static const LIST_BRANCH = '/list_Branch';
   static const ADD_COMPANY_SETTING = '/add-company-setting';
   static const Update_Branch = '/update-Branch';
   static const Branch_Options = '/Branch_Options';
