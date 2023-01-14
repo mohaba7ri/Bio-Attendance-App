@@ -26,6 +26,7 @@ void main() async {
   );
   Get.put(PresenceController(), permanent: true);
   Get.put(PageIndexController(), permanent: true);
+  // Get.put(CompanySignUpController(), permanent: true);
   //Get.put(AddVacationTypeController());
   runApp(
     StreamBuilder<User?>(
@@ -43,7 +44,8 @@ void main() async {
         return GetMaterialApp(
           title: "Application",
           debugShowCheckedModeBanner: false,
-          initialRoute: snapshot.data != null ? Routes.list_Branch : Routes.list_Branch,
+          initialRoute:
+              snapshot.data != null ? Routes.list_Branch : Routes.list_Branch,
           getPages: AppPages.routes,
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,

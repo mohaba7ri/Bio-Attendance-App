@@ -40,6 +40,7 @@ class CompanySignUpController extends GetxController {
 
   determineCompanyPosition() async {
     // isLoadingPosition.value = true;
+
     Map<String, dynamic> _determinePosition =
         await presenceController.determinePosition();
     if (!_determinePosition['error']) {
