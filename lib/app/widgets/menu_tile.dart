@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -28,7 +30,7 @@ class MenuTile extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: AppColor.secondaryExtraSoft,
+              color: AppColor.primaryExtraSoft,
               width: 1,
             ),
           ),

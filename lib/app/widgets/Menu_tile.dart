@@ -30,7 +30,7 @@ class MenuTile extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: AppColor.secondaryExtraSoft,
+              color: AppColor.primaryExtraSoft,
               width: 1,
             ),
           ),
@@ -63,7 +63,7 @@ class MenuTile extends StatelessWidget {
                 'assets/icons/arrow-right.svg',
                 color: (isDanger == false)
                     ? AppColor.secondary
-                    : AppColor.tealShade300,
+                    : AppColor.primaryExtraSoft,
               ),
             ),
           ],
@@ -92,7 +92,7 @@ class ProfileBgWidget extends StatelessWidget {
           child: Container(
             width: Dimensions.WEB_MAX_WIDTH,
             height: 260,
-            color: AppColor.tealShade300,
+            color: AppColor.primaryExtraSoft,
           ),
         ),
         SizedBox(
