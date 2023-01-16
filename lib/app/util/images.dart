@@ -9,4 +9,5 @@ class Images {
   static const String coverAppbar = 'assets/images/pattern-1.png';
   static const String viewAll = 'assets/images/list.png';
   static const String addBranch = 'assets/images/commission.png';
+  static const String logout = 'assets/icons/logout.png';
 }

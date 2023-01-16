@@ -51,7 +51,7 @@ class ManagementScreen extends StatelessWidget {
           title: 'Employees',
           route: Routes.ADD_EMPLOYEE),
       MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
-      MenuModel(icon: Images.profile, title: 'Logout', route: ''),
+      MenuModel(icon: Images.logout, title: 'Logout', route: ''),
     ];
     return PointerInterceptor(
       child: Container(

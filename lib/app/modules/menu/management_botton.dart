@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/model/menu_model.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 
 import '../../util/dinmensions.dart';
@@ -41,15 +40,19 @@ class MenuButton extends StatelessWidget {
             color: isLogout
                 ? Get.find<ProfileController>().isLogout()
                     ? Colors.red
-                    : Colors.teal
-                : Theme.of(context).primaryColor,
+                    : Colors.blue
+                : Theme.of(context).primaryColorDark,
             boxShadow: [
               BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 5)
             ],
           ),
           alignment: Alignment.center,
-          child: Image.asset(menu.icon,
-              width: 20, height: 20, color: Colors.white),
+          child: Image.asset(
+            menu.icon,
+            width: 20,
+            height: 20,
+            color: Colors.white,
+          ),
         ),
         SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
         Text(menu.title,
