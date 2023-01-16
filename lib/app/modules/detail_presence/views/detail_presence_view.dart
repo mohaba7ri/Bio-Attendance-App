@@ -68,8 +68,13 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          (presenceData["masuk"] == null) ? "-" : "${DateFormat.jm().format(DateTime.parse(presenceData["masuk"]["date"]))}",
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          (presenceData["checkIn"] == null)
+                              ? "-"
+                              : "${DateFormat.jm().format(DateTime.parse(presenceData["checkIn"]["date"]))}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -87,8 +92,13 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  (presenceData["masuk"]?["in_area"] == true) ? "In area presence" : "Outside area presence",
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                  (presenceData["checkIn"]?["in_area"] == true)
+                      ? "In area presence"
+                      : "Outside area presence",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 14),
                 Text(
@@ -97,7 +107,9 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  (presenceData["masuk"] == null) ? "-" : "${presenceData["masuk"]["address"]}",
+                  (presenceData["checkIn"] == null)
+                      ? "-"
+                      : "${presenceData["checkIn"]["address"]}",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -136,8 +148,13 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          (presenceData["keluar"] == null) ? "-" : "${DateFormat.jm().format(DateTime.parse(presenceData["keluar"]["date"]))}",
-                          style: TextStyle(color: AppColor.secondary, fontSize: 16, fontWeight: FontWeight.w600),
+                          (presenceData["checkOut"] == null)
+                              ? "-"
+                              : "${DateFormat.jm().format(DateTime.parse(presenceData["checkOut"]["date"]))}",
+                          style: TextStyle(
+                              color: AppColor.secondary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -155,8 +172,13 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  (presenceData["keluar"]?["in_area"] == true) ? "In area presence" : "Outside area presence",
-                  style: TextStyle(color: AppColor.secondary, fontSize: 16, fontWeight: FontWeight.w600),
+                  (presenceData["checkOut"]?["in_area"] == true)
+                      ? "In area presence"
+                      : "Outside area presence",
+                  style: TextStyle(
+                      color: AppColor.secondary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 14),
                 Text(
@@ -165,7 +187,9 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  (presenceData["keluar"] == null) ? "-" : "${presenceData["keluar"]["address"]}",
+                  (presenceData["checkOut"] == null)
+                      ? "-"
+                      : "${presenceData["checkOut"]["address"]}",
                   style: TextStyle(
                     color: AppColor.secondary,
                     fontSize: 16,

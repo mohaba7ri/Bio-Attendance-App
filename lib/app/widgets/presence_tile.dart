@@ -38,9 +38,9 @@ class PresenceTile extends StatelessWidget {
                     ),
                     SizedBox(height: 6),
                     Text(
-                      (presenceData["masuk"] == null)
+                      (presenceData["checkIn"] == null)
                           ? "-"
-                          : "${DateFormat.jm().format(DateTime.parse(presenceData["masuk"]["date"]))}",
+                          : "${DateFormat.jm().format(DateTime.parse(presenceData["checkIn"]["date"]))}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -58,9 +58,9 @@ class PresenceTile extends StatelessWidget {
                     ),
                     SizedBox(height: 6),
                     Text(
-                      (presenceData["keluar"] == null)
+                      (presenceData["checkOut"] == null)
                           ? "-"
-                          : "${DateFormat.jm().format(DateTime.parse(presenceData["keluar"]["date"]))}",
+                          : "${DateFormat.jm().format(DateTime.parse(presenceData["checkOut"]["date"]))}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
