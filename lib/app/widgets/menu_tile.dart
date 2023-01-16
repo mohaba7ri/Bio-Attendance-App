@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -63,7 +61,7 @@ class MenuTile extends StatelessWidget {
                 'assets/icons/arrow-right.svg',
                 color: (isDanger == false)
                     ? AppColor.secondary
-                    : AppColor.tealShade300,
+                    : AppColor.primarySoft,
               ),
             ),
           ],
