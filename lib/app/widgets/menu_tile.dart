@@ -61,7 +61,7 @@ class MenuTile extends StatelessWidget {
                 'assets/icons/arrow-right.svg',
                 color: (isDanger == false)
                     ? AppColor.secondary
-                    : AppColor.primarySoft,
+                    : AppColor.tealShade300,
               ),
             ),
           ],
