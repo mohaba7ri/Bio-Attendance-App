@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/style/app_color.dart';
 
-import '../../../routes/app_pages.dart';
-import '../../../util/images.dart';
-import '../../../widgets/Menu_tile.dart';
-import '../../../widgets/custom_appbar.dart';
-import '../controllers/profile_controller.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../util/images.dart';
+import '../../../../widgets/Menu_tile.dart';
+import '../controllers/Vacation_Home_controller.dart';
 
-class ProfileView extends GetView<ProfileController> {
+class VacationHomeView extends GetView<VacationHomeController> {
   final pageIndexController = Get.find<PageIndexController>();
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class ProfileView extends GetView<ProfileController> {
             case ConnectionState.active:
             case ConnectionState.done:
               Map<String, dynamic> userData = snapshot.data!.data()!;
-              return CustomAppBar(
+              return ProfileBgWidget(
                 backRout: () => Get.toNamed(Routes.HOME),
                 circularImage: Container(
                     width: 140,
@@ -76,41 +74,55 @@ class ProfileView extends GetView<ProfileController> {
 
                     MenuTile(
                       isDanger: true,
-                      title: 'Theme',
-                      icon: Container(
-                        color: Colors.red,
-                        child: Icon(
-                          Ionicons.sunny,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onTap: controller.logout,
-                    ),
-                    MenuTile(
-                      isDanger: true,
-                      title: 'Change Password',
+                      title: 'Vacation Types',
                       icon: Image.asset(
                         Images.changePassword,
-                        color: AppColor.primary,
+                        color: AppColor.primarySoft,
                         width: 20,
                         height: 20,
                       ),
-                      onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
+                      onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
                     ),
                     MenuTile(
                       isDanger: true,
-                      title: 'Edit profile',
+                      title: 'Add Vacation Request',
                       icon: Image.asset(
                         Images.editProfile,
-                        color: AppColor.primary,
+                        color: AppColor.primarySoft,
                         width: 20,
                         height: 20,
                       ),
                       onTap: () {
-                        Get.toNamed(Routes.UPDATE_POFILE, arguments: userData);
+                        Get.toNamed(Routes.ADD_VACATION_REQUEST);
                       },
                     ),
 
+                    MenuTile(
+                      isDanger: true,
+                      title: 'View Vacation Requests',
+                      icon: Image.asset(
+                        Images.editProfile,
+                        color: AppColor.primarySoft,
+                        width: 20,
+                        height: 20,
+                      ),
+                      onTap: () {
+                        Get.toNamed(Routes.LIST_VIEW_REQUESTS);
+                      },
+                    ),
+                    MenuTile(
+                      isDanger: true,
+                      title: 'Employees on Vacation',
+                      icon: Image.asset(
+                        Images.editProfile,
+                        color: AppColor.primarySoft,
+                        width: 20,
+                        height: 20,
+                      ),
+                      onTap: () {
+                        Get.toNamed(Routes.ON_VACATION);
+                      },
+                    ),
                     Container(
                       height: 1,
                       color: AppColor.primaryExtraSoft,
