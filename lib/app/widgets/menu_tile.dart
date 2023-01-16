@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -61,7 +63,7 @@ class MenuTile extends StatelessWidget {
                 'assets/icons/arrow-right.svg',
                 color: (isDanger == false)
                     ? AppColor.secondary
-                    : AppColor.primarySoft,
+                    : AppColor.tealShade300,
               ),
             ),
           ],
@@ -90,7 +92,7 @@ class ProfileBgWidget extends StatelessWidget {
           child: Container(
             width: Dimensions.WEB_MAX_WIDTH,
             height: 260,
-            color: AppColor.primarySoft,
+            color: AppColor.tealShade300,
           ),
         ),
         SizedBox(
