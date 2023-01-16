@@ -50,7 +50,7 @@ class PresenceCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             decoration: BoxDecoration(
-              color: AppColor.primarySoft,
+              color: AppColor.primary,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

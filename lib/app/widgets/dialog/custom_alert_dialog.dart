@@ -189,7 +189,7 @@ class CustomAlertDialog {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(icon,
-                    width: 25, height: 25, color: AppColor.tealShade300),
+                    width: 25, height: 25, color: AppColor.primary),
                 SizedBox(height: 16),
                 Text(
                   message,
@@ -216,7 +216,7 @@ class CustomAlertDialog {
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      backgroundColor: AppColor.tealShade300,
+                      backgroundColor: AppColor.primary,
                       elevation: 0,
                       // foregroundColor: AppColor.primary,
                     ),
