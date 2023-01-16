@@ -7,5 +7,7 @@ class Images {
   static const String editProfile = 'assets/icons/edit-user.png';
   static const String changePassword = 'assets/icons/change-password.png';
   static const String coverAppbar = 'assets/images/pattern-1.png';
+  static const String viewAll = 'assets/images/list.png';
+  static const String addBranch = 'assets/images/commission.png';
   static const String logout = 'assets/icons/logout.png';
 }

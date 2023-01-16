@@ -27,6 +27,15 @@ abstract class Routes {
   static const Update_Branch = _Paths.Update_Branch;
   static const Branch_Setting = _Paths.Branch_Setting;
   static const Branch_Details = _Paths.Branch_Details;
+  static const Branch_Home = _Paths.Branch_Home;
+  static const Employee_Home = _Paths.Employee_Home;
+  static const Vacation_Home = _Paths.Vacation_Home;
+  static const VIEW_Vacation_TYPES = _Paths.VIEW_Vacation_TYPES;
+  static const LIST_VIEW_REQUESTS = _Paths.LIST_VIEW_REQUESTS;
+  static const ON_VACATION = _Paths.ON_VACATION;
+  static const LIST_EMPLOYEES = _Paths.LIST_EMPLOYEES;
+  static const EMP_DETAIL = _Paths.EMP_DETAIL;
+  static const EMP_UPDATE = _Paths.EMP_UPDATE;
 }
 
 abstract class _Paths {
@@ -53,4 +62,13 @@ abstract class _Paths {
   static const Branch_Options = '/Branch_Options';
   static const Branch_Setting = '/Branch_Setting';
   static const Branch_Details = '/Branch_Details';
+  static const Branch_Home = '/Branch_Home';
+  static const Employee_Home = '/Employee_Home';
+  static const Vacation_Home = '/Vacation_Home';
+  static const VIEW_Vacation_TYPES = '/VIEW_Vacation_TYPES';
+  static const LIST_VIEW_REQUESTS = '/LIST_VIEW_REQUESTS';
+  static const ON_VACATION = '/ON_VACATION';
+  static const LIST_EMPLOYEES = '/LIST_EMPLOYEES';
+  static const EMP_DETAIL = '/EMP_DETAIL';
+  static const EMP_UPDATE = '/EMP_UPDATE';
 }

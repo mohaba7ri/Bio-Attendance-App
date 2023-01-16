@@ -20,14 +20,19 @@ class ManagementScreen extends StatelessWidget {
           title: 'Company',
           route: Routes.ADD_COMPANY_SETTING),
       MenuModel(
+        icon: Images.office,
+        title: 'Branch',
+        route: Routes.Branch_Home,
+      ),
+      MenuModel(
           icon: Images.employess,
           title: 'Employees',
-          route: Routes.ADD_EMPLOYEE),
-      MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
+          route: Routes.Employee_Home),
       MenuModel(
-          icon: Images.holidays,
-          title: 'vacation',
-          route: Routes.ADD_COMPANY_SETTING),
+        icon: Images.profile,
+        title: 'vacation',
+        route: Routes.Vacation_Home,
+      ),
       MenuModel(
           icon: Images.office,
           title: 'Attendance',
