@@ -25,7 +25,7 @@ class ManagementScreen extends StatelessWidget {
           route: Routes.ADD_EMPLOYEE),
       MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
       MenuModel(
-          icon: Images.profile,
+          icon: Images.holidays,
           title: 'vacation',
           route: Routes.ADD_COMPANY_SETTING),
       MenuModel(
@@ -36,10 +36,7 @@ class ManagementScreen extends StatelessWidget {
           icon: Images.employess, title: 'Reports', route: Routes.ADD_EMPLOYEE),
       MenuModel(
           icon: Images.office, title: 'Language', route: Routes.ADD_BRANCH),
-      MenuModel(
-          icon: Images.profile,
-          title: 'profile',
-          route: Routes.PROFILE),
+      MenuModel(icon: Images.profile, title: 'profile', route: Routes.PROFILE),
       MenuModel(
           icon: Images.office,
           title: 'Company',
@@ -49,7 +46,7 @@ class ManagementScreen extends StatelessWidget {
           title: 'Employees',
           route: Routes.ADD_EMPLOYEE),
       MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
-      MenuModel(icon: Images.profile, title: 'Logout', route: ''),
+      MenuModel(icon: Images.logout, title: 'Logout', route: ''),
     ];
     return PointerInterceptor(
       child: Container(
