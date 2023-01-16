@@ -61,7 +61,7 @@ class MenuTile extends StatelessWidget {
                 'assets/icons/arrow-right.svg',
                 color: (isDanger == false)
                     ? AppColor.secondary
-                    : AppColor.primarySoft,
+                    : AppColor.primaryExtraSoft,
               ),
             ),
           ],
@@ -90,7 +90,7 @@ class ProfileBgWidget extends StatelessWidget {
           child: Container(
             width: Dimensions.WEB_MAX_WIDTH,
             height: 260,
-            color: AppColor.primarySoft,
+            color: AppColor.primaryExtraSoft,
           ),
         ),
         SizedBox(
