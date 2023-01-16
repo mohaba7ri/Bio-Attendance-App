@@ -20,14 +20,19 @@ class ManagementScreen extends StatelessWidget {
           title: 'Company',
           route: Routes.ADD_COMPANY_SETTING),
       MenuModel(
+        icon: Images.office,
+        title: 'Branch',
+        route: Routes.Branch_Home,
+      ),
+      MenuModel(
           icon: Images.employess,
           title: 'Employees',
-          route: Routes.ADD_EMPLOYEE),
-      MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
+          route: Routes.Employee_Home),
       MenuModel(
-          icon: Images.profile,
-          title: 'vacation',
-          route: Routes.ADD_COMPANY_SETTING),
+        icon: Images.profile,
+        title: 'vacation',
+        route: Routes.Vacation_Home,
+      ),
       MenuModel(
           icon: Images.office,
           title: 'Attendance',
@@ -36,10 +41,7 @@ class ManagementScreen extends StatelessWidget {
           icon: Images.employess, title: 'Reports', route: Routes.ADD_EMPLOYEE),
       MenuModel(
           icon: Images.office, title: 'Language', route: Routes.ADD_BRANCH),
-      MenuModel(
-          icon: Images.profile,
-          title: 'profile',
-          route: Routes.PROFILE),
+      MenuModel(icon: Images.profile, title: 'profile', route: Routes.PROFILE),
       MenuModel(
           icon: Images.office,
           title: 'Company',

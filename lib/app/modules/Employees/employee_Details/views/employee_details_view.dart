@@ -4,18 +4,21 @@ import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-import '../controllers/branch_details_controller.dart';
+import '../controllers/employee_details_controller.dart';
 
-final conttroler = Get.put(detailBranchController(), permanent: true);
+final controller = Get.put(employeeDetailController(), permanent: true);
 
-class detailBranchView extends GetView<detailBranchController> {
+class employeeDetailView extends GetView<employeeDetailController> {
+  /// final updateEmployee = Get.put(UpdateEmployeeController(), permanent: true);
+
   @override
   Widget build(BuildContext context) {
-    detailBranchController _detailBranchController = detailBranchController();
+    employeeDetailController _employeeDetailController =
+        employeeDetailController();
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Branch Details',
+          'Employee Details',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -54,7 +57,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Branch Name: ',
+                      'Name: ',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -67,7 +70,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      controller.brancList['name'],
+                      controller.EmpList['name'],
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -97,7 +100,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      '${controller.brancList['address']}',
+                      '${controller.EmpList['address']}',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Inter',
@@ -127,7 +130,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Yes',
+                      '${controller.EmpList['active']}',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Inter',
@@ -155,7 +158,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "Phone",
+                              "Email",
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -163,7 +166,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             ),
                           ),
                           Text(
-                            '${controller.brancList['phone']}',
+                            '${controller.EmpList['email']}',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
@@ -185,7 +188,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "location",
+                              'Phone',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -193,7 +196,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             ),
                           ),
                           Text(
-                            'There',
+                            '${controller.EmpList['phone']}',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
@@ -212,108 +215,13 @@ class detailBranchView extends GetView<detailBranchController> {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 16),
                   decoration: BoxDecoration(
-                    color: AppColor.primarySoft,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      //  check in
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 6),
-                              child: Text(
-                                "latitude",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Not available',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 1.5,
-                        height: 24,
-                        color: Colors.white,
-                      ),
-                      // check out
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 6),
-                              child: Text(
-                                "longitude",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Not available',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 16),
-                  decoration: BoxDecoration(
                     // color: AppColor.primarySoft,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
                     children: [
                       //  check in
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    Get.toNamed(Routes.Branch_Setting);
-                                  },
-                                  icon: Icon(Icons.settings_rounded),
-                                  label: Text(
-                                    'General Settings',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ),
-                                width: double.infinity,
-                                height: 100.0),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 1.5,
-                        height: 24,
-                        color: Colors.white,
-                      ),
+
                       // check out
                       Expanded(
                         child: Column(
@@ -321,7 +229,11 @@ class detailBranchView extends GetView<detailBranchController> {
                             SizedBox(
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    Get.toNamed(Routes.Update_Branch);
+                                    // controller.EmpList =
+                                    //     snapshot.data!.docs[index];
+
+                                    print(controller.EmpList['name']);
+                                    Get.toNamed(Routes.EMP_UPDATE);
                                   },
                                   icon: Icon(Icons.edit_rounded),
                                   label: Text(

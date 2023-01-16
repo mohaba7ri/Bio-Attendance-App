@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../style/app_color.dart';
 import '../controllers/request_vacation_controller.dart';
 
 class RequestVacationView extends GetView<VacationRequestController> {
@@ -10,17 +12,28 @@ class RequestVacationView extends GetView<VacationRequestController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
+        title: Text(
+          'Request Vacation',
+          style: TextStyle(
+            color: AppColor.secondary,
+            fontSize: 16,
+          ),
+        ),
         leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_outlined,
-              color: Colors.black,
-            )),
-        title: Text('Vacation Request', style: TextStyle(color: Colors.black)),
+          onPressed: () => Get.back(),
+          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 1,
+            color: AppColor.secondaryExtraSoft,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/view_vacation/controllers/vacation_controller.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../style/app_color.dart';
-import '../../add_vacation_type/views/add_vacation_type_view.dart';
+import '../controllers/list_vacation_requests_controller.dart';
 
 final conttroler = Get.put(ListVacationTypeController(), permanent: true);
 
-class ListVacationTypeView extends GetView<ListVacationTypeController> {
+class ListVacationRequestView extends GetView<ListVacationRequestsController> {
   @override
   Widget build(BuildContext context) {
-    ListVacationTypeController _listVacationTypeController =
-        ListVacationTypeController();
+    ListVacationRequestsController _listVacationRequestsController =
+        ListVacationRequestsController();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,7 +39,34 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
             child: ElevatedButton(
               onPressed: () {
                 Get.dialog(
-                  Dialog(),
+                  Dialog(
+                    child: Container(
+                      height: 372,
+                      child: SfDateRangePicker(
+                        headerHeight: 50,
+                        headerStyle: DateRangePickerHeaderStyle(
+                            textAlign: TextAlign.center),
+                        monthViewSettings:
+                            DateRangePickerMonthViewSettings(firstDayOfWeek: 1),
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        selectionColor: AppColor.primary,
+                        rangeSelectionColor: AppColor.primary.withOpacity(0.2),
+                        viewSpacing: 10,
+                        showActionButtons: true,
+                        onCancel: () => Get.back(),
+                        onSubmit: (data) {
+                          if (data != null) {
+                            PickerDateRange range = data as PickerDateRange;
+                            if (range.endDate != null) {
+                              controller.pickDate(
+                                  range.startDate!, range.endDate!);
+                            }
+                          }
+                          //else skip
+                        },
+                      ),
+                    ),
+                  ),
                 );
               },
               child: SvgPicture.asset('assets/icons/filter.svg'),
@@ -62,7 +90,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _listVacationTypeController.vacationType(),
+        stream: _listVacationRequestsController.vacationRequests(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -74,7 +102,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                 itemBuilder: (context, index) {
                   var date = snapshot.data!.docs;
 
-                  return date[index]['vacationType'] == 'please select'
+                  return date[index]['days'] == 'please select'
                       ? SizedBox()
                       : Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -120,38 +148,6 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          'Days:',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          ' 7',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     padding: EdgeInsets.symmetric(
@@ -170,7 +166,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                 margin:
                                                     EdgeInsets.only(bottom: 6),
                                                 child: Text(
-                                                  "Status",
+                                                  "Days",
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.white,
@@ -178,7 +174,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                 ),
                                               ),
                                               Text(
-                                                date[index]['vacationStatus'],
+                                                date[index]['days'],
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w700,
@@ -193,7 +189,6 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                           height: 24,
                                           color: Colors.white,
                                         ),
-                                        // check out
                                         Expanded(
                                           child: Column(
                                             children: [
@@ -201,7 +196,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                 margin:
                                                     EdgeInsets.only(bottom: 6),
                                                 child: Text(
-                                                  "Is paid",
+                                                  "Start Date",
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.white,
@@ -209,7 +204,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                 ),
                                               ),
                                               Text(
-                                                'Yes',
+                                                date[index]['startDate'],
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w700,
@@ -219,6 +214,37 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                             ],
                                           ),
                                         ),
+                                        Container(
+                                          width: 1.5,
+                                          height: 24,
+                                          color: Colors.white,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(bottom: 6),
+                                                child: Text(
+                                                  "End Date",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                date[index]['endDate'],
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        // check out
                                       ],
                                     ),
                                   ),
@@ -232,18 +258,6 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(context: context, builder: (_) => AddVacationTypeView());
-        },
-        child: Icon(Icons.add),
-      ),
-      // TextButton(
-      //   child: Text('Add Vacation Type'),
-      //   onPressed: () {
-      //     showDialog(context: context, builder: (_) => AddVacationTypeView());
-      //   },
-      // ),
     );
   }
 }

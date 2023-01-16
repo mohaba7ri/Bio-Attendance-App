@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:presence/app/modules/Branches/branch_Home/bindings/Branch_Home_binding.dart';
+import 'package:presence/app/modules/Branches/branch_Home/views/Branch_Home_view.dart';
 import 'package:presence/app/modules/Branches/update_Branch/bindings/update_branch_binding.dart';
 import 'package:presence/app/modules/Branches/update_Branch/views/update_branch_view.dart';
+import 'package:presence/app/modules/Employees/employee_Details/bindings/employee_details_binding.dart';
 
 import 'package:presence/app/modules/add_employee/bindings/add_employee_binding.dart';
 import 'package:presence/app/modules/add_employee/views/add_employee_view.dart';
@@ -39,11 +42,23 @@ import '../modules/Branches/general_settings/binding/branch_setting_binding.dart
 import '../modules/Branches/general_settings/view/branch_setting_view.dart';
 import '../modules/Branches/list_Branch/bindings/list_branch_binding.dart';
 import '../modules/Branches/list_Branch/views/list_branch_view.dart';
+import '../modules/Employees/employee_Details/views/employee_details_view.dart';
+import '../modules/Employees/employee_Home/bindings/Employee_Home_binding.dart';
+import '../modules/Employees/employee_Home/views/Employee_Home_view.dart';
+import '../modules/Employees/employee_Update/bindings/update_employee_binding.dart';
+import '../modules/Employees/employee_Update/views/update_employee_view.dart';
+import '../modules/Employees/view_Employee/bindings/Employees_binding.dart';
+import '../modules/Employees/view_Employee/views/Employees_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
+import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
+import '../modules/vacation/on_vacation_employees/views/on_vacation_view.dart';
+import '../modules/vacation/vacation_Home/bindings/Vacation_Home_binding.dart';
+import '../modules/vacation/vacation_Home/views/Vacation_Home_view.dart';
 import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
 import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
 import '../modules/vacation/view_vacation/bindings/vacation_binding.dart';
 import '../modules/vacation/view_vacation/views/vacation_view.dart';
+import '../modules/vacation/view_vacation_requests/views/list_vacation_requests_view.dart';
 
 part 'app_routes.dart';
 
@@ -122,10 +137,6 @@ class AppPages {
         page: () => AddVacationTypeView(),
         binding: AddVacationTypeBinding()),
     GetPage(
-        name: _Paths.VACATION_TYPE,
-        page: () => VacationTypeView(),
-        binding: VacationTypeBinding()),
-    GetPage(
         name: _Paths.ADD_VACATION_REQUEST,
         page: () => RequestVacationView(),
         binding: RequestVacationBinding()),
@@ -153,5 +164,48 @@ class AppPages {
         name: _Paths.Branch_Details,
         page: () => detailBranchView(),
         binding: detailBranchBinding()),
+    GetPage(
+        name: _Paths.Branch_Home,
+        page: () => BranchHomeView(),
+        binding: BranchHomeBinding()),
+    GetPage(
+        name: _Paths.Employee_Home,
+        page: () => EmployeeHomeView(),
+        binding: EmployeeHomeBinding()),
+    GetPage(
+        name: _Paths.Vacation_Home,
+        page: () => VacationHomeView(),
+        binding: VacationHomeBinding()),
+    GetPage(
+        name: _Paths.VIEW_Vacation_TYPES,
+        page: () => ListVacationTypeView(),
+        binding: ListVacationTypeBinding()),
+    GetPage(
+        name: _Paths.LIST_VIEW_REQUESTS,
+        page: () => ListVacationRequestView(),
+        binding: ListVacationTypeBinding()),
+    GetPage(
+        name: _Paths.ON_VACATION,
+        page: () => OnVacationView(),
+        binding: OnVacationBinding()),
+           GetPage(
+        name: _Paths.LIST_EMPLOYEES,
+        page: () => ListEmployeeView(),
+        binding: ListEmployeeBinding()),
+
+
+
+          GetPage(
+        name: _Paths.EMP_DETAIL,
+        page: () => employeeDetailView(),
+        binding: employeeDetailBinding()),
+
+
+
+        
+          GetPage(
+        name: _Paths.EMP_UPDATE,
+        page: () => UpdateEmployeeView(),
+        binding: UpdateEmployeeBinding()),
   ];
 }
