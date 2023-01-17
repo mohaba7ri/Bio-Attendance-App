@@ -8,7 +8,7 @@ import 'package:presence/app/style/app_color.dart';
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
 import '../../../widgets/Menu_tile.dart';
-import '../../../widgets/custom_appbar.dart';
+import '../../../widgets/custom_profile_appbar.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -27,7 +27,7 @@ class ProfileView extends GetView<ProfileController> {
             case ConnectionState.active:
             case ConnectionState.done:
               Map<String, dynamic> userData = snapshot.data!.data()!;
-              return CustomAppBar(
+              return CustomProfileAppBar(
                 backRout: () => Get.toNamed(Routes.HOME),
                 circularImage: Container(
                     width: 140,
