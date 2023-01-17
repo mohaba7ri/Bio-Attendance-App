@@ -30,8 +30,6 @@ class ProfileView extends GetView<ProfileController> {
               return CustomProfileAppBar(
                 backRout: () => Get.toNamed(Routes.HOME),
                 circularImage: Container(
-                    width: 140,
-                    height: 140,
                     decoration: BoxDecoration(
                       color: AppColor.whiteColor,
                       border: Border.all(
@@ -45,6 +43,8 @@ class ProfileView extends GetView<ProfileController> {
                             ? "https://ui-avatars.com/api/?name=${userData['name']}/"
                             : userData['avatar'],
                         fit: BoxFit.cover,
+                        height: 100,
+                        width: 100,
                       ),
                     )),
                 backButton: true,
