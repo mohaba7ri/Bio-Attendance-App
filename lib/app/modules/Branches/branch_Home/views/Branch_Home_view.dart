@@ -81,7 +81,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
                         width: 20,
                         height: 20,
                       ),
-                      onTap: () => Get.toNamed(Routes.list_Branch),
+                      onTap: () => Get.toNamed(Routes.LIST_BRANCH),
                     ),
 
                     Container(

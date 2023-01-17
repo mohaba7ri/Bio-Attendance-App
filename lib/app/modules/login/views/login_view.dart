@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
     return Scaffold(
         backgroundColor: AppColor.primary,
         body: CustomeAppbar(
-            child: SizedBox(),
+            backButton: false,
             mainWidget: Container(
                 color: Colors.white,
                 child: ListView(

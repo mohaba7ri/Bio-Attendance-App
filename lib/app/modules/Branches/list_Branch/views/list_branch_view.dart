@@ -61,7 +61,7 @@ class listBranchView extends GetView<listBranchController> {
                                     snapshot.data!.docs[index];
 
                                 print(detialBranch.brancList['name']);
-                                Get.toNamed(Routes.Branch_Details);
+                                Get.toNamed(Routes.BRANCH_DETAILS);
                               },
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(15, 24, 24, 16),

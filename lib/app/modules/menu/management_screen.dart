@@ -22,16 +22,16 @@ class ManagementScreen extends StatelessWidget {
       MenuModel(
         icon: Images.office,
         title: 'Branch',
-        route: Routes.Branch_Home,
+        route: Routes.BRANCH_HOME,
       ),
       MenuModel(
           icon: Images.employess,
           title: 'Employees',
-          route: Routes.Employee_Home),
+          route: Routes.EMPLOYEE_HOME),
       MenuModel(
         icon: Images.profile,
         title: 'vacation',
-        route: Routes.Vacation_Home,
+        route: Routes.VACATION_HOME,
       ),
       MenuModel(
           icon: Images.office,
