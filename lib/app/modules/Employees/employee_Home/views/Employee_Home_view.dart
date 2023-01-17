@@ -41,7 +41,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 16, bottom: 4),
+                            margin: EdgeInsets.only(top: 16, bottom: 30),
                             child: Text(
                               userData["name"],
                               style: TextStyle(

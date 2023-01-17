@@ -16,9 +16,7 @@ class ManagementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _menuList = [
       MenuModel(
-          icon: Images.office,
-          title: 'Company',
-          route: Routes.ADD_COMPANY_SETTING),
+          icon: Images.office, title: 'Company', route: Routes.COMPANY_HOME),
       MenuModel(
         icon: Images.office,
         title: 'Branch',

@@ -11,8 +11,8 @@ import 'package:presence/app/modules/all_presence/bindings/all_presence_binding.
 import 'package:presence/app/modules/all_presence/views/all_presence_view.dart';
 import 'package:presence/app/modules/change_password/bindings/change_password_binding.dart';
 import 'package:presence/app/modules/change_password/views/change_password_view.dart';
-import 'package:presence/app/modules/company_settings/binding/company_setting_binding.dart';
-import 'package:presence/app/modules/company_settings/view/company_setting_view.dart';
+import 'package:presence/app/modules/Company/company_settings/binding/company_setting_binding.dart';
+import 'package:presence/app/modules/Company/company_settings/view/company_setting_view.dart';
 import 'package:presence/app/modules/detail_presence/bindings/detail_presence_binding.dart';
 import 'package:presence/app/modules/detail_presence/views/detail_presence_view.dart';
 import 'package:presence/app/modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -42,6 +42,10 @@ import '../modules/Branches/general_settings/binding/branch_setting_binding.dart
 import '../modules/Branches/general_settings/view/branch_setting_view.dart';
 import '../modules/Branches/list_Branch/bindings/list_branch_binding.dart';
 import '../modules/Branches/list_Branch/views/list_branch_view.dart';
+import '../modules/Company/company_Details/bindings/company_Details_binding.dart';
+import '../modules/Company/company_Details/views/company_Details_view.dart';
+import '../modules/Company/company_Home/bindings/Company_Home_binding.dart';
+import '../modules/Company/company_Home/views/Company_Home_view.dart';
 import '../modules/Employees/employee_Details/views/employee_details_view.dart';
 import '../modules/Employees/employee_Home/bindings/Employee_Home_binding.dart';
 import '../modules/Employees/employee_Home/views/Employee_Home_view.dart';
@@ -129,10 +133,6 @@ class AppPages {
         page: () => AdminSignUpView(),
         binding: AdminSignUpBinding()),
     GetPage(
-        name: _Paths.ADMINSIGNUP,
-        page: () => AdminSignUpView(),
-        binding: AdminSignUpBinding()),
-    GetPage(
         name: _Paths.ADD_VACATION_TYPE,
         page: () => AddVacationTypeView(),
         binding: AddVacationTypeBinding()),
@@ -188,24 +188,25 @@ class AppPages {
         name: _Paths.ON_VACATION,
         page: () => OnVacationView(),
         binding: OnVacationBinding()),
-           GetPage(
+    GetPage(
         name: _Paths.LIST_EMPLOYEES,
         page: () => ListEmployeeView(),
         binding: ListEmployeeBinding()),
-
-
-
-          GetPage(
+    GetPage(
         name: _Paths.EMP_DETAIL,
         page: () => employeeDetailView(),
         binding: employeeDetailBinding()),
-
-
-
-        
-          GetPage(
+    GetPage(
         name: _Paths.EMP_UPDATE,
         page: () => UpdateEmployeeView(),
         binding: UpdateEmployeeBinding()),
+    GetPage(
+        name: _Paths.COMPANY_HOME,
+        page: () => CompanyHomeView(),
+        binding: CompanyHomeBinding()),
+    GetPage(
+        name: _Paths.COMPANY_DETAILS,
+        page: () => CompanyDetailsView(),
+        binding: CompanyDetailsBinding()),
   ];
 }
