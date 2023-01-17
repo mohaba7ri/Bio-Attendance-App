@@ -153,27 +153,27 @@ class AppPages {
         page: () => CompanySettingView(),
         binding: CompanySettingBinding()),
     GetPage(
-        name: _Paths.Update_Branch,
+        name: _Paths.UPDATE_BRANCH,
         page: () => UpdateBranchView(),
         binding: UpdateBranchBinding()),
     GetPage(
-        name: _Paths.Branch_Setting,
+        name: _Paths.BRACH_SETTING,
         page: () => BranchSettingView(),
         binding: BranchSettingBinding()),
     GetPage(
-        name: _Paths.Branch_Details,
+        name: _Paths.BRANCH_DETAILS,
         page: () => detailBranchView(),
         binding: detailBranchBinding()),
     GetPage(
-        name: _Paths.Branch_Home,
+        name: _Paths.BRANCH_HOME,
         page: () => BranchHomeView(),
         binding: BranchHomeBinding()),
     GetPage(
-        name: _Paths.Employee_Home,
+        name: _Paths.EMPLOYEE_HOME,
         page: () => EmployeeHomeView(),
         binding: EmployeeHomeBinding()),
     GetPage(
-        name: _Paths.Vacation_Home,
+        name: _Paths.VACATION_HOME,
         page: () => VacationHomeView(),
         binding: VacationHomeBinding()),
     GetPage(

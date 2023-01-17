@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
@@ -16,7 +15,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'All Employees',
+          ' Employees',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -24,7 +23,10 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: AppColor.blackColor,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,

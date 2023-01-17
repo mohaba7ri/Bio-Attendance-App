@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../style/app_color.dart';
+import '../util/dinmensions.dart';
+import '../util/images.dart';
 
 class CustomeAppbar extends StatelessWidget {
   final Widget mainWidget;
-  final Widget child;
-  bool isChild;
-  CustomeAppbar({required this.mainWidget, required this.child,this.isChild=false});
+  bool backButton;
+  Function()? backRout;
+  CustomeAppbar({required this.mainWidget, this.backButton = false,this.backRout});
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 20 / 100,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(left: 32),
-          decoration: BoxDecoration(
-            color: AppColor.primary,
-            image: DecorationImage(
-              image: AssetImage('assets/images/pattern-1-1.png'),
-              fit: BoxFit.cover,
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Center(
+              child: Container(
+                width: Dimensions.WEB_MAX_WIDTH,
+                height: MediaQuery.of(context).size.height * 25 / 100,
+                color: AppColor.primary,
+              ),
             ),
-          ),
-          child: isChild == true ? child : SizedBox(),
+            SizedBox(
+              width: context.width,
+              height: MediaQuery.of(context).size.height * 25 / 100,
+              child: Center(
+                  child: Image.asset(Images.coverAppbar,
+                      height: MediaQuery.of(context).size.height * 25 / 100,
+                      width: Dimensions.WEB_MAX_WIDTH,
+                      fit: BoxFit.fill)),
+            ),
+            backButton == true
+                ? Positioned(
+                    top: MediaQuery.of(context).padding.top,
+                    left: 10,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios,
+                          color: AppColor.whiteColor, size: 20),
+                      onPressed:backRout!=null?backRout: ()=>Get.back(),
+                    ),
+                  )
+                : SizedBox(),
+          ],
         ),
         Container(
           height: 20,

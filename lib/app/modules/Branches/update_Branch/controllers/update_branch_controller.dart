@@ -89,7 +89,7 @@ class UpdateBranchController extends GetxController {
           },
         });
         CustomToast.successToast("Success", "Added branch successfully");
-        Get.toNamed(Routes.profile);
+        Get.toNamed(Routes.PROFILE);
       } catch (e) {
         print('error');
       }
