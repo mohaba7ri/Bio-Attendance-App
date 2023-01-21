@@ -58,16 +58,18 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                       : Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.all(40),
+                            padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: AppColor.primarySoft,
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/pattern-1.png'),
-                                fit: BoxFit.cover,
-                              ),
+                              color: Color(0xFF94CCF9),
+                              borderRadius: BorderRadius.circular(30.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xFF04589A),
+                                  offset: Offset(7, 7),
+                                  blurRadius: 6,
+                                ),
+                              ],
                             ),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
