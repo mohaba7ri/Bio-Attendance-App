@@ -8,13 +8,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Company Setting'),
-        elevation: 1,
-        backgroundColor: AppColor.containerColor,
-      ),
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.all(15.0),
         child: Dialog(
           child: Obx(
@@ -129,16 +123,20 @@ class CompanySettingView extends GetView<CompanySettingController> {
                     width: MediaQuery.of(context).size.width * 0.50,
                     child: MaterialButton(
                       color: Colors.blueAccent.shade400,
-                      onPressed: () {},
-                      child: Text('Save'),
+                      onPressed: () {
+                        controller.storeCompanySetting();
+                      },
+                      child: Text(
+                        'Save',
+                        style:
+                            TextStyle(color: AppColor.whiteColor, fontSize: 16),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

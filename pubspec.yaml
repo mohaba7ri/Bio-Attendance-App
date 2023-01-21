@@ -76,6 +76,24 @@ flutter:
           weight: 800
         - asset: assets/fonts/inter/Inter-Black.ttf
           weight: 900
+    - family: cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
+          weight: 400
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
+          weight: 500
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+          weight: 600
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
+          weight: 700
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
+          weight: 800
+        - asset: assets/fonts/cairo/Cairo-Medium.ttf
+          weight: 900
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
+          weight: 900
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+          weight: 900
 flutter_icons:
   android: "launcher_icon"
   ios: true

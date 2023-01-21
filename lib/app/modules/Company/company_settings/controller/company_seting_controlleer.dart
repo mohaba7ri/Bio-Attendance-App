@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/widgets/toast/custom_toast.dart';
 
 class CompanySettingController extends GetxController {
   Rx<TimeOfDay> startTime = TimeOfDay.now().obs;
@@ -9,6 +10,7 @@ class CompanySettingController extends GetxController {
   Rx<TimeOfDay> overlyTime = TimeOfDay(hour: 2, minute: 30).obs;
   RxBool isExistSetting = false.obs;
 
+  final companySetting = FirebaseFirestore.instance;
   Future<TimeOfDay> showTimePickers(
       BuildContext context, TimeOfDay initialTime) async {
     final time = await showTimePicker(
@@ -47,5 +49,33 @@ class CompanySettingController extends GetxController {
         print("Document doesn't exist!");
       }
     });
+  }
+
+  Future<void> storeCompanySetting() async {
+    DateTime now = DateTime.now();
+    DateTime endTimeTimestamp = DateTime(
+        now.year, now.month, now.day, endTime.value.hour, endTime.value.minute);
+    String endTimeIsoString = endTimeTimestamp.toIso8601String();
+    DateTime startTimeTimestamp = DateTime(now.year, now.month, now.day,
+        startTime.value.hour, startTime.value.minute);
+    String startTimeIsoString = startTimeTimestamp.toIso8601String();
+    DateTime lateTimeTimestamp = DateTime(
+        now.year, now.month, now.day, endTime.value.hour, endTime.value.minute);
+    String lateTimeIsoString = lateTimeTimestamp.toIso8601String();
+    DateTime overlyTimeTimestamp = DateTime(now.year, now.month, now.day,
+        overlyTime.value.hour, overlyTime.value.minute);
+    String overlyTimeIsoString = overlyTimeTimestamp.toIso8601String();
+    try {
+      await companySetting.collection('companySettings').doc().set({
+        'startTime': startTimeIsoString,
+        'lateTime': lateTimeIsoString,
+        'endTime': endTimeIsoString,
+        'overlyTime': overlyTimeIsoString,
+      }).whenComplete(() => CustomToast.successToast(
+          'Setting', 'Company Settings added successfully '));
+    } catch (e) {
+      CustomToast.errorToast('error', e.toString());
+      print(e.toString());
+    }
   }
 }
