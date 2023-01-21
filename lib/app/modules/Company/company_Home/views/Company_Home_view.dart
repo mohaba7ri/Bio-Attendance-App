@@ -74,7 +74,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                           height: 20,
                         ),
                         onTap: () {
-                          Get.toNamed(Routes.ADD_COMPANY_SETTING);
+                          Get.toNamed(Routes.UPDATE_COMPANY);
                         },
                       ),
                       MenuTile(

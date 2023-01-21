@@ -18,7 +18,8 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
           ' Company Details',
           style: TextStyle(
             color: AppColor.secondary,
-            fontSize: 16,
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
           ),
         ),
         leading: IconButton(
@@ -40,182 +41,422 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _companyDetailsController.Company(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  var date = snapshot.data!.docs;
+      body: Container(
+        // color: Colors.blueGrey[300],
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: _companyDetailsController.Company(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    var date = snapshot.data!.docs;
 
-                  return date[index]['name'] == 'name'
-                      ? SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: AppColor.primarySoft,
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/pattern-1.png'),
-                                fit: BoxFit.cover,
+                    return date[index]['name'] == 'name'
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                //color: Colors.blueAccent[100],
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  width: 2,
+                                  color: AppColor.blackColor,
+                                ),
                               ),
-                            ),
-                            child: Column(
+                              padding: EdgeInsets.only(
+                                  left: 24, top: 20, right: 8, bottom: 20),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          'Name: ',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'poppins',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Name",
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15.0),
+                                              ),
+                                              Icon(Icons.adobe_rounded),
+                                            ],
                                           ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          date[index]['name'],
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w800,
-                                            letterSpacing: 2,
+                                          SizedBox(height: 6),
+                                          Text(
+                                            date[index]['name'],
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          'Email:',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'poppins',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          snapshot.data!.docs[index]['name'],
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w800,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.primarySoft,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
                                     child: Row(
                                       children: [
-                                        //  check in
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 6),
-                                                child: Text(
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Email",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(Icons.email_outlined),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              date[index]['email'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Address",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(Icons.location_pin),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              date[index]['address'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
                                                   "Phone",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  ),
+                                                  style:
+                                                      TextStyle(fontSize: 18),
                                                 ),
-                                              ),
-                                              Text(
-                                                date[index]['phone'],
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
                                                 ),
+                                                Icon(Icons
+                                                    .phone_android_outlined),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              date[index]['phone'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
                                               ),
-                                            ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Number of Branches",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(Icons.numbers_outlined),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              '2', //date[index]['phone'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Number of Employees",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(Icons.people_alt_outlined),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              '12', //date[index]['phone'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Location",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(Icons
+                                                    .location_searching_outlined),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            "Latitude",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: AppColor.blackColor,
+                                            ),
                                           ),
                                         ),
-                                        Container(
-                                          width: 1.5,
-                                          height: 24,
-                                          color: Colors.white,
-                                        ),
-                                        // check out
                                         Expanded(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 6),
-                                                child: Text(
-                                                  "Address",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                date[index]['address'],
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
+                                          child: Text(
+                                            "Latitude",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: AppColor.blackColor,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ]),
-                          ),
-                        );
-                },
-              );
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Start Time",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(
+                                                  Icons.access_time_outlined,
+                                                  size: 30,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              '12', //date[index]['phone'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "End Time",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                ),
+                                                Icon(
+                                                  Icons.av_timer_outlined,
+                                                  size: 30,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              '12', //date[index]['phone'],
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                  },
+                );
 
-            default:
-              return SizedBox();
-          }
-        },
+              default:
+                return SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
