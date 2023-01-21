@@ -15,7 +15,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          ' Employees',
+          'Employees',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -136,7 +136,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                             margin: EdgeInsets.only(
                                                 top: 4, bottom: 12),
                                             child: Text(
-                                              'Email:',
+                                              'Job:',
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: 'poppins',
@@ -150,8 +150,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                             margin: EdgeInsets.only(
                                                 top: 4, bottom: 12),
                                             child: Text(
-                                              snapshot.data!.docs[index]
-                                                  ['email'],
+                                              snapshot.data!.docs[index]['job'],
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: 'poppins',
@@ -162,80 +161,6 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 16),
-                                        decoration: BoxDecoration(
-                                          color: AppColor.primarySoft,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            //  check in
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 6),
-                                                    child: Text(
-                                                      "Phone",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    date[index]['role'],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 1.5,
-                                              height: 24,
-                                              color: Colors.white,
-                                            ),
-                                            // check out
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 6),
-                                                    child: Text(
-                                                      "Address",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    date[index]['address'],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
                                       ),
                                     ]),
                               )),

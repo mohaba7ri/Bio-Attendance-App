@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/company_settings/controller/company_seting_controlleer.dart';
+import 'package:presence/app/modules/Company/company_settings/controller/company_seting_controlleer.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 

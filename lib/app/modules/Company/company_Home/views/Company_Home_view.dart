@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/widgets/custom_appbar.dart';
 
 import '../../../../routes/app_pages.dart';
+import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../widgets/Menu_tile.dart';
-import '../../../../widgets/custom_appbar.dart';
-import '../controllers/Branch_Home_controller.dart';
+import '../controllers/Company_Home_controller.dart';
 
-class BranchHomeView extends GetView<BranchHomeController> {
+class CompanyHomeView extends GetView<CompanyHomeController> {
   final pageIndexController = Get.find<PageIndexController>();
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,6 @@ class BranchHomeView extends GetView<BranchHomeController> {
                     padding: EdgeInsets.symmetric(vertical: 36),
                     children: [
                       SizedBox(height: 16),
-                      // SizedBox(height: 16),
-
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -49,34 +47,49 @@ class BranchHomeView extends GetView<BranchHomeController> {
                                   fontSize: 16, fontWeight: FontWeight.w500),
                             ),
                           ),
+                          Text(
+                            userData["job"],
+                            style: TextStyle(color: AppColor.secondarySoft),
+                          ),
                         ],
                       ),
-                      // // section 2 - menu
-
                       MenuTile(
                         isDanger: true,
-                        title: 'Add Branch',
-
+                        title: 'View Details',
                         icon: Image.asset(
-                          Images.addBranch,
+                          Images.changePassword,
                           color: AppColor.primarySoft,
                           width: 20,
                           height: 20,
                         ),
-                        onTap: () => Get.toNamed(Routes.ADD_BRANCH),
+                        onTap: () => Get.toNamed(Routes.COMPANY_DETAILS),
                       ),
                       MenuTile(
                         isDanger: true,
-                        title: 'View Branches',
+                        title: 'Edit Information',
                         icon: Image.asset(
-                          Images.viewAll,
+                          Images.editProfile,
                           color: AppColor.primarySoft,
                           width: 20,
                           height: 20,
                         ),
-                        onTap: () => Get.toNamed(Routes.LIST_BRANCH),
+                        onTap: () {
+                          Get.toNamed(Routes.ADD_COMPANY_SETTING);
+                        },
                       ),
-
+                      MenuTile(
+                        isDanger: true,
+                        title: 'Settings',
+                        icon: Image.asset(
+                          Images.editProfile,
+                          color: AppColor.primarySoft,
+                          width: 20,
+                          height: 20,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.ADD_COMPANY_SETTING);
+                        },
+                      ),
                       Container(
                         height: 1,
                         color: AppColor.primaryExtraSoft,
