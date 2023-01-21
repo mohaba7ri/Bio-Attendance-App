@@ -321,7 +321,9 @@ class detailBranchView extends GetView<detailBranchController> {
                             SizedBox(
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    Get.toNamed(Routes.UPDATE_BRANCH);
+                                    Get.toNamed(Routes.UPDATE_BRANCH,
+                                        arguments:
+                                            controller.brancList['branchId']);
                                   },
                                   icon: Icon(Icons.edit_rounded),
                                   label: Text(

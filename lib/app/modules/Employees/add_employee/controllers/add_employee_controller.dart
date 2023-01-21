@@ -57,7 +57,7 @@ class AddEmployeeController extends GetxController {
   changePolicyValue(bool value, int index) {
     selectedPolicyValue![index].value = value;
 
-    print(selectedPolicyValue![index]);
+    print(selectedPolicyValue![index].value);
   }
 
   String getDefaultPassword() {
@@ -131,14 +131,8 @@ class AddEmployeeController extends GetxController {
     newUserId.value = '12345';
   }
 
-  store() async {
-    await role
-        .collection('roles')
-        .doc('ameen')
-        .set({'roles': listSelectedPolicy});
-  }
-
   Future<void> createEmployeeData() async {
+    selectedPolicyValue = List.filled(roles.length, false.obs);
     if (adminPassC.text.isNotEmpty) {
       isLoadingCreatePegawai.value = true;
       String adminEmail = auth.currentUser!.email!;
@@ -171,10 +165,22 @@ class AddEmployeeController extends GetxController {
             "address": addressC.text,
             "createdAt": DateTime.now().toIso8601String(),
           });
-          await role
-              .collection('roles')
-              .doc('ameen')
-              .set({'roles': listSelectedPolicy});
+
+          if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
+            await role.collection('policy').doc(uid.value).set({
+              'roles': {
+                'Add Branch': selectedPolicyValue![0].value,
+                'Stop Branch': selectedPolicyValue![1].value,
+                'Modify Branch ': selectedPolicyValue![2].value,
+                'Add Employee': selectedPolicyValue![3].value,
+                'Stop Employee': selectedPolicyValue![4].value,
+                'Modify Employee': selectedPolicyValue![5].value,
+                'Employee Reports': selectedPolicyValue![6].value,
+                'Attendance Report': selectedPolicyValue![7].value,
+                'Manage Vacation': selectedPolicyValue![8].value,
+              }
+            });
+          }
 
           await employeeCredential.user!.sendEmailVerification();
 
@@ -208,8 +214,8 @@ class AddEmployeeController extends GetxController {
         }
       } catch (e) {
         isLoadingCreatePegawai.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.toString()}');
-        print('the error is ${e.toString()}');
+        CustomToast.errorToast('Error', 'error : ${e}');
+        print('the error is ${e}');
       }
     } else {
       CustomToast.errorToast('Error', 'you need to input password');
