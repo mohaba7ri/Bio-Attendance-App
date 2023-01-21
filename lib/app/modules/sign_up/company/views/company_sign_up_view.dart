@@ -122,7 +122,7 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    height: 180,
+                                    height: 200,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),

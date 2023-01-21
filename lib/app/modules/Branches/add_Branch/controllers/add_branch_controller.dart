@@ -9,6 +9,7 @@ import 'package:presence/app/controllers/presence_controller.dart';
 import '../../../../../branch_data.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
+import 'package:uuid/uuid.dart';
 
 class AddBranchController extends GetxController {
   @override
@@ -79,17 +80,19 @@ class AddBranchController extends GetxController {
         longitudeC.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await branch.doc().set({
+        String branchId = const Uuid().v4();
+        await branch.doc(branchId).set({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,
+          'branchId': branchId,
           'position': {
             ' latitude': latitudeC.value.text,
             'longitude': longitudeC.value.text,
           },
         });
         CustomToast.successToast("Success", "Added branch successfully");
-        Get.toNamed(Routes.PROFILE);
+        Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }

@@ -15,9 +15,12 @@ class UpdateBranchController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getBranchInfo();
+
     determineBranchPosition();
   }
 
+  String branchId = Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;
@@ -37,6 +40,26 @@ class UpdateBranchController extends GetxController {
     } catch (e) {
       CustomToast.errorToast('Error', 'Error : ${e}');
     }
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> streamBranch(
+      String branchId) async* {
+    print("called");
+    var firestore = FirebaseFirestore.instance;
+    yield* firestore.collection("branch").doc(branchId).snapshots();
+  }
+
+  void getBranchInfo() {
+    final branch = FirebaseFirestore.instance
+        .collection('branch')
+        .where('branchId', isEqualTo: branchId);
+    branch.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        print('name${doc['name']}');
+        nameC.value.text = doc['name'];
+        phoneC.value.text = doc['phone'];
+      });
+    });
   }
 
   determineBranchPosition() async {
@@ -79,7 +102,7 @@ class UpdateBranchController extends GetxController {
         longitudeC.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await branch.doc().set({
+        await branch.doc(branchId).update({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,
@@ -88,8 +111,8 @@ class UpdateBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast("Success", "Added branch successfully");
-        Get.toNamed(Routes.PROFILE);
+        CustomToast.successToast("Success", "update branch successfully");
+        Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }

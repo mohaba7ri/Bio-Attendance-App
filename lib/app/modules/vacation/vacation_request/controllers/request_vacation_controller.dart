@@ -60,6 +60,7 @@ class VacationRequestController extends GetxController {
     final leaveTypeStore = FirebaseFirestore.instance
         .collection('vacationType')
         .where('vacationStatus', isEqualTo: 'active');
+        
     leaveTypeStore.get().then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         Map<String, dynamic> data = doc.data();

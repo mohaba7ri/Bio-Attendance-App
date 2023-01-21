@@ -17,6 +17,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: CustomeAppbar(
+        title: 'Employee Management',
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
         mainWidget: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(

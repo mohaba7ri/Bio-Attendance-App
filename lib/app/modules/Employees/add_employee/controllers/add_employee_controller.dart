@@ -15,55 +15,124 @@ class AddEmployeeController extends GetxController {
     adminPassC.dispose();
   }
 
+  RxString? roleValue = 'Please Select'.obs;
+  var roleList = ['Please Select', 'SuperAdmin', 'Admin', 'Employee'];
   RxBool isLoading = false.obs;
   RxBool isLoadingCreatePegawai = false.obs;
+  RxBool isSelectedPolicy = false.obs;
+  RxString newUserId = ''.obs;
+  //this list to store the roles in firebase for each user
+  final List<RxString> listSelectedPolicy = [];
 
   TextEditingController idC = TextEditingController();
   TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController jobC = TextEditingController();
   TextEditingController adminPassC = TextEditingController();
+  TextEditingController addressC = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore role = FirebaseFirestore.instance;
+
+  final List<RxString> roles = [
+    'Add Branch'.obs,
+    'Stop Branch'.obs,
+    'Modify Branch Setting'.obs,
+    'Add Employee'.obs,
+    'Stop Employee'.obs,
+    'Modify Employee'.obs,
+    'Employee Reports'.obs,
+    'Attendance Report'.obs,
+    'Manage Vacation'.obs,
+  ];
+//this list of all roles  from type bool
+  List<RxBool>? selectedPolicyValue;
+  //this function to fill the selectedPolicyValue list with false value  and when you check any checkbox the
+  //value will change to true
+  rolesValue() {
+    selectedPolicyValue = List.filled(roles.length, false.obs);
+  }
+
+  changePolicyValue(bool value, int index) {
+    selectedPolicyValue![index].value = value;
+
+    print(selectedPolicyValue![index].value);
+  }
 
   String getDefaultPassword() {
     return CompanyData.defaultPassword;
+  }
+
+  changeRoleValue(value) {
+    roleValue!.value = value;
   }
 
   String getDefaultRole() {
     return CompanyData.defaultRole;
   }
 
+//this function to store the selected roles in the firebase
+
+//this function to store the the selected roles base on the checked box
+//will store the name of the check box base on the index and only if the value is true means the checkbox
+//is being selected
+  storePolicyValue(int index, bool value) {
+    if (value) {
+      listSelectedPolicy.add(roles[index].obs.value);
+    } else {
+      listSelectedPolicy.remove(roles[index].obs.value);
+    }
+    // listSelectedPolicy.clear();
+    print(listSelectedPolicy.toList());
+  }
+
   Future<void> addEmployee() async {
     if (idC.text.isNotEmpty &&
         nameC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
-        jobC.text.isNotEmpty) {
-      isLoading.value = true;
-      CustomAlertDialog.confirmAdmin(
-        title: 'Admin confirmation',
-        message:
-            'you need to confirm that you are an administrator by inputting your password',
-        onCancel: () {
-          isLoading.value = false;
-          Get.back();
-        },
-        onConfirm: () async {
-          if (isLoadingCreatePegawai.isFalse) {
-            await createEmployeeData();
+        jobC.text.isNotEmpty &&
+        addressC.text.isNotEmpty) {
+      if (listSelectedPolicy.isEmpty) {
+        isLoading.value = true;
+        CustomAlertDialog.confirmAdmin(
+          title: 'Admin confirmation',
+          message:
+              'you need to confirm that you are an administrator by inputting your password',
+          onCancel: () {
             isLoading.value = false;
-          }
-        },
-        controller: adminPassC,
-      );
+            Get.back();
+          },
+          onConfirm: () async {
+            if (isLoadingCreatePegawai.isFalse) {
+              await createEmployeeData();
+              isLoading.value = false;
+            }
+          },
+          controller: adminPassC,
+        );
+        // CustomAlertDialog.showPresenceAlert(
+        //     title: 'Selecting Roles',
+        //     message: 'Are you sure you don\'t want to give User any Role',
+        //     onConfirm: () {
+
+        //     },
+        //     onCancel: () {
+        //       Get.back();
+        //     });
+      }
     } else {
       isLoading.value = false;
       CustomToast.errorToast('Error', 'you need to fill all form');
     }
   }
 
-  createEmployeeData() async {
+  changeid() {
+    newUserId.value = '12345';
+  }
+
+  Future<void> createEmployeeData() async {
+    selectedPolicyValue = List.filled(roles.length, false.obs);
     if (adminPassC.text.isNotEmpty) {
       isLoadingCreatePegawai.value = true;
       String adminEmail = auth.currentUser!.email!;
@@ -82,16 +151,36 @@ class AddEmployeeController extends GetxController {
         );
 
         if (employeeCredential.user != null) {
-          String uid = employeeCredential.user!.uid;
-          DocumentReference employee = firestore.collection("user").doc(uid);
+          RxString uid = employeeCredential.user!.uid.obs;
+          //  newUserId!.value = uid.value;
+
+          DocumentReference employee =
+              firestore.collection("user").doc(uid.value);
           await employee.set({
             "usrId": idC.text,
             "name": nameC.text,
             "email": emailC.text,
             "role": defaultRole,
             "job": jobC.text,
+            "address": addressC.text,
             "createdAt": DateTime.now().toIso8601String(),
           });
+
+          if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
+            await role.collection('policy').doc(uid.value).set({
+              'roles': {
+                'Add Branch': selectedPolicyValue![0].value,
+                'Stop Branch': selectedPolicyValue![1].value,
+                'Modify Branch ': selectedPolicyValue![2].value,
+                'Add Employee': selectedPolicyValue![3].value,
+                'Stop Employee': selectedPolicyValue![4].value,
+                'Modify Employee': selectedPolicyValue![5].value,
+                'Employee Reports': selectedPolicyValue![6].value,
+                'Attendance Report': selectedPolicyValue![7].value,
+                'Manage Vacation': selectedPolicyValue![8].value,
+              }
+            });
+          }
 
           await employeeCredential.user!.sendEmailVerification();
 
@@ -121,10 +210,12 @@ class AddEmployeeController extends GetxController {
           CustomToast.errorToast('Error', 'wrong passowrd');
         } else {
           CustomToast.errorToast('Error', 'error : ${e.code}');
+          print("the problem is ${e.code}");
         }
       } catch (e) {
         isLoadingCreatePegawai.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.toString()}');
+        CustomToast.errorToast('Error', 'error : ${e}');
+        print('the error is ${e}');
       }
     } else {
       CustomToast.errorToast('Error', 'you need to input password');
