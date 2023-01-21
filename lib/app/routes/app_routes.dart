@@ -38,6 +38,7 @@ abstract class Routes {
   static const EMP_UPDATE = _Paths.EMP_UPDATE;
   static const COMPANY_HOME = _Paths.COMPANY_HOME;
   static const COMPANY_DETAILS = _Paths.COMPANY_DETAILS;
+  static const UPDATE_COMPANY = _Paths.UPDATE_COMPANY;
 }
 
 abstract class _Paths {
@@ -74,5 +75,7 @@ abstract class _Paths {
   static const EMP_DETAIL = '/EMP_DETAIL';
   static const EMP_UPDATE = '/EMP_UPDATE';
   static const COMPANY_HOME = '/COMPANY_HOME';
-   static const COMPANY_DETAILS = '/COMPANY_DETAILS';
+  static const COMPANY_DETAILS = '/COMPANY_DETAILS';
+
+  static const UPDATE_COMPANY = '/UPDATE_COMPANY';
 }
