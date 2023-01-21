@@ -4,12 +4,19 @@ import 'package:get/get.dart';
 import '../style/app_color.dart';
 import '../util/dinmensions.dart';
 import '../util/images.dart';
+import '../util/styles.dart';
 
 class CustomeAppbar extends StatelessWidget {
   final Widget mainWidget;
   bool backButton;
+  String? title;
+
   Function()? backRout;
-  CustomeAppbar({required this.mainWidget, this.backButton = false,this.backRout});
+  CustomeAppbar(
+      {required this.mainWidget,
+      this.backButton = false,
+      this.backRout,
+      this.title});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +32,20 @@ class CustomeAppbar extends StatelessWidget {
                 color: AppColor.primary,
               ),
             ),
+            title != null
+                ? Positioned(
+                    top: MediaQuery.of(context).padding.top + 10,
+                    left: 0,
+                    right: 0,
+                    child: Text(
+                      title!,
+                      textAlign: TextAlign.center,
+                      style: robotoRegular.copyWith(
+                          fontSize: Dimensions.fontSizeLarge,
+                          color: Theme.of(context).cardColor),
+                    ),
+                  )
+                : SizedBox(),
             SizedBox(
               width: context.width,
               height: MediaQuery.of(context).size.height * 25 / 100,
@@ -41,7 +62,7 @@ class CustomeAppbar extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_ios,
                           color: AppColor.whiteColor, size: 20),
-                      onPressed:backRout!=null?backRout: ()=>Get.back(),
+                      onPressed: backRout != null ? backRout : () => Get.back(),
                     ),
                   )
                 : SizedBox(),

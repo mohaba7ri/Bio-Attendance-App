@@ -88,4 +88,5 @@ class UserStorage {
 
   static Future<String?> getFingerprint() async =>
       await _storage.read(key: _fingerPrint);
+      
 }

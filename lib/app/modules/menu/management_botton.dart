@@ -4,10 +4,12 @@ import 'package:presence/app/model/menu_model.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 
+import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
 import '../../util/images.dart';
 
 class MenuButton extends StatelessWidget {
+  final profileController = Get.find<ProfileController>();
   final MenuModel menu;
   final bool isLogout;
   MenuButton({super.key, required this.menu, required this.isLogout});
@@ -22,7 +24,10 @@ class MenuButton extends StatelessWidget {
           CustomAlertDialog.customAlert(
               icon: Images.support,
               message: 'Are you sure to logout ?',
-              onConfirm: () {},
+              onConfirm: () {
+                profileController.logout();
+                Get.offAllNamed(Routes.LOGIN);
+              },
               onCancel: () {
                 Get.back();
               });

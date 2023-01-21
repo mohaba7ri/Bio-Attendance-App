@@ -5,8 +5,8 @@ import 'package:presence/app/modules/Branches/update_Branch/bindings/update_bran
 import 'package:presence/app/modules/Branches/update_Branch/views/update_branch_view.dart';
 import 'package:presence/app/modules/Employees/employee_Details/bindings/employee_details_binding.dart';
 
-import 'package:presence/app/modules/add_employee/bindings/add_employee_binding.dart';
-import 'package:presence/app/modules/add_employee/views/add_employee_view.dart';
+import 'package:presence/app/modules/Employees/add_employee/bindings/add_employee_binding.dart';
+import 'package:presence/app/modules/Employees/add_employee/views/add_employee_view.dart';
 import 'package:presence/app/modules/all_presence/bindings/all_presence_binding.dart';
 import 'package:presence/app/modules/all_presence/views/all_presence_view.dart';
 import 'package:presence/app/modules/change_password/bindings/change_password_binding.dart';
