@@ -14,6 +14,7 @@ class listBranchView extends GetView<listBranchController> {
   Widget build(BuildContext context) {
     listBranchController _listBranchController = listBranchController();
     return Scaffold(
+      backgroundColor: AppColor.greyColor,
       appBar: AppBar(
         title: Text(
           'Branches',
@@ -67,13 +68,17 @@ class listBranchView extends GetView<listBranchController> {
                                 padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                  color: AppColor.primarySoft,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColor.containerShedow,
+                                      spreadRadius: 5,
+                                      blurRadius: 10,
+                                    )
+                                  ],
+                                  color: AppColor.whiteColor,
+                                  border:
+                                      Border.all(color: AppColor.blackColor),
                                   borderRadius: BorderRadius.circular(8),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/pattern-1.png'),
-                                    fit: BoxFit.cover,
-                                  ),
                                 ),
                                 child: Column(
                                     crossAxisAlignment:
@@ -85,11 +90,11 @@ class listBranchView extends GetView<listBranchController> {
                                             margin: EdgeInsets.only(
                                                 top: 4, bottom: 12),
                                             child: Text(
-                                              'Branch Name: ',
+                                              'Name: ',
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: AppColor.blackColor,
                                                 fontFamily: 'poppins',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w700,
                                                 letterSpacing: 2,
                                               ),
@@ -101,9 +106,9 @@ class listBranchView extends GetView<listBranchController> {
                                             child: Text(
                                               date[index]['name'],
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: AppColor.blackColor,
                                                 fontFamily: 'poppins',
-                                                fontSize: 18,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w800,
                                                 letterSpacing: 2,
                                               ),
@@ -117,8 +122,7 @@ class listBranchView extends GetView<listBranchController> {
                                               child: Icon(
                                                 (Icons
                                                     .arrow_forward_ios_outlined),
-                                                color: Colors.white,
-                                                size: 40.0,
+                                                color: AppColor.blackColor,
                                               ),
                                             ),
                                           ),
@@ -136,7 +140,7 @@ class listBranchView extends GetView<listBranchController> {
                                             child: Text(
                                               'Address:',
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: AppColor.blackColor,
                                                 fontFamily: 'poppins',
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,
@@ -151,89 +155,15 @@ class listBranchView extends GetView<listBranchController> {
                                               snapshot.data!.docs[index]
                                                   ['address'],
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: AppColor.blackColor,
                                                 fontFamily: 'poppins',
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w800,
                                                 letterSpacing: 2,
                                               ),
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 16),
-                                        decoration: BoxDecoration(
-                                          color: AppColor.primarySoft,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            //  check in
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 6),
-                                                    child: Text(
-                                                      "Phone",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    date[index]['phone'],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 1.5,
-                                              height: 24,
-                                              color: Colors.white,
-                                            ),
-                                            // check out
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 6),
-                                                    child: Text(
-                                                      "location",
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'There',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
                                       ),
                                     ]),
                               )),

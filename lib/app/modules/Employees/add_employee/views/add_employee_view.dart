@@ -186,10 +186,9 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
             child: Obx(
               () => ElevatedButton(
                 onPressed: () {
-                  // if (controller.isLoading.isFalse) {
-                  //   controller.addEmployee();
-                  // }
-                  employeeController.store();
+                  if (controller.isLoading.isFalse) {
+                    controller.addEmployee();
+                  }
                 },
                 child: Text(
                   (controller.isLoading.isFalse)
