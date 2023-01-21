@@ -16,7 +16,7 @@ abstract class Routes {
   static const ADD_EMPLOYEE = _Paths.ADD_EMPLOYEE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const ALL_PRESENCE = _Paths.ALL_PRESENCE;
- 
+
   static const ADD_VACATION_TYPE = _Paths.ADD_VACATION_TYPE;
   static const VACATION_TYPE = _Paths.VACATION_TYPE;
   static const ADD_VACATION_REQUEST = _Paths.ADD_VACATION_REQUEST;
@@ -36,6 +36,8 @@ abstract class Routes {
   static const LIST_EMPLOYEES = _Paths.LIST_EMPLOYEES;
   static const EMP_DETAIL = _Paths.EMP_DETAIL;
   static const EMP_UPDATE = _Paths.EMP_UPDATE;
+  static const COMPANY_HOME = _Paths.COMPANY_HOME;
+  static const COMPANY_DETAILS = _Paths.COMPANY_DETAILS;
 }
 
 abstract class _Paths {
@@ -71,4 +73,6 @@ abstract class _Paths {
   static const LIST_EMPLOYEES = '/LIST_EMPLOYEES';
   static const EMP_DETAIL = '/EMP_DETAIL';
   static const EMP_UPDATE = '/EMP_UPDATE';
+  static const COMPANY_HOME = '/COMPANY_HOME';
+   static const COMPANY_DETAILS = '/COMPANY_DETAILS';
 }
