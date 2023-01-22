@@ -60,6 +60,7 @@ class UpdateCompanyController extends GetxController {
         print('name${doc['name']}');
         nameC.value.text = doc['name'];
         phoneC.value.text = doc['phone'];
+        EmailC.value.text = doc['email'];
       });
     });
   }

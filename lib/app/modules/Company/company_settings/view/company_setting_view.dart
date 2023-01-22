@@ -5,8 +5,12 @@ import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 class CompanySettingView extends GetView<CompanySettingController> {
+  late String? companyId;
+
+  CompanySettingView({this.companyId});
   @override
   Widget build(BuildContext context) {
+    // controller.companyId!.value=companyId;
     // TODO: implement build
     return Padding(
         padding: const EdgeInsets.all(15.0),
@@ -125,12 +129,15 @@ class CompanySettingView extends GetView<CompanySettingController> {
                       color: Colors.blueAccent.shade400,
                       onPressed: () {
                         controller.storeCompanySetting();
+                        Get.back();
                       },
-                      child: Text(
-                        'Save',
-                        style:
-                            TextStyle(color: AppColor.whiteColor, fontSize: 16),
-                      ),
+                      child: controller.isExistSetting.value == true
+                          ? Text('Update')
+                          : Text(
+                              'Save',
+                              style: TextStyle(
+                                  color: AppColor.whiteColor, fontSize: 16),
+                            ),
                     ),
                   ),
                 ],

@@ -14,6 +14,7 @@ import '../controllers/Company_Home_controller.dart';
 
 class CompanyHomeView extends GetView<CompanyHomeController> {
   final pageIndexController = Get.find<PageIndexController>();
+
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> companyStream =
@@ -77,7 +78,9 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 height: 20,
                               ),
                               onTap: () {
-                                Get.toNamed(Routes.ADD_COMPANY_SETTING);
+                                Get.toNamed(Routes.UPDATE_COMPANY,
+                                    arguments: companyData['companyId']);
+                                print(companyData['companyId']);
                               },
                             ),
                             MenuTile(
@@ -90,10 +93,16 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 height: 20,
                               ),
                               onTap: () {
-                                Get.put(CompanySettingController());
+                                // Get.put(CompanySettingController());
+                                Get.lazyPut(() => CompanySettingController(
+                                    companyId: companyData['companyId']));
+
                                 showDialog(
                                     context: context,
-                                    builder: (context) => CompanySettingView());
+                                    builder: (context) => CompanySettingView(
+                                          companyId: companyData['companyId'],
+                                        )).then((_) =>
+                                    Get.delete<CompanySettingController>());
                               },
                             ),
                             Container(

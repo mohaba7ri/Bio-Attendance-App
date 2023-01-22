@@ -4,6 +4,19 @@ import 'package:get/get.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 
 class CompanySettingController extends GetxController {
+  String? companyId;
+  RxString companySettingId = ''.obs;
+
+  CompanySettingController({this.companyId});
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    print('companyID${companyId}');
+    checkCompanySetting()
+        .whenComplete(() => print('companySetting${companySettingId}'));
+  }
+
   Rx<TimeOfDay> startTime = TimeOfDay.now().obs;
   Rx<TimeOfDay> endTime = TimeOfDay(hour: 2, minute: 00).obs;
   Rx<TimeOfDay> lateTime = TimeOfDay(hour: 8, minute: 30).obs;
@@ -37,18 +50,17 @@ class CompanySettingController extends GetxController {
     endTime.value = time;
   }
 
-  checkCompanySetting() {
-    FirebaseFirestore.instance
-        .collection("companySetting")
-        .doc("documentId")
-        .get()
-        .then((documentSnapshot) {
-      if (documentSnapshot.exists) {
-        isExistSetting.value = true;
-      } else {
-        print("Document doesn't exist!");
-      }
-    });
+  Future<void> checkCompanySetting() async {
+    final QuerySnapshot companySetting =
+        await FirebaseFirestore.instance.collection("companySettings").get();
+    for (var document in companySetting.docs) {
+      print(document.id);
+      companySettingId.value = document.id;
+      print('companySettingID${companySettingId}');
+    }
+    if (companySetting.docs.isNotEmpty) {
+      isExistSetting.value = true;
+    }
   }
 
   Future<void> storeCompanySetting() async {
@@ -59,22 +71,40 @@ class CompanySettingController extends GetxController {
     DateTime startTimeTimestamp = DateTime(now.year, now.month, now.day,
         startTime.value.hour, startTime.value.minute);
     String startTimeIsoString = startTimeTimestamp.toIso8601String();
-    DateTime lateTimeTimestamp = DateTime(
-        now.year, now.month, now.day, endTime.value.hour, endTime.value.minute);
+    DateTime lateTimeTimestamp = DateTime(now.year, now.month, now.day,
+        lateTime.value.hour, lateTime.value.minute);
     String lateTimeIsoString = lateTimeTimestamp.toIso8601String();
     DateTime overlyTimeTimestamp = DateTime(now.year, now.month, now.day,
         overlyTime.value.hour, overlyTime.value.minute);
     String overlyTimeIsoString = overlyTimeTimestamp.toIso8601String();
     try {
-      await companySetting.collection('companySettings').doc().set({
-        'startTime': startTimeIsoString,
-        'lateTime': lateTimeIsoString,
-        'endTime': endTimeIsoString,
-        'overlyTime': overlyTimeIsoString,
-      }).whenComplete(() => CustomToast.successToast(
-          'Setting', 'Company Settings added successfully '));
+      final companySettingRef = companySetting.collection('companySettings');
+      final querySnapshot = await companySettingRef.get();
+      if (querySnapshot.docs.isEmpty) {
+        companySettingRef.doc().set({
+          'startTime': startTimeIsoString,
+          'lateTime': lateTimeIsoString,
+          'endTime': endTimeIsoString,
+          'overlyTime': overlyTimeIsoString,
+          'companyId': companyId,
+        });
+        CustomToast.successToast(
+            'Success', 'CompanySetting added successfully');
+      } else {
+        if (isExistSetting.value == true) {
+          companySettingRef.doc(companySettingId.value).update({
+            'startTime': startTimeIsoString,
+            'lateTime': lateTimeIsoString,
+            'endTime': endTimeIsoString,
+            'overlyTime': overlyTimeIsoString,
+            'companyId': companyId,
+          });
+          CustomToast.successToast(
+              'Success', 'CompanySetting updated successfully');
+        }
+      }
     } catch (e) {
-      CustomToast.errorToast('error', e.toString());
+      CustomToast.errorToast('Error', e.toString());
       print(e.toString());
     }
   }
