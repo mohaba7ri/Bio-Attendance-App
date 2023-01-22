@@ -39,6 +39,7 @@ abstract class Routes {
   static const COMPANY_HOME = _Paths.COMPANY_HOME;
   static const COMPANY_DETAILS = _Paths.COMPANY_DETAILS;
   static const UPDATE_COMPANY = _Paths.UPDATE_COMPANY;
+  static const DASHBOARD = _Paths.DASHBOARD;
 }
 
 abstract class _Paths {
@@ -78,4 +79,5 @@ abstract class _Paths {
   static const COMPANY_DETAILS = '/COMPANY_DETAILS';
 
   static const UPDATE_COMPANY = '/UPDATE_COMPANY';
+  static const DASHBOARD = '/DASHBOARD';
 }

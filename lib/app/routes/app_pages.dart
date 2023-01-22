@@ -55,6 +55,8 @@ import '../modules/Employees/employee_Update/bindings/update_employee_binding.da
 import '../modules/Employees/employee_Update/views/update_employee_view.dart';
 import '../modules/Employees/view_Employee/bindings/Employees_binding.dart';
 import '../modules/Employees/view_Employee/views/Employees_view.dart';
+import '../modules/dashboard/bindings/Dashboard_binding.dart';
+import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
 import '../modules/vacation/on_vacation_employees/views/on_vacation_view.dart';
@@ -215,5 +217,10 @@ class AppPages {
         name: _Paths.UPDATE_COMPANY,
         page: () => UpdateCompanyView(),
         binding: UpdateCompanyBinding()),
+
+              GetPage(
+        name: _Paths.DASHBOARD,
+        page: () => DashboardView(),
+        binding: DashboardBinding()),
   ];
 }
