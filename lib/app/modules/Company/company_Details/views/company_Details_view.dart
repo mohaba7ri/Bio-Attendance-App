@@ -387,7 +387,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  'Start Time',
+                                                  'End Time',
                                                   style:
                                                       TextStyle(fontSize: 18),
                                                 ),
@@ -404,7 +404,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             ),
                                             SizedBox(height: 6),
                                             Text(
-                                              "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}", //date[index]['phone'],
+                                              "${DateFormat.jm().format(DateTime.parse(data["endTime"]))}", //date[index]['phone'],
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
@@ -428,7 +428,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  'Start Time',
+                                                  'Late Time',
                                                   style:
                                                       TextStyle(fontSize: 18),
                                                 ),
@@ -445,7 +445,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             ),
                                             SizedBox(height: 6),
                                             Text(
-                                              "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}", //date[index]['phone'],
+                                              "${DateFormat.jm().format(DateTime.parse(data["lateTime"]))}", //date[index]['phone'],
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,
@@ -460,7 +460,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  'Start Time',
+                                                  'Overly Time',
                                                   style:
                                                       TextStyle(fontSize: 18),
                                                 ),
@@ -477,7 +477,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                             ),
                                             SizedBox(height: 6),
                                             Text(
-                                              "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}", //date[index]['phone'],
+                                              "${DateFormat.jm().format(DateTime.parse(data["overlyTime"]))}", //date[index]['phone'],
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w600,

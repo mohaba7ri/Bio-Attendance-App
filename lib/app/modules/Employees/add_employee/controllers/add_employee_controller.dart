@@ -9,6 +9,13 @@ import 'package:presence/company_data.dart';
 
 class AddEmployeeController extends GetxController {
   @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getBranches();
+  }
+
+  @override
   onClose() {
     idC.dispose();
     nameC.dispose();
@@ -16,17 +23,10 @@ class AddEmployeeController extends GetxController {
     adminPassC.dispose();
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getBranches();
-  }
-
   GetStorage store = new GetStorage();
 
-  RxString? roleValue = 'Please Select'.obs;
-  RxString? branchValue = 'Please Select'.obs;
+  RxString roleValue = 'Please Select'.obs;
+  RxString branchValue = 'Please Select'.obs;
   var roleList = ['Please Select', 'Admin', 'Employee'];
   RxBool isLoading = false.obs;
   RxBool isLoadingCreatePegawai = false.obs;
@@ -81,11 +81,11 @@ class AddEmployeeController extends GetxController {
   }
 
   changeRoleValue(value) {
-    roleValue!.value = value;
+    roleValue.value = value;
   }
 
   changeBranchValue(value) {
-    branchValue!.value = value;
+    branchValue.value = value;
   }
 
   String getDefaultRole() {
@@ -98,6 +98,7 @@ class AddEmployeeController extends GetxController {
     branches.get().then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         Map<String, dynamic> data = doc.data();
+
         branchesList.add(DropdownMenuItem(
           child: Text(data['name']),
           value: data['name'],
@@ -199,10 +200,11 @@ class AddEmployeeController extends GetxController {
             "usrId": idC.text,
             "name": nameC.text,
             "email": emailC.text,
-            "role": defaultRole,
+            "role": roleValue.value,
             "job": jobC.text,
             "address": addressC.text,
             "createdAt": DateTime.now().toIso8601String(),
+            "branchName": branchValue.value
           }).whenComplete(() {
             if (isSelectedPolicy.value == true) {
               store.write('userID', uid.value);
