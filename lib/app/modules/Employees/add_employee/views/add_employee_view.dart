@@ -99,16 +99,9 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                               buttonHeight: 40,
                               buttonWidth: 140,
                               itemHeight: 40,
-                              items: employeeController.roleList
-                                  .map(
-                                    (roleValue) => DropdownMenuItem(
-                                      child: Text(roleValue),
-                                      value: roleValue,
-                                    ),
-                                  )
-                                  .toList(),
+                              items: employeeController.branchesList,
                               onChanged: (value) {
-                                employeeController.changeRoleValue(value);
+                                employeeController.changeBranchValue(value);
                               },
                             ),
                           ),
@@ -146,39 +139,40 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
             hint: 'hail street',
           ),
           SizedBox(height: 8),
-          Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width * 0,
-            decoration: BoxDecoration(
-                color: AppColor.greyColor,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(2, 2),
-                      blurRadius: 5,
-                      spreadRadius: 1)
-                ],
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColor.whiteColor, width: 1.5)),
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: employeeController.roles.length,
-                itemBuilder: (context, int index) {
-                  final controller = AddEmployeeController();
-                  controller.rolesValue();
-                  return Obx(
-                    () => CheckboxListTile(
-                      selectedTileColor: Colors.blue,
-                      title: Text(employeeController.roles[index].value),
-                      value: controller.selectedPolicyValue![index].value,
-                      onChanged: (bool? value) {
-                        controller.changePolicyValue(value!, index);
-                        employeeController.storePolicyValue(index, value);
-                      },
-                    ),
-                  );
-                }),
-          ),
+          // Container(
+          //   height: 200,
+          //   width: MediaQuery.of(context).size.width * 0,
+          //   decoration: BoxDecoration(
+          //       color: AppColor.greyColor,
+          //       boxShadow: [
+          //         BoxShadow(
+          //             color: Colors.grey,
+          //             offset: Offset(2, 2),
+          //             blurRadius: 5,
+          //             spreadRadius: 1)
+          //       ],
+          //       borderRadius: BorderRadius.circular(10),
+          //       border: Border.all(color: AppColor.whiteColor, width: 1.5)),
+          //   child: ListView.builder(
+          //       shrinkWrap: true,
+          //       itemCount: employeeController.roles.length,
+          //       itemBuilder: (context, int index) {
+          //         final controller = AddEmployeeController();
+          //         controller.rolesValue();
+          //         return Obx(
+          //           () => CheckboxListTile(
+          //             selectedTileColor: Colors.blue,
+          //             title: Text(employeeController.roles[index].value),
+          //             value: controller.selectedPolicyValue![index].value,
+          //             onChanged: (bool? value) {
+          //               controller.changePolicyValue(value!, index);
+          //               employeeController.storePolicyValue(index, value);
+          //             },
+          //           ),
+          //         );
+          //       }),
+          // ),
+
           SizedBox(
             height: 10,
           ),

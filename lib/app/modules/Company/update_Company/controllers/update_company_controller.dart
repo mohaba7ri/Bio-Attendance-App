@@ -11,6 +11,7 @@ import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class UpdateCompanyController extends GetxController {
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -20,7 +21,7 @@ class UpdateCompanyController extends GetxController {
     determineBranchPosition();
   }
 
-  String companyId = Get.arguments;
+  String companyId =Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;

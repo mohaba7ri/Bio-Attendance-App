@@ -16,17 +16,25 @@ class AddEmployeeController extends GetxController {
     adminPassC.dispose();
   }
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getBranches();
+  }
+
   GetStorage store = new GetStorage();
 
   RxString? roleValue = 'Please Select'.obs;
-  var roleList = ['Please Select', 'SuperAdmin', 'Admin', 'Employee'];
+  RxString? branchValue = 'Please Select'.obs;
+  var roleList = ['Please Select', 'Admin', 'Employee'];
   RxBool isLoading = false.obs;
   RxBool isLoadingCreatePegawai = false.obs;
   RxBool isSelectedPolicy = false.obs;
   RxString newUserId = ''.obs;
   //this list to store the roles in firebase for each user
   final List<RxString> listSelectedPolicy = [];
-
+  final branchesList = <DropdownMenuItem<String>>[].obs;
   TextEditingController idC = TextEditingController();
   TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
@@ -76,8 +84,26 @@ class AddEmployeeController extends GetxController {
     roleValue!.value = value;
   }
 
+  changeBranchValue(value) {
+    branchValue!.value = value;
+  }
+
   String getDefaultRole() {
     return CompanyData.defaultRole;
+  }
+
+  void getBranches() {
+    final branches = FirebaseFirestore.instance.collection('branch');
+
+    branches.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        branchesList.add(DropdownMenuItem(
+          child: Text(data['name']),
+          value: data['name'],
+        ));
+      });
+    });
   }
 
 //this function to store the selected roles in the firebase
@@ -120,15 +146,6 @@ class AddEmployeeController extends GetxController {
           },
           controller: adminPassC,
         );
-        // CustomAlertDialog.showPresenceAlert(
-        //     title: 'Selecting Roles',
-        //     message: 'Are you sure you don\'t want to give User any Role',
-        //     onConfirm: () {
-
-        //     },
-        //     onCancel: () {
-        //       Get.back();
-        //     });
       }
     } else {
       isLoading.value = false;
