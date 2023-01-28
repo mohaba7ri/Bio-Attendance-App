@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:presence/company_data.dart';
@@ -14,6 +15,8 @@ class AddEmployeeController extends GetxController {
     emailC.dispose();
     adminPassC.dispose();
   }
+
+  GetStorage store = new GetStorage();
 
   RxString? roleValue = 'Please Select'.obs;
   var roleList = ['Please Select', 'SuperAdmin', 'Admin', 'Employee'];
@@ -34,7 +37,7 @@ class AddEmployeeController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseFirestore role = FirebaseFirestore.instance;
-
+  var rolesValues = {};
   final List<RxString> roles = [
     'Add Branch'.obs,
     'Stop Branch'.obs,
@@ -56,8 +59,13 @@ class AddEmployeeController extends GetxController {
 
   changePolicyValue(bool value, int index) {
     selectedPolicyValue![index].value = value;
-
+    for (var i = 0; i < roles.length; i++) {
+      rolesValues[roles[i].value] = selectedPolicyValue![i].value;
+    }
+    print('roles${rolesValues}');
     print(selectedPolicyValue![index].value);
+    // print(
+    //     'roles${rolesValues[roles[index].value] = selectedPolicyValue![index].value}');
   }
 
   String getDefaultPassword() {
@@ -83,7 +91,8 @@ class AddEmployeeController extends GetxController {
     } else {
       listSelectedPolicy.remove(roles[index].obs.value);
     }
-    // listSelectedPolicy.clear();
+    // Get.defaultDialog(title: 'hello');
+
     print(listSelectedPolicy.toList());
   }
 
@@ -127,11 +136,24 @@ class AddEmployeeController extends GetxController {
     }
   }
 
-  changeid() {
-    newUserId.value = '12345';
+  changeid() async {
+    print('object');
+    if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
+      print('hi');
+      try {
+        print('hi');
+        await role.collection('policy').doc('555').set({'roles': rolesValues});
+      } catch (e) {
+        print('error${e.toString()}');
+      }
+    }
   }
 
   Future<void> createEmployeeData() async {
+    isSelectedPolicy.value = true;
+    isSelectedPolicy.update((val) {
+      isSelectedPolicy.value = true;
+    });
     selectedPolicyValue = List.filled(roles.length, false.obs);
     if (adminPassC.text.isNotEmpty) {
       isLoadingCreatePegawai.value = true;
@@ -164,22 +186,36 @@ class AddEmployeeController extends GetxController {
             "job": jobC.text,
             "address": addressC.text,
             "createdAt": DateTime.now().toIso8601String(),
+          }).whenComplete(() {
+            if (isSelectedPolicy.value == true) {
+              store.write('userID', uid.value);
+            }
           });
 
+          // if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
+          //   await role.collection('policy').doc(uid.value).set({
+          //     'roles': {
+          //       'Add Branch': selectedPolicyValue![0].value,
+          //       'Stop Branch': selectedPolicyValue![1].value,
+          //       'Modify Branch ': selectedPolicyValue![2].value,
+          //       'Add Employee': selectedPolicyValue![3].value,
+          //       'Stop Employee': selectedPolicyValue![4].value,
+          //       'Modify Employee': selectedPolicyValue![5].value,
+          //       'Employee Reports': selectedPolicyValue![6].value,
+          //       'Attendance Report': selectedPolicyValue![7].value,
+          //       'Manage Vacation': selectedPolicyValue![8].value,
+          //     }
+          //   });
+          // }
           if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
-            await role.collection('policy').doc(uid.value).set({
-              'roles': {
-                'Add Branch': selectedPolicyValue![0].value,
-                'Stop Branch': selectedPolicyValue![1].value,
-                'Modify Branch ': selectedPolicyValue![2].value,
-                'Add Employee': selectedPolicyValue![3].value,
-                'Stop Employee': selectedPolicyValue![4].value,
-                'Modify Employee': selectedPolicyValue![5].value,
-                'Employee Reports': selectedPolicyValue![6].value,
-                'Attendance Report': selectedPolicyValue![7].value,
-                'Manage Vacation': selectedPolicyValue![8].value,
-              }
-            });
+            var rolesValues = {};
+            for (var i = 0; i < roles.length; i++) {
+              rolesValues[roles[i].value] = selectedPolicyValue![i].value;
+            }
+            await role
+                .collection('policy')
+                .doc(uid.value)
+                .set({'roles': rolesValues});
           }
 
           await employeeCredential.user!.sendEmailVerification();

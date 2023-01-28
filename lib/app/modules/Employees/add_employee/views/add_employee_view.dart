@@ -10,6 +10,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 
 class AddEmployeeView extends GetView<AddEmployeeController> {
   final employeeController = AddEmployeeController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,8 +187,13 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
             child: Obx(
               () => ElevatedButton(
                 onPressed: () {
+                  controller.changeid();
+
                   if (controller.isLoading.isFalse) {
                     controller.addEmployee();
+                  }
+                  if (employeeController.isSelectedPolicy == true) {
+                    print('userID' + employeeController.store.read('userID'));
                   }
                 },
                 child: Text(
