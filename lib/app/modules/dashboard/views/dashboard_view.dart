@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../style/app_color.dart';
+import '../../../widgets/dashBoardBoxes.dart';
 import '../controllers/Dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -37,192 +38,12 @@ class DashboardView extends GetView<DashboardController> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                          colors: [Colors.indigo, Colors.blueAccent]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 2.0,
-                            offset: Offset(2.0, 2.0))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+      body: Container(
+        color: Colors.grey[100],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: dashBoardBoxes(),
           ),
         ),
       ),

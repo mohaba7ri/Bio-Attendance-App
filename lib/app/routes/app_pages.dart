@@ -32,6 +32,7 @@ import 'package:presence/app/modules/update_pofile/bindings/update_pofile_bindin
 import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart';
 import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart';
 import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
+import 'package:presence/app/modules/vacation/vacation_Request_Details/views/vacation_Request_details_view.dart';
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
 import '../modules/Branches/add_Branch/views/add_branch_view.dart';
@@ -62,6 +63,7 @@ import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_
 import '../modules/vacation/on_vacation_employees/views/on_vacation_view.dart';
 import '../modules/vacation/vacation_Home/bindings/Vacation_Home_binding.dart';
 import '../modules/vacation/vacation_Home/views/Vacation_Home_view.dart';
+import '../modules/vacation/vacation_Request_Details/bindings/vacation_Request_details_binding.dart';
 import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
 import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
 import '../modules/vacation/view_vacation/bindings/vacation_binding.dart';
@@ -222,5 +224,11 @@ class AppPages {
         name: _Paths.DASHBOARD,
         page: () => DashboardView(),
         binding: DashboardBinding()),
+
+ GetPage(
+        name: _Paths.Req_DETAILS,
+        page: () => vacationRequestDetailDetailView(),
+        binding:  vacationRequestDetailBinding()),
+
   ];
 }
