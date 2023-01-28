@@ -66,7 +66,8 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 width: 20,
                                 height: 20,
                               ),
-                              onTap: () => Get.toNamed(Routes.COMPANY_DETAILS),
+                              onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
+                                  arguments: companyData),
                             ),
                             MenuTile(
                               isDanger: true,

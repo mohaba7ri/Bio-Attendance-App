@@ -10,6 +10,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 
 class AddEmployeeView extends GetView<AddEmployeeController> {
   final employeeController = AddEmployeeController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +56,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                       width: MediaQuery.of(context).size.width * 40 / 100,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton2(
-                          value: employeeController.roleValue!.value,
+                          value: employeeController.roleValue.value,
                           buttonHeight: 40,
                           buttonWidth: 140,
                           itemHeight: 40,
@@ -91,23 +92,14 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                         padding: const EdgeInsets.all(2.0),
                         child: SizedBox(
                           //  height: MediaQuery.of(context).size.height * 50,
-                          width: MediaQuery.of(context).size.width * 40 / 100,
+                          width: MediaQuery.of(context).size.width * 50 / 100,
                           child: DropdownButtonHideUnderline(
-                            child: DropdownButton2(
-                              value: employeeController.roleValue!.value,
-                              buttonHeight: 40,
-                              buttonWidth: 140,
-                              itemHeight: 40,
-                              items: employeeController.roleList
-                                  .map(
-                                    (roleValue) => DropdownMenuItem(
-                                      child: Text(roleValue),
-                                      value: roleValue,
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                employeeController.changeRoleValue(value);
+                            child: DropdownButton(
+                              elevation: 20,
+                              value: controller.branchValue.value,
+                              items: controller.branchesList,
+                              onChanged: (String? selectedValue) {
+                                controller.changeBranchValue(selectedValue);
                               },
                             ),
                           ),
@@ -145,39 +137,40 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
             hint: 'hail street',
           ),
           SizedBox(height: 8),
-          Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width * 0,
-            decoration: BoxDecoration(
-                color: AppColor.greyColor,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(2, 2),
-                      blurRadius: 5,
-                      spreadRadius: 1)
-                ],
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColor.whiteColor, width: 1.5)),
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: employeeController.roles.length,
-                itemBuilder: (context, int index) {
-                  final controller = AddEmployeeController();
-                  controller.rolesValue();
-                  return Obx(
-                    () => CheckboxListTile(
-                      selectedTileColor: Colors.blue,
-                      title: Text(employeeController.roles[index].value),
-                      value: controller.selectedPolicyValue![index].value,
-                      onChanged: (bool? value) {
-                        controller.changePolicyValue(value!, index);
-                        employeeController.storePolicyValue(index, value);
-                      },
-                    ),
-                  );
-                }),
-          ),
+          // Container(
+          //   height: 200,
+          //   width: MediaQuery.of(context).size.width * 0,
+          //   decoration: BoxDecoration(
+          //       color: AppColor.greyColor,
+          //       boxShadow: [
+          //         BoxShadow(
+          //             color: Colors.grey,
+          //             offset: Offset(2, 2),
+          //             blurRadius: 5,
+          //             spreadRadius: 1)
+          //       ],
+          //       borderRadius: BorderRadius.circular(10),
+          //       border: Border.all(color: AppColor.whiteColor, width: 1.5)),
+          //   child: ListView.builder(
+          //       shrinkWrap: true,
+          //       itemCount: employeeController.roles.length,
+          //       itemBuilder: (context, int index) {
+          //         final controller = AddEmployeeController();
+          //         controller.rolesValue();
+          //         return Obx(
+          //           () => CheckboxListTile(
+          //             selectedTileColor: Colors.blue,
+          //             title: Text(employeeController.roles[index].value),
+          //             value: controller.selectedPolicyValue![index].value,
+          //             onChanged: (bool? value) {
+          //               controller.changePolicyValue(value!, index);
+          //               employeeController.storePolicyValue(index, value);
+          //             },
+          //           ),
+          //         );
+          //       }),
+          // ),
+
           SizedBox(
             height: 10,
           ),
@@ -186,8 +179,13 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
             child: Obx(
               () => ElevatedButton(
                 onPressed: () {
+                  controller.changeid();
+
                   if (controller.isLoading.isFalse) {
                     controller.addEmployee();
+                  }
+                  if (employeeController.isSelectedPolicy == true) {
+                    print('userID' + employeeController.store.read('userID'));
                   }
                 },
                 child: Text(
