@@ -40,15 +40,23 @@ class employeeDetailView extends GetView<employeeDetailController> {
           ),
         ),
       ),
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.all(8.0),
+        color: Colors.grey[200],
         child: Container(
           padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: AppColor.containerColor,
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
           ),
+          // padding: EdgeInsets.all(20),
+          // margin: EdgeInsets.all(20),
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(8),
+          //   color: AppColor.containerColor,
+          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -130,7 +138,7 @@ class employeeDetailView extends GetView<employeeDetailController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      '${controller.EmpList['active']}',
+                      '', // '${controller.EmpList['active']}',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Inter',

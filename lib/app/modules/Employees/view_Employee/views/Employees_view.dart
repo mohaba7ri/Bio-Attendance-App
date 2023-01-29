@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -40,138 +41,88 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _listEmployeeController.Employee(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var date = snapshot.data!.docs;
+      body: Container(
+        color: Colors.grey[200],
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: _listEmployeeController.Employee(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var date = snapshot.data!.docs;
 
-                  return date[index]['name'] == 'name'
-                      ? SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                detialEmployee.EmpList =
-                                    snapshot.data!.docs[index];
+                    return date[index]['name'] == 'name'
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  detialEmployee.EmpList =
+                                      snapshot.data!.docs[index];
 
-                                print(detialEmployee.EmpList['name']);
-                                Get.toNamed(Routes.EMP_DETAIL);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: AppColor.primarySoft,
-                                  borderRadius: BorderRadius.circular(8),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/pattern-1.png'),
-                                    fit: BoxFit.cover,
+                                  print(detialEmployee.EmpList['name']);
+                                  Get.toNamed(Routes.EMP_DETAIL);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 10)
+                                    ],
                                   ),
-                                ),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              'Name: ',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'poppins',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              date[index]['name'],
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'poppins',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w800,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: Icon(
-                                                (Icons
-                                                    .arrow_forward_ios_outlined),
-                                                color: Colors.white,
-                                                size: 40.0,
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                          ),
+                                  child: ListTile(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 5.0, vertical: 1.0),
+                                      leading: Container(
+                                        padding: EdgeInsets.only(right: 12.0),
+                                        decoration: new BoxDecoration(
+                                            border: new Border(
+                                                right: new BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.black))),
+                                        child: Image.asset(Images.profile,
+                                            color: Colors.black),
+                                      ),
+                                      title: Text(
+                                        date[index]['name'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      subtitle: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.work_outline,
+                                              color: Colors.black),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text(date[index]['job'],
+                                                style: TextStyle(
+                                                    color: Colors.black)),
+                                          )
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              'Job:',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'poppins',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              snapshot.data!.docs[index]['job'],
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'poppins',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w800,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ]),
-                              )),
-                        );
-                },
-              );
+                                      trailing: Icon(Icons.keyboard_arrow_right,
+                                          color: Colors.black, size: 30.0)),
+                                )),
+                          );
+                  },
+                );
 
-            default:
-              return SizedBox();
-          }
-        },
+              default:
+                return SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
