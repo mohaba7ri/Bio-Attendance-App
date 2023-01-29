@@ -53,7 +53,7 @@ class _CustomInputState extends State<CustomInput> {
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
             hintText: widget.hint,
             hintStyle: TextStyle(

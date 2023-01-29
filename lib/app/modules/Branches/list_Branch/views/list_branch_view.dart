@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -39,142 +40,84 @@ class listBranchView extends GetView<listBranchController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _listBranchController.branch(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var date = snapshot.data!.docs;
+      body: Container(
+        color: Colors.grey[200],
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: _listBranchController.branch(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var date = snapshot.data!.docs;
 
-                  return date[index]['name'] == 'name'
-                      ? SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                detialBranch.brancList =
-                                    snapshot.data!.docs[index];
+                    return date[index]['name'] == 'name'
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  detialBranch.brancList =
+                                      snapshot.data!.docs[index];
 
-                                print(detialBranch.brancList['name']);
-                                Get.toNamed(Routes.BRANCH_DETAILS);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColor.containerShedow,
-                                      spreadRadius: 5,
-                                      blurRadius: 10,
-                                    )
-                                  ],
-                                  color: AppColor.whiteColor,
-                                  border:
-                                      Border.all(color: AppColor.blackColor),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              'Name: ',
+                                  print(detialBranch.brancList['name']);
+                                  Get.toNamed(Routes.BRANCH_DETAILS);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white70,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 10)
+                                    ],
+                                  ),
+                                  child: ListTile(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 5.0, vertical: 1.0),
+                                      leading: Container(
+                                        padding: EdgeInsets.only(right: 12.0),
+                                        decoration: new BoxDecoration(
+                                            border: new Border(
+                                                right: new BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.black))),
+                                        child: Image.asset(Images.office,
+                                            color: Colors.black),
+                                      ),
+                                      title: Text(
+                                        date[index]['name'],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      subtitle: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.linear_scale,
+                                              color: Colors.yellowAccent),
+                                          Text(date[index]['address'],
                                               style: TextStyle(
-                                                color: AppColor.blackColor,
-                                                fontFamily: 'poppins',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              date[index]['name'],
-                                              style: TextStyle(
-                                                color: AppColor.blackColor,
-                                                fontFamily: 'poppins',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w800,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: Icon(
-                                                (Icons
-                                                    .arrow_forward_ios_outlined),
-                                                color: AppColor.blackColor,
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                          ),
+                                                  color: Colors.black))
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              'Address:',
-                                              style: TextStyle(
-                                                color: AppColor.blackColor,
-                                                fontFamily: 'poppins',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 4, bottom: 12),
-                                            child: Text(
-                                              snapshot.data!.docs[index]
-                                                  ['address'],
-                                              style: TextStyle(
-                                                color: AppColor.blackColor,
-                                                fontFamily: 'poppins',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w800,
-                                                letterSpacing: 2,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ]),
-                              )),
-                        );
-                },
-              );
+                                      trailing: Icon(Icons.keyboard_arrow_right,
+                                          color: Colors.black, size: 30.0)),
+                                )),
+                          );
+                  },
+                );
 
-            default:
-              return SizedBox();
-          }
-        },
+              default:
+                return SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
