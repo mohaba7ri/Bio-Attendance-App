@@ -32,6 +32,7 @@ class AddEmployeeController extends GetxController {
   RxBool isLoadingCreatePegawai = false.obs;
   RxBool isSelectedPolicy = false.obs;
   RxString newUserId = ''.obs;
+  RxString branchId = '123'.obs;
   //this list to store the roles in firebase for each user
   final List<RxString> listSelectedPolicy = [];
   final branchesList = <DropdownMenuItem<String>>[].obs;
@@ -84,8 +85,18 @@ class AddEmployeeController extends GetxController {
     roleValue.value = value;
   }
 
-  changeBranchValue(value) {
+  changeBranchValue(value) async {
     branchValue.value = value;
+    await firestore
+        .collection('branch')
+        .where('name', isEqualTo: branchValue.value)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        branchId.value = data['branchId'];
+      });
+    });
   }
 
   String getDefaultRole() {
@@ -94,17 +105,22 @@ class AddEmployeeController extends GetxController {
 
   void getBranches() {
     final branches = FirebaseFirestore.instance.collection('branch');
+    try {
+      branches.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
 
-    branches.get().then((querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data();
-
-        branchesList.add(DropdownMenuItem(
-          child: Text(data['name']),
-          value: data['name'],
-        ));
+          branchesList.add(
+            DropdownMenuItem(
+              child: Text(data['name']),
+              value: data['name'],
+            ),
+          );
+        });
       });
-    });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
 //this function to store the selected roles in the firebase
@@ -204,7 +220,7 @@ class AddEmployeeController extends GetxController {
             "job": jobC.text,
             "address": addressC.text,
             "createdAt": DateTime.now().toIso8601String(),
-            "branchName": branchValue.value
+            "branchId": branchId.value,
           }).whenComplete(() {
             if (isSelectedPolicy.value == true) {
               store.write('userID', uid.value);

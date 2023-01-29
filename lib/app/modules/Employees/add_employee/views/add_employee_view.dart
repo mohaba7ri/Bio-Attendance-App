@@ -91,7 +91,6 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: SizedBox(
-                          //  height: MediaQuery.of(context).size.height * 50,
                           width: MediaQuery.of(context).size.width * 50 / 100,
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
