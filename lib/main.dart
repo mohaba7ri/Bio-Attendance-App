@@ -23,7 +23,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init();
-  Map<String, Map<String, String>> _languages = await di.init( );
+  Map<String, Map<String, String>> _languages = await di.init();
   GetStorage().writeIfNull('darkMode', false);
   timeago.setLocaleMessages('ar', timeago.ArMessages());
   await translator.init(
@@ -53,24 +53,23 @@ void main() async {
             ),
           );
         }
-        return GetBuilder<LanguagesController>(builder: (LanguagesController){
-            final Map<String, Map<String, String>> languages;
-            return GetMaterialApp(
-
-          title: "Application",
-          debugShowCheckedModeBanner: false,
-          initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
-          getPages: AppPages.routes,
-          locale: LanguagesController.locale,
-          translations: Messages(languages: _languages),
-           fallbackLocale: Locale(AppConstants.languages[0].languageCode, AppConstants.languages[0].countryCode),
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            fontFamily: 'inter',
-          ),
-        );
+        return GetBuilder<LanguagesController>(builder: (LanguagesController) {
+          final Map<String, Map<String, String>> languages;
+          return GetMaterialApp(
+            title: "Application",
+            debugShowCheckedModeBanner: false,
+            initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
+            getPages: AppPages.routes,
+            locale: LanguagesController.locale,
+            translations: Messages(languages: _languages),
+            fallbackLocale: Locale(AppConstants.languages[0].languageCode,
+                AppConstants.languages[0].countryCode),
+            theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              fontFamily: 'inter',
+            ),
+          );
         });
-     
       },
     ),
   );

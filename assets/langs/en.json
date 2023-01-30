@@ -3,5 +3,9 @@
   "company":"Company",
   "branch":"Branch",
   "employee":"Employee",
-  "select_language":"Select Language"
+  "select_language":"Select Language",
+  "welcome back":"Welcome Back",
+  "No_location_yet":"No location yet",
+  "Distance from office":"Distance from office"
+
 }
