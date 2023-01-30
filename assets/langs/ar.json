@@ -4,8 +4,7 @@
   "branch":"الفرع",
   "employee":"الموظف",
   "select_language":"أختار اللغة",
-  "select_a_language": "اختر لغة",
-  "save": "يحفظ",
-  "sign_in": "تسجيل الدخول"
-
+  "welcome_back":"اهلا بعودتك",
+  "No_location_yet":"لم يتم تحديد الموقع",
+  "Distance_from_office":"المسافة من الشركة"
 }

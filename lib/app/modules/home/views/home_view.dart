@@ -13,6 +13,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       bottomNavigationBar: CustomBottomNavigationBar(),
       extendBody: true,
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -51,7 +52,7 @@ class HomeView extends GetView<HomeController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "welcome back",
+                                'welcome back'.tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: AppColor.secondarySoft,
@@ -95,7 +96,7 @@ class HomeView extends GetView<HomeController> {
                       child: Text(
                         (user["address"] != null)
                             ? "${user['address']}"
-                            : "No location yet",
+                            : "No location yet".tr,
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColor.secondarySoft,
@@ -121,7 +122,7 @@ class HomeView extends GetView<HomeController> {
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
                                     child: Text(
-                                      'Distance from office',
+                                      'Distance from office'.tr,
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   ),
