@@ -8,7 +8,9 @@ import 'package:get_storage/get_storage.dart';
 
 class LanguagesController extends GetxController implements GetxService {
   final SharedPreferences sharedPreferences;
-  LanguagesController({required this.sharedPreferences}) {
+  final ApiClient apiClient;
+  LanguagesController(
+      {required this.sharedPreferences, required this.apiClient}) {
     loadCurrentLanguage();
   }
   final storage = GetStorage();
@@ -41,6 +43,10 @@ class LanguagesController extends GetxController implements GetxService {
       _isLtr = true;
     }
 
+    apiClient.updateHeader(
+     AppConstants.TOKEN,
+      locale.languageCode,
+    );
     saveLanguage(_locale);
 
     update();
@@ -76,8 +82,35 @@ class LanguagesController extends GetxController implements GetxService {
     }
     update();
   }
-  // updateLanguage(String? languageCode){
-  //   AppConstants.LOCALIZATION_KEY: languageCode ?? AppConstants.languages[0].languageCode!,
+}
 
-  // }
+class ApiClient extends GetxService {
+  final SharedPreferences sharedPreferences;
+
+  String? token;
+  Map<String, String>? _mainHeaders;
+
+  ApiClient({required this.sharedPreferences}) {
+    token = AppConstants.TOKEN;
+    token = sharedPreferences.getString(AppConstants.TOKEN);
+
+    updateHeader(
+      AppConstants.TOKEN,
+      sharedPreferences.getString(AppConstants.LANGUAGE_CODE)!,
+    );
+  }
+
+  void updateHeader(
+    String token,
+    String languageCode,
+  ) {
+    Map<String, String> _header = {};
+
+    _header.addAll({
+      AppConstants.LOCALIZATION_KEY:
+          languageCode ?? AppConstants.languages[0].languageCode,
+      'Authorization': 'Bearer $token'
+    });
+    _mainHeaders = _header;
+  }
 }

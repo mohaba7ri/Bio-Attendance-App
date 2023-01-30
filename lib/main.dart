@@ -37,9 +37,6 @@ void main() async {
 
   Get.put(HomeController(), permanent: true);
 
-  // Get.put(CompanySignUpController(), permanent: true);
-  //Get.put(AddVacationTypeController());
-
   runApp(
     StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),

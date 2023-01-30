@@ -15,7 +15,10 @@ Future<Map<String, Map<String, String>>> init() async {
   Map<String, Map<String, String>> _languages = Map();
   Get.lazyPut(() => LanguageRepo());
   Get.lazyPut(() => sharedPreferences);
-  Get.lazyPut(() => LanguagesController(sharedPreferences: Get.find()));
+  Get.lazyPut(() => ApiClient(sharedPreferences: sharedPreferences));
+  Get.lazyPut(() => LanguagesController(
+      sharedPreferences: Get.find(), apiClient: Get.find()));
+
   for (LanguageModel languageModel in AppConstants.languages) {
     String jsonStringValues = await rootBundle
         .loadString('assets/langs/${languageModel.languageCode}.json');
