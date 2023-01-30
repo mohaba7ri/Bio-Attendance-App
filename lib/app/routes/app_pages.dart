@@ -50,6 +50,7 @@ import '../modules/Company/company_Home/bindings/Company_Home_binding.dart';
 import '../modules/Company/company_Home/views/Company_Home_view.dart';
 import '../modules/Company/update_Company/bindings/update_company_binding.dart';
 import '../modules/Company/update_Company/views/update_company_view.dart';
+import '../modules/Employees/add_employee/views/manage_Policies.dart';
 import '../modules/Employees/employee_Details/views/employee_details_view.dart';
 import '../modules/Employees/employee_Home/bindings/Employee_Home_binding.dart';
 import '../modules/Employees/employee_Home/views/Employee_Home_view.dart';
@@ -226,11 +227,12 @@ class AppPages {
     GetPage(
         name: _Paths.Req_DETAILS,
         page: () => vacationRequestDetailDetailView(),
-        binding: vacationRequestDetailBinding()),
-    GetPage(
-      name: _Paths.LANGUAGES,
-      page: () => LanguagesView(),
-      // binding: LanguagesBinding()
-    ),
+        binding:  vacationRequestDetailBinding()),
+
+         GetPage(
+        name: _Paths.MANAGE_POLICIES,
+        page: () => ManagePoliciesView(),
+        binding:  AddEmployeeBinding()),
+
   ];
 }
