@@ -156,7 +156,7 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ),
                                 child: Text(
-                                  'Open in maps',
+                                  'Open in maps'.tr,
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                               ),
