@@ -171,7 +171,7 @@ class HomeView extends GetView<HomeController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Presence History",
+                            "Presence History".tr,
                             style: TextStyle(
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
