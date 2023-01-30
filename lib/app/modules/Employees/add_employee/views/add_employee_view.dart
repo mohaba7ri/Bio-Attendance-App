@@ -111,7 +111,10 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                       items: employeeController.roleList
                                           .map(
                                             (roleValue) => DropdownMenuItem(
-                                              child: Text(roleValue),
+                                              child: Text(
+                                                roleValue,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                               value: roleValue,
                                             ),
                                           )
@@ -145,7 +148,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                   child: SizedBox(
                                     //  height: MediaQuery.of(context).size.height * 50,
                                     width: MediaQuery.of(context).size.width *
-                                        40 /
+                                        50 /
                                         100,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton(

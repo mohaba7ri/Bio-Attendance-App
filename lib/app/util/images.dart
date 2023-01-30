@@ -10,4 +10,7 @@ class Images {
   static const String viewAll = 'assets/icons/list.png';
   static const String addBranch = 'assets/icons/commission.png';
   static const String logout = 'assets/icons/logout.png';
+  static const String language = 'assets/icons/language.png';
+  static const String arabic = 'assets/icons/arabic.png';
+  static const String english = 'assets/icons/english.png';
 }

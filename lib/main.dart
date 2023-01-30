@@ -10,6 +10,7 @@ import 'package:presence/app/modules/profile/controllers/profile_controller.dart
 import 'firebase_options.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:presence/app/helper/get_di.dart ' as di;
 
 import 'app/routes/app_pages.dart';
 
@@ -19,6 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init();
+   Map<String, Map<String, String>> _languages = await di.init();
   GetStorage().writeIfNull('darkMode', false);
   timeago.setLocaleMessages('ar', timeago.ArMessages());
   await translator.init(
@@ -49,8 +51,7 @@ void main() async {
         return GetMaterialApp(
           title: "Application",
           debugShowCheckedModeBanner: false,
-          initialRoute:
-              snapshot.data != null ? Routes.ADD_EMPLOYEE : Routes.ADD_EMPLOYEE,
+          initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
           getPages: AppPages.routes,
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
