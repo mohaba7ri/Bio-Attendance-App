@@ -17,7 +17,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Requests',
+          'Vacation Types',
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -61,176 +61,183 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _listVacationTypeController.vacationType(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var date = snapshot.data!.docs;
+      body: Container(
+        color: Colors.grey[200],
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: _listVacationTypeController.vacationType(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var date = snapshot.data!.docs;
 
-                  return date[index]['vacationType'] == 'please select'
-                      ? SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColor.containerColor,
-                            ),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          'Vacation Type: ',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          date[index]['vacationType'],
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          'Days:',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: 4, bottom: 12),
-                                        child: Text(
-                                          ' 7',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    decoration: BoxDecoration(
-                                      color: AppColor.primarySoft,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Row(
+                    return date[index]['vacationType'] == 'please select'
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.white70,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black12, blurRadius: 5)
+                                ],
+                              ),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
                                       children: [
-                                        //  check in
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 6),
-                                                child: Text(
-                                                  "Status",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                date[index]['vacationStatus'],
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 2, bottom: 8),
+                                          child: Text(
+                                            'Vacation Type: ',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'poppins',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 2,
+                                            ),
                                           ),
                                         ),
                                         Container(
-                                          width: 1.5,
-                                          height: 24,
-                                          color: Colors.white,
-                                        ),
-                                        // check out
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 6),
-                                                child: Text(
-                                                  "Is paid",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                'Yes',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
+                                          margin: EdgeInsets.only(
+                                              top: 2, bottom: 8),
+                                          child: Text(
+                                            date[index]['vacationType'],
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'poppins',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 2,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ]),
-                          ),
-                        );
-                },
-              );
-            default:
-              return SizedBox();
-          }
-        },
+                                    Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 4, bottom: 12),
+                                          child: Text(
+                                            'Days:',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'poppins',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 2,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 4, bottom: 12),
+                                          child: Text(
+                                            ' 7',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'poppins',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 2,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: AppColor.primarySoft,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          //  check in
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 6),
+                                                  child: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  date[index]['vacationStatus'],
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 1.5,
+                                            height: 24,
+                                            color: Colors.white,
+                                          ),
+                                          // check out
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 6),
+                                                  child: Text(
+                                                    "Is paid",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Yes',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          );
+                  },
+                );
+              default:
+                return SizedBox();
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
