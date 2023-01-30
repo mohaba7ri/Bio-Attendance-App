@@ -7,5 +7,6 @@
   "welcome_back":"Welcome Back",
   "No_location_yet":"No location yet",
   "Distance_from_office":"Distance from office",
-  "sign_in":"Sign In"
+  "sign_in":"Sign In",
+  "Open_in_maps": "Open in maps"
 }
