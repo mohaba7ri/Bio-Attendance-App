@@ -76,4 +76,8 @@ class LanguagesController extends GetxController implements GetxService {
     }
     update();
   }
+  // updateLanguage(String? languageCode){
+  //   AppConstants.LOCALIZATION_KEY: languageCode ?? AppConstants.languages[0].languageCode!,
+
+  // }
 }
