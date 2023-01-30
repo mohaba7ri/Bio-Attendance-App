@@ -2,6 +2,7 @@
   "language":"العربي",
   "company":"الشركة",
   "branch":"الفرع",
-  "employee":"الموظف"
+  "employee":"الموظف",
+  "select_language":"أختار اللغة"
 
 }

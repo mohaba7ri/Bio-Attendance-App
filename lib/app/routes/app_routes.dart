@@ -42,6 +42,7 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const Req_DETAILS = _Paths.Req_DETAILS;
   static const MANAGE_POLICIES = _Paths.MANAGE_POLICIES;
+  static const LANGUAGES = _Paths.LANGUAGES;
 }
 
 abstract class _Paths {
@@ -83,4 +84,6 @@ abstract class _Paths {
   static const UPDATE_COMPANY = '/UPDATE_COMPANY';
   static const DASHBOARD = '/DASHBOARD';
   static const Req_DETAILS = '/Req_DETAILS';
+  static const MANAGE_POLICIES = '/MANAGE_POLICIES';
+  static const LANGUAGES = '/LANGUAGES';
 }

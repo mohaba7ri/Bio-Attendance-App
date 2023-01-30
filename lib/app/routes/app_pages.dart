@@ -227,12 +227,14 @@ class AppPages {
     GetPage(
         name: _Paths.Req_DETAILS,
         page: () => vacationRequestDetailDetailView(),
-        binding:  vacationRequestDetailBinding()),
-
-         GetPage(
+        binding: vacationRequestDetailBinding()),
+    GetPage(
         name: _Paths.MANAGE_POLICIES,
         page: () => ManagePoliciesView(),
-        binding:  AddEmployeeBinding()),
-
+        binding: AddEmployeeBinding()),
+    GetPage(
+      name: _Paths.LANGUAGES,
+      page: () => LanguagesView(),
+    ),
   ];
 }

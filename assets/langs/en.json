@@ -2,5 +2,6 @@
   "language":"Language",
   "company":"Company",
   "branch":"Branch",
-  "employee":"Employee"
+  "employee":"Employee",
+  "select_language":"Select Language"
 }

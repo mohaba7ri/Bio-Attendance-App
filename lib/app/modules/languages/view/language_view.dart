@@ -48,7 +48,6 @@ class LanguagesView extends StatelessWidget {
                       index: index,
                     ),
                   ),
-                  Text('hello Ameen', style: robotoMedium),
                 ],
               );
             }),
