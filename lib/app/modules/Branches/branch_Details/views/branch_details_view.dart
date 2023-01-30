@@ -13,6 +13,7 @@ class detailBranchView extends GetView<detailBranchController> {
   Widget build(BuildContext context) {
     detailBranchController _detailBranchController = detailBranchController();
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text(
           'Branch Details',
@@ -43,8 +44,9 @@ class detailBranchView extends GetView<detailBranchController> {
           padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: AppColor.containerColor,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

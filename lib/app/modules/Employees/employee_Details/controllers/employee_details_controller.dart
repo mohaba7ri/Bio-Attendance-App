@@ -9,4 +9,21 @@ class employeeDetailController extends GetxController {
   Stream<DocumentSnapshot<Map<String, dynamic>>> employee() async* {
   //  yield* firestore.collection('branch').where('branchId', isEqualTo: branchId).snapshots();
   }
+
+   void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  
+
+    branchInfo;
+  }
+
+RxMap branchInfo = {}.obs;
+
+   Stream<QuerySnapshot<Map<String, dynamic>>> getBranchName() async* {
+    yield* firestore
+        .collection('branch')
+        .where('name', isEqualTo: EmpList['branchId'])
+        .snapshots();
+  } 
 }
