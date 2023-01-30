@@ -59,6 +59,130 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.all(15),
                       children: [
+                        Obx(
+                          () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Text(' Role: '),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 5)
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: SizedBox(
+                                            //  height: MediaQuery.of(context).size.height * 50,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                42 /
+                                                100,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              child:
+                                                  DropdownButtonHideUnderline(
+                                                child: DropdownButton2(
+                                                  value: employeeController
+                                                      .roleValue.value,
+                                                  buttonHeight: 50,
+                                                  buttonWidth: 40,
+                                                  itemHeight: 40,
+                                                  items: employeeController
+                                                      .roleList
+                                                      .map(
+                                                        (roleValue) =>
+                                                            DropdownMenuItem(
+                                                          child:
+                                                              Text(roleValue),
+                                                          value: roleValue,
+                                                        ),
+                                                      )
+                                                      .toList(),
+                                                  onChanged: (value) {
+                                                    employeeController
+                                                        .changeRoleValue(value);
+                                                  },
+                                                  //  value: controller.roleValue!.value,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Text(' Branch: '),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 5)
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: SizedBox(
+                                          //  height: MediaQuery.of(context).size.height * 50,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              45 /
+                                              100,
+                                          child: DropdownButtonHideUnderline(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
+                                              child: DropdownButton2(
+                                                buttonHeight: 50,
+                                                buttonWidth: 40,
+                                                itemHeight: 40,
+                                                value: controller
+                                                    .branchValue.value,
+                                                items: controller.branchesList,
+                                                onChanged:
+                                                    (String? selectedValue) {
+                                                  controller.changeBranchValue(
+                                                      selectedValue);
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         CustomInput(
                           controller: controller.idC,
                           label: 'Employee ID',
@@ -110,107 +234,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                         //   ),
                         // ),
                         SizedBox(height: 8),
-                        Obx(
-                          () => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Text(' Role: '),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black12,
-                                              blurRadius: 5)
-                                        ],
-                                      ),
-                                      child: SizedBox(
-                                        //  height: MediaQuery.of(context).size.height * 50,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                30 /
-                                                100,
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton2(
-                                            value: employeeController
-                                                .roleValue.value,
-                                            buttonHeight: 20,
-                                            buttonWidth: 40,
-                                            itemHeight: 40,
-                                            items: employeeController.roleList
-                                                .map(
-                                                  (roleValue) =>
-                                                      DropdownMenuItem(
-                                                    child: Text(roleValue),
-                                                    value: roleValue,
-                                                  ),
-                                                )
-                                                .toList(),
-                                            onChanged: (value) {
-                                              employeeController
-                                                  .changeRoleValue(value);
-                                            },
-                                            //  value: controller.roleValue!.value,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Text(' Branch: '),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black12,
-                                              blurRadius: 5)
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: SizedBox(
-                                          //  height: MediaQuery.of(context).size.height * 50,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              40 /
-                                              100,
-                                          child: DropdownButtonHideUnderline(
-                                            child: DropdownButton(
-                                              elevation: 20,
-                                              value:
-                                                  controller.branchValue.value,
-                                              items: controller.branchesList,
-                                              onChanged:
-                                                  (String? selectedValue) {
-                                                controller.changeBranchValue(
-                                                    selectedValue);
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+
                         SizedBox(
                           height: 10,
                         ),
