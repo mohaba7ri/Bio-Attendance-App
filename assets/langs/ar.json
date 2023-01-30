@@ -6,5 +6,6 @@
   "select_language":"أختار اللغة",
   "welcome_back":"اهلا بعودتك",
   "No_location_yet":"لم يتم تحديد الموقع",
-  "Distance_from_office":"المسافة من الشركة"
+  "Distance_from_office":"المسافة من الشركة",
+  "sign_in":"تسجيل الدخول"
 }

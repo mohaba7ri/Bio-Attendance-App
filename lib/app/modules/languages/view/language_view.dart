@@ -83,6 +83,7 @@ class LanguageSaveButton extends StatelessWidget {
             AppConstants
                 .languages[localizationController.selectedIndex].countryCode,
           ));
+          Get.toNamed(Routes.HOME);
         } else {
           CustomToast.successToast('Language', 'select_a_language'.tr);
         }
