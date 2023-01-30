@@ -37,6 +37,7 @@ class AppColor {
   static Color themeDarkBackgroundColor = const Color(0xFF343636);
   static Color greyColor = const Color(0xFFEEEEEE);
   static Color tealShade300 = const Color(0xFF9D9D9D);
+  static Color greyShade200 = const Color(0xFFEEEEEE);
 
   //other info
   //#6a6e81

@@ -141,7 +141,7 @@ class LoginView extends GetView<LoginController> {
                                   },
                                   child: Text(
                                     (controller.isLoading.isFalse)
-                                        ? 'Log in'
+                                        ? 'sign_in'.tr
                                         : 'Loading...',
                                     style: TextStyle(
                                       fontSize: 16,

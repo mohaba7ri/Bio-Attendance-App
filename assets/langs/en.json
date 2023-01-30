@@ -3,5 +3,8 @@
   "company":"Company",
   "branch":"Branch",
   "employee":"Employee",
-  "select_language":"Select Language"
+  "select_language":"Select Language",
+  "select_a_language": "Select a language",
+  "save": "save",
+  "sign_in": "Sign In"
 }

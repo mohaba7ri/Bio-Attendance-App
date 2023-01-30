@@ -3,6 +3,9 @@
   "company":"الشركة",
   "branch":"الفرع",
   "employee":"الموظف",
-  "select_language":"أختار اللغة"
+  "select_language":"أختار اللغة",
+  "select_a_language": "اختر لغة",
+  "save": "يحفظ",
+  "sign_in": "تسجيل الدخول"
 
 }
