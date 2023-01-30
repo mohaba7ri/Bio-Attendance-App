@@ -5,6 +5,7 @@ import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_appbar.dart';
 
+import '../../../util/styles.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -141,13 +142,9 @@ class LoginView extends GetView<LoginController> {
                                   },
                                   child: Text(
                                     (controller.isLoading.isFalse)
-                                        ? 'Log in'
+                                        ? 'sign_in'.tr
                                         : 'Loading...',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                    style: robotoMedium,
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.symmetric(vertical: 18),
