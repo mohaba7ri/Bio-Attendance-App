@@ -21,7 +21,7 @@ class LanguagesController extends GetxController implements GetxService {
   bool _isLtr = true;
   bool get isLtr => _isLtr;
   int get selectedIndex => _selectedIndex;
-  Locale _locale = Locale(AppConstants.languages[0].languageCode,
+  Locale _locale = Locale(AppConstants.languages[0].languageCode!,
       AppConstants.languages[0].countryCode);
   void setSelectIndex(int index) {
     _selectedIndex = index;
@@ -44,9 +44,8 @@ class LanguagesController extends GetxController implements GetxService {
     }
 
     apiClient.updateHeader(
-     AppConstants.TOKEN,
-      locale.languageCode,
-    );
+        token: sharedPreferences.getString(AppConstants.TOKEN),
+        languageCode: locale.languageCode);
     saveLanguage(_locale);
 
     update();
@@ -54,7 +53,7 @@ class LanguagesController extends GetxController implements GetxService {
 
   void loadCurrentLanguage() async {
     _locale = Locale(sharedPreferences.getString(AppConstants.COUNTRY_CODE) ??
-        AppConstants.languages[0].countryCode);
+        AppConstants.languages[0].countryCode!);
     _isLtr = _locale.languageCode != 'ar';
     for (int index = 0; index < AppConstants.languages.length; index++) {
       if (AppConstants.languages[index].languageCode == _locale.languageCode) {
@@ -75,7 +74,9 @@ class LanguagesController extends GetxController implements GetxService {
       _selectedIndex = -1;
       _languages = [];
       AppConstants.languages.forEach((language) async {
-        if (language.languageName.toLowerCase().contains(query.toLowerCase())) {
+        if (language.languageName!
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
           _languages.add(language);
         }
       });
@@ -91,25 +92,23 @@ class ApiClient extends GetxService {
   Map<String, String>? _mainHeaders;
 
   ApiClient({required this.sharedPreferences}) {
-    token = AppConstants.TOKEN;
     token = sharedPreferences.getString(AppConstants.TOKEN);
 
     updateHeader(
-      AppConstants.TOKEN,
-      sharedPreferences.getString(AppConstants.LANGUAGE_CODE)!,
-    );
+        token: token,
+        languageCode: sharedPreferences.getString(AppConstants.LANGUAGE_CODE));
   }
 
-  void updateHeader(
-    String token,
-    String languageCode,
-  ) {
+  void updateHeader({
+    String? token,
+    String? languageCode,
+  }) {
     Map<String, String> _header = {};
 
     _header.addAll({
       AppConstants.LOCALIZATION_KEY:
-          languageCode ?? AppConstants.languages[0].languageCode,
-      'Authorization': 'Bearer $token'
+          languageCode ?? AppConstants.languages[0].languageCode!,
+      'Authorization': token!,
     });
     _mainHeaders = _header;
   }

@@ -20,7 +20,7 @@ class LanguageWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         languagesController.setLanguage(Locale(
-          AppConstants.languages[index].languageCode,
+          AppConstants.languages[index].languageCode!,
           AppConstants.languages[index].countryCode,
         ));
         languagesController.setSelectIndex(index);
@@ -50,7 +50,7 @@ class LanguageWidget extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Image.asset(
-                  languageModel.imageUrl,
+                  languageModel.imageUrl!,
                   width: 36,
                   height: 36,
                   color: languageModel.languageCode == 'en' ||
@@ -60,7 +60,7 @@ class LanguageWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-              Text(languageModel.languageName, style: robotoRegular),
+              Text(languageModel.languageName!, style: robotoRegular),
             ]),
           ),
           languagesController.selectedIndex == index

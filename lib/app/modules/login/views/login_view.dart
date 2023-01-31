@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -138,6 +139,8 @@ class LoginView extends GetView<LoginController> {
                                   onPressed: () async {
                                     if (controller.isLoading.isFalse) {
                                       await controller.login();
+                                      await controller.getUserToken(FirebaseAuth
+                                          .instance.currentUser!.uid);
                                     }
                                   },
                                   child: Text(

@@ -59,7 +59,7 @@ void main() async {
             getPages: AppPages.routes,
             locale: LanguagesController.locale,
             translations: Messages(languages: _languages),
-            fallbackLocale: Locale(AppConstants.languages[0].languageCode,
+            fallbackLocale: Locale(AppConstants.languages[0].languageCode!,
                 AppConstants.languages[0].countryCode),
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,

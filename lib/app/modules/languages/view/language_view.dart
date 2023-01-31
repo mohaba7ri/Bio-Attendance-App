@@ -79,7 +79,7 @@ class LanguageSaveButton extends StatelessWidget {
             localizationController.selectedIndex != -1) {
           localizationController.setLanguage(Locale(
             AppConstants
-                .languages[localizationController.selectedIndex].languageCode,
+                .languages[localizationController.selectedIndex].languageCode!,
             AppConstants
                 .languages[localizationController.selectedIndex].countryCode,
           ));
