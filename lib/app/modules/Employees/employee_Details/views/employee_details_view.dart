@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -51,12 +52,6 @@ class employeeDetailView extends GetView<employeeDetailController> {
             borderRadius: BorderRadius.circular(10),
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
           ),
-          // padding: EdgeInsets.all(20),
-          // margin: EdgeInsets.all(20),
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(8),
-          //   color: AppColor.containerColor,
-          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -125,7 +120,7 @@ class employeeDetailView extends GetView<employeeDetailController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Active: ',
+                      'Status: ',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -138,7 +133,7 @@ class employeeDetailView extends GetView<employeeDetailController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      '', // '${controller.EmpList['active']}',
+                      '${controller.EmpList['status']}',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Inter',
@@ -150,6 +145,139 @@ class employeeDetailView extends GetView<employeeDetailController> {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 4, bottom: 12),
+                    child: Text(
+                      'Job: ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'poppins',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 4, bottom: 12),
+                    child: Text(
+                      '${controller.EmpList['job']}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Inter',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              // Row(
+              //   children: [
+              //     Container(
+              //       margin: EdgeInsets.only(top: 4, bottom: 12),
+              //       child: Text(
+              //         'Branch: ',
+              //         style: TextStyle(
+              //           color: Colors.black,
+              //           fontFamily: 'poppins',
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.w700,
+              //           letterSpacing: 2,
+              //         ),
+              //       ),
+              //     ),
+              //     Container(
+              //       margin: EdgeInsets.only(top: 4, bottom: 12),
+              //       child: Text(
+              //         '${controller.EmpList['branchId']}',
+              //         style: TextStyle(
+              //           color: Colors.black,
+              //           fontFamily: 'Inter',
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.w700,
+              //           letterSpacing: 2,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Divider(),
+
+              Container(
+                child: StreamBuilder(
+                  stream: controller.getBranchName(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text("Loading");
+                    }
+
+                    return ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        children: snapshot.data!.docs.map(
+                          (DocumentSnapshot document) {
+                            Map<String, dynamic> data =
+                                document.data()! as Map<String, dynamic>;
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Branch',
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15.0),
+                                              ),
+                                              Icon(
+                                                Icons.access_time_outlined,
+                                                size: 30,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 6),
+                                          Text(
+                                            "${controller.EmpList['name']}", //  "${data["branchId"]}", //date[index]['phone'],
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ).toList());
+                  },
+                ),
+              ),
+              Divider(),
               Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),

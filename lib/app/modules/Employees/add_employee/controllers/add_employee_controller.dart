@@ -42,6 +42,7 @@ class AddEmployeeController extends GetxController {
   TextEditingController jobC = TextEditingController();
   TextEditingController adminPassC = TextEditingController();
   TextEditingController addressC = TextEditingController();
+  TextEditingController phoneC = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -144,6 +145,7 @@ class AddEmployeeController extends GetxController {
         nameC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
         jobC.text.isNotEmpty &&
+        phoneC.text.isNotEmpty &&
         addressC.text.isNotEmpty) {
       if (listSelectedPolicy.isEmpty) {
         isLoading.value = true;
@@ -218,7 +220,9 @@ class AddEmployeeController extends GetxController {
             "email": emailC.text,
             "role": roleValue.value,
             "job": jobC.text,
+            "phone": phoneC.text,
             "address": addressC.text,
+            "status": "Active",
             "createdAt": DateTime.now().toIso8601String(),
             "branchId": branchId.value,
           }).whenComplete(() {

@@ -209,9 +209,9 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                           hint: 'hail street',
                         ),
                         CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
+                          controller: controller.phoneC,
+                          label: 'Phone',
+                          hint: '7****',
                         ),
 
                         CustomInput(

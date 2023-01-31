@@ -71,7 +71,7 @@ class listBranchView extends GetView<listBranchController> {
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
