@@ -99,6 +99,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                     companyId: companyData['companyId']));
 
                                 showDialog(
+                                  
                                     context: context,
                                     builder: (context) => CompanySettingView(
                                           companyId: companyData['companyId'],
