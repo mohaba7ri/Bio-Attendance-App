@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
 
 class CustomToast {
-  static errorToast(String? title, String? message) {
+  static errorToast( String? message) {
     Get.rawSnackbar(
       duration: Duration(seconds: 4),
       dismissDirection: DismissDirection.horizontal,
@@ -23,7 +23,7 @@ class CustomToast {
                 Container(
                   margin: EdgeInsets.only(bottom: 4),
                   child: Text(
-                    title ?? "error",
+                    "error",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -48,7 +48,7 @@ class CustomToast {
     );
   }
 
-  static successToast(String? title, String? message) {
+  static successToast( String? message) {
     Get.rawSnackbar(
       duration: Duration(seconds: 4),
       dismissDirection: DismissDirection.horizontal,
@@ -67,7 +67,7 @@ class CustomToast {
                 Container(
                   margin: EdgeInsets.only(bottom: 4),
                   child: Text(
-                    title ?? "Success",
+                   "success",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,

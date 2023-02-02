@@ -79,13 +79,13 @@ class LanguageSaveButton extends StatelessWidget {
             localizationController.selectedIndex != -1) {
           localizationController.setLanguage(Locale(
             AppConstants
-                .languages[localizationController.selectedIndex].languageCode!,
+                .languages[localizationController.selectedIndex].languageCode,
             AppConstants
                 .languages[localizationController.selectedIndex].countryCode,
           ));
           Get.toNamed(Routes.HOME);
         } else {
-          CustomToast.successToast('Language', 'select_a_language'.tr);
+          CustomToast.successToast( 'select_a_language'.tr);
         }
       },
     );

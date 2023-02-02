@@ -38,7 +38,7 @@ class UpdateBranchController extends GetxController {
         BranchData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast('Error', 'Error : ${e}');
+      CustomToast.errorToast( 'Error : ${e}');
     }
   }
 
@@ -111,13 +111,13 @@ class UpdateBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast("Success", "update branch successfully");
+        CustomToast.successToast( "update branch successfully");
         Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast("Error", "You need to fill all fields");
+      CustomToast.errorToast( "You need to fill all fields");
     }
   }
 

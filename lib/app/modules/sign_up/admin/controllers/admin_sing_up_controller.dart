@@ -36,7 +36,7 @@ class AdminSignUpController extends GetxController {
       }
     } else {
       print('thename is$name');
-      CustomToast.errorToast("Error", "You need to fill all fields");
+      CustomToast.errorToast( "You need to fill all fields");
     }
   }
 
@@ -69,21 +69,21 @@ class AdminSignUpController extends GetxController {
         isLoadingCreatePegawai.value = false;
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
-          CustomToast.errorToast('Error', 'default password too short');
+          CustomToast.errorToast( 'default password too short');
         } else if (e.code == 'email-already-in-use') {
           print('The account already exists for that email.');
-          CustomToast.errorToast('Error', 'Employee already exist');
+          CustomToast.errorToast( 'Employee already exist');
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast('Error', 'wrong passowrd');
+          CustomToast.errorToast( 'wrong passowrd');
         } else {
-          CustomToast.errorToast('Error', 'error : ${e.code}');
+          CustomToast.errorToast( 'error : ${e.code}');
         }
       } catch (e) {
         isLoadingCreatePegawai.value = false;
-        CustomToast.errorToast('Error', 'error : ${e.toString()}');
+        CustomToast.errorToast( 'error : ${e.toString()}');
       }
     } else {
-      CustomToast.errorToast('Error', 'something want wrong ');
+      CustomToast.errorToast( 'something want wrong ');
     }
   }
 

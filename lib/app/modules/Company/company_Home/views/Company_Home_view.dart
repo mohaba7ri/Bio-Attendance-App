@@ -45,9 +45,9 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Welcome To :\n' +
+                              'welcome_to :\n'.tr +
                                   '${companyData['name']}' +
-                                  ' company',
+                                  'company'.tr,
                               style: TextStyle(
                                   color: AppColor.secondarySoft,
                                   fontFamily: 'cairo',
@@ -59,7 +59,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             ),
                             MenuTile(
                               isDanger: true,
-                              title: 'View Details',
+                              title: 'view_details'.tr,
                               icon: Image.asset(
                                 Images.changePassword,
                                 color: AppColor.primarySoft,
@@ -71,7 +71,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             ),
                             MenuTile(
                               isDanger: true,
-                              title: 'Edit Information',
+                              title: 'edit_information'.tr,
                               icon: Image.asset(
                                 Images.editProfile,
                                 color: AppColor.primarySoft,
@@ -86,7 +86,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             ),
                             MenuTile(
                               isDanger: true,
-                              title: 'Settings',
+                              title: 'settings'.tr,
                               icon: Image.asset(
                                 Images.editProfile,
                                 color: AppColor.primarySoft,
@@ -99,7 +99,6 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                     companyId: companyData['companyId']));
 
                                 showDialog(
-                                  
                                     context: context,
                                     builder: (context) => CompanySettingView(
                                           companyId: companyData['companyId'],

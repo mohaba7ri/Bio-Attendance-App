@@ -34,7 +34,7 @@ class CompanySignUpController extends GetxController {
         CompanyData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast('Error', 'Error : ${e}');
+      CustomToast.errorToast( 'Error : ${e}');
     }
   }
 
@@ -94,7 +94,7 @@ class CompanySignUpController extends GetxController {
         print('error');
       }
     } else {
-      CustomToast.errorToast("Error", "You need to fill all fields");
+      CustomToast.errorToast( "You need to fill all fields");
     }
   }
 

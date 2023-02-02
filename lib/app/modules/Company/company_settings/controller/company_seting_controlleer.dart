@@ -89,7 +89,7 @@ class CompanySettingController extends GetxController {
           'companyId': companyId,
         });
         CustomToast.successToast(
-            'Success', 'CompanySetting added successfully');
+             'CompanySetting added successfully');
       } else {
         if (isExistSetting.value == true) {
           companySettingRef.doc(companySettingId.value).update({
@@ -100,11 +100,11 @@ class CompanySettingController extends GetxController {
             'companyId': companyId,
           });
           CustomToast.successToast(
-              'Success', 'CompanySetting updated successfully');
+               'CompanySetting updated successfully');
         }
       }
     } catch (e) {
-      CustomToast.errorToast('Error', e.toString());
+      CustomToast.errorToast( e.toString());
       print(e.toString());
     }
   }

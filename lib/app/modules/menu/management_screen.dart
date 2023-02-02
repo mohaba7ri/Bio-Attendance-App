@@ -16,38 +16,33 @@ class ManagementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _menuList = [
       MenuModel(
-          icon: Images.office, title: 'Company', route: Routes.COMPANY_HOME),
+          icon: Images.office, title: 'company'.tr, route: Routes.COMPANY_HOME),
       MenuModel(
         icon: Images.office,
-        title: 'Branch',
+        title: 'branch'.tr,
         route: Routes.BRANCH_HOME,
       ),
       MenuModel(
           icon: Images.employess,
-          title: 'Employees',
+          title: 'employees'.tr,
           route: Routes.EMPLOYEE_HOME),
       MenuModel(
         icon: Images.profile,
-        title: 'vacation',
+        title: 'vacation'.tr,
         route: Routes.VACATION_HOME,
       ),
       MenuModel(
-          icon: Images.office, title: 'Attendance', route: Routes.DASHBOARD),
-      MenuModel(
-          icon: Images.employess, title: 'Reports', route: Routes.ADD_EMPLOYEE),
-      MenuModel(
-          icon: Images.language, title: 'Language', route: Routes.LANGUAGES),
-      MenuModel(icon: Images.profile, title: 'profile', route: Routes.PROFILE),
-      MenuModel(
-          icon: Images.office,
-          title: 'Company',
-          route: Routes.ADD_COMPANY_SETTING),
+          icon: Images.office, title: 'attendance'.tr, route: Routes.DASHBOARD),
       MenuModel(
           icon: Images.employess,
-          title: 'Employees',
+          title: 'reports'.tr,
           route: Routes.ADD_EMPLOYEE),
-      MenuModel(icon: Images.office, title: 'Branch', route: Routes.ADD_BRANCH),
-      MenuModel(icon: Images.logout, title: 'Logout', route: ''),
+      MenuModel(
+          icon: Images.language, title: 'language'.tr, route: Routes.LANGUAGES),
+      MenuModel(
+          icon: Images.profile, title: 'profile'.tr, route: Routes.PROFILE),
+      MenuModel(icon: Images.office, title: 'company'.tr, route: ''),
+      MenuModel(icon: Images.logout, title: 'logout'.tr, route: ''),
     ];
     return PointerInterceptor(
       child: Container(

@@ -33,7 +33,7 @@ class LoginController extends GetxController {
 
   Future<bool> getUserToken(String? token) async {
     apiClient.token = token;
-    apiClient.updateHeader(token: token);
+    // apiClient.updateHeader(token: token);
 
     return await sharedPreferences.setString(AppConstants.TOKEN, token!);
   }
@@ -62,10 +62,10 @@ class LoginController extends GetxController {
                   await credential.user!.sendEmailVerification();
                   Get.back();
                   CustomToast.successToast(
-                      "Success", "We've send email verification to your email");
+                      "We've send email verification to your email");
                   isLoading.value = false;
                 } catch (e) {
-                  CustomToast.errorToast("Error",
+                  CustomToast.errorToast(
                       "Cant send email verification. Error because : ${e.toString()}");
                 }
               },
@@ -76,16 +76,16 @@ class LoginController extends GetxController {
       } on FirebaseAuthException catch (e) {
         isLoading.value = false;
         if (e.code == 'user-not-found') {
-          CustomToast.errorToast("Error", "Account not found");
+          CustomToast.errorToast( "Account not found");
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast("Error", "Wrong Password");
+          CustomToast.errorToast( "Wrong Password");
         }
       } catch (e) {
-        CustomToast.errorToast("Error", "Error because : ${e.toString()}");
+        CustomToast.errorToast( "Error because : ${e.toString()}");
       }
     } else {
       CustomToast.errorToast(
-          "Error", "You need to fill email and password form");
+           "You need to fill email and password form");
     }
   }
 }

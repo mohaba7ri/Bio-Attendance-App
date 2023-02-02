@@ -131,7 +131,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                   child: MaterialButton(
                     color: Colors.blueAccent.shade400,
                     onPressed: () {
-                      CustomToast.successToast("Success", "Added successfully");
+                      CustomToast.successToast( "Added successfully");
                       Get.back();
                     },
                     child: Text('Save'),

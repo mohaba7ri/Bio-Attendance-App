@@ -11,7 +11,7 @@ final robotoRegular = TextStyle(
 final robotoMedium = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
-  fontSize: Dimensions.fontSizeDefault,
+  fontSize: Dimensions.fontSizeLarge,
 );
 
 final robotoBold = TextStyle(

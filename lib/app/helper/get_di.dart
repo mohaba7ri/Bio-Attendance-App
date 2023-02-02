@@ -15,7 +15,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Map<String, Map<String, String>> _languages = Map();
   Get.lazyPut(() => LanguageRepo());
   Get.lazyPut(() => sharedPreferences);
-  Get.lazyPut(() => ApiClient(sharedPreferences: sharedPreferences));
+  Get.lazyPut(() => ApiClient(sharedPreferences: Get.find()));
   Get.lazyPut(() => LanguagesController(
       sharedPreferences: Get.find(), apiClient: Get.find()));
 

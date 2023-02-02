@@ -33,7 +33,7 @@ class PresenceTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "check in",
+                      "check_in".tr,
                       style: TextStyle(fontSize: 12),
                     ),
                     SizedBox(height: 6),
@@ -53,7 +53,7 @@ class PresenceTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "check out",
+                      "check_out".tr,
                       style: TextStyle(fontSize: 12),
                     ),
                     SizedBox(height: 6),

@@ -1,8 +1,8 @@
 {
-  "language":"العربي",
+  "language":"اللغة",
   "company":"الشركة",
   "branch":"الفرع",
-  "employee":"الموظف",
+  "employees":"الموظفين",
   "select_language":"أختار اللغة",
   "welcome_back":"اهلا بعودتك",
   "No_location_yet":"لم يتم تحديد الموقع",
@@ -10,6 +10,21 @@
   "sign_in":"تسجيل الدخول",
   "Open_in_maps": "فتح في الخريطة",
   "Presence_History":"سجل الحضور",
-  "show_all":"عرض الكل"
+  "show_all":"عرض الكل",
+  "vacation":"الاجازة",
+  "profile":"الملف الشخصي",
+  "reports":"التقارير",
+  "attendance":"حضور ونصراف",
+  "logout":"تسجيل خروج",
+  "check_in":"حضور",
+  "check_out":"انصراف",
+  "email":"الايميل",
+  "password":"كلمة السر",
+  "settings":"الاعدادات",
+  "welcome_to":"مرحباَ ",
+  "view_details":"عرض البيانات ",
+  "edit_information":"تعديل البينات "
+
+
 
 }

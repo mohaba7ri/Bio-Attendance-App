@@ -59,6 +59,17 @@ class AddEmployeeController extends GetxController {
     'Attendance Report'.obs,
     'Manage Vacation'.obs,
   ];
+  final Map<String, bool> allRolles = {
+     'Add Branch':true,
+    'Stop Branch':true,
+    'Modify Branch Setting':false,
+    'Add Employee':false,
+    'Stop Employee':true,
+    'Modify Employee':true,
+    'Employee Reports':true,
+    'Attendance Report':true,
+    'Manage Vacation':true,
+  };
 //this list of all roles  from type bool
   List<RxBool>? selectedPolicyValue;
   //this function to fill the selectedPolicyValue list with false value  and when you check any checkbox the
@@ -168,7 +179,7 @@ class AddEmployeeController extends GetxController {
       }
     } else {
       isLoading.value = false;
-      CustomToast.errorToast('Error', 'you need to fill all form');
+      CustomToast.errorToast('you need to fill all form');
     }
   }
 
@@ -269,7 +280,7 @@ class AddEmployeeController extends GetxController {
 
           Get.back(); //close dialog
           Get.back(); //close form screen
-          CustomToast.successToast('Success', 'success adding employee');
+          CustomToast.successToast('success adding employee');
 
           isLoadingCreatePegawai.value = false;
         }
@@ -277,23 +288,23 @@ class AddEmployeeController extends GetxController {
         isLoadingCreatePegawai.value = false;
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
-          CustomToast.errorToast('Error', 'default password too short');
+          CustomToast.errorToast('default password too short');
         } else if (e.code == 'email-already-in-use') {
           print('The account already exists for that email.');
-          CustomToast.errorToast('Error', 'Employee already exist');
+          CustomToast.errorToast('Employee already exist');
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast('Error', 'wrong passowrd');
+          CustomToast.errorToast('wrong passowrd');
         } else {
-          CustomToast.errorToast('Error', 'error : ${e.code}');
+          CustomToast.errorToast('error : ${e.code}');
           print("the problem is ${e.code}");
         }
       } catch (e) {
         isLoadingCreatePegawai.value = false;
-        CustomToast.errorToast('Error', 'error : ${e}');
+        CustomToast.errorToast('error : ${e}');
         print('the error is ${e}');
       }
     } else {
-      CustomToast.errorToast('Error', 'you need to input password');
+      CustomToast.errorToast('you need to input password');
     }
   }
 }

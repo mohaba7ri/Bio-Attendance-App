@@ -2,7 +2,7 @@
   "language":"Language",
   "company":"Company",
   "branch":"Branch",
-  "employee":"Employee",
+  "employees":"Employee",
   "select_language":"Select Language",
   "welcome_back":"Welcome Back",
   "No_location_yet":"No location yet",
@@ -10,5 +10,18 @@
   "sign_in":"Sign In",
   "Open_in_maps": "Open in maps",
   "Presence_History":"Presence History",
-  "show_all":"Show all"
+  "show_all":"Show all",
+  "vacation":"vacation",
+  "profile":"profile",
+  "reports":"reports",
+  "attendance":"attendance",
+  "logout":"logout",
+  "check_in":"check in",
+  "check_out":"check out",
+  "email":"Email",
+  "password":"Password",
+  "settings":"Settings",
+  "welcome_to":"Welcome to ",
+  "view_details":"View Detailes",
+  "edit_information":"Edit Information"
 }

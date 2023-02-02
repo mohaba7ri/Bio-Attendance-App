@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:async';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
@@ -10,9 +11,45 @@ import 'package:presence/company_data.dart';
 
 class PresenceController extends GetxController {
   RxBool isLoading = false.obs;
+  DateTime? startTime;
+  DateTime? endTime;
+  DateTime? lateTime;
+  DateTime currentDate = DateTime.now();
+  String? timeStatus;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getCompanySetting();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+  }
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  Future getCompanySetting() async {
+    firestore
+        .collection('companySettings')
+        .where('companyId', isEqualTo: 'J5RB7gH6aPnw8uVoqndS')
+        .get()
+        .then((QuerySnapshot query) {
+      query.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        startTime = DateTime.parse(data['startTime']);
+        endTime = DateTime.parse(data['endTime']);
+        lateTime = DateTime.parse(data['lateTime']);
+
+        print('the company ID${data['companyId']}');
+        print('the company ID${startTime.runtimeType}');
+      });
+    
+    });
+  }
 
   presence() async {
     isLoading.value = true;
@@ -28,7 +65,8 @@ class PresenceController extends GetxController {
           CompanyData.office['longitude'],
           position.latitude,
           position.longitude);
-
+      //get the company Settings
+      await getCompanySetting();
       // update position ( store to database )
       await updatePosition(position, address);
       // presence ( store to database )
@@ -82,7 +120,9 @@ class PresenceController extends GetxController {
           await presenceCollection.doc(todayDocId).set(
             {
               "date": DateTime.now().toIso8601String(),
+              "status": 'presence',
               "checkIn": {
+                "status": timeStatus,
                 "date": DateTime.now().toIso8601String(),
                 "latitude": position.latitude,
                 "longitude": position.longitude,
@@ -93,7 +133,7 @@ class PresenceController extends GetxController {
             },
           );
           Get.back();
-          CustomToast.successToast("Success", "success check in");
+          CustomToast.successToast("success check in");
         },
       );
     } else {
@@ -124,7 +164,9 @@ class PresenceController extends GetxController {
           await presenceCollection.doc(todayDocId).set(
             {
               "date": DateTime.now().toIso8601String(),
+              "status": 'absence',
               "checkIn": {
+                "status":timeStatus,
                 "date": DateTime.now().toIso8601String(),
                 "latitude": position.latitude,
                 "longitude": position.longitude,
@@ -135,7 +177,7 @@ class PresenceController extends GetxController {
             },
           );
           Get.back();
-          CustomToast.successToast("Success", "success check in");
+          CustomToast.successToast("success check in");
         },
       );
     } else {
@@ -166,6 +208,7 @@ class PresenceController extends GetxController {
           await presenceCollection.doc(todayDocId).update(
             {
               "checkOut": {
+                "status":timeStatus,
                 "date": DateTime.now().toIso8601String(),
                 "latitude": position.latitude,
                 "longitude": position.longitude,
@@ -176,7 +219,7 @@ class PresenceController extends GetxController {
             },
           );
           Get.back();
-          CustomToast.successToast("Success", "success check out");
+          CustomToast.successToast("success check out");
         },
       );
     } else {
@@ -218,8 +261,7 @@ class PresenceController extends GetxController {
         // case : already check in
         if (dataPresenceToday?["checkOut"] != null) {
           // case : already check in and check out
-          CustomToast.successToast(
-              "Success", "you already check in and check out");
+          CustomToast.successToast("you already check in and check out");
         } else {
           // case : already check in and not yet check out ( check out )
           checkoutPresence(presenceCollection, todayDocId, position, address,
@@ -292,5 +334,31 @@ class PresenceController extends GetxController {
       "message": "Managed to get the position of the device",
       "error": false,
     };
+  }
+}
+
+class PresenceUpdater {
+  Timer? _timer;
+  final CollectionReference presenceCollection;
+
+  PresenceUpdater({required this.presenceCollection});
+
+  void start() {
+    if (_timer == null || !_timer!.isActive) {
+      _timer = Timer.periodic(Duration(hours: 24), (timer) async {
+        var now = DateTime.now();
+        if (now.hour == 0 && now.minute == 0) {
+          // Update the status to 'absence' at 12 AM
+          var todayDocId = now.toIso8601String().split('T')[0];
+          await presenceCollection.doc(todayDocId).update({
+            'status': 'absence',
+          });
+        }
+      });
+    }
+  }
+
+  void stop() {
+    _timer?.cancel();
   }
 }
