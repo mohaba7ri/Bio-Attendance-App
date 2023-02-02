@@ -4,6 +4,7 @@ import 'package:presence/app/modules/languages/controller/languages_controller.d
 class LanguagesBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => LanguagesController(sharedPreferences: Get.find()));
+    Get.lazyPut(() => LanguagesController(
+        sharedPreferences: Get.find(), apiClient: Get.find()));
   }
 }

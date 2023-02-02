@@ -27,23 +27,23 @@ class ChangePasswordController extends GetxController {
           await auth.currentUser!.updatePassword(newPassC.text);
 
           Get.back();
-          CustomToast.successToast('Success', 'success change password');
+          CustomToast.successToast( 'success change password');
         } on FirebaseAuthException catch (e) {
           if (e.code == 'wrong-password') {
-            CustomToast.errorToast('Error', 'current password wrong');
+            CustomToast.errorToast('current password wrong');
           } else {
-            CustomToast.errorToast('Error', 'cant update password because : ${e.code}');
+            CustomToast.errorToast('cant update password because : ${e.code}');
           }
         } catch (e) {
-          CustomToast.errorToast('Error', 'error : ${e.toString()}');
+          CustomToast.errorToast('error : ${e.toString()}');
         } finally {
           isLoading.value = false;
         }
       } else {
-        CustomToast.errorToast('Error', 'new password and confirm password doesnt match');
+        CustomToast.errorToast('new password and confirm password doesnt match');
       }
     } else {
-      CustomToast.errorToast('Error', 'all form must be filled');
+      CustomToast.errorToast('all form must be filled');
     }
   }
 }

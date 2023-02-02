@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:presence/app/style/app_color.dart';
 
@@ -62,7 +63,7 @@ class PresenceCard extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 6),
                         child: Text(
-                          "check in",
+                          "check_in".tr,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white,
@@ -94,7 +95,7 @@ class PresenceCard extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: 6),
                         child: Text(
-                          "check out",
+                          "check_out".tr,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white,

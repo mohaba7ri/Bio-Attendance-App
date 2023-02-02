@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/model/menu_model.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
+import 'package:presence/app/util/app_constants.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
@@ -16,6 +18,7 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SharedPreferences sharedPreferences = Get.find();
     double _size = Dimensions.PADDING_SIZE_DEFAULT;
     return InkWell(
       onTap: () {
@@ -29,6 +32,9 @@ class MenuButton extends StatelessWidget {
                 Get.offAllNamed(Routes.LOGIN);
               },
               onCancel: () {
+                String token =
+                    sharedPreferences.getString(AppConstants.LANGUAGE_CODE)!;
+                print('the language code: $token');
                 Get.back();
               });
         } else

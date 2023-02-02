@@ -41,7 +41,7 @@ class UpdateCompanyController extends GetxController {
         BranchData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast('Error', 'Error : ${e}');
+      CustomToast.errorToast( 'Error : ${e}');
     }
   }
 
@@ -117,13 +117,13 @@ class UpdateCompanyController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast("Success", "update company successfully");
+        CustomToast.successToast( "update company successfully");
         Get.toNamed(Routes.COMPANY_DETAILS);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast("Error", "You need to fill all fields");
+      CustomToast.errorToast( "You need to fill all fields");
     }
   }
 

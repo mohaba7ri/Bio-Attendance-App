@@ -2,12 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
+import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/routes/app_pages.dart';
+import 'package:presence/app/util/app_constants.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
+ final SharedPreferences sharedPreferences;
+ final ApiClient apiClient;
+ LoginController({required this.apiClient,required this.sharedPreferences});
   final pageIndexController = Get.find<PageIndexController>();
+
   RxBool isLoading = false.obs;
   RxBool obsecureText = true.obs;
   TextEditingController emailC = TextEditingController();
@@ -24,6 +31,13 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<bool> getUserToken(String? token) async {
+    apiClient.token = token;
+    // apiClient.updateHeader(token: token);
+
+    return await sharedPreferences.setString(AppConstants.TOKEN, token!);
+  }
+
   Future<void> login() async {
     if (emailC.text.isNotEmpty && passC.text.isNotEmpty) {
       isLoading.value = true;
@@ -33,6 +47,7 @@ class LoginController extends GetxController {
           password: passC.text,
         );
 
+        update();
         if (credential.user != null) {
           if (credential.user!.emailVerified) {
             isLoading.value = false;
@@ -47,10 +62,10 @@ class LoginController extends GetxController {
                   await credential.user!.sendEmailVerification();
                   Get.back();
                   CustomToast.successToast(
-                      "Success", "We've send email verification to your email");
+                      "We've send email verification to your email");
                   isLoading.value = false;
                 } catch (e) {
-                  CustomToast.errorToast("Error",
+                  CustomToast.errorToast(
                       "Cant send email verification. Error because : ${e.toString()}");
                 }
               },
@@ -61,16 +76,16 @@ class LoginController extends GetxController {
       } on FirebaseAuthException catch (e) {
         isLoading.value = false;
         if (e.code == 'user-not-found') {
-          CustomToast.errorToast("Error", "Account not found");
+          CustomToast.errorToast( "Account not found");
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast("Error", "Wrong Password");
+          CustomToast.errorToast( "Wrong Password");
         }
       } catch (e) {
-        CustomToast.errorToast("Error", "Error because : ${e.toString()}");
+        CustomToast.errorToast( "Error because : ${e.toString()}");
       }
     } else {
       CustomToast.errorToast(
-          "Error", "You need to fill email and password form");
+           "You need to fill email and password form");
     }
   }
 }

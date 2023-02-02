@@ -36,7 +36,7 @@ class HomeController extends GetxController {
         CompanyData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast('Error', 'Error : ${e}');
+      CustomToast.errorToast( 'Error : ${e}');
     }
   }
 

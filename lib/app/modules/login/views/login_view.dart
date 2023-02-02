@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class LoginView extends GetView<LoginController> {
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 24),
                                 child: Text(
-                                  'Log in',
+                                  'sign_in'.tr,
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontFamily: 'poppins',
@@ -58,13 +59,7 @@ class LoginView extends GetView<LoginController> {
                                 maxLines: 1,
                                 controller: controller.emailC,
                                 decoration: InputDecoration(
-                                  label: Text(
-                                    "Email",
-                                    style: TextStyle(
-                                      color: AppColor.secondarySoft,
-                                      fontSize: 14,
-                                    ),
-                                  ),
+                                  label: Text("email".tr, style: robotoMedium),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   border: InputBorder.none,
@@ -98,13 +93,8 @@ class LoginView extends GetView<LoginController> {
                                     controller: controller.passC,
                                     obscureText: controller.obsecureText.value,
                                     decoration: InputDecoration(
-                                      label: Text(
-                                        "Password",
-                                        style: TextStyle(
-                                          color: AppColor.secondarySoft,
-                                          fontSize: 14,
-                                        ),
-                                      ),
+                                      label: Text("password".tr,
+                                          style: robotoMedium),
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       border: InputBorder.none,
@@ -138,6 +128,8 @@ class LoginView extends GetView<LoginController> {
                                   onPressed: () async {
                                     if (controller.isLoading.isFalse) {
                                       await controller.login();
+                                      await controller.getUserToken(FirebaseAuth
+                                          .instance.currentUser!.uid);
                                     }
                                   },
                                   child: Text(

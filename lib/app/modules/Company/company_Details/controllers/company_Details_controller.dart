@@ -8,9 +8,13 @@ class CompanyDetailsController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     companyInfo;
-
+    getUsers();
+    getBranches();
     companySettings;
   }
+
+  int? userNumbers;
+  int? branchNumbers;
 
   RxBool isloading = false.obs;
   dynamic companyInfo = Get.arguments;
@@ -24,5 +28,21 @@ class CompanyDetailsController extends GetxController {
         .collection('companySettings')
         .where('companyId', isEqualTo: companyInfo['companyId'])
         .snapshots();
+  }
+
+  Future getUsers() async {
+    await firestore.collection('user').get().then((QuerySnapshot query) {
+      userNumbers = query.size;
+
+      print('number of users$userNumbers');
+      update();
+    });
+  }
+
+  Future getBranches() async {
+    await firestore.collection('branch').get().then((QuerySnapshot query) {
+      branchNumbers = query.size;
+      update();
+    });
   }
 }

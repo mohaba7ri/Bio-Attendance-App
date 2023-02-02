@@ -44,15 +44,15 @@ class UpdatePofileController extends GetxController {
         await firestore.collection("user").doc(uid).update(data);
         image = null;
         Get.back();
-        CustomToast.successToast('Success', 'Success Update Profile');
+        CustomToast.successToast( 'Success Update Profile');
       } catch (e) {
         CustomToast.errorToast(
-            'Error', 'Cant Update Profile. Err : ${e.toString()}');
+             'Cant Update Profile. Err : ${e.toString()}');
       } finally {
         isLoading.value = false;
       }
     } else {
-      CustomToast.errorToast('Error', 'You must fill all form');
+      CustomToast.errorToast( 'You must fill all form');
     }
   }
 

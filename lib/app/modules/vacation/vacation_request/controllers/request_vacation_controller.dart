@@ -85,7 +85,7 @@ class VacationRequestController extends GetxController {
 
   void submit() async {
     if (leaveTypeValue.value == 'please select') {
-      CustomToast.errorToast('mm', 'please select leave type');
+      CustomToast.errorToast( 'please select leave type');
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)

@@ -25,14 +25,14 @@ class NewPasswordController extends GetxController {
           _updatePassword();
           isLoading.value = false;
         } else {
-          CustomToast.errorToast('Error', 'you must change your password');
+          CustomToast.errorToast('you must change your password');
           isLoading.value = false;
         }
       } else {
-        CustomToast.errorToast('Error', 'password doesnt match');
+        CustomToast.errorToast('password doesnt match');
       }
     } else {
-      CustomToast.errorToast('Error', 'you must fill all form');
+      CustomToast.errorToast('you must fill all form');
     }
   }
 
@@ -46,13 +46,14 @@ class NewPasswordController extends GetxController {
       Get.offAllNamed(Routes.HOME);
 
       pageIndexController.changePage(0);
-      CustomToast.successToast('success', 'success update password');
+      CustomToast.successToast('success update password');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        CustomToast.errorToast('Error', 'password too weak, you need at least six charachter');
+        CustomToast.errorToast(
+            'password too weak, you need at least six charachter');
       }
     } catch (e) {
-      CustomToast.errorToast('Error', 'error : ${e.toString()}');
+      CustomToast.errorToast('error : ${e.toString()}');
     }
   }
 }
