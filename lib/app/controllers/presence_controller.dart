@@ -329,6 +329,7 @@ class PresenceController extends GetxController {
     // continue accessing the position of the device.
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
+
     return {
       "position": position,
       "message": "Managed to get the position of the device",

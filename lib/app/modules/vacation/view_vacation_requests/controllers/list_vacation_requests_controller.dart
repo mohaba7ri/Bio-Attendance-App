@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 
 class ListVacationRequestsController extends GetxController {
   RxBool switchValue = false.obs;
-
- DateTime? start;
+  String searchValue = '';
+  DateTime? start;
   DateTime end = DateTime.now();
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -14,6 +13,10 @@ class ListVacationRequestsController extends GetxController {
     yield* firestore.collection('vacationRequest').snapshots();
   }
 
+  changeSearchValue(String value) {
+    searchValue = value;
+    update();
+  }
 
   void pickDate(DateTime pickStart, DateTime pickEnd) {
     start = pickStart;
