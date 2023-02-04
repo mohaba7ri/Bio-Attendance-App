@@ -1,29 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
-class employeeDetailController extends GetxController {
-  
-    dynamic EmpList;
+class EmployeeDetailController extends GetxController {
+  dynamic EmpList = Get.arguments;
+  String? branchName;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> employee() async* {
-  //  yield* firestore.collection('branch').where('branchId', isEqualTo: branchId).snapshots();
+    //  yield* firestore.collection('branch').where('branchId', isEqualTo: branchId).snapshots();
   }
 
-   void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-  
-
-    branchInfo;
+    await getBranch();
+    print('branchName$branchName');
   }
 
-RxMap branchInfo = {}.obs;
-
-   Stream<QuerySnapshot<Map<String, dynamic>>> getBranchName() async* {
-    yield* firestore
+  Future getBranch() async {
+    await firestore
         .collection('branch')
-        .where('name', isEqualTo: EmpList['branchId'])
-        .snapshots();
-  } 
+        .where('branchId', isEqualTo: EmpList['branchId'])
+        .get()
+        .then((QuerySnapshot query) {
+      query.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        branchName = data['name'];
+        update();
+        print('the name${data['name']}');
+      });
+    });
+  }
 }

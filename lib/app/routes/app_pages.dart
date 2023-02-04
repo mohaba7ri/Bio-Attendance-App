@@ -202,8 +202,8 @@ class AppPages {
         binding: ListEmployeeBinding()),
     GetPage(
         name: _Paths.EMP_DETAIL,
-        page: () => employeeDetailView(),
-        binding: employeeDetailBinding()),
+        page: () => EmployeeDetailView(),
+        binding: EmployeeDetailBinding()),
     GetPage(
         name: _Paths.EMP_UPDATE,
         page: () => UpdateEmployeeView(),

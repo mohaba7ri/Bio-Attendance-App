@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 
 import '../controllers/employee_details_controller.dart';
 
-class employeeDetailBinding extends Bindings {
+class EmployeeDetailBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<employeeDetailController>(
-      () => employeeDetailController(),
+    Get.lazyPut<EmployeeDetailController>(
+      () => EmployeeDetailController(),
     );
   }
 }

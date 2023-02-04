@@ -78,7 +78,8 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                           height: 20,
                         ),
                         onTap: () {
-                          Get.toNamed(Routes.LIST_EMPLOYEES);
+                          Get.toNamed(Routes.LIST_EMPLOYEES,
+                              arguments: userData);
                         },
                       ),
 

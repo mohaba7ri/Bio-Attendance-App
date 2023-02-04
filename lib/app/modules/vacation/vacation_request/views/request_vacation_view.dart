@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 50),
         child: Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
@@ -46,7 +47,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(10.0),
             child: Form(
               key: controller.formKey,
               child: Obx(
@@ -64,9 +65,14 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             ),
                             Spacer(),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: DropdownButton(
-                                elevation: 20,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: DropdownButton2(
+                                isExpanded: true,
+                                dropdownWidth:
+                                    MediaQuery.of(context).size.width * 0.45,
+                                buttonWidth:
+                                    MediaQuery.of(context).size.width * 0.45,
                                 value: controller.leaveTypeValue.value,
                                 items: controller.vacationTypeList,
                                 onChanged: (String? selectedValue) {
