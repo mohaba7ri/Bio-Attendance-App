@@ -43,7 +43,7 @@ class EmployeeDetailView extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.white70,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
             ),
@@ -65,16 +65,19 @@ class EmployeeDetailView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        controller.EmpList['name'],
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
+                    Flexible(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 4, bottom: 12),
+                        child: Text(
+                          controller.EmpList['name'],
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 2,
+                          ),
                         ),
                       ),
                     ),

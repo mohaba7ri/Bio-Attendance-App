@@ -5,11 +5,9 @@ import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-import '../../employee_Details/controllers/employee_details_controller.dart';
 import '../controllers/Employees_controller.dart';
 
 class ListEmployeeView extends GetView<ListEmployeeController> {
- 
   @override
   Widget build(BuildContext context) {
     ListEmployeeController _listEmployeeController = ListEmployeeController();
@@ -62,7 +60,6 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                                 onTap: () {
-                                 
                                   Get.toNamed(Routes.EMP_DETAIL,
                                       arguments: snapshot.data!.docs[index]);
                                 },
@@ -70,7 +67,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
