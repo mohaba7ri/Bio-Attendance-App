@@ -70,6 +70,7 @@ import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.
 import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
 import '../modules/vacation/view_vacation/bindings/vacation_binding.dart';
 import '../modules/vacation/view_vacation/views/vacation_view.dart';
+import '../modules/vacation/view_vacation_requests/bindings/list_vacation_requests_binding.dart';
 import '../modules/vacation/view_vacation_requests/views/list_vacation_requests_view.dart';
 
 part 'app_routes.dart';
@@ -191,7 +192,7 @@ class AppPages {
     GetPage(
         name: _Paths.LIST_VIEW_REQUESTS,
         page: () => ListVacationRequestView(),
-        binding: ListVacationTypeBinding()),
+        binding: ListVacationRequestBinding()),
     GetPage(
         name: _Paths.ON_VACATION,
         page: () => OnVacationView(),

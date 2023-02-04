@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
@@ -222,14 +223,10 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           children: [
                             ElevatedButton(
                               onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red.shade400,
-                                  fixedSize: const Size(90, 60),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
+                              style: redElevatedButStyle,
                               child: Text(
                                 'Cancel',
-                                style: TextStyle(fontSize: 15),
+                                style: robotoMedium,
                               ),
                             ),
                             controller.isloading == true
@@ -240,14 +237,10 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                         : () {
                                             controller.submit();
                                           },
-                                    style: ElevatedButton.styleFrom(
-                                        fixedSize: const Size(90, 60),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15))),
+                                    style: elevatedButStyle,
                                     child: Text(
                                       'Send',
-                                      style: TextStyle(fontSize: 20),
+                                      style: robotoMedium,
                                     ),
                                   ),
                           ],

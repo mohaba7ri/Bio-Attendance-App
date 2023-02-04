@@ -25,3 +25,13 @@ final robotoBlack = TextStyle(
   fontWeight: FontWeight.w900,
   fontSize: Dimensions.fontSizeDefault,
 );
+final elevatedButStyle = ElevatedButton.styleFrom(
+    fixedSize: const Size(90, 30),
+    backgroundColor: Colors.blue,
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)));
+final redElevatedButStyle = ElevatedButton.styleFrom(
+    fixedSize: const Size(90, 30),
+    backgroundColor: Colors.redAccent,
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)));

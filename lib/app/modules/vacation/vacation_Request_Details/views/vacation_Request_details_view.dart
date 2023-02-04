@@ -5,15 +5,10 @@ import 'package:get/get.dart';
 import '../../../../style/app_color.dart';
 import '../controllers/vacation_Request_details_controller.dart';
 
-final controller = Get.put(vacationRequestDetailController(), permanent: true);
-
 class vacationRequestDetailDetailView
     extends GetView<vacationRequestDetailController> {
-
   @override
   Widget build(BuildContext context) {
-    vacationRequestDetailController _vacationRequestDetailController =
-        vacationRequestDetailController();
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/view_vacation/controllers/vacation_controller.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../../../../style/app_color.dart';
 import '../../add_vacation_type/views/add_vacation_type_view.dart';
@@ -85,7 +86,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white70,
+                                color: AppColor.whiteColor,
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.black12, blurRadius: 5)
@@ -99,30 +100,16 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 2, bottom: 8),
-                                          child: Text(
-                                            'Vacation Type: ',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
+                                          child: Text('Vacation Type: ',
+                                              style: robotoBold),
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 2, bottom: 8),
                                           child: Text(
-                                            date[index]['vacationType'],
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
+                                              date[index]['vacationType'],
+                                              style: robotoBold.copyWith(
+                                                  letterSpacing: 2)),
                                         ),
                                       ],
                                     ),
