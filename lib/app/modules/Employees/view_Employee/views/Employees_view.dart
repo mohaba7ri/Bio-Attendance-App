@@ -9,7 +9,7 @@ import '../../employee_Details/controllers/employee_details_controller.dart';
 import '../controllers/Employees_controller.dart';
 
 class ListEmployeeView extends GetView<ListEmployeeController> {
-  final detialEmployee = Get.put(employeeDetailController(), permanent: true);
+ 
   @override
   Widget build(BuildContext context) {
     ListEmployeeController _listEmployeeController = ListEmployeeController();
@@ -62,11 +62,9 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                                 onTap: () {
-                                  detialEmployee.EmpList =
-                                      snapshot.data!.docs[index];
-
-                                  print(detialEmployee.EmpList['name']);
-                                  Get.toNamed(Routes.EMP_DETAIL);
+                                 
+                                  Get.toNamed(Routes.EMP_DETAIL,
+                                      arguments: snapshot.data!.docs[index]);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
