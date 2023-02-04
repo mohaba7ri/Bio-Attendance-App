@@ -84,7 +84,7 @@ class CustomeAppbar extends StatelessWidget {
           Container(
             height: 20,
             decoration: BoxDecoration(
-                color: AppColor.greyShade200,
+                color: AppColor.whiteColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
