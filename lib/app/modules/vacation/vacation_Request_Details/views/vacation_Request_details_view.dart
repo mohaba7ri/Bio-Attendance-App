@@ -12,7 +12,7 @@ class vacationRequestDetailDetailView
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Request Details',
+          'Request_Details'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -58,7 +58,7 @@ class vacationRequestDetailDetailView
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Vacation Type: ',
+                        'Vacation_Type '.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -99,7 +99,7 @@ class vacationRequestDetailDetailView
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "Days",
+                                "Days".tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -128,7 +128,7 @@ class vacationRequestDetailDetailView
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "Start Date",
+                                "Start_Date".tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -157,7 +157,7 @@ class vacationRequestDetailDetailView
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "End Date",
+                                "End_Date".tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,

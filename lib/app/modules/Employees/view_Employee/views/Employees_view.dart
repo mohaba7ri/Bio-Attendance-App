@@ -14,7 +14,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Employees',
+          'Employees'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -75,39 +75,40 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                     ],
                                   ),
                                   child: ListTile(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 5.0, vertical: 1.0),
-                                      leading: Container(
-                                        padding: EdgeInsets.only(right: 12.0),
-                                        decoration: new BoxDecoration(
-                                            border: new Border(
-                                                right: new BorderSide(
-                                                    width: 2.0,
-                                                    color: Colors.black))),
-                                        child: Image.asset(Images.profile,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 5.0, vertical: 1.0),
+                                    leading: Container(
+                                      padding: EdgeInsets.only(right: 12.0),
+                                      decoration: new BoxDecoration(
+                                          border: new Border(
+                                              right: new BorderSide(
+                                                  width: 2.0,
+                                                  color: Colors.black))),
+                                      child: Image.asset(Images.profile,
+                                          color: Colors.black),
+                                    ),
+                                    title: Text(
+                                      date[index]['name'],
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.work_outline,
                                             color: Colors.black),
-                                      ),
-                                      title: Text(
-                                        date[index]['name'],
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      subtitle: Row(
-                                        children: <Widget>[
-                                          Icon(Icons.work_outline,
-                                              color: Colors.black),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text(date[index]['job'],
-                                                style: TextStyle(
-                                                    color: Colors.black)),
-                                          )
-                                        ],
-                                      ),
-                                      trailing: Icon(Icons.keyboard_arrow_right,
-                                          color: Colors.black, size: 30.0)),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text(date[index]['job'],
+                                              style: TextStyle(
+                                                  color: Colors.black)),
+                                        )
+                                      ],
+                                    ),
+                                    trailing: Icon(Icons.keyboard_arrow_right,
+                                        color: Colors.black, size: 30.0),
+                                  ),
                                 )),
                           );
                   },

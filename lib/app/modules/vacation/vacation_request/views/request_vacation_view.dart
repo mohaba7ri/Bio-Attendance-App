@@ -16,7 +16,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: Text(
-          'Request Vacation',
+          'Request_Vacation'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -61,7 +61,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Row(
                           children: [
                             Text(
-                              'Leave type',
+                              'Leave_type'.tr,
                               style: TextStyle(fontSize: 20),
                             ),
                             Spacer(),
@@ -87,7 +87,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Row(
                           children: [
                             Text(
-                              'Start date',
+                              'Start_date'.tr,
                               style: TextStyle(fontSize: 20),
                             ),
                             Spacer(),
@@ -127,7 +127,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Row(
                           children: [
                             Text(
-                              'End date',
+                              'End_date'.tr,
                               style: TextStyle(fontSize: 20),
                             ),
                             Spacer(),
@@ -168,7 +168,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Row(
                           children: [
                             Text(
-                              'Days ',
+                              'Days '.tr,
                               style: TextStyle(fontSize: 20),
                             ),
                             Spacer(),
@@ -189,7 +189,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                         Row(
                           children: [
                             Text(
-                              'File ',
+                              'File '.tr,
                               style: TextStyle(fontSize: 20),
                             ),
                             Spacer(),
@@ -225,7 +225,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               onPressed: () {},
                               style: redElevatedButStyle,
                               child: Text(
-                                'Cancel',
+                                'Cancel'.tr,
                                 style: robotoMedium,
                               ),
                             ),
@@ -239,7 +239,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                           },
                                     style: elevatedButStyle,
                                     child: Text(
-                                      'Send',
+                                      'Send'.tr,
                                       style: robotoMedium,
                                     ),
                                   ),

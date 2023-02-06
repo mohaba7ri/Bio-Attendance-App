@@ -18,7 +18,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Vacation Types',
+          'Vacation_Types'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -100,7 +100,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 2, bottom: 8),
-                                          child: Text('Vacation Type: ',
+                                          child: Text('Vacation Type '.tr,
                                               style: robotoBold),
                                         ),
                                         Container(
@@ -119,7 +119,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                           margin: EdgeInsets.only(
                                               top: 4, bottom: 12),
                                           child: Text(
-                                            'Days:',
+                                            'Days'.tr,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'poppins',
@@ -163,7 +163,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 6),
                                                   child: Text(
-                                                    "Status",
+                                                    "Status".tr,
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.white,
@@ -194,7 +194,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                                   margin: EdgeInsets.only(
                                                       bottom: 6),
                                                   child: Text(
-                                                    "Is paid",
+                                                    "Is_paid".tr,
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.white,
@@ -232,12 +232,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
         },
         child: Icon(Icons.add),
       ),
-      // TextButton(
-      //   child: Text('Add Vacation Type'),
-      //   onPressed: () {
-      //     showDialog(context: context, builder: (_) => AddVacationTypeView());
-      //   },
-      // ),
+
     );
   }
 }

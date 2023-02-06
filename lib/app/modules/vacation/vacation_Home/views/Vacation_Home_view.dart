@@ -37,28 +37,12 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     children: [
                       SizedBox(height: 16),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 16, bottom: 30),
-                            child: Text(
-                              userData["name"],
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Text(
-                            userData["job"],
-                            style: TextStyle(color: AppColor.secondarySoft),
-                          ),
-                        ],
-                      ),
-                      // section 2 - menu
+                     
+                     
 
                       MenuTile(
                         isDanger: true,
-                        title: 'Vacation Types',
+                        title: 'Vacation_Types'.tr,
                         icon: Image.asset(
                           Images.changePassword,
                           color: AppColor.primarySoft,
@@ -69,7 +53,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                       ),
                       MenuTile(
                         isDanger: true,
-                        title: 'Add Vacation Request',
+                        title: 'Add_Vacation_Request'.tr,
                         icon: Image.asset(
                           Images.editProfile,
                           color: AppColor.primarySoft,
@@ -83,7 +67,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
 
                       MenuTile(
                         isDanger: true,
-                        title: 'View Vacation Requests',
+                        title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
                           Images.editProfile,
                           color: AppColor.primarySoft,
@@ -96,7 +80,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                       ),
                       MenuTile(
                         isDanger: true,
-                        title: 'Employees on Vacation',
+                        title: 'Employees_on_Vacation'.tr,
                         icon: Image.asset(
                           Images.editProfile,
                           color: AppColor.primarySoft,

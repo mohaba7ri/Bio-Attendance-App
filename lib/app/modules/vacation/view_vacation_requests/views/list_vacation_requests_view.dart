@@ -17,7 +17,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Requests',
+          'Requests'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -56,8 +56,8 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                     },
                     // controller: editingController,
                     decoration: InputDecoration(
-                        labelText: "Search",
-                        hintText: "Search",
+                        labelText: "Search".tr,
+                        hintText: "",
                         prefixIcon: Icon(Icons.search),
                         border: OutlineInputBorder(
                             borderRadius:
@@ -117,7 +117,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                     margin: EdgeInsets.only(
                                                         top: 4, bottom: 12),
                                                     child: Text(
-                                                      'Vacation Type: ',
+                                                      'Vacation_Type '.tr,
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontFamily: 'poppins',
@@ -169,7 +169,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Days",
+                                                              "Days".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -204,7 +204,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Start Date",
+                                                              "Start_Date".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -240,7 +240,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "End Date",
+                                                              "End_Date".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -322,10 +322,6 @@ class SearchWideget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          // control.vacationRequest =
-          //     snapshot.data!.docs[index];
-
-          // print(control.vacationRequest['vacationType']);
           Get.toNamed(Routes.Req_DETAILS);
         },
         child: Container(
@@ -343,7 +339,7 @@ class SearchWideget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 4, bottom: 12),
                   child: Text(
-                    'Vacation Type: ',
+                    'Vacation_Type '.tr,
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'poppins',
@@ -384,7 +380,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "Days",
+                            "Days".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -413,7 +409,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "Start Date",
+                            "Start_Date".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -442,7 +438,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "End Date",
+                            "End_Date".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,

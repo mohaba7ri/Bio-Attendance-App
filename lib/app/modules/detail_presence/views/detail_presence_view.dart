@@ -14,7 +14,7 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Presence Detail',
+          'Presence_Detail'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -63,7 +63,7 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'check in',
+                          'check_in'.tr,
                           style: TextStyle(color: Colors.white),
                         ),
                         SizedBox(height: 4),
@@ -87,14 +87,14 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 14),
                 Text(
-                  'status',
+                  'status'.tr,
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 4),
                 Text(
                   (presenceData["checkIn"]?["in_area"] == true)
-                      ? "In area presence"
-                      : "Outside area presence",
+                      ? "In_area_presence".tr
+                      : "Outside_area_presence".tr,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -102,7 +102,7 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 14),
                 Text(
-                  'address',
+                  'address'.tr,
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 4),
@@ -143,7 +143,7 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'check out',
+                          'check_out'.tr,
                           style: TextStyle(color: AppColor.secondary),
                         ),
                         SizedBox(height: 4),
@@ -167,14 +167,14 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 14),
                 Text(
-                  'status',
+                  'status'.tr,
                   style: TextStyle(color: AppColor.secondary),
                 ),
                 SizedBox(height: 4),
                 Text(
                   (presenceData["checkOut"]?["in_area"] == true)
-                      ? "In area presence"
-                      : "Outside area presence",
+                        ? "In_area_presence".tr
+                      : "Outside_area_presence".tr,
                   style: TextStyle(
                       color: AppColor.secondary,
                       fontSize: 16,
@@ -182,7 +182,7 @@ class DetailPresenceView extends GetView<DetailPresenceController> {
                 ),
                 SizedBox(height: 14),
                 Text(
-                  'address',
+                  'address'.tr,
                   style: TextStyle(color: AppColor.secondary),
                 ),
                 SizedBox(height: 4),

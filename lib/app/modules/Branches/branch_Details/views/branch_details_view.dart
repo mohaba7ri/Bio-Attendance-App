@@ -16,7 +16,7 @@ class detailBranchView extends GetView<detailBranchController> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text(
-          'Branch Details',
+          'Branch_Details'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -56,7 +56,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Branch Name: ',
+                      'Branch_Name: '.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -86,7 +86,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Address:',
+                      'Address:'.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -116,7 +116,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Active: ',
+                      'Active: '.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -157,7 +157,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "Phone",
+                              "Phone".tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -187,7 +187,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "location",
+                              "location".tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -226,7 +226,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "latitude",
+                                "latitude".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -257,7 +257,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "longitude",
+                                "longitude".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -302,7 +302,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                   },
                                   icon: Icon(Icons.settings_rounded),
                                   label: Text(
-                                    'General Settings',
+                                    'settings'.tr,
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -329,7 +329,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                   },
                                   icon: Icon(Icons.edit_rounded),
                                   label: Text(
-                                    'Edit Information',
+                                    'Edit_Information'.tr,
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ),
