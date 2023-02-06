@@ -188,11 +188,13 @@ class PresenceController extends GetxController {
       return chechIn = true;
     } else {
       print("Check-in is late.");
-      CustomToast.errorToast(
-          'You are late for ${currentHour - lateHour} minutes');
+      int lateMinutes = (lateHour - currentHour);
+      int lateHours = lateMinutes ~/ 60;
+      int lateMinutesRemainder = lateMinutes % 60;
       print(currentTime);
       print('lateHour$lateHour');
-      Get.snackbar('Late', 'You are late for');
+      Get.snackbar('Late',
+          'You are being late for${lateHours}:${lateMinutesRemainder} minutes');
       return chechIn = true;
     }
   }
