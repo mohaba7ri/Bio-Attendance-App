@@ -11,6 +11,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
   Widget build(BuildContext context) {
     //  AddVacationTypeController controller = AddVacationTypeController();
     // TODO: implement build
+
     return Dialog(
       child: Container(
         width: MediaQuery.of(context).size.width,

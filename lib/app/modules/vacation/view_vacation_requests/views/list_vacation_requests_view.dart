@@ -27,7 +27,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
           onPressed: () => Get.back(),
           icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[200],
         elevation: 0,
         centerTitle: true,
         actions: [filter(controller: controller)],
@@ -42,7 +42,6 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
       ),
       body: GetBuilder<ListVacationRequestsController>(
         builder: (_controller) => Container(
-          color: Colors.grey[200],
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -99,7 +98,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                         width:
                                             MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
-                                          color: Colors.white70,
+                                          color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           boxShadow: [
