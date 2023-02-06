@@ -10,7 +10,9 @@ class PageIndexController extends GetxController {
     pageIndex.value = index;
     switch (index) {
       case 1:
-        presenceController.presence();
+        presenceController
+          ..checkTime()
+          ..presence();
         break;
       case 2:
         Get.offAllNamed(Routes.PROFILE);

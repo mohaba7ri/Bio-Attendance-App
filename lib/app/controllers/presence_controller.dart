@@ -14,19 +14,27 @@ class PresenceController extends GetxController {
   DateTime? startTime;
   DateTime? endTime;
   DateTime? lateTime;
-  DateTime currentDate = DateTime.now();
+  DateTime? overlyTime;
+  DateTime? currentTime = DateTime.now();
   String? timeStatus;
+
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    getCompanySetting();
+    await getCompanySetting();
   }
 
   @override
   void onReady() {
     // TODO: implement onReady
     super.onReady();
+
+    print('the current Time$currentTime');
+  }
+
+  checkTime() async {
+    currentTime = DateTime.now();
   }
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -43,23 +51,37 @@ class PresenceController extends GetxController {
         startTime = DateTime.parse(data['startTime']);
         endTime = DateTime.parse(data['endTime']);
         lateTime = DateTime.parse(data['lateTime']);
-
+        overlyTime = DateTime.parse(data['overlyTime']);
         print('the company ID${data['companyId']}');
         print('the company ID${startTime.runtimeType}');
       });
-    
     });
   }
 
-  presence() async {
-    isLoading.value = true;
+  Future getAddress() async {
     Map<String, dynamic> _determinePosition = await determinePosition();
     if (!_determinePosition["error"]) {
       Position position = _determinePosition["position"];
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
       String address =
-          "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
+          "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality},${placemarks.first.name}";
+    } else {
+      Get.snackbar("There is an error", _determinePosition["message"]);
+      print(_determinePosition["error"]);
+    }
+  }
+
+  presence() async {
+    isLoading.value = true;
+
+    Map<String, dynamic> _determinePosition = await determinePosition();
+    if (!_determinePosition["error"]) {
+      Position position = _determinePosition["position"];
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      String address =
+          "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality},${placemarks.first.name}";
       double distance = Geolocator.distanceBetween(
           CompanyData.office['latitude'],
           CompanyData.office['longitude'],
@@ -90,10 +112,10 @@ class PresenceController extends GetxController {
       var startDate = DateFormat("MMM dd, yyyy").parse(doc.data()['startDate']);
       var endDate = DateFormat("MMM dd, yyyy").parse(doc.data()['endDate']);
       print('thesartDate$startDate');
-      var currentDate = DateTime.now();
+      var currentTime = DateTime.now();
       if (status == 'approved' &&
-          currentDate.isAfter(startDate) &&
-          currentDate.isBefore(endDate)) {
+          currentTime.isAfter(startDate) &&
+          currentTime.isBefore(endDate)) {
         print('satus$status');
         return false;
       }
@@ -146,6 +168,52 @@ class PresenceController extends GetxController {
     }
   }
 
+  Future<bool> calCheckIn() async {
+    bool chechIn;
+    int currentHour = currentTime!.hour * 60 + currentTime!.minute;
+    int startHour = startTime!.hour * 60 + startTime!.minute;
+    int lateHour = lateTime!.hour * 60 + lateTime!.minute;
+    int endHour = endTime!.hour * 60 + endTime!.minute;
+    int overlyHoure = overlyTime!.hour * 60 + overlyTime!.minute;
+    if (currentHour < startHour) {
+      print("Check-in time has not arrived yet.");
+      CustomToast.errorToast('Check-in time has not arrived yet');
+      return chechIn = false;
+    } else if (currentHour > startHour && currentHour <= lateHour) {
+      print("Check-in is on time.");
+
+      print(currentHour);
+      update();
+      print('lateHour$lateHour');
+      return chechIn = true;
+    } else {
+      print("Check-in is late.");
+      CustomToast.errorToast(
+          'You are late for ${currentHour - lateHour} minutes');
+      print(currentTime);
+      print('lateHour$lateHour');
+      Get.snackbar('Late', 'You are late for');
+      return chechIn = true;
+    }
+  }
+
+  Future<bool> calCheckOut() async {
+    bool chechOut;
+    int currentHour = currentTime!.hour * 60 + currentTime!.minute;
+    int startHour = startTime!.hour * 60 + startTime!.minute;
+    int lateHour = lateTime!.hour * 60 + lateTime!.minute;
+    int endHour = endTime!.hour * 60 + endTime!.minute;
+    int overlyHoure = overlyTime!.hour * 60 + overlyTime!.minute;
+    if (currentHour < endHour) {
+      print("Check-out time has not arrived yet.");
+      CustomToast.errorToast('Check-out time has not arrived yet');
+      return chechOut = false;
+    } else {
+      print("Check-out time has passed.");
+      return chechOut = true;
+    }
+  }
+
   checkinPresence(
     CollectionReference<Map<String, dynamic>> presenceCollection,
     String todayDocId,
@@ -154,39 +222,44 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
-    if (allowCheckIn) {
-      CustomAlertDialog.showPresenceAlert(
-        title: "Do you want to check in?",
-        message: "you need to confirm before you\ncan do presence now",
-        onCancel: () => Get.back(),
-        onConfirm: () async {
-          await presenceCollection.doc(todayDocId).set(
-            {
-              "date": DateTime.now().toIso8601String(),
-              "status": 'absence',
-              "checkIn": {
-                "status":timeStatus,
+    update();
+
+    bool checkIn = await calCheckIn();
+    if (checkIn) {
+      bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
+      if (allowCheckIn) {
+        CustomAlertDialog.showPresenceAlert(
+          title: "Do you want to check in?",
+          message: "you need to confirm before you\ncan do presence now",
+          onCancel: () => Get.back(),
+          onConfirm: () async {
+            await presenceCollection.doc(todayDocId).set(
+              {
                 "date": DateTime.now().toIso8601String(),
-                "latitude": position.latitude,
-                "longitude": position.longitude,
-                "address": address,
-                "in_area": in_area,
-                "distance": distance,
-              }
-            },
-          );
-          Get.back();
-          CustomToast.successToast("success check in");
-        },
-      );
-    } else {
-      CustomAlertDialog.showPresenceAlert(
-          title: 'Vacation Request',
-          message:
-              'Sorry you can\'t check in because you have vacation\n Do you want to cancel vacation request',
-          onConfirm: () {},
-          onCancel: () => Get.back());
+                "status": 'absence',
+                "checkIn": {
+                  "status": timeStatus,
+                  "date": DateTime.now().toIso8601String(),
+                  "latitude": position.latitude,
+                  "longitude": position.longitude,
+                  "address": address,
+                  "in_area": in_area,
+                  "distance": distance,
+                }
+              },
+            );
+            Get.back();
+            CustomToast.successToast("success check in");
+          },
+        );
+      } else {
+        CustomAlertDialog.showPresenceAlert(
+            title: 'Vacation Request',
+            message:
+                'Sorry you can\'t check in because you have vacation\n Do you want to cancel vacation request',
+            onConfirm: () {},
+            onCancel: () => Get.back());
+      }
     }
   }
 
@@ -198,37 +271,49 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckOut = await checkVacationStatus(auth.currentUser!.uid);
-    if (allowCheckOut) {
-      CustomAlertDialog.showPresenceAlert(
-        title: "Do you want to check out?",
-        message: "you need to confirm before you\ncan do presence now",
-        onCancel: () => Get.back(),
-        onConfirm: () async {
-          await presenceCollection.doc(todayDocId).update(
-            {
-              "checkOut": {
-                "status":timeStatus,
-                "date": DateTime.now().toIso8601String(),
-                "latitude": position.latitude,
-                "longitude": position.longitude,
-                "address": address,
-                "in_area": in_area,
-                "distance": distance,
-              }
-            },
-          );
-          Get.back();
-          CustomToast.successToast("success check out");
-        },
-      );
-    } else {
-      CustomAlertDialog.showPresenceAlert(
-          title: 'Vacation Request',
-          message:
-              'Sorry you can\'t check out because you have vacation\n Do you want to cancel vacation request',
-          onConfirm: () {},
-          onCancel: () => Get.back());
+    bool chechOut = await calCheckOut();
+    if (chechOut) {
+      bool allowCheckOut = await checkVacationStatus(auth.currentUser!.uid);
+      if (allowCheckOut) {
+        int currentHour = currentTime!.hour * 60 + currentTime!.minute;
+        int startHour = startTime!.hour * 60 + startTime!.minute;
+        int lateHour = lateTime!.hour * 60 + lateTime!.minute;
+        int endHour = endTime!.hour * 60 + endTime!.minute;
+        if (currentHour < endHour) {
+          print("Check-out time has not arrived yet.");
+        } else {
+          print("Check-out time has passed.");
+        }
+        CustomAlertDialog.showPresenceAlert(
+          title: "Do you want to check out?",
+          message: "you need to confirm before you\ncan do presence now",
+          onCancel: () => Get.back(),
+          onConfirm: () async {
+            await presenceCollection.doc(todayDocId).update(
+              {
+                "checkOut": {
+                  "status": timeStatus,
+                  "date": DateTime.now().toIso8601String(),
+                  "latitude": position.latitude,
+                  "longitude": position.longitude,
+                  "address": address,
+                  "in_area": in_area,
+                  "distance": distance,
+                }
+              },
+            );
+            Get.back();
+            CustomToast.successToast("success check out");
+          },
+        );
+      } else {
+        CustomAlertDialog.showPresenceAlert(
+            title: 'Vacation Request',
+            message:
+                'Sorry you can\'t check out because you have vacation\n Do you want to cancel vacation request',
+            onConfirm: () {},
+            onCancel: () => Get.back());
+      }
     }
   }
 
