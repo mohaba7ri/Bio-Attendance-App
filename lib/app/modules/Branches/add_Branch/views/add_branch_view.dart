@@ -15,7 +15,7 @@ class AddBranchView extends GetView<AddBranchController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Branch',
+          'Add_Branch'.tr,
           style: TextStyle(
               color: AppColor.secondary,
               fontSize: 14,
@@ -62,7 +62,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                   children: [
                                     CustomInput(
                                       controller: controller.nameC.value,
-                                      label: 'Branch Name',
+                                      label: 'Branch_Name'.tr,
                                       hint: 'Code Tech',
                                       valdate: (value) {
                                         if (value!.isEmpty) {
@@ -76,7 +76,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                     ),
                                     CustomInput(
                                       controller: controller.phoneC.value,
-                                      label: 'Phone',
+                                      label: 'Phone'.tr,
                                       hint: '77777777',
                                       valdate: (value) {
                                         if (value!.isEmpty) {
@@ -90,7 +90,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                     ),
                                     CustomInput(
                                       controller: controller.AddressC.value,
-                                      label: 'address',
+                                      label: 'address'.tr,
                                       hint: 'address',
                                     ),
                                     Padding(
@@ -111,7 +111,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                                     top: 5)),
                                             Center(
                                                 child: Text(
-                                              'Set Branch Location ',
+                                              'Set_Branch_Location'.tr,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             )),
@@ -140,7 +140,8 @@ class AddBranchView extends GetView<AddBranchController> {
                                                                 controller
                                                                     .latitudeC
                                                                     .value,
-                                                            label: 'Latitude',
+                                                            label:
+                                                                'Latitude'.tr,
                                                             hint: '4.35424',
                                                             disabled: true,
                                                           ),
@@ -159,7 +160,8 @@ class AddBranchView extends GetView<AddBranchController> {
                                                                 controller
                                                                     .longitudeC
                                                                     .value,
-                                                            label: 'Longitude',
+                                                            label:
+                                                                'Longitude'.tr,
                                                             hint: '4.35424',
                                                             disabled: true,
                                                           ),
@@ -194,7 +196,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                                           ),
                                                         ),
                                                         child: Text(
-                                                          'Open in maps',
+                                                          'Open_in_maps'.tr,
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -229,8 +231,8 @@ class AddBranchView extends GetView<AddBranchController> {
                                     },
                                     child: Text(
                                       (controller.isLoading.isFalse)
-                                          ? 'Add'
-                                          : 'Loading...',
+                                          ? 'Add'.tr
+                                          : 'Loading'.tr,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: 'poppins',

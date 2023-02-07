@@ -18,13 +18,13 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
         UpdateEmployeeController();
 
     // controller.employeeAddressC.text = controller.EmpDetail['name'];
-    controller.nameC.text = 'name name name';
+
     ;
     // controller.emailC.text = emp["email"];
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit Employee',
+          'Edit_Employee'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -72,19 +72,19 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
           //section 2 - user data
           CustomInput(
             controller: controller.nameC,
-            label: "Full Name",
+            label: "Full_Name".tr,
             hint: "Your Full Name",
             margin: EdgeInsets.only(bottom: 16, top: 42),
           ),
           CustomInput(
             controller: controller.employeeAddressC,
-            label: "Employee ID",
-            hint: "100000000000",
+            label: "Address".tr,
+            hint: "",
             disabled: true,
           ),
           CustomInput(
             controller: controller.emailC,
-            label: "Email",
+            label: "email".tr,
             hint: "youremail@email.com",
             disabled: true,
           ),

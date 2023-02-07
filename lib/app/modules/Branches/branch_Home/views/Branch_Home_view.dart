@@ -55,7 +55,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
 
                       MenuTile(
                         isDanger: true,
-                        title: 'Add Branch',
+                        title: 'Add_Branch'.tr,
 
                         icon: Image.asset(
                           Images.addBranch,
@@ -67,7 +67,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
                       ),
                       MenuTile(
                         isDanger: true,
-                        title: 'View Branches',
+                        title: 'View_Branches'.tr,
                         icon: Image.asset(
                           Images.viewAll,
                           color: AppColor.primarySoft,

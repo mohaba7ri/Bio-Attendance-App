@@ -13,7 +13,7 @@ class EmployeeDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Employee Details',
+          'Employee_Details'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
@@ -55,7 +55,7 @@ class EmployeeDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Name: ',
+                        'Name: '.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -88,7 +88,7 @@ class EmployeeDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Address:',
+                        'Address:'.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -118,7 +118,7 @@ class EmployeeDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Status: ',
+                        'Active: '.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -148,7 +148,7 @@ class EmployeeDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Job: ',
+                        'Job: '.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -178,7 +178,7 @@ class EmployeeDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(top: 4, bottom: 12),
                       child: Text(
-                        'Branch: ',
+                        'Branch: '.tr,
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'poppins',
@@ -220,7 +220,7 @@ class EmployeeDetailView extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "Email",
+                                "Email".tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -250,7 +250,7 @@ class EmployeeDetailView extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                'Phone',
+                                'Phone'.tr,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -299,7 +299,7 @@ class EmployeeDetailView extends StatelessWidget {
                                     },
                                     icon: Icon(Icons.edit_rounded),
                                     label: Text(
-                                      'Edit Information',
+                                      'edit_information'.tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                   ),

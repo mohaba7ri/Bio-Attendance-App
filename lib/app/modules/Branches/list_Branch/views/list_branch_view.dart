@@ -18,7 +18,7 @@ class listBranchView extends GetView<listBranchController> {
       backgroundColor: AppColor.greyColor,
       appBar: AppBar(
         title: Text(
-          'Branches',
+          'Branches'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
