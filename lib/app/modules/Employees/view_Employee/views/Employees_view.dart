@@ -5,6 +5,7 @@ import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../languages/controller/languages_controller.dart';
 import '../controllers/Employees_controller.dart';
 
 class ListEmployeeView extends GetView<ListEmployeeController> {
@@ -59,22 +60,22 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(Routes.EMP_DETAIL,
-                                      arguments: snapshot.data!.docs[index]);
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12, blurRadius: 10)
-                                    ],
-                                  ),
-                                  child: ListTile(
+                              onTap: () {
+                                Get.toNamed(Routes.EMP_DETAIL,
+                                    arguments: snapshot.data!.docs[index]);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12, blurRadius: 10)
+                                  ],
+                                ),
+                                child: ListTile(
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 5.0, vertical: 1.0),
                                     leading: Container(
@@ -106,11 +107,15 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                         )
                                       ],
                                     ),
-                                    trailing: Icon(Icons.keyboard_arrow_right,
-                                        color: Colors.black, size: 30.0),
-                                  ),
-                                )),
-                          );
+                                    trailing: GetBuilder<LanguagesController>(
+                                      builder: (controller) => Icon(
+                                        controller.isLtr == false
+                                            ? Icons.keyboard_arrow_left
+                                            : Icons.keyboard_arrow_right,
+                                      ),
+                                    )),
+                              ),
+                            ));
                   },
                 );
 

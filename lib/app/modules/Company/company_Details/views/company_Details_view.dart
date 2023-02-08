@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../style/app_color.dart';
 
+import '../../../../util/styles.dart';
 import '../controllers/company_Details_controller.dart';
 
 class CompanyDetailsView extends GetView<CompanyDetailsController> {
@@ -24,13 +25,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
               fontWeight: FontWeight.w800,
             ),
           ),
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColor.blackColor,
-            ),
-          ),
+          leading: backButton,
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,

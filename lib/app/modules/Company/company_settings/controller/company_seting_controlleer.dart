@@ -21,6 +21,7 @@ class CompanySettingController extends GetxController {
   Rx<TimeOfDay> endTime = TimeOfDay(hour: 2, minute: 00).obs;
   Rx<TimeOfDay> lateTime = TimeOfDay(hour: 8, minute: 30).obs;
   Rx<TimeOfDay> overlyTime = TimeOfDay(hour: 2, minute: 30).obs;
+  TextEditingController workingDays = TextEditingController();
   RxBool isExistSetting = false.obs;
 
   final companySetting = FirebaseFirestore.instance;
@@ -87,9 +88,9 @@ class CompanySettingController extends GetxController {
           'endTime': endTimeIsoString,
           'overlyTime': overlyTimeIsoString,
           'companyId': companyId,
+          'workingDays': workingDays.text
         });
-        CustomToast.successToast(
-             'CompanySetting added successfully');
+        CustomToast.successToast('CompanySetting added successfully');
       } else {
         if (isExistSetting.value == true) {
           companySettingRef.doc(companySettingId.value).update({
@@ -98,13 +99,13 @@ class CompanySettingController extends GetxController {
             'endTime': endTimeIsoString,
             'overlyTime': overlyTimeIsoString,
             'companyId': companyId,
+            'workingDays': workingDays.text
           });
-          CustomToast.successToast(
-               'CompanySetting updated successfully');
+          CustomToast.successToast('CompanySetting updated successfully');
         }
       }
     } catch (e) {
-      CustomToast.errorToast( e.toString());
+      CustomToast.errorToast(e.toString());
       print(e.toString());
     }
   }

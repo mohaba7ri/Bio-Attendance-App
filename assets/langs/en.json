@@ -83,8 +83,7 @@
   "Status":"Status ",
   "Is_paid":"Is paid ",
   "Requests":"Vacation Requests",
-  "Search":"Search"
- 
-
-
+  "Search":"Search",
+  "salary_per_hour":"Salary per Hour",
+  "user_name":"Employee Name"
 }

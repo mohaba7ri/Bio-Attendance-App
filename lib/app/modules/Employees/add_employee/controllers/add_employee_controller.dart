@@ -17,7 +17,7 @@ class AddEmployeeController extends GetxController {
 
   @override
   onClose() {
-    idC.dispose();
+    salaryPerHour.dispose();
     nameC.dispose();
     emailC.dispose();
     adminPassC.dispose();
@@ -36,13 +36,14 @@ class AddEmployeeController extends GetxController {
   //this list to store the roles in firebase for each user
   final List<RxString> listSelectedPolicy = [];
   final branchesList = <DropdownMenuItem<String>>[].obs;
-  TextEditingController idC = TextEditingController();
+
   TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController jobC = TextEditingController();
   TextEditingController adminPassC = TextEditingController();
   TextEditingController addressC = TextEditingController();
   TextEditingController phoneC = TextEditingController();
+  TextEditingController salaryPerHour = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -60,15 +61,15 @@ class AddEmployeeController extends GetxController {
     'Manage Vacation'.obs,
   ];
   final Map<String, bool> allRolles = {
-     'Add Branch':true,
-    'Stop Branch':true,
-    'Modify Branch Setting':false,
-    'Add Employee':false,
-    'Stop Employee':true,
-    'Modify Employee':true,
-    'Employee Reports':true,
-    'Attendance Report':true,
-    'Manage Vacation':true,
+    'Add Branch': true,
+    'Stop Branch': true,
+    'Modify Branch Setting': false,
+    'Add Employee': false,
+    'Stop Employee': true,
+    'Modify Employee': true,
+    'Employee Reports': true,
+    'Attendance Report': true,
+    'Manage Vacation': true,
   };
 //this list of all roles  from type bool
   List<RxBool>? selectedPolicyValue;
@@ -152,7 +153,7 @@ class AddEmployeeController extends GetxController {
   }
 
   Future<void> addEmployee() async {
-    if (idC.text.isNotEmpty &&
+    if (salaryPerHour.text.isNotEmpty &&
         nameC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
         jobC.text.isNotEmpty &&
@@ -226,7 +227,7 @@ class AddEmployeeController extends GetxController {
           DocumentReference employee =
               firestore.collection("user").doc(uid.value);
           await employee.set({
-            "usrId": idC.text,
+            "salary": salaryPerHour.text,
             "name": nameC.text,
             "email": emailC.text,
             "role": roleValue.value,

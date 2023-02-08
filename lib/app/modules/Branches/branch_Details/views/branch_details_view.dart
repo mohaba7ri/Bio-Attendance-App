@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -15,17 +15,8 @@ class detailBranchView extends GetView<detailBranchController> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text(
-          'Branch_Details'.tr,
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 16,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
+        title: Text('Branch_Details'.tr, style: robotoMedium),
+        leading: backButton,
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

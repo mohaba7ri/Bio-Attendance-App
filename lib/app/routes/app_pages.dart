@@ -33,6 +33,8 @@ import 'package:presence/app/modules/update_pofile/bindings/update_pofile_bindin
 import 'package:presence/app/modules/update_pofile/views/update_pofile_view.dart';
 import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart';
 import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
+import 'package:presence/app/modules/vacation/my_vaction/my_vacation_binding/my_vacation_binding.dart';
+import 'package:presence/app/modules/vacation/my_vaction/my_vacation_view/my_vacation_view.dart';
 import 'package:presence/app/modules/vacation/vacation_Request_Details/views/vacation_Request_details_view.dart';
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
@@ -236,6 +238,11 @@ class AppPages {
     GetPage(
       name: _Paths.LANGUAGES,
       page: () => LanguagesView(),
+    ),
+    GetPage(
+      name: _Paths.MY_VACATION,
+      page: () => MyVacationView(),
+      binding: MyVacationBinding(),
     ),
   ];
 }
