@@ -268,7 +268,6 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                           }
                         },
                       )
-                   
                     : StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream:
                             _listVacationRequestsController.vacationRequests(),
