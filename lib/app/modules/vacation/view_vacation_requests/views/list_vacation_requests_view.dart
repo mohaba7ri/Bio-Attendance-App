@@ -57,7 +57,8 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                   ),
                 ),
                 controller.searchValue == ''
-                    ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    ? 
+                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream:
                             _listVacationRequestsController.vacationRequests(),
                         builder:
@@ -267,6 +268,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                           }
                         },
                       )
+                   
                     : StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream:
                             _listVacationRequestsController.vacationRequests(),
