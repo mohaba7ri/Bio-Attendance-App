@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +6,7 @@ import 'package:presence/app/modules/vacation/my_vaction/my_vacation_controller/
 import 'package:presence/app/style/app_color.dart';
 
 import '../../../../util/styles.dart';
+import '../widgets/vacation_appbar.dart';
 
 class MyVacationView extends StatelessWidget {
   @override
@@ -14,51 +14,14 @@ class MyVacationView extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
-      appBar: AppBar(
-        title: Text('My Vacation'),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        actions: [
-          GetBuilder<MyVacationController>(
-              builder: (controller) => Padding(
-                    padding: const EdgeInsets.only(right: 15, top: 10),
-                    child: DropdownButton2(
-                      value: controller.requestValue,
-                      buttonDecoration: BoxDecoration(
-                          color: AppColor.whiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 10,
-                                offset: Offset(10, 10)),
-                          ]),
-                      items: controller.requestItems
-                          .map((items) => DropdownMenuItem(
-                                child: Text(
-                                  items,
-                                ),
-                                value: items,
-                              ))
-                          .toList(),
-                      onChanged: (value) =>
-                          controller.changeRequestValue(value!),
-                    ),
-                  ))
-        ],
-      ),
+      appBar: MyVacationAppBar(),
       body: Stack(
         children: [
           Positioned(
-            bottom: 600,
+            bottom: MediaQuery.of(context).size.height * 0.7,
             child: Container(
-              height: 400,
-              width: MediaQuery.of(context).size.width * 100 / 100,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.blueAccent,
                 borderRadius: BorderRadius.horizontal(
@@ -67,12 +30,13 @@ class MyVacationView extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 80,
-            left: 10,
-            right: 10,
+            top: MediaQuery.of(context).size.height * 0.05,
+            left: MediaQuery.of(context).size.width * 0.03,
+            right: MediaQuery.of(context).size.width * 0.03,
+            // bottom: MediaQuery.of(context).size.width * 0.99,
             child: Container(
-              height: 180,
-              width: MediaQuery.of(context).size.width * 100 / 100,
+              height: MediaQuery.of(context).size.height * 0.27,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -88,10 +52,11 @@ class MyVacationView extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 263,
+              top: MediaQuery.of(context).size.height * 0.32,
+              bottom: MediaQuery.of(context).size.height * 0,
               child: GetBuilder<MyVacationController>(
                 builder: (controller) => Container(
-                  height: MediaQuery.of(context).size.width * 1.2,
+                  height: MediaQuery.of(context).size.width * 0.7,
                   width: MediaQuery.of(context).size.width,
                   child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                     stream: controller.vacationRequests(),
@@ -132,21 +97,6 @@ class MyVacationView extends StatelessWidget {
                                           GetBuilder<MyVacationController>(
                                             builder: (_controller) => Row(
                                               children: [
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 4, bottom: 12),
-                                                  child: Text(
-                                                      'user_name'.tr + ' : ',
-                                                      style: robotoMedium),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 4, bottom: 12),
-                                                  child: Text(
-                                                      '${data[index]['userName']}',
-                                                      style: robotoMedium),
-                                                ),
-                                                Spacer(),
                                                 Container(
                                                   margin: EdgeInsets.only(
                                                       top: 4, bottom: 12),
