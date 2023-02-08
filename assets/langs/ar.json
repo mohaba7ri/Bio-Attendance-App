@@ -1,7 +1,7 @@
 {
   "language":"اللغة",
   "company":"الشركة",
-  "branch":"الفرع",
+  "branch":"الفروع",
   "employees":"الموظفين",
   "select_language":"أختار اللغة",
   "welcome_back":"اهلا بعودتك",
@@ -23,7 +23,78 @@
   "settings":"الاعدادات",
   "welcome_to":"مرحباَ ",
   "view_details":"عرض البيانات ",
-  "edit_information":"تعديل البينات "
+  "edit_information":"تعديل البينات ",
+  "Presence_Detail":"تفاصيل الحضور",
+  "status":"الحالة",
+  "In_area_presence":"داخل منطقة الحضور",
+  "Outside_area_presence":"خارج منطقة الحضور",
+  "address":"العنوان",
+  "Home":"الرئيسية",
+  "Presence":"حضور",
+  "Company_Details":"تفاصيل الشركة",
+  "Name":"الاسم",
+  "Phone":"الهاتف",
+  "Number_of_Branches":"عدد الفروع",
+  "Number_of_Employees":"عدد الموظفين",
+  "Location":"الموقع",
+  "Latitude":"خطوط العرض",
+  "Longitude":"خطوط الطول",
+  "Loading":"جار التحميل",
+  "Start_Time":"وقت بداية الدوام",
+  "End_Time":"وقت نهاية الدوام",
+  "Late_Time":"وقت التأخير",
+  "Overly_Time":"الوقت الاضافي",
+  "Add_Branch":"اضافة فرع",
+  "View_Branches":"عرض الفروع",
+  "Branch_Name":"اسم الفرع",
+  "Set_Branch_Location":"تحديد موقع الفرع",
+  "Add":"اضافة",
+  "Branch_Details":"تفاصيل الفرع",
+  "Active":"فعال",
+  "Edit_Information":"تعديل البيانات",
+  "Branch_working_times":"اوقات دوام الفرع",
+  "Added_Successfully":"تمت الاضافة بنجاح",
+  "Save":"حفظ",
+  "Branches":"الفروع",
+  "Update_Branch":"تحديث الفرع",
+  "Edit_Branch_Information":"تعديل بيانات الفرع",
+  "Add_Employee":"اضافة موظف",
+  "Role":"النوع",
+  "Full_Name":"الاسم الكامل",
+  "Job":"الوظيفة",
+  "Employee_Details":"تفاصيل الموظف",
+  "Employee_Management":"ادارة الموظفين",
+  "View_Employees":"عرض الموظفين",
+  "Edit_Employee":"تعديل بيانات الموظف",
+  "Vacation_Types":"انواع الاجازات",
+  "Add_Vacation_Request":"اضافة طلب اجازة",
+  "View_Vacation_Requests":"عرض طلبات الاجازة",
+  "Employees_on_Vacation":"الفتالين",
+  "Request_Vacation":"طلب اجازة",
+  "Leave_type":"نوع الاجازة",
+  "Start_date":"تاريخ البداية",
+  "End_date":"تاريخ النهاية",
+  "Days":"عدد الايام",
+  "File":"ملف",
+  "Cancel":"الغاء",
+  "Send":"ارسال",
+  "Request_Details":"تفاصيل الطلب",
+  "Vacation_Type":"نوع الاجازة:",
+  "Status":" الحالة ",
+  "Is_paid":" مدفوعة ",
+  "Requests":"طلبات الاجازات",
+  "Search":"بحث",
+  "salary_per_hour":"نسبة الراتب في الساعة",
+  "user_name":"أسم الموظف"
+
+
+
+
+
+
+
+
+
 
 
 

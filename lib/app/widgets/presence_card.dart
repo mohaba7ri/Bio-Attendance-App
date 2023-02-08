@@ -33,19 +33,7 @@ class PresenceCard extends StatelessWidget {
             ),
           ),
           //  Employee ID
-          Container(
-            margin: EdgeInsets.only(top: 4, bottom: 12),
-            child: Text(
-              userData["userId"],
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'poppins',
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 2,
-              ),
-            ),
-          ),
+
           // check in - check out box
           Container(
             width: MediaQuery.of(context).size.width,

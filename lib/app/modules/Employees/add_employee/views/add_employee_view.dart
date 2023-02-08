@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
@@ -16,7 +15,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Employee',
+          'Add_Employee'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -24,7 +23,10 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.blackColor,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -67,7 +69,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text(' Role: '),
+                                    Text('Role'.tr),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
@@ -134,7 +136,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text(' Branch: '),
+                                    Text('branch'.tr),
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius:
@@ -184,57 +186,37 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                           ),
                         ),
                         CustomInput(
-                          controller: controller.idC,
-                          label: 'Employee ID',
-                          hint: '1000000001',
-                        ),
-                        CustomInput(
                           controller: controller.nameC,
-                          label: 'Full Name',
+                          label: 'Full_Name'.tr,
                           hint: 'Johnn Doe',
                         ),
                         CustomInput(
                           controller: controller.emailC,
-                          label: 'Email',
+                          label: 'email'.tr,
                           hint: 'youremail@email.com',
                         ),
                         CustomInput(
                           controller: controller.jobC,
-                          label: 'Job',
+                          label: 'Job'.tr,
                           hint: 'Employee Job',
                         ),
                         CustomInput(
                           controller: controller.addressC,
-                          label: 'Address',
+                          label: 'Address'.tr,
                           hint: 'hail street',
                         ),
                         CustomInput(
                           controller: controller.phoneC,
-                          label: 'Phone',
+                          label: 'Phone'.tr,
                           hint: '7****',
                         ),
-
                         CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
+                          keyboardType: TextInputType.number,
+                          controller: controller.salaryPerHour,
+                          label: 'salary_per_hour'.tr,
+                          hint: '1500',
                         ),
-
-                        CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
-                        ),
-
-                        // SizedBox(child: Text('Active')),
-                        // Container(
-                        //   child: Checkbox(
-                        //     value: isChecked,
-                        //     onChanged: (checked) => {print('hello')},
-                        //   ),
-                        // ),
                         SizedBox(height: 8),
-
                         SizedBox(
                           height: 10,
                         ),
@@ -256,8 +238,8 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                               },
                               child: Text(
                                 (controller.isLoading.isFalse)
-                                    ? 'Add Employee'
-                                    : 'Loading...',
+                                    ? 'Add'.tr
+                                    : 'Loading'.tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'poppins',

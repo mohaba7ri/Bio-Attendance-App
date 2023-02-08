@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 
 class CustomInput extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final String hint;
   final bool disabled;
-  final TextInputType? type;
+
   String? Function(String? value)? valdate;
   final EdgeInsetsGeometry margin;
   final bool obsecureText;
   final Widget? suffixIcon;
-  CustomInput({
-    this.valdate,
-    required this.controller,
-    this.type,
-    required this.label,
-    required this.hint,
-    this.disabled = false,
-    this.margin = const EdgeInsets.only(bottom: 16),
-    this.obsecureText = false,
-    this.suffixIcon,
-  });
+  TextInputType? keyboardType;
+  CustomInput(
+      {this.valdate,
+      required this.controller,
+      required this.label,
+      required this.hint,
+      this.disabled = false,
+      this.margin = const EdgeInsets.only(bottom: 16),
+      this.obsecureText = false,
+      this.suffixIcon,
+      this.keyboardType});
 
   @override
   State<CustomInput> createState() => _CustomInputState();
@@ -35,35 +36,24 @@ class _CustomInputState extends State<CustomInput> {
       child: SizedBox(
         height: 55,
         child: TextFormField(
-          validator: widget.valdate,
-          keyboardType: widget.type,
-          readOnly: widget.disabled,
-          obscureText: widget.obsecureText,
-          style: TextStyle(fontSize: 12, fontFamily: 'poppins'),
-          maxLines: 1,
-          controller: widget.controller,
-          decoration: InputDecoration(
-            suffixIcon: widget.suffixIcon ?? SizedBox(),
-            label: Text(
-              widget.label,
-              style: TextStyle(
-                color: AppColor.secondarySoft,
-                fontSize: 14,
+            validator: widget.valdate,
+            keyboardType: widget.keyboardType,
+            readOnly: widget.disabled,
+            obscureText: widget.obsecureText,
+            style: robotoMedium,
+            maxLines: 1,
+            controller: widget.controller,
+            decoration: InputDecoration(
+              suffixIcon: widget.suffixIcon ?? SizedBox(),
+              label: Text(widget.label,
+                  style: robotoMedium.copyWith(color: AppColor.blackColor)),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-            ),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            hintText: widget.hint,
-            hintStyle: TextStyle(
-              fontSize: 12,
-              fontFamily: 'poppins',
-              fontWeight: FontWeight.w500,
-              color: AppColor.secondarySoft,
-            ),
-          ),
-        ),
+              hintText: widget.hint,
+              hintStyle: robotoMedium.copyWith(color: AppColor.secondarySoft),
+            )),
       ),
     );
   }

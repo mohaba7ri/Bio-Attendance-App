@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -15,17 +15,8 @@ class detailBranchView extends GetView<detailBranchController> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text(
-          'Branch Details',
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 16,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
+        title: Text('Branch_Details'.tr, style: robotoMedium),
+        leading: backButton,
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -56,7 +47,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Branch Name: ',
+                      'Branch_Name: '.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -86,7 +77,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Address:',
+                      'Address:'.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -116,7 +107,7 @@ class detailBranchView extends GetView<detailBranchController> {
                   Container(
                     margin: EdgeInsets.only(top: 4, bottom: 12),
                     child: Text(
-                      'Active: ',
+                      'Active: '.tr,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'poppins',
@@ -157,7 +148,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "Phone",
+                              "Phone".tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -187,7 +178,7 @@ class detailBranchView extends GetView<detailBranchController> {
                           Container(
                             margin: EdgeInsets.only(bottom: 6),
                             child: Text(
-                              "location",
+                              "location".tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -226,7 +217,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "latitude",
+                                "latitude".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -257,7 +248,7 @@ class detailBranchView extends GetView<detailBranchController> {
                             Container(
                               margin: EdgeInsets.only(bottom: 6),
                               child: Text(
-                                "longitude",
+                                "longitude".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -302,7 +293,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                   },
                                   icon: Icon(Icons.settings_rounded),
                                   label: Text(
-                                    'General Settings',
+                                    'settings'.tr,
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -329,7 +320,7 @@ class detailBranchView extends GetView<detailBranchController> {
                                   },
                                   icon: Icon(Icons.edit_rounded),
                                   label: Text(
-                                    'Edit Information',
+                                    'Edit_Information'.tr,
                                     style: TextStyle(fontSize: 18),
                                   ),
                                 ),

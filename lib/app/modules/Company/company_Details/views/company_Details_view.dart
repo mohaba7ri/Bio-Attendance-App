@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../style/app_color.dart';
 
+import '../../../../util/styles.dart';
 import '../controllers/company_Details_controller.dart';
 
 class CompanyDetailsView extends GetView<CompanyDetailsController> {
@@ -17,20 +18,14 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            ' Company Details',
+            'Company_Details'.tr,
             style: TextStyle(
               color: AppColor.secondary,
               fontSize: 18,
               fontWeight: FontWeight.w800,
             ),
           ),
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColor.blackColor,
-            ),
-          ),
+          leading: backButton,
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
@@ -69,7 +64,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                               Row(
                                 children: [
                                   Text(
-                                    "Name",
+                                    "Name".tr,
                                     style: TextStyle(fontSize: 18),
                                   ),
                                   Padding(
@@ -104,7 +99,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Email",
+                                      "Email".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -141,7 +136,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Address",
+                                      "address".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -178,7 +173,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Phone",
+                                      "Phone".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -215,7 +210,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Number of Branches",
+                                      "Number_of_Branches".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -252,7 +247,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Number of Employees",
+                                      "Number_of_Employees".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -289,7 +284,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Location",
+                                      "Location".tr,
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Padding(
@@ -306,7 +301,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                             ),
                             Expanded(
                               child: Text(
-                                "Latitude",
+                                "Latitude".tr,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppColor.blackColor,
@@ -315,7 +310,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                             ),
                             Expanded(
                               child: Text(
-                                "Latitude",
+                                "Longitude",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppColor.blackColor,
@@ -329,22 +324,22 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                         thickness: 2,
                       ),
                       StreamBuilder(
-                          stream: controller.getCompanySettings(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Text('Something went wrong');
-                            }
+                        stream: controller.getCompanySettings(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text('Something went wrong');
+                          }
 
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Text("Loading");
-                            }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text("Loading".tr);
+                          }
 
-                            return ListView(
-                                shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
-                                children: snapshot.data!.docs
-                                    .map((DocumentSnapshot document) {
+                          return ListView(
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              children: snapshot.data!.docs.map(
+                                (DocumentSnapshot document) {
                                   Map<String, dynamic> data =
                                       document.data()! as Map<String, dynamic>;
                                   return Padding(
@@ -362,7 +357,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      'Start Time',
+                                                      'Start_Time'.tr,
                                                       style: TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -395,7 +390,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      'End Time',
+                                                      'End_Time'.tr,
                                                       style: TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -437,7 +432,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      'Late Time',
+                                                      'Late_Time'.tr,
                                                       style: TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -470,7 +465,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      'Overly Time',
+                                                      'Overly_Time'.tr,
                                                       style: TextStyle(
                                                           fontSize: 18),
                                                     ),
@@ -501,8 +496,10 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
                                       ],
                                     ),
                                   );
-                                }).toList());
-                          }),
+                                },
+                              ).toList());
+                        },
+                      ),
                       Divider(
                         thickness: 2,
                       ),

@@ -123,6 +123,15 @@ class CompanySettingView extends GetView<CompanySettingController> {
                             },
                             icon: Icon(Icons.access_time))),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: CustomInput(
+                      keyboardType: TextInputType.number,
+                      controller: controller.workingDays,
+                      label: 'working Days Number',
+                      hint: '6 Days',
+                    ),
+                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.50,
                     child: MaterialButton(
