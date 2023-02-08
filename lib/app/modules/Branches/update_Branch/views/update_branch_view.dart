@@ -16,7 +16,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Update Branch',
+            'Update_Branch'.tr,
             style: TextStyle(
               color: AppColor.secondary,
               fontSize: 14,
@@ -53,7 +53,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                             SizedBox(
                                 height: 40,
                                 child: Text(
-                                  'Edit Branch Information',
+                                  'Edit_Branch_Information'.tr,
                                   style: TextStyle(fontSize: 20),
                                 )),
                             Obx(
@@ -61,7 +61,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                 children: [
                                   CustomInput(
                                     controller: controller.nameC.value,
-                                    label: 'Branch Name',
+                                    label: 'Branch_Name'.tr,
                                     hint: '',
                                     valdate: (value) {
                                       if (value!.isEmpty) {
@@ -75,7 +75,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                   ),
                                   CustomInput(
                                     controller: controller.phoneC.value,
-                                    label: 'Phone',
+                                    label: 'Phone'.tr,
                                     hint: '77777777',
                                     valdate: (value) {
                                       if (value!.isEmpty) {
@@ -89,7 +89,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                   ),
                                   CustomInput(
                                     controller: controller.AddressC.value,
-                                    label: 'address',
+                                    label: 'address'.tr,
                                     hint: 'address',
                                   ),
                                   Padding(
@@ -107,7 +107,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                         children: [
                                           Center(
                                               child:
-                                                  Text('Set Branch Location ')),
+                                                  Text('Set_Branch_Location'.tr)),
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -130,7 +130,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                                         child: CustomInput(
                                                           controller: controller
                                                               .latitudeC.value,
-                                                          label: 'Latitude',
+                                                          label: 'Latitude'.tr,
                                                           hint: '4.35424',
                                                           disabled: true,
                                                         ),
@@ -147,7 +147,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                                         child: CustomInput(
                                                           controller: controller
                                                               .longitudeC.value,
-                                                          label: 'Longitude',
+                                                          label: 'Longitude'.tr,
                                                           hint: '4.35424',
                                                           disabled: true,
                                                         ),
@@ -180,7 +180,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                                         ),
                                                       ),
                                                       child: Text(
-                                                        'Open in maps',
+                                                        'Open_in_maps'.tr,
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -215,8 +215,8 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                   },
                                   child: Text(
                                     (controller.isLoading.isFalse)
-                                        ? 'Add'
-                                        : 'Loading...',
+                                        ? 'Add'.tr
+                                        : 'Loading'.tr,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: 'poppins',

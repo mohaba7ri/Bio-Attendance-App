@@ -13,6 +13,7 @@ import 'package:presence/company_data.dart';
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
   RxString officeDistance = "-".obs;
+  
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Timer? timer;
@@ -36,7 +37,7 @@ class HomeController extends GetxController {
         CompanyData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast( 'Error : ${e}');
+      CustomToast.errorToast('Error : ${e}');
     }
   }
 

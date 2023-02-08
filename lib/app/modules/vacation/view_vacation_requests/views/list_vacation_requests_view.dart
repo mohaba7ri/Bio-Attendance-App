@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/styles.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../routes/app_pages.dart';
@@ -16,17 +17,8 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
         ListVacationRequestsController();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Requests',
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 14,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
+        title: Text('Requests'.tr, style: robotoMedium),
+        leading: backButton,
         backgroundColor: Colors.grey[200],
         elevation: 0,
         centerTitle: true,
@@ -56,8 +48,8 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                     },
                     // controller: editingController,
                     decoration: InputDecoration(
-                        labelText: "Search",
-                        hintText: "Search",
+                        labelText: "Search".tr,
+                        hintText: "",
                         prefixIcon: Icon(Icons.search),
                         border: OutlineInputBorder(
                             borderRadius:
@@ -80,7 +72,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                 physics: BouncingScrollPhysics(),
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (context, index) {
-                                  dynamic date = snapshot.data!.docs;
+                                  dynamic data = snapshot.data!.docs;
 
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -111,40 +103,43 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: 4, bottom: 12),
-                                                    child: Text(
-                                                      'Vacation Type: ',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily: 'poppins',
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        letterSpacing: 2,
-                                                      ),
+                                              GetBuilder<
+                                                  ListVacationRequestsController>(
+                                                builder: (_controller) => Row(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 4, bottom: 12),
+                                                      child: Text(
+                                                          'user_name'.tr +
+                                                              ' : ',
+                                                          style: robotoMedium),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: 4, bottom: 12),
-                                                    child: Text(
-                                                      date[index]
-                                                          ['vacationType'],
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontFamily: 'poppins',
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        letterSpacing: 2,
-                                                      ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 4, bottom: 12),
+                                                      child: Text(
+                                                          '${data[index]['userName']}',
+                                                          style: robotoMedium),
                                                     ),
-                                                  ),
-                                                ],
+                                                    Spacer(),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 4, bottom: 12),
+                                                      child: Text(
+                                                          'Vacation_Type'.tr,
+                                                          style: robotoMedium),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 4, bottom: 12),
+                                                      child: Text(
+                                                          data[index]
+                                                              ['vacationType'],
+                                                          style: robotoMedium),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               Container(
                                                 width: MediaQuery.of(context)
@@ -169,7 +164,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Days",
+                                                              "Days".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -178,16 +173,10 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            date[index]['days'],
-                                                            style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
+                                                              data[index]
+                                                                  ['days'],
+                                                              style:
+                                                                  robotoMedium),
                                                         ],
                                                       ),
                                                     ),
@@ -204,7 +193,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Start Date",
+                                                              "Start_Date".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -213,7 +202,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            date[index]
+                                                            data[index]
                                                                 ['startDate'],
                                                             style: TextStyle(
                                                               fontSize: 16,
@@ -240,7 +229,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "End Date",
+                                                              "End_Date".tr,
                                                               style: TextStyle(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -249,7 +238,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            date[index]
+                                                            data[index]
                                                                 ['endDate'],
                                                             style: TextStyle(
                                                               fontSize: 16,
@@ -322,10 +311,6 @@ class SearchWideget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          // control.vacationRequest =
-          //     snapshot.data!.docs[index];
-
-          // print(control.vacationRequest['vacationType']);
           Get.toNamed(Routes.Req_DETAILS);
         },
         child: Container(
@@ -343,7 +328,7 @@ class SearchWideget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 4, bottom: 12),
                   child: Text(
-                    'Vacation Type: ',
+                    'Vacation_Type'.tr,
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'poppins',
@@ -384,7 +369,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "Days",
+                            "Days".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -413,7 +398,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "Start Date",
+                            "Start_Date".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -442,7 +427,7 @@ class SearchWideget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(bottom: 6),
                           child: Text(
-                            "End Date",
+                            "End_Date".tr,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,

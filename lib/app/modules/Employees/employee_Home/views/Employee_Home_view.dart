@@ -17,7 +17,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: CustomeAppbar(
-        title: 'Employee Management',
+        title: 'Employee_Management'.tr,
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
         mainWidget: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -59,7 +59,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
 
                       MenuTile(
                         isDanger: true,
-                        title: 'Add Employee',
+                        title: 'Add_Employee'.tr,
                         icon: Image.asset(
                           Images.changePassword,
                           color: AppColor.primarySoft,
@@ -70,7 +70,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                       ),
                       MenuTile(
                         isDanger: true,
-                        title: 'View Employees',
+                        title: 'View_Employees'.tr,
                         icon: Image.asset(
                           Images.editProfile,
                           color: AppColor.primarySoft,

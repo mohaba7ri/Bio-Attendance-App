@@ -46,7 +46,7 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                                 margin: EdgeInsets.only(bottom: 4),
                               ),
                               Text(
-                                "Home",
+                                "Home".tr,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppColor.secondary,
@@ -62,7 +62,7 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                       margin: EdgeInsets.only(top: 24),
                       alignment: Alignment.center,
                       child: Text(
-                        "Presence",
+                        "Presence".tr,
                         style: TextStyle(
                           fontSize: 10,
                           color: AppColor.secondary,

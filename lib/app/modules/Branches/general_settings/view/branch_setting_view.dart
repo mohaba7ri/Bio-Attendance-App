@@ -12,7 +12,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Branch working times'),
+        title: Text('Branch_working_times'.tr),
         elevation: 1,
         backgroundColor: AppColor.containerColor,
       ),
@@ -49,7 +49,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                   height: 10,
                 ),
                 Text(
-                  "Branch working times",
+                  'Branch_working_times'.tr,
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -64,7 +64,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       disabled: true,
                       controller: TextEditingController(
                           text: controller.startTime.value.format(context)),
-                      label: 'Start Time',
+                      label: 'Start_Time'.tr,
                       hint: '8:00',
                       suffixIcon: IconButton(
                           onPressed: () async {
@@ -81,7 +81,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       disabled: true,
                       controller: TextEditingController(
                           text: controller.lateTime.value.format(context)),
-                      label: 'Late Time',
+                      label: 'Late_Time'.tr,
                       hint: '8:30',
                       suffixIcon: IconButton(
                           onPressed: () async {
@@ -98,7 +98,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       disabled: true,
                       controller: TextEditingController(
                           text: controller.endTime.value.format(context)),
-                      label: 'End Time',
+                      label: 'End_Time'.tr,
                       hint: '2:00',
                       suffixIcon: IconButton(
                           onPressed: () async {
@@ -115,7 +115,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       disabled: true,
                       controller: TextEditingController(
                           text: controller.overlyTime.value.format(context)),
-                      label: 'Overly Time',
+                      label: 'Overly_Time'.tr,
                       hint: '2:30',
                       suffixIcon: IconButton(
                           onPressed: () async {
@@ -131,10 +131,10 @@ class BranchSettingView extends GetView<BranchSettingController> {
                   child: MaterialButton(
                     color: Colors.blueAccent.shade400,
                     onPressed: () {
-                      CustomToast.successToast( "Added successfully");
+                      CustomToast.successToast("Added_Successfully".tr);
                       Get.back();
                     },
-                    child: Text('Save'),
+                    child: Text('Save'.tr),
                   ),
                 ),
               ],
