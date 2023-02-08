@@ -117,7 +117,7 @@ class VacationRequestController extends GetxController {
       'vacationNum': 1,
       'days': daysController.value.text,
       'file': vacationUrl,
-      'status': 'pending',
+      'status': 'Pending',
       'cancelled': '',
     }).whenComplete(() {
       isloading!.value = false;

@@ -18,7 +18,7 @@ class ListVacationRequestsController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationRequests() async* {
     yield* firestore
         .collection('vacationRequest')
-        .where('status', isEqualTo: 'pending')
+        .where('status', isEqualTo: 'Pending')
         .snapshots();
   }
 

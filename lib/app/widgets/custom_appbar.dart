@@ -10,16 +10,13 @@ import '../util/styles.dart';
 class CustomeAppbar extends StatelessWidget {
   final Widget mainWidget;
   bool backButton;
-  bool? isfloating = false;
   String? title;
-  final Widget? floatingContainer;
+
   Function()? backRout;
   CustomeAppbar(
       {required this.mainWidget,
       this.backButton = false,
       this.backRout,
-      this.floatingContainer,
-      this.isfloating,
       this.title});
   @override
   Widget build(BuildContext context) {
@@ -82,24 +79,6 @@ class CustomeAppbar extends StatelessWidget {
                           ),
                         )
                       : SizedBox(),
-              Positioned(
-                top: 80,
-                right: 10,
-                left: 10,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    height: 200,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        color: AppColor.whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black12, blurRadius: 10)
-                        ]),
-                  ),
-                ),
-              )
             ],
           ),
           Container(
