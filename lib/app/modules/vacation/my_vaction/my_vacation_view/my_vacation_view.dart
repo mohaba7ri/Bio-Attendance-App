@@ -101,21 +101,6 @@ class MyVacationView extends StatelessWidget {
                                                   margin: EdgeInsets.only(
                                                       top: 4, bottom: 12),
                                                   child: Text(
-                                                      'user_name'.tr + ' : ',
-                                                      style: robotoMedium),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 4, bottom: 12),
-                                                  child: Text(
-                                                      '${data[index]['userName']}',
-                                                      style: robotoMedium),
-                                                ),
-                                                Spacer(),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 4, bottom: 12),
-                                                  child: Text(
                                                       'Vacation_Type'.tr,
                                                       style: robotoMedium),
                                                 ),
