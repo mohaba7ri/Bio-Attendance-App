@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../style/app_color.dart';
+import '../../../widgets/custom_appbar.dart';
 import '../controllers/Dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -60,22 +62,47 @@ class DashboardView extends GetView<DashboardController> {
         ),
       ),
       backgroundColor: Colors.grey[200],
-      body: SingleChildScrollView(
-        child: Column(
+      body: CustomeAppbar(
+        title: 'Employee Management',
+        backButton: true,
+        backRout: () => Get.toNamed(Routes.HOME),
+        mainWidget: (
+
+            // customChart2(data: data),
+            //customChart(chartData: chartData),
+            //Padding(
+            // padding: const EdgeInsets.all(8.0),
+            //child: customChart(chartData: chartData),
+            //),
+
+            Stack(
           children: [
-            //Initialize the chart widget
-            Column(
-              children: [
-                customChart2(data: data),
-                customChart(chartData: chartData),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: customChart(chartData: chartData),
+            Positioned(
+              top: 0,
+              left: 50,
+              height: 200,
+              width: 400,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
                 ),
-              ],
+                width: 300,
+                height: 300,
+                child: Column(
+                  children: [
+                    Text(
+                      "Total Requests",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
-        ),
+        )),
       ),
     );
   }

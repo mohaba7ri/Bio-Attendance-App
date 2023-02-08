@@ -40,7 +40,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
         ),
       ),
       body: Container(
-        color: Colors.grey[200],
+        color: AppColor.greyShade200,
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: _listEmployeeController.Employee(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
