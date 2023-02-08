@@ -12,6 +12,10 @@ dependencies:
   firebase_auth: ^4.2.5
   firebase_core: ^2.4.1
   firebase_storage: ^11.0.10
+  fl_chart: ^0.60.0
+  syncfusion_flutter_charts: ^20.4.49
+  pie_chart: any
+
   flutter:
     sdk: flutter
   

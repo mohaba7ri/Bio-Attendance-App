@@ -13,4 +13,7 @@ class Images {
   static const String language = 'assets/icons/language.png';
   static const String arabic = 'assets/icons/arabic.png';
   static const String english = 'assets/icons/english.png';
+  static const String request = 'assets/icons/request.png';
+  static const String cancel = 'assets/icons/cancel.png';
+  static const String approve = 'assets/icons/approval.png';
 }

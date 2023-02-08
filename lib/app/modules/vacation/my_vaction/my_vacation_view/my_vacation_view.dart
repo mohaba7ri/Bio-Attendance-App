@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_controller/my_vacation_controller.dart';
 import 'package:presence/app/style/app_color.dart';
 
+import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../widgets/vacation_appbar.dart';
 
@@ -47,7 +48,82 @@ class MyVacationView extends StatelessWidget {
                         offset: Offset(10, 10)),
                   ]),
               child: Column(
-                children: [Text("")],
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          "you_requests_history".tr,
+                          style: robotoBlack,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+                    child: Row(
+                      children: [
+                        //  check in
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ImageIcon(AssetImage(
+                                Images.request,
+                              )),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 2),
+                                child: Text("total_requests".tr,
+                                    style: robotoMedium),
+                              ),
+                              Text("15", style: robotoMedium),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 1.5,
+                          height: 60,
+                          color: AppColor.primary,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ImageIcon(AssetImage(
+                                Images.approve,
+                              )),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 2),
+                                child: Text("approved".tr, style: robotoMedium),
+                              ),
+                              Text('9', style: robotoMedium),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 1.5,
+                          height: 60,
+                          color: AppColor.primary,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ImageIcon(AssetImage(
+                                Images.cancel,
+                              )),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 2),
+                                child: Text("denied".tr, style: robotoMedium),
+                              ),
+                              Text("6", style: robotoMedium),
+                            ],
+                          ),
+                        ),
+                        // check out
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
