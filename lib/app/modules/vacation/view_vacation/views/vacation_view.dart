@@ -100,7 +100,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 2, bottom: 8),
-                                          child: Text('Vacation Type '.tr,
+                                          child: Text('Vacation_Type '.tr,
                                               style: robotoBold),
                                         ),
                                         Container(
@@ -232,7 +232,6 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
         },
         child: Icon(Icons.add),
       ),
-
     );
   }
 }

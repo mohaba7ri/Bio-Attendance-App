@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
@@ -24,7 +23,10 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.blackColor,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -67,7 +69,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text('Role: '.tr),
+                                    Text('Role'.tr),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
@@ -134,7 +136,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text('branch: '.tr),
+                                    Text('branch'.tr),
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius:
@@ -184,11 +186,6 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                           ),
                         ),
                         CustomInput(
-                          controller: controller.idC,
-                          label: 'Employee ID',
-                          hint: '1000000001',
-                        ),
-                        CustomInput(
                           controller: controller.nameC,
                           label: 'Full_Name'.tr,
                           hint: 'Johnn Doe',
@@ -213,17 +210,13 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                           label: 'Phone'.tr,
                           hint: '7****',
                         ),
-
-
-                        // SizedBox(child: Text('Active')),
-                        // Container(
-                        //   child: Checkbox(
-                        //     value: isChecked,
-                        //     onChanged: (checked) => {print('hello')},
-                        //   ),
-                        // ),
+                        CustomInput(
+                          keyboardType: TextInputType.number,
+                          controller: controller.salaryPerHour,
+                          label: 'salary_per_hour'.tr,
+                          hint: '1500',
+                        ),
                         SizedBox(height: 8),
-
                         SizedBox(
                           height: 10,
                         ),

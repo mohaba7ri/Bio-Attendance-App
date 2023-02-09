@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
 import '../controllers/add_branch_controller.dart';
 
 class AddBranchView extends GetView<AddBranchController> {
@@ -16,15 +16,9 @@ class AddBranchView extends GetView<AddBranchController> {
       appBar: AppBar(
         title: Text(
           'Add_Branch'.tr,
-          style: TextStyle(
-              color: AppColor.secondary,
-              fontSize: 14,
-              fontWeight: FontWeight.bold),
+          style: robotoMedium,
         ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
+        leading: backButton,
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

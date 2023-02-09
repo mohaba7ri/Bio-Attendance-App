@@ -20,6 +20,7 @@ class VacationRequestController extends GetxController {
   String? fileName;
   String? filePath;
   String? vacationUrl;
+  String? userName;
   // FilePickerResult? vacationFile;
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
@@ -30,13 +31,23 @@ class VacationRequestController extends GetxController {
       FirebaseFirestore.instance.collection('vacationRequest');
   CollectionReference leaveTypeStore =
       FirebaseFirestore.instance.collection('vacationType');
+  CollectionReference user = FirebaseFirestore.instance.collection('user');
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    await getuser();
 
     returnVacationType();
+  }
+
+  Future getuser() async {
+    user.doc(uid).get().then((query) {
+      Map<String, dynamic> data = query.data() as Map<String, dynamic>;
+      userName = data['name'];
+      update();
+    });
   }
 
   Future uploadFile() async {
@@ -60,7 +71,7 @@ class VacationRequestController extends GetxController {
     final leaveTypeStore = FirebaseFirestore.instance
         .collection('vacationType')
         .where('vacationStatus', isEqualTo: 'active');
-        
+
     leaveTypeStore.get().then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         Map<String, dynamic> data = doc.data();
@@ -85,7 +96,7 @@ class VacationRequestController extends GetxController {
 
   void submit() async {
     if (leaveTypeValue.value == 'please select') {
-      CustomToast.errorToast( 'please select leave type');
+      CustomToast.errorToast('please select leave type');
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
@@ -102,10 +113,11 @@ class VacationRequestController extends GetxController {
       'endDate': endDateController.value.text,
       'requestDate': DateTime.now().toIso8601String(),
       'userId': uid,
+      'userName': userName,
       'vacationNum': 1,
       'days': daysController.value.text,
       'file': vacationUrl,
-      'status': 'pending',
+      'status': 'Pending',
       'cancelled': '',
     }).whenComplete(() {
       isloading!.value = false;
@@ -146,8 +158,6 @@ class VacationRequestController extends GetxController {
 
     return date!;
   }
-
- 
 
   startDayValdate() {
     if (startDateController.value.text.isEmpty) {

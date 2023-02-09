@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
@@ -17,15 +17,9 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
         appBar: AppBar(
           title: Text(
             'Update Company',
-            style: TextStyle(
-                color: AppColor.secondary,
-                fontSize: 14,
-                fontWeight: FontWeight.bold),
+            style: robotoMedium,
           ),
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-          ),
+          leading: backButton,
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,

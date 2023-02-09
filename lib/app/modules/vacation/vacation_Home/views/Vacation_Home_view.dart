@@ -36,10 +36,6 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     padding: EdgeInsets.symmetric(vertical: 36),
                     children: [
                       SizedBox(height: 16),
-
-                     
-                     
-
                       MenuTile(
                         isDanger: true,
                         title: 'Vacation_Types'.tr,
@@ -64,7 +60,19 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.ADD_VACATION_REQUEST);
                         },
                       ),
-
+                      MenuTile(
+                        isDanger: true,
+                        title: 'my_vacation'.tr,
+                        icon: Image.asset(
+                          Images.editProfile,
+                          color: AppColor.primarySoft,
+                          width: 20,
+                          height: 20,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.MY_VACATION);
+                        },
+                      ),
                       MenuTile(
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
