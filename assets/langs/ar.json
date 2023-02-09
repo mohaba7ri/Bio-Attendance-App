@@ -85,7 +85,13 @@
   "Requests":"طلبات الاجازات",
   "Search":"بحث",
   "salary_per_hour":"نسبة الراتب في الساعة",
-  "user_name":"أسم الموظف"
+  "user_name":"أسم الموظف",
+  "total_requests":"اجمالي الطلبات",
+  "approved":"مقبول",
+
+  "denied":"مرفوض",
+  "you_requests_history":"سجل طلباتك",
+  "my_vacation":"اجازاتي"
 
 
 

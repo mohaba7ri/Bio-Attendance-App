@@ -109,7 +109,7 @@ class MyVacationView extends StatelessWidget {
                           child: Column(
                             children: [
                               ImageIcon(AssetImage(
-                                Images.cancel,
+                                Images.deny,
                               )),
                               Container(
                                 margin: EdgeInsets.only(bottom: 2),
