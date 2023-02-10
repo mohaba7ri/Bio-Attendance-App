@@ -16,7 +16,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Update Company',
+            'update_company'.tr,
             style: robotoMedium,
           ),
           leading: backButton,
@@ -57,11 +57,11 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                     children: [
                                       CustomInput(
                                         controller: controller.nameC.value,
-                                        label: 'Company Name',
+                                        label: 'company_name'.tr,
                                         hint: '',
                                         valdate: (value) {
                                           if (value!.isEmpty) {
-                                            return 'please enter the branch name';
+                                            return 'please_enter_the_company_name'.tr;
                                           }
                                           return null;
                                         },
@@ -71,11 +71,11 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       ),
                                       CustomInput(
                                         controller: controller.phoneC.value,
-                                        label: 'Phone',
+                                        label: 'Phone'.tr,
                                         hint: '77777777',
                                         valdate: (value) {
                                           if (value!.isEmpty) {
-                                            return 'please enter the Phone Number';
+                                            return 'please_enter_the_phone_number'.tr;
                                           }
                                           return null;
                                         },
@@ -85,7 +85,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       ),
                                       CustomInput(
                                         controller: controller.AddressC.value,
-                                        label: 'Address',
+                                        label: 'Address'.tr,
                                         hint: 'Address',
                                       ),
                                       SizedBox(
@@ -93,7 +93,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       ),
                                       CustomInput(
                                         controller: controller.EmailC.value,
-                                        label: 'Email',
+                                        label: 'email'.tr,
                                         hint: 'Email',
                                       ),
                                       Padding(
@@ -116,7 +116,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                           top: 5)),
                                               Center(
                                                   child: Text(
-                                                'Set Company Location ',
+                                                'set_company_location'.tr,
                                                 style: TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -146,7 +146,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                                   controller
                                                                       .latitudeC
                                                                       .value,
-                                                              label: 'Latitude',
+                                                              label: 'Latitude'.tr,
                                                               hint: '4.35424',
                                                               disabled: true,
                                                             ),
@@ -166,7 +166,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                                       .longitudeC
                                                                       .value,
                                                               label:
-                                                                  'Longitude',
+                                                                  'Longitude'.tr,
                                                               hint: '4.35424',
                                                               disabled: true,
                                                             ),
@@ -202,7 +202,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                             ),
                                                           ),
                                                           child: Text(
-                                                            'Open in maps',
+                                                            'Open_in_maps'.tr,
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
@@ -237,8 +237,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       },
                                       child: Text(
                                         (controller.isLoading.isFalse)
-                                            ? 'Add'
-                                            : 'Loading...',
+                                            ? 'Add'.tr
+                                            : 'Loading'.tr,
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontFamily: 'poppins',

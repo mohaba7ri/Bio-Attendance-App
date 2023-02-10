@@ -63,6 +63,8 @@ import '../modules/Employees/view_Employee/views/Employees_view.dart';
 import '../modules/dashboard/bindings/Dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
+import '../modules/vacation/manage_vacations/manage_vacations_binding/manage_vacations_binding.dart';
+import '../modules/vacation/manage_vacations/manage_vacations_view/manage_vacations_view.dart';
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
 import '../modules/vacation/on_vacation_employees/views/on_vacation_view.dart';
 import '../modules/vacation/vacation_Home/bindings/Vacation_Home_binding.dart';
@@ -243,6 +245,11 @@ class AppPages {
       name: _Paths.MY_VACATION,
       page: () => MyVacationView(),
       binding: MyVacationBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANAGE_VACATION,
+      page: () => ManageVacationView(),
+      binding: ManageVacationBinding(),
     ),
   ];
 }

@@ -109,7 +109,7 @@ class MyVacationView extends StatelessWidget {
                           child: Column(
                             children: [
                               ImageIcon(AssetImage(
-                                Images.cancel,
+                                Images.deny,
                               )),
                               Container(
                                 margin: EdgeInsets.only(bottom: 2),
@@ -236,7 +236,7 @@ class MyVacationView extends StatelessWidget {
                                                         margin: EdgeInsets.only(
                                                             bottom: 6),
                                                         child: Text(
-                                                          "Start_Date".tr,
+                                                          "start_date".tr,
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color: Colors.white,
@@ -268,7 +268,7 @@ class MyVacationView extends StatelessWidget {
                                                         margin: EdgeInsets.only(
                                                             bottom: 6),
                                                         child: Text(
-                                                          "End_Date".tr,
+                                                          "end_date".tr,
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color: Colors.white,
