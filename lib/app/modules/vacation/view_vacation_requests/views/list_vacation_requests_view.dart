@@ -78,11 +78,9 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        // control.vacationRequest =
-                                        //     snapshot.data!.docs[index];
-
-                                        // print(control.vacationRequest['vacationType']);
-                                        Get.toNamed(Routes.MANAGE_VACATION);
+                                        Get.toNamed(Routes.MANAGE_VACATION,
+                                            arguments:
+                                                snapshot.data!.docs[index]);
                                       },
                                       child: Container(
                                         padding:
