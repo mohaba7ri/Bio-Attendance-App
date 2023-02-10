@@ -44,6 +44,7 @@ abstract class Routes {
   static const MANAGE_POLICIES = _Paths.MANAGE_POLICIES;
   static const LANGUAGES = _Paths.LANGUAGES;
   static const MY_VACATION = _Paths.MY_VACATION;
+  static const MANAGE_VACATION = _Paths.MANAGE_VACATION;
 }
 
 abstract class _Paths {
@@ -88,4 +89,5 @@ abstract class _Paths {
   static const MANAGE_POLICIES = '/MANAGE_POLICIES';
   static const LANGUAGES = '/LANGUAGES';
   static const MY_VACATION = '/MY_VACATION';
+  static const MANAGE_VACATION = '/MANAGE_VACATION';
 }

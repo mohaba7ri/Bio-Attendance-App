@@ -21,7 +21,7 @@
   "email":"الايميل",
   "password":"كلمة السر",
   "settings":"الاعدادات",
-  "welcome_to":"مرحباَ ",
+  "welcome_to":"مرحباَ\n",
   "view_details":"عرض البيانات ",
   "edit_information":"تعديل البينات ",
   "Presence_Detail":"تفاصيل الحضور",
@@ -71,9 +71,9 @@
   "View_Vacation_Requests":"عرض طلبات الاجازة",
   "Employees_on_Vacation":"الفتالين",
   "Request_Vacation":"طلب اجازة",
-  "Leave_type":"نوع الاجازة",
-  "Start_date":"تاريخ البداية",
-  "End_date":"تاريخ النهاية",
+  "end_date":"نوع الاجازة",
+  "start_date":"من تاريخ ",
+  "End_date":"الى تاريخ ",
   "Days":"عدد الايام",
   "File":"ملف",
   "Cancel":"الغاء",
@@ -88,11 +88,35 @@
   "user_name":"أسم الموظف",
   "total_requests":"اجمالي الطلبات",
   "approved":"مقبول",
+  
 
   "denied":"مرفوض",
   "you_requests_history":"سجل طلباتك",
-  "my_vacation":"اجازاتي"
+  "my_vacation":"اجازاتي",
 
+  "update_company":"تحديث بيانات الشركة",
+"company_name":"اسم الشركة",
+"set_company_location":"تحديد موقع الشركة",
+"please_enter_the_branch_name":"يرجى ادخال اسم الفرع",
+"please_enter_the_phone_number":"يرجى ادخال رقم الهاتف",
+"please_enter_the_company_name":"يرجى ادخال اسم الشركة",
+"there_is_an_error":"هنالك خطأ",
+"do_you_want_to_check_in?":"هل تريد تسجيل بصمة الدخول؟",
+"you_need_to_confirm_before_you_can_do_presence_now":"يجب عليك التأكيد قبل تسجيل البصمة",
+"success_check_in":"تم تسجيل بصمة الدخول بنجاح",
+"vacations":"الاجازات",
+"sorry_you_can_to_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request":"المعذرة, لايمكنك تسجيل بصمة الدخول لانك في اجازة \nهل تريد الغاء الاجازة؟",
+"check-in_time_has_not_arrived_yet":"وقت بصمة الدخول لم يحن بعد",
+"check-out_time_has_not_arrived_yet":"وقت بصمة الخروج لم يحن بعد",
+"Late":"تأخير",
+"success_check_out":"تم تسجيل بصمة الخروج بنجاح",
+"sorry_you_cant_check_out_because_you_have_vacation_do_you_want_to_cancel_vacation_request":"المعذرة, لايمكنك تسجيل بصمة الخروج لانك في اجازة \nهل تريد الغاء الاجازة؟",
+"you_already_check_in_and_check_out":"لقد تم بالفعل تسجيل بصمة الدخول والخروج",
+"location_services_are_disabled":"خدمة تحديد الموقع غير مفعله",
+"company_setting":"اعدادات الشركة",
+"working_days_number":"عدد ايام الدوام",
+"Update":"تحديث",
+"":""
 
 
 
