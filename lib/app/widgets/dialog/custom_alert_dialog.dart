@@ -12,6 +12,7 @@ class CustomAlertDialog {
     required TextEditingController controller,
   }) {
     Get.defaultDialog(
+      
       title: "",
       contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       radius: 8,
