@@ -71,8 +71,8 @@
   "View_Vacation_Requests":"View Vacation Requests",
   "Employees_on_Vacation":"Employees on Vacation",
   "Request_Vacation":"Request Vacation",
-  "Leave_type":"Leave Type",
-  "Start_date":"Start Date",
+  "end_date":"Leave Type",
+  "start_date":"Start Date",
   "End_date":"End Date",
   "Days":"Days",
   "File":"File",
@@ -91,5 +91,30 @@
 
   "denied":"Denied",
   "you_requests_history":"You Requests History",
-  "my_vacation":"My Vacations"
+  "my_vacation":"My Vacations",
+  "update_company":"Update Company's Information",
+  "company_name":"Company Name",
+  "set_company_location":"Set Company Location",
+  "please_enter_the_branch_name":"Please Enter the Branch Name",
+  "please_enter_the_phone_number":"Please Enter the Phone Number",
+  "please_enter_the_company_name":"Please Enter the Company Name",
+  "there_is_an_error":"There is an Error",
+  "do_you_want_to_check_in?":"Do You Want to Check-in?",
+"you_need_to_confirm_before_you_can_do_presence_now":"You Need to Confirm Before You\ncan do Presence Now",
+"success_check_in":"Success Check-in",
+"vacations":"Vacations",
+"sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request":"Sorry You can't Check-in Because You are in Vacation\n do You Want to Cancel the Vacation?",
+"check-in_time_has_not_arrived_yet":"Check-in Time Has not Arrived yet",
+"check-out_time_has_not_arrived_yet":"Check-out Time Has not Arrived yet",
+"Late":"Late",
+"success_check_out":"Success Check-out",
+"sorry_you_cant_check_out_because_you_have_vacation_do_you_want_to_cancel_vacation_request":"Sorry You can't Check-out Because You are in Vacation\n do You Want to Cancel the Vacation?",
+"you_already_check_in_and_check_out":"You have Already Check-in and Check-out",
+"location_services_are_disabled":"Location Services are Disabled",
+"company_setting":"Company Setting",
+"working_days_number":"Working Days Number",
+"Update":"Update"
+
+
+
 }

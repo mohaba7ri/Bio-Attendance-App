@@ -45,7 +45,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'welcome_to :\n'.tr +
+                              'welcome_to'.tr +
                                   '${companyData['name']}' +
                                   'company'.tr,
                               style: TextStyle(
