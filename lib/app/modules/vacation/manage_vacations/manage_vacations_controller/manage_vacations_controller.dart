@@ -1,25 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
 class ManageVacationController extends GetxController {
-  String requestValue = 'All';
-  List<String> requestItems = ['All', 'Pending', 'Approved', 'Denied'];
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Stream<QuerySnapshot<Map<String, dynamic>>> vacationRequests() async* {
-    if (requestValue == 'All') {
-      yield* firestore.collection('vacationRequest').snapshots();
-      update();
-    } else {
-      yield* firestore
-          .collection('vacationRequest')
-          .where('status', isEqualTo: requestValue)
-          .snapshots();
-      update();
-    }
-  }
+  dynamic VacList = Get.arguments;
 
-  changeRequestValue(String value) {
-    requestValue = value;
-    update();
-  }
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // Stream<DocumentSnapshot<Map<String, dynamic>>> vacationRequests() async* {
+  //   //  yield* firestore.collection('vacationRequest').snapshots();
+  // }
 }

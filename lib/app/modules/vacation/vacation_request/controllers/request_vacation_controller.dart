@@ -119,6 +119,11 @@ class VacationRequestController extends GetxController {
       'file': vacationUrl,
       'status': 'Pending',
       'cancelled': '',
+
+
+
+
+      
     }).whenComplete(() {
       isloading!.value = false;
       fileName = '';
@@ -161,7 +166,7 @@ class VacationRequestController extends GetxController {
 
   startDayValdate() {
     if (startDateController.value.text.isEmpty) {
-      return 'fuck pick date';
+      return 'pick date';
     }
   }
 
