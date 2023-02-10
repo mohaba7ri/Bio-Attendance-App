@@ -37,6 +37,7 @@ class AppWidgets {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          
                           title != null ? Headline6(title) : const SizedBox(),
                           subtitle != null
                               ? BodyText1(

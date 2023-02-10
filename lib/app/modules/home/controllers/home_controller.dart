@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -9,17 +10,18 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:presence/company_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
   RxString officeDistance = "-".obs;
-  
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Timer? timer;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     timer = Timer.periodic(Duration(seconds: 10), (timer) {
       if (Get.currentRoute == Routes.HOME) {
@@ -28,6 +30,10 @@ class HomeController extends GetxController {
         });
       }
     });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      Get.toNamed(Routes.HOME);
+    });
+    await updateUser();
   }
 
   launchOfficeOnMap() {
@@ -38,6 +44,17 @@ class HomeController extends GetxController {
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
+    }
+  }
+
+  Future updateUser() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    String? deviceToken = sharedPreferences.getString('deviceToken');
+    if (deviceToken!.isNotEmpty) {
+      await firestore
+          .collection('user')
+          .doc(auth.currentUser!.uid)
+          .update({"deviceToken": deviceToken});
     }
   }
 
