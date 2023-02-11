@@ -7,6 +7,7 @@ import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
+import '../../../../util/images.dart';
 import '../controllers/request_vacation_controller.dart';
 
 class RequestVacationView extends GetView<VacationRequestController> {
@@ -58,6 +59,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                     
                         Row(
                           children: [
                             Text(
