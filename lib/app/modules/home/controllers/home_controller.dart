@@ -31,7 +31,7 @@ class HomeController extends GetxController {
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      Get.toNamed(Routes.HOME);
+      Get.toNamed(Routes.LIST_VIEW_REQUESTS);
     });
     await updateUser();
   }

@@ -89,9 +89,14 @@ class MyVacationView extends StatelessWidget {
                         Expanded(
                           child: Column(
                             children: [
-                              ImageIcon(AssetImage(
-                                Images.approve,
-                              )),
+                              // ImageIcon(AssetImage(
+                              //   Images.approved,
+                              // )),
+                              Image.asset(
+                                Images.approved,
+                                width: 40,
+                                height: 40,
+                              ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 2),
                                 child: Text("approved".tr, style: robotoMedium),

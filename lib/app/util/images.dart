@@ -18,4 +18,5 @@ class Images {
   static const String approve = 'assets/icons/icons8-approval-96.png';
   static const String approve_ani = 'assets/icons/approval_ani.gif';
   static const String deny_ani = 'assets/icons/cancel_ani.gif';
+  static const String approved = 'assets/icons/approved-64.png';
 }
