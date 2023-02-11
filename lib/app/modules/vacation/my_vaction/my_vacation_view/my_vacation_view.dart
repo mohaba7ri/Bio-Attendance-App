@@ -93,7 +93,7 @@ class MyVacationView extends StatelessWidget {
                               //   Images.approved,
                               // )),
                               Image.asset(
-                                Images.approved,
+                                Images.approve_ani,
                                 width: 40,
                                 height: 40,
                               ),
@@ -113,9 +113,11 @@ class MyVacationView extends StatelessWidget {
                         Expanded(
                           child: Column(
                             children: [
-                              ImageIcon(AssetImage(
-                                Images.deny,
-                              )),
+                              Image.asset(
+                                Images.deny_ani,
+                                width: 40,
+                                height: 40,
+                              ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 2),
                                 child: Text("denied".tr, style: robotoMedium),

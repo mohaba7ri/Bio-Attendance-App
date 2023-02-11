@@ -22,6 +22,12 @@ final robotoBold = TextStyle(
   fontSize: Dimensions.fontSizeDefault,
 );
 
+final robotoHuge = TextStyle(
+  fontFamily: 'Roboto',
+  fontWeight: FontWeight.w700,
+  fontSize: Dimensions.fontSizeExtraLarge,
+);
+
 final robotoBlack = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w900,
@@ -37,9 +43,9 @@ final redElevatedButStyle = ElevatedButton.styleFrom(
     backgroundColor: Colors.redAccent,
     elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)));
-final backButton= IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: AppColor.blackColor,
-            ));
+final backButton = IconButton(
+    onPressed: () => Get.back(),
+    icon: Icon(
+      Icons.arrow_back_ios,
+      color: AppColor.blackColor,
+    ));

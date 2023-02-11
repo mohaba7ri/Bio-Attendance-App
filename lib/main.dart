@@ -35,10 +35,8 @@ void main() async {
   var fbm = FirebaseMessaging.instance;
   fbm.getToken().then((token) async {
     print('the device token: $token');
-     
-    
-      sharedPreferences.setString('deviceToken', token!);
-    
+
+    sharedPreferences.setString('deviceToken', token!);
   });
   FirebaseMessaging.onMessage.listen((event) {
     CustomAlertDialog.customAlert(
@@ -68,22 +66,26 @@ void main() async {
             ),
           );
         }
-        return GetBuilder<LanguagesController>(builder: (languageController) {
-          return GetMaterialApp(
-            //  title: "Application",
-            debugShowCheckedModeBanner: false,
-            initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
-            getPages: AppPages.routes,
-            locale: languageController.locale,
-            translations: Messages(languages: _languages),
-            fallbackLocale: Locale(AppConstants.languages[0].languageCode,
-                AppConstants.languages[0].countryCode),
-            theme: ThemeData(
-              scaffoldBackgroundColor: Colors.white,
-              fontFamily: 'inter',
-            ),
-          );
-        });
+        return GetBuilder<LanguagesController>(
+          builder: (languageController) {
+            return GetMaterialApp(
+              //  title: "Application",
+              debugShowCheckedModeBanner: false,
+              initialRoute: snapshot.data != null
+                  ? Routes.LIST_VIEW_REQUESTS
+                  : Routes.LIST_VIEW_REQUESTS,
+              getPages: AppPages.routes,
+              locale: languageController.locale,
+              translations: Messages(languages: _languages),
+              fallbackLocale: Locale(AppConstants.languages[0].languageCode,
+                  AppConstants.languages[0].countryCode),
+              theme: ThemeData(
+                scaffoldBackgroundColor: Colors.white,
+                fontFamily: 'inter',
+              ),
+            );
+          },
+        );
       },
     ),
   );
