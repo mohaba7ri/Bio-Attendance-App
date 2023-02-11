@@ -9,10 +9,11 @@ import 'package:presence/company_data.dart';
 
 class AddEmployeeController extends GetxController {
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    getBranches();
+
+    await getBranches();
   }
 
   @override
@@ -25,14 +26,14 @@ class AddEmployeeController extends GetxController {
 
   GetStorage store = new GetStorage();
 
-  RxString roleValue = 'Please Select'.obs;
-  RxString branchValue = 'Please Select'.obs;
+  String roleValue = 'Please Select';
+  String branchValue = 'Please Select';
   var roleList = ['Please Select', 'Admin', 'Employee'];
-  RxBool isLoading = false.obs;
-  RxBool isLoadingCreatePegawai = false.obs;
-  RxBool isSelectedPolicy = false.obs;
-  RxString newUserId = ''.obs;
-  RxString branchId = '123'.obs;
+  bool isLoading = false;
+  bool isLoadingCreatePegawai = false;
+  bool isSelectedPolicy = false;
+
+  String branchId = '123';
   //this list to store the roles in firebase for each user
   final List<RxString> listSelectedPolicy = [];
   final branchesList = <DropdownMenuItem<String>>[].obs;
@@ -95,19 +96,22 @@ class AddEmployeeController extends GetxController {
   }
 
   changeRoleValue(value) {
-    roleValue.value = value;
+    update();
+    roleValue = value;
   }
 
   changeBranchValue(value) async {
-    branchValue.value = value;
+    branchValue = value;
+    update();
     await firestore
         .collection('branch')
-        .where('name', isEqualTo: branchValue.value)
+        .where('name', isEqualTo: branchValue)
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         Map<String, dynamic> data = doc.data();
-        branchId.value = data['branchId'];
+        branchId = data['branchId'];
+        update();
       });
     });
   }
@@ -116,10 +120,10 @@ class AddEmployeeController extends GetxController {
     return CompanyData.defaultRole;
   }
 
-  void getBranches() {
+  Future getBranches() async {
     final branches = FirebaseFirestore.instance.collection('branch');
     try {
-      branches.get().then((querySnapshot) {
+      await branches.get().then((querySnapshot) {
         querySnapshot.docs.forEach((doc) {
           Map<String, dynamic> data = doc.data();
 
@@ -129,6 +133,7 @@ class AddEmployeeController extends GetxController {
               value: data['name'],
             ),
           );
+          update();
         });
       });
     } catch (e) {
@@ -160,27 +165,31 @@ class AddEmployeeController extends GetxController {
         phoneC.text.isNotEmpty &&
         addressC.text.isNotEmpty) {
       if (listSelectedPolicy.isEmpty) {
-        isLoading.value = true;
+        isLoading = true;
+        update();
         CustomAlertDialog.confirmAdmin(
           title: 'Admin confirmation',
           message:
               'you need to confirm that you are an administrator by inputting your password',
           onCancel: () {
-            isLoading.value = false;
+            isLoading = false;
+            update();
             Get.back();
           },
           onConfirm: () async {
-            if (isLoadingCreatePegawai.isFalse) {
+            if (isLoadingCreatePegawai == false) {
               await createEmployeeData();
-              isLoading.value = false;
+              isLoading = false;
+              update();
             }
           },
           controller: adminPassC,
         );
       }
     } else {
-      isLoading.value = false;
+      isLoading = false;
       CustomToast.errorToast('you need to fill all form');
+      update();
     }
   }
 
@@ -198,13 +207,11 @@ class AddEmployeeController extends GetxController {
   }
 
   Future<void> createEmployeeData() async {
-    isSelectedPolicy.value = true;
-    isSelectedPolicy.update((val) {
-      isSelectedPolicy.value = true;
-    });
+    isSelectedPolicy = true;
+    update();
     selectedPolicyValue = List.filled(roles.length, false.obs);
     if (adminPassC.text.isNotEmpty) {
-      isLoadingCreatePegawai.value = true;
+      isLoadingCreatePegawai = true;
       String adminEmail = auth.currentUser!.email!;
       try {
         //checking if the pass is match
@@ -230,15 +237,15 @@ class AddEmployeeController extends GetxController {
             "salary": salaryPerHour.text,
             "name": nameC.text,
             "email": emailC.text,
-            "role": roleValue.value,
+            "role": roleValue,
             "job": jobC.text,
             "phone": phoneC.text,
             "address": addressC.text,
             "status": "Active",
             "createdAt": DateTime.now().toIso8601String(),
-            "branchId": branchId.value,
+            "branchId": branchId,
           }).whenComplete(() {
-            if (isSelectedPolicy.value == true) {
+            if (isSelectedPolicy == true) {
               store.write('userID', uid.value);
             }
           });
@@ -283,10 +290,10 @@ class AddEmployeeController extends GetxController {
           Get.back(); //close form screen
           CustomToast.successToast('success adding employee');
 
-          isLoadingCreatePegawai.value = false;
+          isLoadingCreatePegawai = false;
         }
       } on FirebaseAuthException catch (e) {
-        isLoadingCreatePegawai.value = false;
+        isLoadingCreatePegawai = false;
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
           CustomToast.errorToast('default password too short');
@@ -300,7 +307,7 @@ class AddEmployeeController extends GetxController {
           print("the problem is ${e.code}");
         }
       } catch (e) {
-        isLoadingCreatePegawai.value = false;
+        isLoadingCreatePegawai = false;
         CustomToast.errorToast('error : ${e}');
         print('the error is ${e}');
       }

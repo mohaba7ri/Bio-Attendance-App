@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +11,17 @@ import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
- final SharedPreferences sharedPreferences;
- final ApiClient apiClient;
- LoginController({required this.apiClient,required this.sharedPreferences});
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  final SharedPreferences sharedPreferences;
+  final ApiClient apiClient;
+  LoginController({required this.apiClient, required this.sharedPreferences});
   final pageIndexController = Get.find<PageIndexController>();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   RxBool isLoading = false.obs;
   RxBool obsecureText = true.obs;
@@ -36,6 +44,17 @@ class LoginController extends GetxController {
     // apiClient.updateHeader(token: token);
 
     return await sharedPreferences.setString(AppConstants.TOKEN, token!);
+  }
+
+  Future updateUser() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    String? deviceToken = sharedPreferences.getString('deviceToken');
+    if (deviceToken!.isNotEmpty) {
+      await firestore
+          .collection('user')
+          .doc(auth.currentUser!.uid)
+          .update({"deviceToken": deviceToken});
+    }
   }
 
   Future<void> login() async {
@@ -71,21 +90,22 @@ class LoginController extends GetxController {
               },
             );
           }
+          await updateUser();
+          update();
         }
         isLoading.value = false;
       } on FirebaseAuthException catch (e) {
         isLoading.value = false;
         if (e.code == 'user-not-found') {
-          CustomToast.errorToast( "Account not found");
+          CustomToast.errorToast("Account not found");
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast( "Wrong Password");
+          CustomToast.errorToast("Wrong Password");
         }
       } catch (e) {
-        CustomToast.errorToast( "Error because : ${e.toString()}");
+        CustomToast.errorToast("Error because : ${e.toString()}");
       }
     } else {
-      CustomToast.errorToast(
-           "You need to fill email and password form");
+      CustomToast.errorToast("You need to fill email and password form");
     }
   }
 }

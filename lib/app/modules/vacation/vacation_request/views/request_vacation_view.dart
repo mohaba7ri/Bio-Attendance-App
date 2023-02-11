@@ -222,7 +222,9 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.getAdminData();
+                              },
                               style: redElevatedButStyle,
                               child: Text(
                                 'Cancel'.tr,
