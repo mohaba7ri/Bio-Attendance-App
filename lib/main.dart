@@ -35,10 +35,10 @@ void main() async {
   var fbm = FirebaseMessaging.instance;
   fbm.getToken().then((token) async {
     print('the device token: $token');
-
-    if (token!.isNotEmpty) {
-      sharedPreferences.setString('deviceToken', token);
-    }
+     
+    
+      sharedPreferences.setString('deviceToken', token!);
+    
   });
   FirebaseMessaging.onMessage.listen((event) {
     CustomAlertDialog.customAlert(

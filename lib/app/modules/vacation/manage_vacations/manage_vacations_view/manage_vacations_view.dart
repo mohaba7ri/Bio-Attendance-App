@@ -53,22 +53,22 @@ class ManageVacationView extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 8, vertical: 25),
                       child: Column(children: [
-                        Row(children: [
-                          ClipOval(
-                            child: Container(
-                              width: 42,
-                              height: 42,
-                              child: Image.network(
-                                // Images.profile
-                                (controller.VacList["avatar"] == null ||
-                                        controller.VacList['avatar'] == "")
-                                    ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
-                                    : controller.VacList['avatar'],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
-                        ]),
+                        // Row(children: [
+                        //   ClipOval(
+                        //     child: Container(
+                        //       width: 42,
+                        //       height: 42,
+                        //       child: Image.network(
+                        //         // Images.profile
+                        //         (controller.VacList["avatar"] == null ||
+                        //                 controller.VacList['avatar'] == "")
+                        //             ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
+                        //             : controller.VacList['avatar'],
+                        //         fit: BoxFit.cover,
+                        //       ),
+                        //     ),
+                        //   )
+                        // ]),
                         Row(
                           children: [
                             Text("Name ", style: robotoMedium),
