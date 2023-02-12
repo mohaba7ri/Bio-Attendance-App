@@ -90,8 +90,10 @@ class CustomeAppbar extends StatelessWidget {
                     topRight: Radius.circular(20))),
           ),
           Expanded(
+              child: Container(
+            color: AppColor.whiteColor,
             child: mainWidget,
-          ),
+          ))
         ],
       ),
     );

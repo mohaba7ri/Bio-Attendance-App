@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class ListVacationRequestsController extends GetxController {
+class ViewVacationRequestsController extends GetxController {
   RxBool switchValue = false.obs;
   String searchValue = '';
   DateTime? start;
