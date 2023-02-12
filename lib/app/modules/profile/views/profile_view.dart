@@ -7,7 +7,7 @@ import 'package:presence/app/style/app_color.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
-import '../../../widgets/Menu_tile.dart';
+import '../../../widgets/menu_tile.dart';
 import '../../../widgets/custom_profile_appbar.dart';
 import '../controllers/profile_controller.dart';
 
