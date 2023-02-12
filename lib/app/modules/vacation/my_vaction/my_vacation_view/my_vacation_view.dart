@@ -52,7 +52,7 @@ class MyVacationView extends StatelessWidget {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "you_requests_history".tr,
                           style: robotoBlack,
@@ -62,16 +62,18 @@ class MyVacationView extends StatelessWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 25),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),
                     child: Row(
                       children: [
                         //  check in
                         Expanded(
                           child: Column(
                             children: [
-                              ImageIcon(AssetImage(
-                                Images.request,
-                              )),
+                              Image.asset(
+                                Images.list,
+                                width: 40,
+                                height: 40,
+                              ),
                               Container(
                                 margin: EdgeInsets.only(bottom: 2),
                                 child: Text("total_requests".tr,

@@ -242,7 +242,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                               BorderRadius
                                                                   .circular(8),
                                                         ),
-                                                        width: 200,
+                                                        width: 50,
                                                         height: 30,
                                                         child: Text(
                                                           data[index]['file'],
