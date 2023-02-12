@@ -13,4 +13,10 @@ class Images {
   static const String language = 'assets/icons/language.png';
   static const String arabic = 'assets/icons/arabic.png';
   static const String english = 'assets/icons/english.png';
+  static const String request = 'assets/icons/icons8-request-90.png';
+  static const String deny = 'assets/icons/icons8-cancel-96.png';
+  static const String approve = 'assets/icons/icons8-approval-96.png';
+  static const String approve_ani = 'assets/icons/approve_ani.gif';
+  static const String deny_ani = 'assets/icons/cancel_ani.gif';
+  static const String approved = 'assets/icons/approved-64.png';
 }

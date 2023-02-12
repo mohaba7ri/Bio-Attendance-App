@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: '>=2.18.2 <3.0.0'
 
 dependencies:
   cloud_firestore: ^4.3.1
@@ -12,6 +12,11 @@ dependencies:
   firebase_auth: ^4.2.5
   firebase_core: ^2.4.1
   firebase_storage: ^11.0.10
+  fl_chart: ^0.60.0
+  syncfusion_flutter_charts: ^20.4.49
+  pie_chart: any
+  firebase_messaging: ^14.2.2
+
   flutter:
     sdk: flutter
   
@@ -35,6 +40,7 @@ dependencies:
   dropdown_button2: ^1.9.2
   uuid: ^3.0.6
   shared_preferences: ^2.0.11
+  flutter_local_notifications: ^13.0.0
 
 
 dev_dependencies:

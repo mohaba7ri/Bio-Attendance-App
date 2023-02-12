@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/util/images.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -11,23 +12,15 @@ import '../controllers/list_branch_controller.dart';
 
 class listBranchView extends GetView<listBranchController> {
   final detialBranch = Get.put(detailBranchController(), permanent: true);
+
   @override
   Widget build(BuildContext context) {
     listBranchController _listBranchController = listBranchController();
     return Scaffold(
       backgroundColor: AppColor.greyColor,
       appBar: AppBar(
-        title: Text(
-          'Branches',
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 16,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
+        title: Text('Branches'.tr, style: robotoMedium),
+        leading: backButton,
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -106,8 +99,13 @@ class listBranchView extends GetView<listBranchController> {
                                                   color: Colors.black))
                                         ],
                                       ),
-                                      trailing: Icon(Icons.keyboard_arrow_right,
-                                          color: Colors.black, size: 30.0)),
+                                      trailing: GetBuilder<LanguagesController>(
+                                        builder: (controller) => Icon(
+                                          controller.isLtr == false
+                                              ? Icons.keyboard_arrow_left
+                                              : Icons.keyboard_arrow_right,
+                                        ),
+                                      )),
                                 )),
                           );
                   },

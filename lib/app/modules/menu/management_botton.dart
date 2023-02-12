@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/model/menu_model.dart';
+import 'package:presence/app/modules/home/controllers/home_controller.dart';
 import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
-import 'package:presence/app/util/app_constants.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +12,7 @@ import '../../util/images.dart';
 
 class MenuButton extends StatelessWidget {
   final profileController = Get.find<ProfileController>();
+  final homeController = Get.find<HomeController>();
   final MenuModel menu;
   final bool isLogout;
   MenuButton({super.key, required this.menu, required this.isLogout});
@@ -32,10 +33,11 @@ class MenuButton extends StatelessWidget {
                 Get.offAllNamed(Routes.LOGIN);
               },
               onCancel: () {
-                String token =
-                    sharedPreferences.getString(AppConstants.LANGUAGE_CODE)!;
-                print('the language code: $token');
-                Get.back();
+                //   Get.back();
+                String? token = sharedPreferences.getString('deviceToken');
+                print(token);
+                homeController.sendPushMessage(
+                    token!, 'By : Ameen', 'Vacation Request');
               });
         } else
           Get.toNamed(menu.route);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
@@ -8,15 +7,14 @@ import 'package:presence/app/widgets/custom_input.dart';
 import '../controllers/add_employee_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-class AddEmployeeView extends GetView<AddEmployeeController> {
-  final employeeController = AddEmployeeController();
+class AddEmployeeView extends StatelessWidget {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Employee',
+          'Add_Employee'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 14,
@@ -24,7 +22,10 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.blackColor,
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -42,32 +43,32 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         child: SingleChildScrollView(
           child: Container(
             color: Colors.grey[200],
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 5)
-                      ],
-                    ),
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      padding: EdgeInsets.all(15),
-                      children: [
-                        Obx(
-                          () => Column(
+            child: GetBuilder<AddEmployeeController>(
+              builder: (controller) => Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ],
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.all(15),
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text(' Role: '),
+                                    Text('Role'.tr),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
@@ -99,13 +100,11 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                               child:
                                                   DropdownButtonHideUnderline(
                                                 child: DropdownButton2(
-                                                  value: employeeController
-                                                      .roleValue.value,
+                                                  value: controller.roleValue,
                                                   buttonHeight: 50,
                                                   buttonWidth: 40,
                                                   itemHeight: 40,
-                                                  items: employeeController
-                                                      .roleList
+                                                  items: controller.roleList
                                                       .map(
                                                         (roleValue) =>
                                                             DropdownMenuItem(
@@ -116,7 +115,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                                       )
                                                       .toList(),
                                                   onChanged: (value) {
-                                                    employeeController
+                                                    controller
                                                         .changeRoleValue(value);
                                                   },
                                                   //  value: controller.roleValue!.value,
@@ -134,7 +133,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 padding: const EdgeInsets.all(10.0),
                                 child: Row(
                                   children: [
-                                    Text(' Branch: '),
+                                    Text('branch'.tr),
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius:
@@ -163,8 +162,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                                 buttonHeight: 50,
                                                 buttonWidth: 40,
                                                 itemHeight: 40,
-                                                value: controller
-                                                    .branchValue.value,
+                                                value: controller.branchValue,
                                                 items: controller.branchesList,
                                                 onChanged:
                                                     (String? selectedValue) {
@@ -182,82 +180,59 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                               ),
                             ],
                           ),
-                        ),
-                        CustomInput(
-                          controller: controller.idC,
-                          label: 'Employee ID',
-                          hint: '1000000001',
-                        ),
-                        CustomInput(
-                          controller: controller.nameC,
-                          label: 'Full Name',
-                          hint: 'Johnn Doe',
-                        ),
-                        CustomInput(
-                          controller: controller.emailC,
-                          label: 'Email',
-                          hint: 'youremail@email.com',
-                        ),
-                        CustomInput(
-                          controller: controller.jobC,
-                          label: 'Job',
-                          hint: 'Employee Job',
-                        ),
-                        CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
-                        ),
-                        CustomInput(
-                          controller: controller.phoneC,
-                          label: 'Phone',
-                          hint: '7****',
-                        ),
-
-                        CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
-                        ),
-
-                        CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address',
-                          hint: 'hail street',
-                        ),
-
-                        // SizedBox(child: Text('Active')),
-                        // Container(
-                        //   child: Checkbox(
-                        //     value: isChecked,
-                        //     onChanged: (checked) => {print('hello')},
-                        //   ),
-                        // ),
-                        SizedBox(height: 8),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Obx(
-                            () => ElevatedButton(
+                          CustomInput(
+                            controller: controller.nameC,
+                            label: 'Full_Name'.tr,
+                            hint: 'Johnn Doe',
+                          ),
+                          CustomInput(
+                            controller: controller.emailC,
+                            label: 'email'.tr,
+                            hint: 'youremail@email.com',
+                          ),
+                          CustomInput(
+                            controller: controller.jobC,
+                            label: 'Job'.tr,
+                            hint: 'Employee Job',
+                          ),
+                          CustomInput(
+                            controller: controller.addressC,
+                            label: 'Address'.tr,
+                            hint: 'hail street',
+                          ),
+                          CustomInput(
+                            controller: controller.phoneC,
+                            label: 'Phone'.tr,
+                            hint: '7****',
+                          ),
+                          CustomInput(
+                            keyboardType: TextInputType.number,
+                            controller: controller.salaryPerHour,
+                            label: 'salary_per_hour'.tr,
+                            hint: '1500',
+                          ),
+                          SizedBox(height: 8),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
                               onPressed: () {
                                 controller.changeid();
 
-                                if (controller.isLoading.isFalse) {
+                                if (controller.isLoading == false) {
                                   controller.addEmployee();
                                 }
-                                if (employeeController.isSelectedPolicy ==
-                                    true) {
+                                if (controller.isSelectedPolicy == true) {
                                   print('userID' +
-                                      employeeController.store.read('userID'));
+                                      controller.store.read('userID'));
                                 }
                               },
                               child: Text(
-                                (controller.isLoading.isFalse)
-                                    ? 'Add Employee'
-                                    : 'Loading...',
+                                (controller.isLoading == false)
+                                    ? 'Add'.tr
+                                    : 'Loading'.tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'poppins',
@@ -272,13 +247,13 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

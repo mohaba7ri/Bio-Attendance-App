@@ -7,7 +7,7 @@ import 'package:presence/app/widgets/custom_appbar.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
-import '../../../../widgets/Menu_tile.dart';
+import '../../../../widgets/menu.dart';
 import '../../company_settings/controller/company_seting_controlleer.dart';
 import '../../company_settings/view/company_setting_view.dart';
 import '../controllers/Company_Home_controller.dart';
@@ -45,7 +45,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'welcome_to :\n'.tr +
+                              'welcome_to'.tr +
                                   '${companyData['name']}' +
                                   'company'.tr,
                               style: TextStyle(
@@ -57,7 +57,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             SizedBox(
                               height: 20,
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'view_details'.tr,
                               icon: Image.asset(
@@ -69,7 +69,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                               onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
                                   arguments: companyData),
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'edit_information'.tr,
                               icon: Image.asset(
@@ -84,7 +84,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 print(companyData['companyId']);
                               },
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'settings'.tr,
                               icon: Image.asset(

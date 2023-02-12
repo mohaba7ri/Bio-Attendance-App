@@ -46,7 +46,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
                     height: 10,
                   ),
                   Text(
-                    "Company Setting",
+                    "company_setting".tr,
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
                         disabled: true,
                         controller: TextEditingController(
                             text: controller.startTime.value.format(context)),
-                        label: 'Start Time',
+                        label: 'Start_Time'.tr,
                         hint: '8:00',
                         suffixIcon: IconButton(
                             onPressed: () async {
@@ -78,7 +78,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
                         disabled: true,
                         controller: TextEditingController(
                             text: controller.lateTime.value.format(context)),
-                        label: 'Late Time',
+                        label: 'Late_Time'.tr,
                         hint: '8:30',
                         suffixIcon: IconButton(
                             onPressed: () async {
@@ -95,7 +95,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
                         disabled: true,
                         controller: TextEditingController(
                             text: controller.endTime.value.format(context)),
-                        label: 'End Time',
+                        label: 'End_Time'.tr,
                         hint: '2:00',
                         suffixIcon: IconButton(
                             onPressed: () async {
@@ -112,7 +112,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
                         disabled: true,
                         controller: TextEditingController(
                             text: controller.overlyTime.value.format(context)),
-                        label: 'Overly Time',
+                        label: 'Overly_Time'.tr,
                         hint: '2:30',
                         suffixIcon: IconButton(
                             onPressed: () async {
@@ -123,6 +123,15 @@ class CompanySettingView extends GetView<CompanySettingController> {
                             },
                             icon: Icon(Icons.access_time))),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: CustomInput(
+                      keyboardType: TextInputType.number,
+                      controller: controller.workingDays,
+                      label: 'working_days_number'.tr,
+                      hint: '',
+                    ),
+                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.50,
                     child: MaterialButton(
@@ -132,9 +141,9 @@ class CompanySettingView extends GetView<CompanySettingController> {
                         Get.back();
                       },
                       child: controller.isExistSetting.value == true
-                          ? Text('Update')
+                          ? Text('Update'.tr)
                           : Text(
-                              'Save',
+                              'Save'.tr,
                               style: TextStyle(
                                   color: AppColor.whiteColor, fontSize: 16),
                             ),
