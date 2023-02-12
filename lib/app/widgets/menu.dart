@@ -7,12 +7,12 @@ import '../util/dinmensions.dart';
 import '../util/images.dart';
 import '../util/styles.dart';
 
-class MenuTile extends StatelessWidget {
+class MenuSheet extends StatelessWidget {
   final String title;
   final Widget icon;
   final void Function() onTap;
   final bool isDanger;
-  MenuTile({
+  MenuSheet({
     required this.title,
     required this.icon,
     required this.onTap,
