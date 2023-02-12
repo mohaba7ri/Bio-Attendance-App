@@ -4,5 +4,6 @@
         "Getbuilder",
         "الشركة",
         "الصلاحيات"
-    ]
+    ],
+    "dart.flutterSdkPath": "C:\\flutter_3.3.5\\flutter"
 }

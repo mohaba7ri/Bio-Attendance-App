@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:presence/app/modules/home/controllers/home_controller.dart';
 
 import '../../../../widgets/toast/custom_toast.dart';
 
 class VacationRequestController extends GetxController {
+  var homeController = HomeController();
   final formKey = GlobalKey<FormState>();
   final startDateController = TextEditingController().obs;
   final endDateController = TextEditingController().obs;
@@ -19,8 +21,10 @@ class VacationRequestController extends GetxController {
   RxBool? isloading = false.obs;
   String? fileName;
   String? filePath;
-  String? vacationUrl;
+  String? vacationUrl='No file';
   String? userName;
+  String? branchName;
+  String? adminDeviceToken;
   // FilePickerResult? vacationFile;
   String uid = FirebaseAuth.instance.currentUser!.uid;
   RxString leaveTypeValue = 'please select'.obs;
@@ -37,17 +41,42 @@ class VacationRequestController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    await getuser();
+    await getUserData();
+    await getAdminData();
 
     returnVacationType();
   }
 
-  Future getuser() async {
-    user.doc(uid).get().then((query) {
-      Map<String, dynamic> data = query.data() as Map<String, dynamic>;
-      userName = data['name'];
-      update();
-    });
+  Future getUserData() async {
+    try {
+      await user.doc(uid).get().then((query) {
+        Map<String, dynamic> data = query.data() as Map<String, dynamic>;
+        userName = data['name'];
+
+        update();
+      });
+    } catch (e) {}
+  }
+
+  Future getAdminData() async {
+    print('heloooooo');
+    try {
+      await user
+          .where('role', isEqualTo: 'Admin')
+          .where('branchName', isEqualTo: branchName)
+          .get()
+          .then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          print('Admin:${data['name']}');
+          adminDeviceToken = data['deviceToken'];
+          print('Admin token$adminDeviceToken');
+          update();
+        });
+      });
+    } catch (e) {
+      print('error is$e');
+    }
   }
 
   Future uploadFile() async {
@@ -101,12 +130,16 @@ class VacationRequestController extends GetxController {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
             .whenComplete(() => storeVacationData());
+      } else {
+        await storeVacationData();
       }
     }
   }
 
-  void storeVacationData() {
-    vacationRequest.doc().set({
+  Future storeVacationData() async {
+    isloading!.value = true;
+
+    await vacationRequest.doc().set({
       'vacationId': 'uid',
       'vacationType': leaveTypeValue.value,
       'startDate': startDateController.value.text,
@@ -119,16 +152,15 @@ class VacationRequestController extends GetxController {
       'file': vacationUrl,
       'status': 'Pending',
       'cancelled': '',
-
-
-
-
-      
-    }).whenComplete(() {
+    }).whenComplete(() async {
+      await homeController.sendPushMessage(
+          adminDeviceToken!, userName!, 'Vacation Request');
       isloading!.value = false;
       fileName = '';
       filePath = '';
       leaveTypeValue.value = 'please select';
+      fileController.value.text = ' ';
+      CustomToast.successToast('your_request_sent_successfully');
     });
   }
 

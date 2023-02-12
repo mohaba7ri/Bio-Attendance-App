@@ -65,18 +65,36 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                               .vacationRequests(),
                           builder:
                               (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              case ConnectionState.active:
-                              case ConnectionState.done:
-                                return ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (context, index) {
-                                    dynamic data = snapshot.data!.docs;
+                            if (snapshot.hasError) {
+                              print('the error${snapshot.error}');
+                              return const Text('Something went wrong');
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (snapshot.data!.docs.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'There is No Data !',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      letterSpacing: 1.5,
+                                      color: Colors.blueGrey,
+                                      fontFamily: 'Acme',
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                            }
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, index) {
+                                dynamic data = snapshot.data!.docs;
 
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -193,79 +211,45 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                         context)
                                                                     .size
                                                                     .width,
-                                                                height: MediaQuery.of(
+                                                            height:
+                                                                MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .height,
-                                                                child: Image
-                                                                    .network(
-                                                                  (data[index]['file'] ==
-                                                                              null ||
-                                                                          data[index]['file'] ==
-                                                                              "")
-                                                                      ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
-                                                                      : data[index]
-                                                                          [
-                                                                          'file'],
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
+                                                            child:
+                                                                Image.network(
+                                                              (data[index]['file'] ==
+                                                                          null ||
+                                                                      data[index]
+                                                                              [
+                                                                              'file'] ==
+                                                                          "")
+                                                                  ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                                                  : data[index]
+                                                                      ['file'],
+                                                              fit: BoxFit.cover,
                                                             ),
-                                                            actions: <Widget>[
-                                                              TextButton(
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          ctx)
-                                                                      .pop();
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(14),
-                                                                  child:
-                                                                      const Text(
-                                                                          "okay"),
-                                                                ),
-                                                              ),
-                                                            ],
                                                           ),
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: AppColor
-                                                              .primarySoft,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
                                                         ),
-                                                        width: 50,
-                                                        height: 30,
-                                                        child: Text(
-                                                          data[index]['file'],
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(ctx)
+                                                                  .pop();
+                                                            },
+                                                            child: Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(14),
+                                                              child: const Text(
+                                                                  "okay"),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ]),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 8.0),
+                                                    );
+                                                  },
                                                   child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 16),
                                                     decoration: BoxDecoration(
                                                       color:
                                                           AppColor.primarySoft,
@@ -273,137 +257,150 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                           BorderRadius.circular(
                                                               8),
                                                     ),
-                                                    child: Row(
-                                                      children: [
-                                                        //  check in
-                                                        Expanded(
-                                                          child: Column(
-                                                            children: [
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            6),
-                                                                child: Text(
-                                                                  "Days".tr,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                  data[index]
-                                                                      ['days'],
-                                                                  style:
-                                                                      robotoMedium),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          width: 1.5,
-                                                          height: 24,
-                                                          color: Colors.white,
-                                                        ),
-                                                        Expanded(
-                                                          child: Column(
-                                                            children: [
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            6),
-                                                                child: Text(
-                                                                  "Start_Date"
-                                                                      .tr,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                data[index][
-                                                                    'startDate'],
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          width: 1.5,
-                                                          height: 24,
-                                                          color: Colors.white,
-                                                        ),
-                                                        Expanded(
-                                                          child: Column(
-                                                            children: [
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            6),
-                                                                child: Text(
-                                                                  "End_Date".tr,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                data[index]
-                                                                    ['endDate'],
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // check out
-                                                      ],
+                                                    width: 200,
+                                                    height: 30,
+                                                    child: Text(
+                                                      data[index]['file'] !=
+                                                              null
+                                                          ? data[index]['file']
+                                                          : '',
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                     ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 8.0),
-                                                  child: acceptDeny_buttons(),
-                                                ),
                                               ]),
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 16),
+                                                decoration: BoxDecoration(
+                                                  color: AppColor.primarySoft,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    //  check in
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom: 6),
+                                                            child: Text(
+                                                              "Days".tr,
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                              data[index]
+                                                                  ['days'],
+                                                              style:
+                                                                  robotoMedium),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 1.5,
+                                                      height: 24,
+                                                      color: Colors.white,
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom: 6),
+                                                            child: Text(
+                                                              "Start_Date".tr,
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            data[index]
+                                                                ['startDate'],
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 1.5,
+                                                      height: 24,
+                                                      color: Colors.white,
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom: 6),
+                                                            child: Text(
+                                                              "End_Date".tr,
+                                                              style: TextStyle(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            data[index]
+                                                                ['endDate'],
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    // check out
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: acceptDeny_buttons(),
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
                                 );
-                              default:
-                                return SizedBox();
-                            }
+                              },
+                            );
                           },
                         )
                       : StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

@@ -7,8 +7,7 @@ import 'package:presence/app/widgets/custom_input.dart';
 import '../controllers/add_employee_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-class AddEmployeeView extends GetView<AddEmployeeController> {
-  final employeeController = AddEmployeeController();
+class AddEmployeeView extends StatelessWidget {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -44,25 +43,25 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
         child: SingleChildScrollView(
           child: Container(
             color: Colors.grey[200],
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 5)
-                      ],
-                    ),
-                    child: ListView(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      padding: EdgeInsets.all(15),
-                      children: [
-                        Obx(
-                          () => Column(
+            child: GetBuilder<AddEmployeeController>(
+              builder: (controller) => Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, blurRadius: 5)
+                        ],
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.all(15),
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
@@ -101,13 +100,11 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                               child:
                                                   DropdownButtonHideUnderline(
                                                 child: DropdownButton2(
-                                                  value: employeeController
-                                                      .roleValue.value,
+                                                  value: controller.roleValue,
                                                   buttonHeight: 50,
                                                   buttonWidth: 40,
                                                   itemHeight: 40,
-                                                  items: employeeController
-                                                      .roleList
+                                                  items: controller.roleList
                                                       .map(
                                                         (roleValue) =>
                                                             DropdownMenuItem(
@@ -118,7 +115,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                                       )
                                                       .toList(),
                                                   onChanged: (value) {
-                                                    employeeController
+                                                    controller
                                                         .changeRoleValue(value);
                                                   },
                                                   //  value: controller.roleValue!.value,
@@ -165,8 +162,7 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                                 buttonHeight: 50,
                                                 buttonWidth: 40,
                                                 itemHeight: 40,
-                                                value: controller
-                                                    .branchValue.value,
+                                                value: controller.branchValue,
                                                 items: controller.branchesList,
                                                 onChanged:
                                                     (String? selectedValue) {
@@ -184,60 +180,57 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                               ),
                             ],
                           ),
-                        ),
-                        CustomInput(
-                          controller: controller.nameC,
-                          label: 'Full_Name'.tr,
-                          hint: 'Johnn Doe',
-                        ),
-                        CustomInput(
-                          controller: controller.emailC,
-                          label: 'email'.tr,
-                          hint: 'youremail@email.com',
-                        ),
-                        CustomInput(
-                          controller: controller.jobC,
-                          label: 'Job'.tr,
-                          hint: 'Employee Job',
-                        ),
-                        CustomInput(
-                          controller: controller.addressC,
-                          label: 'Address'.tr,
-                          hint: 'hail street',
-                        ),
-                        CustomInput(
-                          controller: controller.phoneC,
-                          label: 'Phone'.tr,
-                          hint: '7****',
-                        ),
-                        CustomInput(
-                          keyboardType: TextInputType.number,
-                          controller: controller.salaryPerHour,
-                          label: 'salary_per_hour'.tr,
-                          hint: '1500',
-                        ),
-                        SizedBox(height: 8),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Obx(
-                            () => ElevatedButton(
+                          CustomInput(
+                            controller: controller.nameC,
+                            label: 'Full_Name'.tr,
+                            hint: 'Johnn Doe',
+                          ),
+                          CustomInput(
+                            controller: controller.emailC,
+                            label: 'email'.tr,
+                            hint: 'youremail@email.com',
+                          ),
+                          CustomInput(
+                            controller: controller.jobC,
+                            label: 'Job'.tr,
+                            hint: 'Employee Job',
+                          ),
+                          CustomInput(
+                            controller: controller.addressC,
+                            label: 'Address'.tr,
+                            hint: 'hail street',
+                          ),
+                          CustomInput(
+                            controller: controller.phoneC,
+                            label: 'Phone'.tr,
+                            hint: '7****',
+                          ),
+                          CustomInput(
+                            keyboardType: TextInputType.number,
+                            controller: controller.salaryPerHour,
+                            label: 'salary_per_hour'.tr,
+                            hint: '1500',
+                          ),
+                          SizedBox(height: 8),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
                               onPressed: () {
                                 controller.changeid();
 
-                                if (controller.isLoading.isFalse) {
+                                if (controller.isLoading == false) {
                                   controller.addEmployee();
                                 }
-                                if (employeeController.isSelectedPolicy ==
-                                    true) {
+                                if (controller.isSelectedPolicy == true) {
                                   print('userID' +
-                                      employeeController.store.read('userID'));
+                                      controller.store.read('userID'));
                                 }
                               },
                               child: Text(
-                                (controller.isLoading.isFalse)
+                                (controller.isLoading == false)
                                     ? 'Add'.tr
                                     : 'Loading'.tr,
                                 style: TextStyle(
@@ -254,13 +247,13 @@ class AddEmployeeView extends GetView<AddEmployeeController> {
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

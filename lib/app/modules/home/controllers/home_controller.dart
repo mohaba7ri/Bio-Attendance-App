@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,7 +11,8 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:presence/company_data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,10 +21,19 @@ class HomeController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Timer? timer;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  late AndroidNotificationChannel channel;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void onInit() async {
     super.onInit();
+    await initialMessage();
+    await getMessage();
+
+    _firebaseMessaging.subscribeToTopic("notifications");
+
+    requestPermission();
     timer = Timer.periodic(Duration(seconds: 10), (timer) {
       if (Get.currentRoute == Routes.HOME) {
         getDistanceToOffice().then((value) {
@@ -33,7 +44,128 @@ class HomeController extends GetxController {
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       Get.toNamed(Routes.LIST_VIEW_REQUESTS);
     });
-    await updateUser();
+
+    loadFCM();
+
+    listenFCM();
+  }
+
+  initialMessage() async {
+    var message = await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      Get.toNamed(Routes.MANAGE_VACATION);
+    }
+  }
+
+  requestPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    print('User granted permission: ${settings.authorizationStatus}');
+  }
+
+  // Replace with server token from firebase console settings.
+  final String? serverToken =
+      'AAAAWoxIhHs:APA91bExI1ipt8E9Weo3zhAyTz9EGdajlGrbvX3pkpzkgkTsrJkl_6FH0Y49rgrKunJPM6p51y2EpwRccjaix59YRwgKPhchHs7z29Fosel75Y4lqPSLHep6Z3h0bV7LhSAk2meOjg1K';
+
+  final FirebaseMessaging? firebaseMessaging = FirebaseMessaging.instance;
+
+  void listenFCM() async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null && !kIsWeb) {
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              icon: 'launch_background',
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  void loadFCM() async {
+    if (!kIsWeb) {
+      channel = const AndroidNotificationChannel(
+        'high_importance_channel', // id
+        'High Importance Notifications',
+        // title
+        importance: Importance.high,
+        enableVibration: true,
+      );
+
+      flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+      /// Create an Android Notification Channel.
+      ///
+      /// We use this channel in the `AndroidManifest.xml` file to override the
+      /// default FCM channel to enable heads up notifications.
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
+
+      /// Update the iOS foreground notification presentation options to allow
+      /// heads up notifications.
+      await FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+    }
+  }
+
+  getMessage() {
+    FirebaseMessaging.onMessage.listen((message) {
+      CustomToast.successToast(message.data['status']);
+      update();
+    });
+  }
+
+  Future sendPushMessage(String token, String body, String title) async {
+    try {
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'key=$serverToken',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'notification': <String, dynamic>{
+              'body': body.toString(),
+              'title': title.toString()
+            },
+            'priority': 'high',
+            'data': <String, dynamic>{
+              'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+              'id': '1',
+              'status': 'Yes Ameen'
+            },
+            "to": token,
+          },
+        ),
+      );
+    } catch (e) {
+      print("error push notification");
+    }
   }
 
   launchOfficeOnMap() {
@@ -44,17 +176,6 @@ class HomeController extends GetxController {
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
-    }
-  }
-
-  Future updateUser() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    String? deviceToken = sharedPreferences.getString('deviceToken');
-    if (deviceToken!.isNotEmpty) {
-      await firestore
-          .collection('user')
-          .doc(auth.currentUser!.uid)
-          .update({"deviceToken": deviceToken});
     }
   }
 
