@@ -133,7 +133,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                               color: AppColor.primarySoft,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            width: 200,
+                            width: 80,
                             height: 30,
                             child: Text(
                               data[index]['file'] != null
@@ -152,8 +152,11 @@ class ViewVacationRequestWidget extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                         decoration: BoxDecoration(
-                          color: AppColor.primarySoft,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 5)
+                          ],
                         ),
                         child: Row(
                           children: [
@@ -163,13 +166,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "Days".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("Days".tr, style: robotoMedium),
                                   ),
                                   Text(data[index]['days'],
                                       style: robotoMedium),
@@ -179,58 +176,36 @@ class ViewVacationRequestWidget extends StatelessWidget {
                             Container(
                               width: 1.5,
                               height: 24,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             Expanded(
                               child: Column(
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "Start_Date".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("start_date".tr,
+                                        style: robotoMedium),
                                   ),
-                                  Text(
-                                    data[index]['startDate'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  Text(data[index]['startDate'],
+                                      style: robotoMedium),
                                 ],
                               ),
                             ),
                             Container(
                               width: 1.5,
                               height: 24,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             Expanded(
                               child: Column(
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "End_Date".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("end_date".tr,
+                                        style: robotoMedium),
                                   ),
-                                  Text(
-                                    data[index]['endDate'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  Text(data[index]['endDate'],
+                                      style: robotoMedium),
                                 ],
                               ),
                             ),
