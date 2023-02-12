@@ -114,8 +114,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                           child: Container(
                                                             width: 50,
                                                             height: 50,
-                                                            child:
-                                                                Image.network(
+                                                            child: Image.asset(
                                                               Images.profile,
                                                               // (controller.VacList["avatar"] == null ||
                                                               //         controller.VacList['avatar'] == "")

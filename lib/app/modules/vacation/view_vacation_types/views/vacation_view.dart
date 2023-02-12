@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/vacation/view_vacation/controllers/vacation_controller.dart';
+import 'package:presence/app/modules/vacation/view_vacation_types/controllers/vacation_controller.dart';
 import 'package:presence/app/util/styles.dart';
 
 import '../../../../style/app_color.dart';

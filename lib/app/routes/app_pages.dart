@@ -35,7 +35,6 @@ import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vac
 import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_binding/my_vacation_binding.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_view/my_vacation_view.dart';
-import 'package:presence/app/modules/vacation/vacation_Request_Details/views/vacation_Request_details_view.dart';
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
 import '../modules/Branches/add_Branch/views/add_branch_view.dart';
@@ -63,17 +62,16 @@ import '../modules/Employees/view_Employee/views/Employees_view.dart';
 import '../modules/dashboard/bindings/Dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
-import '../modules/vacation/manage_vacations/manage_vacations_binding/manage_vacations_binding.dart';
-import '../modules/vacation/manage_vacations/manage_vacations_view/manage_vacations_view.dart';
+
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
 import '../modules/vacation/on_vacation_employees/views/on_vacation_view.dart';
+import '../modules/vacation/request_vacation/views/request_vacation_view.dart';
 import '../modules/vacation/vacation_Home/bindings/Vacation_Home_binding.dart';
 import '../modules/vacation/vacation_Home/views/Vacation_Home_view.dart';
-import '../modules/vacation/vacation_Request_Details/bindings/vacation_Request_details_binding.dart';
-import '../modules/vacation/vacation_request/bindings/request_vacation_bindings.dart';
-import '../modules/vacation/vacation_request/views/request_vacation_view.dart';
-import '../modules/vacation/view_vacation/bindings/vacation_binding.dart';
-import '../modules/vacation/view_vacation/views/vacation_view.dart';
+import '../modules/vacation/request_vacation/bindings/request_vacation_bindings.dart';
+
+import '../modules/vacation/view_vacation_types/bindings/vacation_binding.dart';
+import '../modules/vacation/view_vacation_types/views/vacation_view.dart';
 import '../modules/vacation/view_vacation_requests/bindings/list_vacation_requests_binding.dart';
 import '../modules/vacation/view_vacation_requests/views/list_vacation_requests_view.dart';
 
@@ -150,9 +148,10 @@ class AppPages {
         page: () => AddVacationTypeView(),
         binding: AddVacationTypeBinding()),
     GetPage(
-        name: _Paths.ADD_VACATION_REQUEST,
-        page: () => RequestVacationView(),
-        binding: RequestVacationBinding()),
+      name: _Paths.ADD_VACATION_REQUEST,
+      page: () => RequestVacationView(),
+      binding: RequestVacationBinding(),
+    ),
     GetPage(
         name: _Paths.ADD_BRANCH,
         page: () => AddBranchView(),
@@ -230,10 +229,6 @@ class AppPages {
         page: () => DashboardView(),
         binding: DashboardBinding()),
     GetPage(
-        name: _Paths.Req_DETAILS,
-        page: () => vacationRequestDetailDetailView(),
-        binding: vacationRequestDetailBinding()),
-    GetPage(
         name: _Paths.MANAGE_POLICIES,
         page: () => ManagePoliciesView(),
         binding: AddEmployeeBinding()),
@@ -245,11 +240,6 @@ class AppPages {
       name: _Paths.MY_VACATION,
       page: () => MyVacationView(),
       binding: MyVacationBinding(),
-    ),
-    GetPage(
-      name: _Paths.MANAGE_VACATION,
-      page: () => ManageVacationView(),
-      binding: ManageVacationBinding(),
     ),
   ];
 }
