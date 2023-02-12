@@ -21,7 +21,7 @@ class VacationRequestController extends GetxController {
   RxBool? isloading = false.obs;
   String? fileName;
   String? filePath;
-  String? vacationUrl;
+  String? vacationUrl='No file';
   String? userName;
   String? branchName;
   String? adminDeviceToken;
@@ -41,19 +41,21 @@ class VacationRequestController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    await getuser();
+    await getUserData();
     await getAdminData();
 
     returnVacationType();
   }
 
-  Future getuser() async {
-    user.doc(uid).get().then((query) {
-      Map<String, dynamic> data = query.data() as Map<String, dynamic>;
-      userName = data['name'];
+  Future getUserData() async {
+    try {
+      await user.doc(uid).get().then((query) {
+        Map<String, dynamic> data = query.data() as Map<String, dynamic>;
+        userName = data['name'];
 
-      update();
-    });
+        update();
+      });
+    } catch (e) {}
   }
 
   Future getAdminData() async {
@@ -128,11 +130,15 @@ class VacationRequestController extends GetxController {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
             .whenComplete(() => storeVacationData());
+      } else {
+        await storeVacationData();
       }
     }
   }
 
   Future storeVacationData() async {
+    isloading!.value = true;
+
     await vacationRequest.doc().set({
       'vacationId': 'uid',
       'vacationType': leaveTypeValue.value,
@@ -153,6 +159,8 @@ class VacationRequestController extends GetxController {
       fileName = '';
       filePath = '';
       leaveTypeValue.value = 'please select';
+      fileController.value.text = ' ';
+      CustomToast.successToast('your_request_sent_successfully');
     });
   }
 

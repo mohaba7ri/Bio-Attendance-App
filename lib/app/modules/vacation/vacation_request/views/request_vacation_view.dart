@@ -7,7 +7,6 @@ import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
-import '../../../../util/images.dart';
 import '../controllers/request_vacation_controller.dart';
 
 class RequestVacationView extends GetView<VacationRequestController> {
@@ -59,7 +58,6 @@ class RequestVacationView extends GetView<VacationRequestController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                     
                         Row(
                           children: [
                             Text(
@@ -200,12 +198,12 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.5,
                                 child: CustomInput(
-                                  valdate: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please Pick File';
-                                    }
-                                    return null;
-                                  },
+                                  // valdate: (value) {
+                                  //   if (value!.isEmpty) {
+                                  //     return 'Please Pick File';
+                                  //   }
+                                  //   return null;
+                                  // },
                                   disabled: true,
                                   controller: controller.fileController.value,
                                   label: '',
