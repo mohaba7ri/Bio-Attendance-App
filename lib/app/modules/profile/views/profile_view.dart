@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     // section 2 - menu
 
-                    MenuTile(
+                    MenuSheet(
                       isDanger: true,
                       title: 'Theme',
                       icon: Container(
@@ -86,7 +86,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       onTap: controller.logout,
                     ),
-                    MenuTile(
+                    MenuSheet(
                       isDanger: true,
                       title: 'Change Password',
                       icon: Image.asset(
@@ -97,7 +97,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
                     ),
-                    MenuTile(
+                    MenuSheet(
                       isDanger: true,
                       title: 'Edit profile',
                       icon: Image.asset(

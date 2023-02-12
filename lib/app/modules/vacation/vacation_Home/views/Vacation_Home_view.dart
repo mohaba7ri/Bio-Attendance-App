@@ -36,7 +36,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     padding: EdgeInsets.symmetric(vertical: 36),
                     children: [
                       SizedBox(height: 16),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'Vacation_Types'.tr,
                         icon: Image.asset(
@@ -47,7 +47,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'Add_Vacation_Request'.tr,
                         icon: Image.asset(
@@ -60,7 +60,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.ADD_VACATION_REQUEST);
                         },
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'my_vacation'.tr,
                         icon: Image.asset(
@@ -73,7 +73,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.MY_VACATION);
                         },
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
@@ -86,7 +86,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.LIST_VIEW_REQUESTS);
                         },
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'Employees_on_Vacation'.tr,
                         icon: Image.asset(

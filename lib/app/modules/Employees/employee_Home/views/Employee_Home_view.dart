@@ -57,7 +57,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                       ),
                       // section 2 - menu
 
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'Add_Employee'.tr,
                         icon: Image.asset(
@@ -68,7 +68,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                         ),
                         onTap: () => Get.toNamed(Routes.ADD_EMPLOYEE),
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'View_Employees'.tr,
                         icon: Image.asset(

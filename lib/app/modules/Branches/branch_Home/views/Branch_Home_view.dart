@@ -53,10 +53,9 @@ class BranchHomeView extends GetView<BranchHomeController> {
                       ),
                       // // section 2 - menu
 
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'Add_Branch'.tr,
-
                         icon: Image.asset(
                           Images.addBranch,
                           color: AppColor.primarySoft,
@@ -65,7 +64,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
                         ),
                         onTap: () => Get.toNamed(Routes.ADD_BRANCH),
                       ),
-                      MenuTile(
+                      MenuSheet(
                         isDanger: true,
                         title: 'View_Branches'.tr,
                         icon: Image.asset(

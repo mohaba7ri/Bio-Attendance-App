@@ -57,7 +57,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             SizedBox(
                               height: 20,
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'view_details'.tr,
                               icon: Image.asset(
@@ -69,7 +69,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                               onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
                                   arguments: companyData),
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'edit_information'.tr,
                               icon: Image.asset(
@@ -84,7 +84,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 print(companyData['companyId']);
                               },
                             ),
-                            MenuTile(
+                            MenuSheet(
                               isDanger: true,
                               title: 'settings'.tr,
                               icon: Image.asset(
