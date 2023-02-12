@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/util/styles.dart';
 
+import '../../../../util/images.dart';
 import '../manage_vacations_controller/manage_vacations_controller.dart';
 import '../widgets/manage_vacation_appbar.dart';
 
@@ -53,27 +54,27 @@ class ManageVacationView extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 8, vertical: 25),
                       child: Column(children: [
-                        // Row(children: [
-                        //   ClipOval(
-                        //     child: Container(
-                        //       width: 42,
-                        //       height: 42,
-                        //       child: Image.network(
-                        //         // Images.profile
-                        //         (controller.VacList["avatar"] == null ||
-                        //                 controller.VacList['avatar'] == "")
-                        //             ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
-                        //             : controller.VacList['avatar'],
-                        //         fit: BoxFit.cover,
-                        //       ),
-                        //     ),
-                        //   )
-                        // ]),
+                        Row(children: [
+                          ClipOval(
+                            child: Container(
+                              width: 42,
+                              height: 42,
+                              child: Image.network(
+                                Images.profile,
+                                // (controller.VacList["avatar"] == null ||
+                                //         controller.VacList['avatar'] == "")
+                                //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
+                                //     : controller.VacList['avatar'],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
+                        ]),
                         Row(
                           children: [
-                            Text("Name ", style: robotoMedium),
+                            Text("Name ", style: robotoHuge),
                             Text(controller.VacList['userName'],
-                                style: robotoMedium),
+                                style: robotoHuge),
                           ],
                         ),
                         customDivider(),
