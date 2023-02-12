@@ -7,7 +7,7 @@ import 'package:presence/app/widgets/custom_appbar.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
-import '../../../../widgets/menu_tile.dart';
+import '../../../../widgets/menu.dart';
 import '../controllers/Employee_Home_controller.dart';
 
 class EmployeeHomeView extends GetView<EmployeeHomeController> {
