@@ -96,118 +96,110 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                               itemBuilder: (context, index) {
                                 dynamic data = snapshot.data!.docs;
 
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          // Get.toNamed(Routes.MANAGE_VACATION,
-                                          //     arguments:
-                                          //         snapshot.data!.docs[index]);
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.fromLTRB(
-                                              15, 24, 24, 16),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 10)
-                                            ],
-                                          ),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                GetBuilder<
-                                                    ListVacationRequestsController>(
-                                                  builder: (_controller) => Row(
-                                                    children: [
-                                                      Row(children: [
-                                                        ClipOval(
-                                                          child: Container(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: Image.asset(
-                                                              Images.profile,
-                                                              // (controller.VacList["avatar"] == null ||
-                                                              //         controller.VacList['avatar'] == "")
-                                                              //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
-                                                              //     : controller.VacList['avatar'],
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ]),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8.0),
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 4,
-                                                                  bottom: 12),
-                                                          child: Text(
-                                                              'Name'.tr + ' : ',
-                                                              style:
-                                                                  robotoMedium),
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // Get.toNamed(Routes.MANAGE_VACATION,
+                                      //     arguments:
+                                      //         snapshot.data!.docs[index]);
+                                    },
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.fromLTRB(15, 24, 24, 16),
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 10)
+                                        ],
+                                      ),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GetBuilder<
+                                                ListVacationRequestsController>(
+                                              builder: (_controller) => Row(
+                                                children: [
+                                                  Row(children: [
+                                                    ClipOval(
+                                                      child: Container(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: Image.asset(
+                                                          Images.profile,
+                                                          // (controller.VacList["avatar"] == null ||
+                                                          //         controller.VacList['avatar'] == "")
+                                                          //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
+                                                          //     : controller.VacList['avatar'],
+                                                          fit: BoxFit.cover,
                                                         ),
                                                       ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: 4, bottom: 12),
-                                                        child: Text(
-                                                            '${data[index]['userName']}',
-                                                            style:
-                                                                robotoMedium),
-                                                      ),
-                                                      Spacer(),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: 4, bottom: 12),
-                                                        child: Text(
-                                                            'Vacation_Type'.tr,
-                                                            style:
-                                                                robotoMedium),
-                                                      ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            top: 4, bottom: 12),
-                                                        child: Text(
-                                                            data[index][
-                                                                'vacationType'],
-                                                            style:
-                                                                robotoMedium),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Row(children: [
-                                                    Text(
-                                                      "attached_files".tr,
-                                                      style: robotoHuge,
+                                                    )
+                                                  ]),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 4, bottom: 12),
+                                                      child: Text(
+                                                          'Name'.tr + ' : ',
+                                                          style: robotoMedium),
                                                     ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (ctx) =>
-                                                              AlertDialog(
-                                                            title: Text(
-                                                                "attached_files"
-                                                                    .tr),
-                                                            content: ClipRRect(
-                                                              child: Container(
-                                                                width: MediaQuery.of(
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 4, bottom: 12),
+                                                    child: Text(
+                                                        '${data[index]['userName']}',
+                                                        style: robotoMedium),
+                                                  ),
+                                                  Spacer(),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 4, bottom: 12),
+                                                    child: Text(
+                                                        'Vacation_Type'.tr,
+                                                        style: robotoMedium),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 4, bottom: 12),
+                                                    child: Text(
+                                                        data[index]
+                                                            ['vacationType'],
+                                                        style: robotoMedium),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(children: [
+                                                Text(
+                                                  "attached_files".tr,
+                                                  style: robotoHuge,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (ctx) =>
+                                                          AlertDialog(
+                                                        title: Text(
+                                                            "attached_files"
+                                                                .tr),
+                                                        content: ClipRRect(
+                                                          child: Container(
+                                                            width:
+                                                                MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .width,
@@ -257,7 +249,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                           BorderRadius.circular(
                                                               8),
                                                     ),
-                                                    width: 200,
+                                                    width: 80,
                                                     height: 30,
                                                     child: Text(
                                                       data[index]['file'] !=
@@ -282,9 +274,15 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                     horizontal: 8,
                                                     vertical: 16),
                                                 decoration: BoxDecoration(
-                                                  color: AppColor.primarySoft,
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.black12,
+                                                        blurRadius: 5)
+                                                  ],
                                                 ),
                                                 child: Row(
                                                   children: [
@@ -297,13 +295,9 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Days".tr,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
+                                                                "Days".tr,
+                                                                style:
+                                                                    robotoMedium),
                                                           ),
                                                           Text(
                                                               data[index]
@@ -316,7 +310,7 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                     Container(
                                                       width: 1.5,
                                                       height: 24,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     ),
                                                     Expanded(
                                                       child: Column(
@@ -326,33 +320,22 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "Start_Date".tr,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
+                                                                "start_date".tr,
+                                                                style:
+                                                                    robotoMedium),
                                                           ),
                                                           Text(
-                                                            data[index]
-                                                                ['startDate'],
-                                                            style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
+                                                              data[index]
+                                                                  ['startDate'],
+                                                              style:
+                                                                  robotoMedium),
                                                         ],
                                                       ),
                                                     ),
                                                     Container(
                                                       width: 1.5,
                                                       height: 24,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     ),
                                                     Expanded(
                                                       child: Column(
@@ -362,26 +345,15 @@ class ListVacationRequestView extends GetView<ListVacationRequestsController> {
                                                                 EdgeInsets.only(
                                                                     bottom: 6),
                                                             child: Text(
-                                                              "End_Date".tr,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
+                                                                "end_date".tr,
+                                                                style:
+                                                                    robotoMedium),
                                                           ),
                                                           Text(
-                                                            data[index]
-                                                                ['endDate'],
-                                                            style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
+                                                              data[index]
+                                                                  ['endDate'],
+                                                              style:
+                                                                  robotoMedium),
                                                         ],
                                                       ),
                                                     ),
