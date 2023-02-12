@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../../style/app_color.dart';
-import '../../controllers/list_vacation_requests_controller.dart';
+import '../../controllers/view_vacation_request_controller.dart';
 
 class filter extends StatelessWidget {
   const filter({
@@ -14,7 +12,7 @@ class filter extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final ListVacationRequestsController controller;
+  final ViewVacationRequestsController controller;
 
   @override
   Widget build(BuildContext context) {
