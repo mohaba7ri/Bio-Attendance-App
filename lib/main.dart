@@ -66,8 +66,8 @@ void main() async {
               //  title: "Application",
               debugShowCheckedModeBanner: false,
               initialRoute: snapshot.data != null
-                  ? Routes.LIST_VIEW_REQUESTS
-                  : Routes.LIST_VIEW_REQUESTS,
+                  ? Routes.ADD_VACATION_REQUEST
+                  : Routes.ADD_VACATION_REQUEST,
               getPages: AppPages.routes,
               locale: languageController.locale,
               translations: Messages(languages: _languages),

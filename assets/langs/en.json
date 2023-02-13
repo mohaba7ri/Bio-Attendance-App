@@ -114,7 +114,12 @@
 "company_setting":"Company Setting",
 "working_days_number":"Working Days Number",
 "Update":"Update",
-"attached_files":"Attached Files "
+"attached_files":"Attached Files ",
+"decline":"Decline",
+"accept":"Accept",
+"no_file":"No File",
+"file":"File",
+"save":"Save"
 
 
 

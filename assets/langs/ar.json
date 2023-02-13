@@ -116,7 +116,12 @@
 "company_setting":"اعدادات الشركة",
 "working_days_number":"عدد ايام الدوام",
 "Update":"تحديث",
-"attached_files":"الملفات المرفقة"
+"attached_files":"الملفات المرفقة",
+"decline":"رفض",
+"accept":"موافقة",
+"no_file":"لايوجد ملف",
+"file":"ملف",
+"save":"حفظ"
 
 
 
