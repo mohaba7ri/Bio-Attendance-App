@@ -85,7 +85,7 @@ class LanguageSaveButton extends StatelessWidget {
           ));
           Get.toNamed(Routes.HOME);
         } else {
-          CustomToast.successToast( 'select_a_language'.tr);
+          CustomToast.successToast('select_a_language'.tr);
         }
       },
     );
