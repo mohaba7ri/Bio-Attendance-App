@@ -86,6 +86,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
                                   child: CustomInput(
+                                    disabled: true,
                                     valdate: (value) {
                                       if (value!.isEmpty) {
                                         return 'please_start_date'.tr;
@@ -127,6 +128,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
                                   child: CustomInput(
+                                    disabled: true,
                                     valdate: (value) {
                                       if (value!.isEmpty) {
                                         return 'please_pick_end_date'.tr;

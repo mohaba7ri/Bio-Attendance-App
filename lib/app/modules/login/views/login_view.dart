@@ -156,7 +156,7 @@ class LoginView extends GetView<LoginController> {
                               child: TextButton(
                                 onPressed: () =>
                                     Get.toNamed(Routes.FORGOT_PASSWORD),
-                                child: Text("Forgot your password?"),
+                                child: Text("forgot_your_password".tr),
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColor.secondarySoft,
                                 ),
