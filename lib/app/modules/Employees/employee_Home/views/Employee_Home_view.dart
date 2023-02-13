@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
+import 'package:presence/app/widgets/custom_widget.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -16,7 +16,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.primary,
-      body: CustomeAppbar(
+      body: CustomeWidget(
         title: 'Employee_Management'.tr,
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
