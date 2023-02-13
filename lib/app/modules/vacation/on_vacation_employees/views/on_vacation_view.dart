@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../style/app_color.dart';
+import '../../../../widgets/custom_appbar.dart';
 import '../controllers/on_vacation_requests_controller.dart';
 
 final conttroler = Get.put(OnVacationController(), permanent: true);
@@ -14,22 +15,11 @@ class OnVacationView extends GetView<OnVacationController> {
   Widget build(BuildContext context) {
     OnVacationController _onVacationController = OnVacationController();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Employees on Vacation',
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 14,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        actions: [
+      appBar: CustomAppBar(
+        isaction: true,
+        isBackBotton: true,
+        title: 'Employees on Vacation',
+        action: [
           Container(
             width: 44,
             height: 44,
@@ -78,14 +68,6 @@ class OnVacationView extends GetView<OnVacationController> {
             ),
           )
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 1,
-            color: AppColor.secondaryExtraSoft,
-          ),
-        ),
       ),
       body: Container(
         color: Colors.grey[200],
@@ -266,3 +248,4 @@ class OnVacationView extends GetView<OnVacationController> {
     );
   }
 }
+

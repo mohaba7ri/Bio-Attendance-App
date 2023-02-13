@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
+import 'package:presence/app/widgets/custom_widget.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 
 import '../../../routes/app_pages.dart';
@@ -19,7 +19,7 @@ class LanguagesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.primary,
-        body: CustomeAppbar(
+        body: CustomeWidget(
           backButton: true,
           backRout: () => Get.toNamed(Routes.HOME),
           mainWidget: Container(
@@ -85,7 +85,7 @@ class LanguageSaveButton extends StatelessWidget {
           ));
           Get.toNamed(Routes.HOME);
         } else {
-          CustomToast.successToast( 'select_a_language'.tr);
+          CustomToast.successToast('select_a_language'.tr);
         }
       },
     );

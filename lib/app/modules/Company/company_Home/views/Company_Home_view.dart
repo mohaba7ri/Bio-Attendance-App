@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
+import 'package:presence/app/util/styles.dart';
+import 'package:presence/app/widgets/custom_widget.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -21,7 +22,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
         FirebaseFirestore.instance.collection('company').snapshots();
     return Scaffold(
       backgroundColor: AppColor.primary,
-      body: CustomeAppbar(
+      body: CustomeWidget(
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
         mainWidget: StreamBuilder<QuerySnapshot>(
@@ -48,67 +49,55 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                               'welcome_to'.tr +
                                   '${companyData['name']}' +
                                   'company'.tr,
-                              style: TextStyle(
-                                  color: AppColor.secondarySoft,
-                                  fontFamily: 'cairo',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800),
+                              style: robotoMedium,
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             MenuSheet(
-                              isDanger: true,
                               title: 'view_details'.tr,
                               icon: Image.asset(
-                                Images.changePassword,
-                                color: AppColor.primarySoft,
-                                width: 20,
-                                height: 20,
+                                Images.details,
                               ),
                               onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
                                   arguments: companyData),
                             ),
                             MenuSheet(
-                              isDanger: true,
                               title: 'edit_information'.tr,
                               icon: Image.asset(
                                 Images.editProfile,
-                                color: AppColor.primarySoft,
-                                width: 20,
-                                height: 20,
                               ),
                               onTap: () {
-                                Get.toNamed(Routes.UPDATE_COMPANY,
-                                    arguments: companyData['companyId']);
-                                print(companyData['companyId']);
+                                Get.toNamed(
+                                  Routes.UPDATE_COMPANY,
+                                  arguments: companyData['companyId'],
+                                );
+                                print(
+                                  companyData['companyId'],
+                                );
                               },
                             ),
                             MenuSheet(
-                              isDanger: true,
                               title: 'settings'.tr,
                               icon: Image.asset(
-                                Images.editProfile,
-                                color: AppColor.primarySoft,
-                                width: 20,
-                                height: 20,
+                                Images.settings,
                               ),
                               onTap: () {
                                 // Get.put(CompanySettingController());
-                                Get.lazyPut(() => CompanySettingController(
-                                    companyId: companyData['companyId']));
+                                Get.lazyPut(
+                                  () => CompanySettingController(
+                                    companyId: companyData['companyId'],
+                                  ),
+                                );
 
                                 showDialog(
                                     context: context,
                                     builder: (context) => CompanySettingView(
                                           companyId: companyData['companyId'],
-                                        )).then((_) =>
-                                    Get.delete<CompanySettingController>());
+                                        )).then(
+                                  (_) => Get.delete<CompanySettingController>(),
+                                );
                               },
-                            ),
-                            Container(
-                              height: 1,
-                              color: AppColor.primaryExtraSoft,
                             ),
                             SizedBox(
                               height: 5,

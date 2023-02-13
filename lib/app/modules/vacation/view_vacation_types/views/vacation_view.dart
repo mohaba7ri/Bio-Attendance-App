@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/view_vacation_types/controllers/vacation_controller.dart';
 import 'package:presence/app/util/styles.dart';
+import 'package:presence/app/widgets/custom_appbar.dart';
 
 import '../../../../style/app_color.dart';
 import '../../add_vacation_type/views/add_vacation_type_view.dart';
@@ -16,22 +17,11 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
     ListVacationTypeController _listVacationTypeController =
         ListVacationTypeController();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Vacation_Types'.tr,
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 14,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        actions: [
+      appBar: CustomAppBar(
+        isBackBotton: true,
+        title: 'Vacation_Types'.tr,
+        isaction: true,
+        action: [
           Container(
             width: 44,
             height: 44,
@@ -53,14 +43,6 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
             ),
           )
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 1,
-            color: AppColor.secondaryExtraSoft,
-          ),
-        ),
       ),
       body: Container(
         color: Colors.grey[200],

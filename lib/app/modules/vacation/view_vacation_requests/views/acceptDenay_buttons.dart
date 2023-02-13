@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/util/styles.dart';
 
 class acceptDeny_buttons extends StatelessWidget {
   const acceptDeny_buttons({
@@ -10,7 +11,7 @@ class acceptDeny_buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -35,12 +36,7 @@ class acceptDeny_buttons extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text(
-                              'Cancel'.tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
+                            Text('decline'.tr, style: robotoMediumWhite),
                           ],
                         ),
                       ),
@@ -57,7 +53,7 @@ class acceptDeny_buttons extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(bottom: 6),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Padding(
@@ -65,12 +61,7 @@ class acceptDeny_buttons extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text(
-                              'Accept'.tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
+                            Text('accept'.tr, style: robotoMediumWhite),
                           ],
                         ),
                       ),

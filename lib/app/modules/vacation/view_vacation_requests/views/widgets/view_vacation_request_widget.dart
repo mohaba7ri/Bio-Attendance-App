@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/style/app_color.dart';
 
-import '../../../../../style/app_color.dart';
 import '../../../../../util/images.dart';
 import '../../../../../util/styles.dart';
 import '../../controllers/view_vacation_request_controller.dart';
@@ -32,7 +32,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
               //         snapshot.data!.docs[index]);
             },
             child: Container(
-              padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+              padding: EdgeInsets.fromLTRB(10, 2, 2, 1),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -62,26 +62,32 @@ class ViewVacationRequestWidget extends StatelessWidget {
                             )
                           ]),
                           Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 5, right: 5),
                             child: Container(
-                              margin: EdgeInsets.only(top: 4, bottom: 12),
+                              margin: EdgeInsets.only(top: 4, bottom: 5),
                               child:
                                   Text('Name'.tr + ' : ', style: robotoMedium),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 4, bottom: 12),
+                            margin: EdgeInsets.only(top: 4, bottom: 5),
                             child: Text('${data[index]['userName']}',
                                 style: robotoMedium),
                           ),
-                          Spacer(),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        children: [
                           Container(
-                            margin: EdgeInsets.only(top: 4, bottom: 12),
+                            margin: EdgeInsets.only(top: 2, bottom: 5),
                             child:
                                 Text('Vacation_Type'.tr, style: robotoMedium),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 4, bottom: 12),
+                            margin: EdgeInsets.only(top: 2, bottom: 5),
                             child: Text(data[index]['vacationType'],
                                 style: robotoMedium),
                           ),
@@ -89,11 +95,11 @@ class ViewVacationRequestWidget extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Row(children: [
                         Text(
                           "attached_files".tr,
-                          style: robotoHuge,
+                          style: robotoMedium,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -130,30 +136,34 @@ class ViewVacationRequestWidget extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppColor.primarySoft,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: AppColor.primary,
                             ),
-                            width: 200,
+                            width: 90,
                             height: 30,
-                            child: Text(
-                              data[index]['file'] != null
-                                  ? data[index]['file']
-                                  : '',
-                              overflow: TextOverflow.ellipsis,
+                            child: Center(
+                              child: Text(
+                                data[index]['file'] == 'No file'
+                                    ? "no_file".tr
+                                    : 'file'.tr,
+                                style: robotoMediumWhite,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ),
+                        Icon(Icons.file_present_outlined)
                       ]),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 5.0),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding:
                             EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                         decoration: BoxDecoration(
-                          color: AppColor.primarySoft,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: AppColor.primary,
                         ),
                         child: Row(
                           children: [
@@ -163,16 +173,11 @@ class ViewVacationRequestWidget extends StatelessWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "Days".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("Days".tr,
+                                        style: robotoMediumWhite),
                                   ),
                                   Text(data[index]['days'],
-                                      style: robotoMedium),
+                                      style: robotoMediumWhite),
                                 ],
                               ),
                             ),
@@ -186,22 +191,11 @@ class ViewVacationRequestWidget extends StatelessWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "Start_Date".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("start_date".tr,
+                                        style: robotoMediumWhite),
                                   ),
-                                  Text(
-                                    data[index]['startDate'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  Text(data[index]['startDate'],
+                                      style: robotoMediumWhite),
                                 ],
                               ),
                             ),
@@ -215,22 +209,11 @@ class ViewVacationRequestWidget extends StatelessWidget {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(bottom: 6),
-                                    child: Text(
-                                      "End_Date".tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text("end_date".tr,
+                                        style: robotoMediumWhite),
                                   ),
-                                  Text(
-                                    data[index]['endDate'],
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  Text(data[index]['endDate'],
+                                      style: robotoMediumWhite),
                                 ],
                               ),
                             ),
@@ -240,7 +223,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 5.0),
                       child: acceptDeny_buttons(),
                     ),
                   ]),
