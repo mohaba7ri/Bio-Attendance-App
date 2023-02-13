@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/style/app_color.dart';
 
-import '../../../../../style/app_color.dart';
 import '../../../../../util/images.dart';
 import '../../../../../util/styles.dart';
 import '../../controllers/view_vacation_request_controller.dart';
@@ -74,7 +74,6 @@ class ViewVacationRequestWidget extends StatelessWidget {
                             child: Text('${data[index]['userName']}',
                                 style: robotoMedium),
                           ),
-                          Spacer(),
                           Container(
                             margin: EdgeInsets.only(top: 4, bottom: 12),
                             child:
@@ -130,19 +129,23 @@ class ViewVacationRequestWidget extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppColor.primarySoft,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: AppColor.primary,
                             ),
                             width: 80,
                             height: 30,
-                            child: Text(
-                              data[index]['file'] != null
-                                  ? data[index]['file']
-                                  : '',
-                              overflow: TextOverflow.ellipsis,
+                            child: Center(
+                              child: Text(
+                                data[index]['file'] == 'No file'
+                                    ? "No File"
+                                    : 'File',
+                                style: robotoMedium,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ),
+                        Icon(Icons.file_present_outlined)
                       ]),
                     ),
                     Padding(
@@ -153,10 +156,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 5)
-                          ],
+                          color: AppColor.primary,
                         ),
                         child: Row(
                           children: [
