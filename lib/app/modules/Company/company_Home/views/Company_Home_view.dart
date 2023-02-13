@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/util/styles.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
+import 'package:presence/app/widgets/custom_widget.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -22,7 +22,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
         FirebaseFirestore.instance.collection('company').snapshots();
     return Scaffold(
       backgroundColor: AppColor.primary,
-      body: CustomeAppbar(
+      body: CustomeWidget(
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
         mainWidget: StreamBuilder<QuerySnapshot>(

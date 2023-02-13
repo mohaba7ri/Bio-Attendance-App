@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../modules/languages/controller/languages_controller.dart';
 import '../style/app_color.dart';
 import '../util/dinmensions.dart';
 import '../util/images.dart';
@@ -56,14 +56,15 @@ class MenuSheet extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 24),
-              child: SvgPicture.asset(
-                'assets/icons/arrow-right.svg',
-                color: (isDanger == false)
-                    ? AppColor.secondary
-                    : AppColor.primaryExtraSoft,
-              ),
-            ),
+                margin: EdgeInsets.only(left: 24),
+                child: GetBuilder<LanguagesController>(
+                  builder: (controller) => Icon(
+                    size: 25,
+                    controller.isLtr == false
+                        ? Icons.keyboard_arrow_left
+                        : Icons.keyboard_arrow_right,
+                  ),
+                )),
           ],
         ),
       ),

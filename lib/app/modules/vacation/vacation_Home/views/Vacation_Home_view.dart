@@ -7,7 +7,7 @@ import 'package:presence/app/style/app_color.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../util/images.dart';
 import '../../../../widgets/menu.dart';
-import '../../../../widgets/custom_appbar.dart';
+import '../../../../widgets/custom_widget.dart';
 import '../controllers/Vacation_Home_controller.dart';
 
 class VacationHomeView extends GetView<VacationHomeController> {
@@ -16,7 +16,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.primary,
-      body: CustomeAppbar(
+      body: CustomeWidget(
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
         mainWidget: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(

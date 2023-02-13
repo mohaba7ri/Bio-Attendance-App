@@ -32,13 +32,7 @@ class MenuButton extends StatelessWidget {
                 profileController.logout();
                 Get.offAllNamed(Routes.LOGIN);
               },
-              onCancel: () {
-                //   Get.back();
-                String? token = sharedPreferences.getString('deviceToken');
-                print(token);
-                homeController.sendPushMessage(
-                    token!, 'By : Ameen', 'Vacation Request');
-              });
+              onCancel: () => Get.back());
         } else
           Get.toNamed(menu.route);
       },
