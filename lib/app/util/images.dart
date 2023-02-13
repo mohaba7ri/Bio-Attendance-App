@@ -20,4 +20,8 @@ class Images {
   static const String deny_ani = 'assets/icons/cancel_ani.gif';
   static const String approved = 'assets/icons/approved-64.png';
   static const String list = 'assets/icons/list.gif';
+  static const String viewEmps = 'assets/icons/viewEmps_black.png';
+  static const String vacation = 'assets/icons/vacatios.png';
+  static const String settings = 'assets/icons/settings_black.png';
+  static const String details = 'assets/icons/details.png';
 }

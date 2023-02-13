@@ -135,8 +135,8 @@ class LoginView extends GetView<LoginController> {
                                   child: Text(
                                     (controller.isLoading.isFalse)
                                         ? 'sign_in'.tr
-                                        : 'Loading...',
-                                    style: robotoMedium,
+                                        : 'Loading'.tr,
+                                    style: robotoMediumWhite,
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.symmetric(vertical: 18),

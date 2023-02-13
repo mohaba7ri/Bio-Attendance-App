@@ -76,7 +76,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           Row(
                             children: [
                               Text(
-                                'Start_date'.tr,
+                                'start_date'.tr,
                                 style: TextStyle(fontSize: 20),
                               ),
                               Spacer(),
@@ -88,14 +88,14 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   child: CustomInput(
                                     valdate: (value) {
                                       if (value!.isEmpty) {
-                                        return 'please start date';
+                                        return 'please_start_date'.tr;
                                       }
                                       return null;
                                     },
                                     controller:
                                         controller.startDateController.value,
                                     label: '',
-                                    hint: 'pick start date',
+                                    hint: '',
                                     suffixIcon: IconButton(
                                         onPressed: () async {
                                           DateTime startDate =
@@ -117,7 +117,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           Row(
                             children: [
                               Text(
-                                'End_date'.tr,
+                                'end_date'.tr,
                                 style: TextStyle(fontSize: 20),
                               ),
                               Spacer(),
@@ -129,14 +129,14 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   child: CustomInput(
                                     valdate: (value) {
                                       if (value!.isEmpty) {
-                                        return 'please pick end date';
+                                        return 'please_pick_end_date'.tr;
                                       }
                                       return null;
                                     },
                                     controller:
                                         controller.endDateController.value,
                                     label: '',
-                                    hint: 'pick End date',
+                                    hint: '',
                                     suffixIcon: IconButton(
                                         onPressed: () async {
                                           DateTime startDate =
@@ -159,7 +159,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           Row(
                             children: [
                               Text(
-                                'Days '.tr,
+                                'Days'.tr,
                                 style: TextStyle(fontSize: 20),
                               ),
                               Spacer(),

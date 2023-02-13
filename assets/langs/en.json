@@ -119,7 +119,9 @@
 "accept":"Accept",
 "no_file":"No File",
 "file":"File",
-"save":"Save"
+"save":"Save",
+"please_pick_end_date":"Please Pick End Date",
+"please_start_date":"Please Pick Start Date"
 
 
 
