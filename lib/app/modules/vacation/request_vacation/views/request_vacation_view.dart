@@ -51,7 +51,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             children: [
                               Text(
                                 'Leave_type'.tr,
-                                style: TextStyle(fontSize: 20),
+                                style: robotoHuge,
                               ),
                               Spacer(),
                               Padding(
@@ -77,7 +77,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             children: [
                               Text(
                                 'start_date'.tr,
-                                style: TextStyle(fontSize: 20),
+                                style: robotoHuge,
                               ),
                               Spacer(),
                               Padding(
@@ -118,7 +118,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             children: [
                               Text(
                                 'end_date'.tr,
-                                style: TextStyle(fontSize: 20),
+                                style: robotoHuge,
                               ),
                               Spacer(),
                               Padding(
@@ -160,7 +160,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             children: [
                               Text(
                                 'Days'.tr,
-                                style: TextStyle(fontSize: 20),
+                                style: robotoHuge,
                               ),
                               Spacer(),
                               Padding(
@@ -181,8 +181,8 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           Row(
                             children: [
                               Text(
-                                'File '.tr,
-                                style: TextStyle(fontSize: 20),
+                                'File'.tr,
+                                style: robotoHuge,
                               ),
                               Spacer(),
                               Padding(
@@ -200,7 +200,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                     disabled: true,
                                     controller: controller.fileController.value,
                                     label: '',
-                                    hint: 'pick file ',
+                                    hint: 'pick_file'.tr,
                                     suffixIcon: IconButton(
                                         onPressed: () async {
                                           await controller.uploadFile();
