@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
+import 'package:presence/app/widgets/custom_widget.dart';
 
 import '../../../util/styles.dart';
 import '../controllers/login_controller.dart';
@@ -14,7 +14,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.primary,
-        body: CustomeAppbar(
+        body: CustomeWidget(
             backButton: false,
             mainWidget: Container(
                 color: Colors.white,

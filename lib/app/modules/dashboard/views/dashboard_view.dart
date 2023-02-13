@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../style/app_color.dart';
-import '../../../widgets/custom_appbar.dart';
+import '../../../widgets/custom_widget.dart';
 import '../controllers/Dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -62,7 +62,7 @@ class DashboardView extends GetView<DashboardController> {
         ),
       ),
       backgroundColor: Colors.grey[200],
-      body: CustomeAppbar(
+      body: CustomeWidget(
         title: 'Employee Management',
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
