@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 class CustomAlertDialog {
@@ -12,7 +13,6 @@ class CustomAlertDialog {
     required TextEditingController controller,
   }) {
     Get.defaultDialog(
-      
       title: "",
       contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
       radius: 8,
@@ -25,14 +25,7 @@ class CustomAlertDialog {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'poppins',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                Text(title, style: robotoHuge),
                 SizedBox(height: 16),
                 Text(
                   message,
@@ -60,7 +53,7 @@ class CustomAlertDialog {
                   child: ElevatedButton(
                     onPressed: onCancel,
                     child: Text(
-                      "cancel",
+                      "cancel".tr,
                       style: TextStyle(color: AppColor.secondarySoft),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -76,7 +69,7 @@ class CustomAlertDialog {
                   flex: 6,
                   child: ElevatedButton(
                     onPressed: onConfirm,
-                    child: Text("confirm"),
+                    child: Text("confirm".tr),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
@@ -111,22 +104,9 @@ class CustomAlertDialog {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'poppins',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                Text(title, style: robotoMedium),
                 SizedBox(height: 16),
-                Text(
-                  message,
-                  style: TextStyle(
-                    color: AppColor.secondarySoft,
-                    height: 150 / 100,
-                  ),
-                ),
+                Text(message, style: robotoMedium),
               ],
             ),
           ),
@@ -139,8 +119,8 @@ class CustomAlertDialog {
                   child: ElevatedButton(
                     onPressed: onCancel,
                     child: Text(
-                      "cancel",
-                      style: TextStyle(color: AppColor.secondarySoft),
+                      "cancel".tr,
+                      style: robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: AppColor.primary,
@@ -155,7 +135,7 @@ class CustomAlertDialog {
                   flex: 6,
                   child: ElevatedButton(
                     onPressed: onConfirm,
-                    child: Text("confirm"),
+                    child: Text("confirm".tr),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
@@ -211,7 +191,7 @@ class CustomAlertDialog {
                   child: ElevatedButton(
                     onPressed: onCancel,
                     child: Text(
-                      "No",
+                      "No".tr,
                       style:
                           TextStyle(color: AppColor.blackColor, fontSize: 20),
                     ),
@@ -229,7 +209,7 @@ class CustomAlertDialog {
                   child: ElevatedButton(
                     onPressed: onConfirm,
                     child: Text(
-                      "Yes",
+                      "Yes".tr,
                       style:
                           TextStyle(color: AppColor.blackColor, fontSize: 20),
                     ),

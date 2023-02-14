@@ -47,13 +47,7 @@ class MenuSheet extends StatelessWidget {
               child: icon,
             ),
             Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.secondary,
-                ),
-              ),
+              child: Text(title, style: robotoMedium),
             ),
             Container(
                 margin: EdgeInsets.only(left: 24),

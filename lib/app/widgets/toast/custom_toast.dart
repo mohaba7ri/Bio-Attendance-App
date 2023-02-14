@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 
 class CustomToast {
-  static errorToast( String? message) {
+  static errorToast(String? message) {
     Get.rawSnackbar(
       duration: Duration(seconds: 4),
       dismissDirection: DismissDirection.horizontal,
@@ -22,14 +23,7 @@ class CustomToast {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 4),
-                  child: Text(
-                    "error",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'poppins',
-                    ),
-                  ),
+                  child: Text("error".tr, style: robotoMediumWhite),
                 ),
                 Text(
                   message ?? "Add your error message here",
@@ -48,7 +42,7 @@ class CustomToast {
     );
   }
 
-  static successToast( String? message) {
+  static successToast(String? message) {
     Get.rawSnackbar(
       duration: Duration(seconds: 4),
       dismissDirection: DismissDirection.horizontal,
@@ -66,14 +60,7 @@ class CustomToast {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 4),
-                  child: Text(
-                   "success",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'poppins',
-                    ),
-                  ),
+                  child: Text("success".tr, style: robotoMediumWhite),
                 ),
                 Text(
                   message ?? "Add your success message here",

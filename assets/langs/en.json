@@ -67,7 +67,7 @@
   "View_Employees":"View Employees",
   "Edit_Employee":"Edit Employee's Information",
   "Vacation_Types":"Vacation Types",
-  "Add_Vacation_Request":"Vacation Request",
+  "Add_Vacation_Request":"Request Vacation",
   "View_Vacation_Requests":"View Vacation Requests",
   "Employees_on_Vacation":"Employees on Vacation",
   "Request_Vacation":"Request Vacation",
@@ -123,8 +123,15 @@
 "please_pick_end_date":"Please Pick End Date",
 "please_start_date":"Please Pick Start Date",
 "pick_file":"Pick File",
-"forgot_your_password":"Forgot your password?"
-
+"forgot_your_password":"Forgot your password?",
+"sure":"Are you sure to logout ?",
+"error":"Error",
+"confirm":"Confirm",
+"No":"No",
+"Yes":"Yes",
+"reset_password":"Reset Password",
+"getEmail":"We will send password reset link to\nyour email.",
+"send_to_email":"Send to Email"
 
 
 }

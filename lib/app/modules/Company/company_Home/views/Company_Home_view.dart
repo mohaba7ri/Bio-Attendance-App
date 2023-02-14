@@ -65,6 +65,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             MenuSheet(
                               title: 'edit_information'.tr,
                               icon: Image.asset(
+                                color: AppColor.primarySoft,
                                 Images.editCom,
                               ),
                               onTap: () {
