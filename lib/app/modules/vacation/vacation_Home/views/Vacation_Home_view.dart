@@ -42,8 +42,6 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         icon: Image.asset(
                           Images.changePassword,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
                       ),
@@ -51,10 +49,8 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'Add_Vacation_Request'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.leave,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.ADD_VACATION_REQUEST);
@@ -64,10 +60,8 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'my_vacation'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.myVacations,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.MY_VACATION);
@@ -77,10 +71,8 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.request,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.LIST_VIEW_REQUESTS);
@@ -92,8 +84,6 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         icon: Image.asset(
                           Images.editProfile,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.ON_VACATION);
