@@ -67,7 +67,7 @@
   "View_Employees":"عرض الموظفين",
   "Edit_Employee":"تعديل بيانات الموظف",
   "Vacation_Types":"انواع الاجازات",
-  "Add_Vacation_Request":"اضافة طلب اجازة",
+  "Add_Vacation_Request":" طلب اجازة",
   "View_Vacation_Requests":"عرض طلبات الاجازة",
   "Employees_on_Vacation":"الفتالين",
   "Request_Vacation":"طلب اجازة",
@@ -123,7 +123,9 @@
 "file":"ملف",
 "save":"حفظ",
 "please_pick_end_date":"يرجى تحديد تاريخ الانتهاء",
-"please_start_date":"يرجى تحديد تاريخ البداية"
+"please_start_date":"يرجى تحديد تاريخ البداية",
+"pick_file":"ارفق ملف",
+"forgot_your_password":"هل نسيت كلمة المرور؟"
 
 
 

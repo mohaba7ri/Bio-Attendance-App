@@ -24,9 +24,13 @@ class MyVacationView extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: AppColor.primary,
                 borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(15), right: Radius.circular(15)),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/pattern-1.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

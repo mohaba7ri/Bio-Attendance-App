@@ -27,7 +27,7 @@ class ManagementScreen extends StatelessWidget {
           title: 'employees'.tr,
           route: Routes.EMPLOYEE_HOME),
       MenuModel(
-        icon: Images.profile,
+        icon: Images.vacation,
         title: 'vacation'.tr,
         route: Routes.VACATION_HOME,
       ),

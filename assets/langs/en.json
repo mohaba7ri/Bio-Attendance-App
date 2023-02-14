@@ -67,7 +67,7 @@
   "View_Employees":"View Employees",
   "Edit_Employee":"Edit Employee's Information",
   "Vacation_Types":"Vacation Types",
-  "Add_Vacation_Request":"Add Vacation Request",
+  "Add_Vacation_Request":"Vacation Request",
   "View_Vacation_Requests":"View Vacation Requests",
   "Employees_on_Vacation":"Employees on Vacation",
   "Request_Vacation":"Request Vacation",
@@ -121,7 +121,9 @@
 "file":"File",
 "save":"Save",
 "please_pick_end_date":"Please Pick End Date",
-"please_start_date":"Please Pick Start Date"
+"please_start_date":"Please Pick Start Date",
+"pick_file":"Pick File",
+"forgot_your_password":"Forgot your password?"
 
 
 
