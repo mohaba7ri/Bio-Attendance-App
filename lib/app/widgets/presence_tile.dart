@@ -34,26 +34,26 @@ class PresenceTile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("check_in".tr, style: robotoMediumWhite),
+                    Text("check_in".tr, style: robotoMedium),
                     SizedBox(height: 6),
                     Text(
                         (presenceData["checkIn"] == null)
                             ? "-"
                             : "${DateFormat.jm().format(DateTime.parse(presenceData["checkIn"]["date"]))}",
-                        style: robotoMediumWhite),
+                        style: robotoMedium),
                   ],
                 ),
                 SizedBox(width: 24),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("check_out".tr, style: robotoMediumWhite),
+                    Text("check_out".tr, style: robotoMedium),
                     SizedBox(height: 6),
                     Text(
                       (presenceData["checkOut"] == null)
                           ? "-"
                           : "${DateFormat.jm().format(DateTime.parse(presenceData["checkOut"]["date"]))}",
-                      style: robotoMediumWhite,
+                      style: robotoMedium,
                     ),
                   ],
                 ),
