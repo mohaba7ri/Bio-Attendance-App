@@ -61,10 +61,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                         isDanger: true,
                         title: 'Add_Employee'.tr,
                         icon: Image.asset(
-                          Images.changePassword,
-                          color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
+                          Images.addEmp,
                         ),
                         onTap: () => Get.toNamed(Routes.ADD_EMPLOYEE),
                       ),
@@ -72,10 +69,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                         isDanger: true,
                         title: 'View_Employees'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
-                          color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
+                          Images.viewEmps,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.LIST_EMPLOYEES,
