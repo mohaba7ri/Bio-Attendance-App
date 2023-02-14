@@ -67,7 +67,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                       MenuSheet(
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
-                          Images.request,
+                          Images.leave,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () {
