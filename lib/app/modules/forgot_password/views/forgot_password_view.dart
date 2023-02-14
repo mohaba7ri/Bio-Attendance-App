@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../controllers/forgot_password_controller.dart';
 
@@ -58,22 +59,9 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Reset Password',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      Text('reset_password'.tr, style: robotoHuge),
                       SizedBox(height: 8),
-                      Text(
-                        "We will send password reset link to\nyour email.",
-                        style: TextStyle(
-                          color: AppColor.secondarySoft,
-                          height: 150 / 100,
-                        ),
-                      ),
+                      Text("getEmail".tr, style: robotoMedium),
                     ],
                   ),
                 ),
@@ -92,13 +80,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                     maxLines: 1,
                     controller: controller.emailC,
                     decoration: InputDecoration(
-                      label: Text(
-                        "Email",
-                        style: TextStyle(
-                          color: AppColor.secondarySoft,
-                          fontSize: 14,
-                        ),
-                      ),
+                      label: Text("email".tr, style: robotoMedium),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       border: InputBorder.none,
                       hintText: "youremail@email.com",
@@ -122,13 +104,9 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       },
                       child: Text(
                         (controller.isLoading.isFalse)
-                            ? 'Send to email'
-                            : 'Loading...',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
+                            ? 'send_to_email'.tr
+                            : 'Loading'.tr,
+                        style: robotoMediumWhite
                       ),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 18),

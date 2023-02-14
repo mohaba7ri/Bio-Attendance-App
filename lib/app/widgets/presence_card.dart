@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 
 class PresenceCard extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -24,14 +25,7 @@ class PresenceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // job
-          Text(
-            userData["job"],
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'poppins',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text(userData["job"], style: robotoMediumWhite),
           //  Employee ID
 
           // check in - check out box
@@ -50,24 +44,13 @@ class PresenceCard extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.only(bottom: 6),
-                        child: Text(
-                          "check_in".tr,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: Text("check_in".tr, style: robotoMediumWhite),
                       ),
                       Text(
-                        (todayPresenceData?["checkIn"] == null)
-                            ? "-"
-                            : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkIn"]["date"]))}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
+                          (todayPresenceData?["checkIn"] == null)
+                              ? "-"
+                              : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkIn"]["date"]))}",
+                          style: robotoMediumWhite),
                     ],
                   ),
                 ),
@@ -82,24 +65,13 @@ class PresenceCard extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.only(bottom: 6),
-                        child: Text(
-                          "check_out".tr,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: Text("check_out".tr, style: robotoMediumWhite),
                       ),
                       Text(
-                        (todayPresenceData?["checkOut"] == null)
-                            ? "-"
-                            : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkOut"]["date"]))}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
+                          (todayPresenceData?["checkOut"] == null)
+                              ? "-"
+                              : "${DateFormat.jms().format(DateTime.parse(todayPresenceData!["checkOut"]["date"]))}",
+                          style: robotoMediumWhite),
                     ],
                   ),
                 ),

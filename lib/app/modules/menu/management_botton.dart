@@ -27,7 +27,7 @@ class MenuButton extends StatelessWidget {
           Get.back();
           CustomAlertDialog.customAlert(
               icon: Images.support,
-              message: 'Are you sure to logout ?',
+              message: 'sure'.tr,
               onConfirm: () {
                 profileController.logout();
                 Get.offAllNamed(Routes.LOGIN);

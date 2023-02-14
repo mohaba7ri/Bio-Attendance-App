@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '388900619387',
     projectId: 'biometri-app',
     storageBucket: 'biometri-app.appspot.com',
-    iosClientId: '388900619387-d8dh8a0s4m0t26jp1635dbb8dnsal3so.apps.googleusercontent.com',
+    iosClientId:
+        '388900619387-d8dh8a0s4m0t26jp1635dbb8dnsal3so.apps.googleusercontent.com',
     iosBundleId: 'com.mrezkys.presence',
   );
 }

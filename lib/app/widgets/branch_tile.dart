@@ -33,13 +33,13 @@ class BranchTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Name",
+                      "Name".tr,
                       style: TextStyle(fontSize: 12),
                     ),
                     SizedBox(height: 6),
                     Text(
                       (branchData[Index] == null)
-                          ? "Fuck"
+                          ? "--"
                           : "${(branchData[Index]["branchName"])}",
                       style: TextStyle(
                         fontSize: 14,
@@ -53,13 +53,13 @@ class BranchTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Address",
+                      "address".tr,
                       style: TextStyle(fontSize: 12),
                     ),
                     SizedBox(height: 6),
                     Text(
                       (branchData["branch"] == null)
-                          ? "-"
+                          ? "--"
                           : "${(branchData["branch"]["address"])}",
                       style: TextStyle(
                         fontSize: 14,

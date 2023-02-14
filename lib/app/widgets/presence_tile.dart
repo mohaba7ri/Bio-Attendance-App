@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
 
+import '../util/styles.dart';
+
 class PresenceTile extends StatelessWidget {
   final Map<String, dynamic> presenceData;
   PresenceTile({required this.presenceData});
@@ -32,39 +34,26 @@ class PresenceTile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "check_in".tr,
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    Text("check_in".tr, style: robotoMediumWhite),
                     SizedBox(height: 6),
                     Text(
-                      (presenceData["checkIn"] == null)
-                          ? "-"
-                          : "${DateFormat.jm().format(DateTime.parse(presenceData["checkIn"]["date"]))}",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                        (presenceData["checkIn"] == null)
+                            ? "-"
+                            : "${DateFormat.jm().format(DateTime.parse(presenceData["checkIn"]["date"]))}",
+                        style: robotoMediumWhite),
                   ],
                 ),
                 SizedBox(width: 24),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "check_out".tr,
-                      style: TextStyle(fontSize: 12),
-                    ),
+                    Text("check_out".tr, style: robotoMediumWhite),
                     SizedBox(height: 6),
                     Text(
                       (presenceData["checkOut"] == null)
                           ? "-"
                           : "${DateFormat.jm().format(DateTime.parse(presenceData["checkOut"]["date"]))}",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: robotoMediumWhite,
                     ),
                   ],
                 ),
