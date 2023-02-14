@@ -37,50 +37,38 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     children: [
                       SizedBox(height: 16),
                       MenuSheet(
-                        isDanger: true,
                         title: 'Vacation_Types'.tr,
                         icon: Image.asset(
                           Images.changePassword,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
                       ),
                       MenuSheet(
-                        isDanger: true,
                         title: 'Add_Vacation_Request'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.leave,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.ADD_VACATION_REQUEST);
                         },
                       ),
                       MenuSheet(
-                        isDanger: true,
                         title: 'my_vacation'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.myVacations,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.MY_VACATION);
                         },
                       ),
                       MenuSheet(
-                        isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.request,
                           color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.LIST_VIEW_REQUESTS);
