@@ -6,7 +6,7 @@ import 'package:presence/app/style/app_color.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../util/images.dart';
-import '../../../../widgets/menu.dart';
+import '../../../../widgets/custom_menu_tile.dart';
 import '../../../../widgets/custom_widget.dart';
 import '../controllers/Vacation_Home_controller.dart';
 
@@ -36,7 +36,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     padding: EdgeInsets.symmetric(vertical: 36),
                     children: [
                       SizedBox(height: 16),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'Vacation_Types'.tr,
                         icon: Image.asset(
@@ -47,7 +47,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
                       ),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'Add_Vacation_Request'.tr,
                         icon: Image.asset(
@@ -60,7 +60,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.ADD_VACATION_REQUEST);
                         },
                       ),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'my_vacation'.tr,
                         icon: Image.asset(
@@ -73,7 +73,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.MY_VACATION);
                         },
                       ),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
@@ -86,7 +86,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.LIST_VIEW_REQUESTS);
                         },
                       ),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'Employees_on_Vacation'.tr,
                         icon: Image.asset(

@@ -8,7 +8,7 @@ import 'package:presence/app/widgets/custom_widget.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
-import '../../../../widgets/menu.dart';
+import '../../../../widgets/custom_menu_tile.dart';
 import '../../company_settings/controller/company_seting_controlleer.dart';
 import '../../company_settings/view/company_setting_view.dart';
 import '../controllers/Company_Home_controller.dart';
@@ -54,7 +54,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             SizedBox(
                               height: 20,
                             ),
-                            MenuSheet(
+                            CustomMenuTile(
                               title: 'view_details'.tr,
                               icon: Image.asset(
                                 Images.details,
@@ -62,7 +62,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                               onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
                                   arguments: companyData),
                             ),
-                            MenuSheet(
+                            CustomMenuTile(
                               title: 'edit_information'.tr,
                               icon: Image.asset(
                                 Images.editProfile,
@@ -77,7 +77,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                                 );
                               },
                             ),
-                            MenuSheet(
+                            CustomMenuTile(
                               title: 'settings'.tr,
                               icon: Image.asset(
                                 Images.settings,

@@ -6,7 +6,7 @@ import 'package:presence/app/style/app_color.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../util/images.dart';
-import '../../../../widgets/menu.dart';
+import '../../../../widgets/custom_menu_tile.dart';
 import '../../../../widgets/custom_widget.dart';
 import '../controllers/Branch_Home_controller.dart';
 
@@ -53,7 +53,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
                       ),
                       // // section 2 - menu
 
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'Add_Branch'.tr,
                         icon: Image.asset(
@@ -64,7 +64,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
                         ),
                         onTap: () => Get.toNamed(Routes.ADD_BRANCH),
                       ),
-                      MenuSheet(
+                      CustomMenuTile(
                         isDanger: true,
                         title: 'View_Branches'.tr,
                         icon: Image.asset(
