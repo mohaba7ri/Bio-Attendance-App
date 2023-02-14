@@ -165,7 +165,21 @@ class LoginView extends GetView<LoginController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('Copy Email and Password'),
+                                Text('Admin'),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.emailC.text =
+                                        'codetech2023@gmail.com'; // 'codetech2023@gmail.com';
+                                    controller.passC.text = "123456";
+                                  },
+                                  icon: Icon(Icons.copy_outlined),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('Employee'),
                                 IconButton(
                                   onPressed: () {
                                     controller.emailC.text =

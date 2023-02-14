@@ -21,7 +21,7 @@ class VacationRequestController extends GetxController {
   RxBool? isloading = false.obs;
   String? fileName;
   String? filePath;
-  String? vacationUrl='No file';
+  String? vacationUrl = 'No file';
   String? userName;
   String? branchName;
   String? adminDeviceToken;
@@ -154,7 +154,7 @@ class VacationRequestController extends GetxController {
       'cancelled': '',
     }).whenComplete(() async {
       await homeController.sendPushMessage(
-          adminDeviceToken!, userName!, 'Vacation Request');
+          adminDeviceToken!, userName!, 'Vacation Request by:');
       isloading!.value = false;
       fileName = '';
       filePath = '';

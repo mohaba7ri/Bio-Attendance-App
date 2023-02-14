@@ -14,6 +14,9 @@ import 'package:presence/company_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../../../util/images.dart';
+import '../../../widgets/dialog/custom_alert_dialog.dart';
+
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
   RxString officeDistance = "-".obs;
@@ -132,9 +135,15 @@ class HomeController extends GetxController {
     }
   }
 
-  getMessage() {
-    FirebaseMessaging.onMessage.listen((message) {
-      CustomToast.successToast(message.data['status']);
+  getMessage() async {
+    await FirebaseMessaging.onMessage.listen((message) {
+      String? _title = '${message.notification!.title}' + ' \n ';
+      CustomToast.successToast(message.notification!.title);
+      CustomAlertDialog.customAlert(
+          icon: Images.holidays,
+          message: '$_title ${message.notification!.body} ',
+          onCancel: () => Get.back(),
+          onConfirm: () => Get.toNamed(Routes.LIST_VIEW_REQUESTS));
       update();
     });
   }
@@ -157,7 +166,7 @@ class HomeController extends GetxController {
             'data': <String, dynamic>{
               'click_action': 'FLUTTER_NOTIFICATION_CLICK',
               'id': '1',
-              'status': 'Yes Ameen'
+              'status': title
             },
             "to": token,
           },
