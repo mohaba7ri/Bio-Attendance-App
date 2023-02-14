@@ -61,7 +61,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                         hint: '',
                                         valdate: (value) {
                                           if (value!.isEmpty) {
-                                            return 'please_enter_the_company_name'.tr;
+                                            return 'please_enter_the_company_name'
+                                                .tr;
                                           }
                                           return null;
                                         },
@@ -75,7 +76,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                         hint: '77777777',
                                         valdate: (value) {
                                           if (value!.isEmpty) {
-                                            return 'please_enter_the_phone_number'.tr;
+                                            return 'please_enter_the_phone_number'
+                                                .tr;
                                           }
                                           return null;
                                         },
@@ -85,8 +87,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       ),
                                       CustomInput(
                                         controller: controller.AddressC.value,
-                                        label: 'Address'.tr,
-                                        hint: 'Address',
+                                        label: 'address'.tr,
+                                        hint: '',
                                       ),
                                       SizedBox(
                                         height: 5,
@@ -94,7 +96,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       CustomInput(
                                         controller: controller.EmailC.value,
                                         label: 'email'.tr,
-                                        hint: 'Email',
+                                        hint: '',
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -146,7 +148,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                                   controller
                                                                       .latitudeC
                                                                       .value,
-                                                              label: 'Latitude'.tr,
+                                                              label:
+                                                                  'Latitude'.tr,
                                                               hint: '4.35424',
                                                               disabled: true,
                                                             ),
@@ -165,8 +168,8 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                                   controller
                                                                       .longitudeC
                                                                       .value,
-                                                              label:
-                                                                  'Longitude'.tr,
+                                                              label: 'Longitude'
+                                                                  .tr,
                                                               hint: '4.35424',
                                                               disabled: true,
                                                             ),

@@ -15,6 +15,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
     ViewVacationRequestsController _listVacationRequestsController =
         ViewVacationRequestsController();
     return Scaffold(
+      backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text('Requests'.tr, style: robotoMedium),
         leading: backButton,
