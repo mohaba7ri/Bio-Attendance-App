@@ -7,7 +7,7 @@ import 'package:presence/app/style/app_color.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
-import '../../../widgets/menu.dart';
+import '../../../widgets/custom_menu_tile.dart';
 import '../../../widgets/custom_profile_appbar.dart';
 import '../controllers/profile_controller.dart';
 
@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     // section 2 - menu
 
-                    MenuSheet(
+                    CustomMenuTile(
                       isDanger: true,
                       title: 'Theme',
                       icon: Container(
@@ -86,7 +86,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       onTap: controller.logout,
                     ),
-                    MenuSheet(
+                    CustomMenuTile(
                       isDanger: true,
                       title: 'Change Password',
                       icon: Image.asset(
@@ -97,7 +97,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
                     ),
-                    MenuSheet(
+                    CustomMenuTile(
                       isDanger: true,
                       title: 'Edit profile',
                       icon: Image.asset(
