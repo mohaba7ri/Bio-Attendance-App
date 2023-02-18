@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/util/styles.dart';
 
+import '../controllers/view_vacation_request_controller.dart';
+
 class acceptDeny_buttons extends StatelessWidget {
   const acceptDeny_buttons({
     super.key,
@@ -30,7 +32,9 @@ class acceptDeny_buttons extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        deny();
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Row(
@@ -55,7 +59,9 @@ class acceptDeny_buttons extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        accept();
+                      },
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Row(
