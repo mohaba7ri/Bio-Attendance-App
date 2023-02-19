@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path_provider/path_provider.dart';
 import 'package:presence/app/modules/home/controllers/home_controller.dart';
 
 import '../../../../widgets/toast/custom_toast.dart';
@@ -122,6 +123,7 @@ class VacationRequestController extends GetxController {
     await ref.putFile(File(filePath));
     vacationUrl = await ref.getDownloadURL();
   }
+
 
   void submit() async {
     if (leaveTypeValue.value == 'please select') {
