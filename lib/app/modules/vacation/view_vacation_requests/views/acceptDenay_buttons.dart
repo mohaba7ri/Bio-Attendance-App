@@ -5,7 +5,8 @@ import 'package:presence/app/util/styles.dart';
 import '../controllers/view_vacation_request_controller.dart';
 
 class acceptDeny_buttons extends StatelessWidget {
-  const acceptDeny_buttons({
+  const acceptDeny_buttons(
+    index, {
     super.key,
   });
 
