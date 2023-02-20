@@ -1,11 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/controllers/presence_controller.dart';
-import 'package:presence/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/util/app_constants.dart';
 import 'app/util/messages.dart';
@@ -13,7 +10,6 @@ import 'firebase_options.dart';
 import 'package:get/get.dart';
 import 'app/helper/get_di.dart' as di;
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -32,11 +28,7 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   Map<String, Map<String, String>> _languages = await di.init();
   final sharedPreferences = await SharedPreferences.getInstance();
-  Get.put(PresenceController(), permanent: true);
-  Get.put(PageIndexController(), permanent: true);
-  Get.put(ProfileController());
 
-  Get.put(HomeController(), permanent: true);
   var fbm = FirebaseMessaging.instance;
   fbm.getToken().then((token) async {
     print('the device token: $token');
@@ -54,12 +46,12 @@ void main() async {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(
-            builder: EasyLoading.init(),
             home: Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             ),
+            builder: EasyLoading.init(),
           );
         }
         return GetBuilder<LanguagesController>(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
@@ -7,6 +8,7 @@ import 'package:presence/app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:presence/app/widgets/presence_card.dart';
 import 'package:presence/app/widgets/presence_tile.dart';
 
+import '../../../controllers/loading_config.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -75,19 +77,32 @@ class HomeView extends GetView<HomeController> {
                       stream: controller.streamTodayPresence(),
                       builder: (context, snapshot) {
                         // #TODO: make skeleton
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return Center(child: CircularProgressIndicator());
-                          case ConnectionState.active:
-                          case ConnectionState.done:
-                            var todayPresenceData = snapshot.data?.data();
-                            return PresenceCard(
-                              userData: user,
-                              todayPresenceData: todayPresenceData,
-                            );
-                          default:
-                            return SizedBox();
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text('something went wrong'),
+                          );
                         }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          Get.find<LoadingConfig>().configLoading();
+                          controller.isLoading.value
+                              ? EasyLoading.show(
+                                  status: 'please wait...',
+                                  maskType: EasyLoadingMaskType.custom)
+                              : SizedBox();
+                        } else {
+                          EasyLoading.dismiss();
+                        }
+                        if (snapshot.data == null) {
+                          return Center(
+                            child: Text('There is no Data'),
+                          );
+                        }
+                        var todayPresenceData = snapshot.data?.data();
+                        return PresenceCard(
+                          userData: user,
+                          todayPresenceData: todayPresenceData,
+                        );
                       }),
                   // last location
                   Container(

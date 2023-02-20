@@ -19,6 +19,7 @@ import '../../../widgets/dialog/custom_alert_dialog.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
+
   RxString officeDistance = "-".obs;
 
   FirebaseAuth auth = FirebaseAuth.instance;

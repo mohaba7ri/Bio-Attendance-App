@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/controllers/loading_config.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_widget.dart';
@@ -38,22 +39,13 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              // var easLoading = EasyLoading.instance;
-              // easLoading.indicatorColor = AppColor.whiteColor;
-              // easLoading.maskColor = Colors.amber;
-              // easLoading.backgroundColor = Colors.blue;
-              // EasyLoading.show();
-              EasyLoading.instance
-                ..displayDuration = const Duration(milliseconds: 2000)
-                ..loadingStyle =
-                    EasyLoadingStyle.custom //This was missing in earlier code
-                ..backgroundColor = Colors.red
-                ..indicatorColor = Colors.red
-                ..maskColor = Colors.red
-                ..dismissOnTap = false
-                ..textColor = Colors.amber
-                ..userInteractions = false;
-              EasyLoading.show(status: 'Please wait...');
+              //   EasyLoading.instance.maskColor = Colors.amber;
+              Get.find<LoadingConfig>().configLoading();
+              controller.isLoading == false
+                  ? EasyLoading.show(
+                      status: 'please wait...',
+                      maskType: EasyLoadingMaskType.custom)
+                  : SizedBox();
               Timer(Duration(milliseconds: 1000), () => EasyLoading.dismiss());
             }
             if (snapshot.data == null) {
