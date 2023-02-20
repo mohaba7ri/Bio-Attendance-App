@@ -69,7 +69,7 @@
   "Vacation_Types":"انواع الاجازات",
   "Add_Vacation_Request":" طلب اجازة",
   "View_Vacation_Requests":"عرض طلبات الاجازة",
-  "Employees_on_Vacation":"الفتالين",
+  "Employees_on_Vacation":"الاجازات المقبولة",
   "Request_Vacation":"طلب اجازة",
   "end_date":"نوع الاجازة",
   "start_date":"من تاريخ ",
@@ -133,7 +133,8 @@
 "Yes":"نعم",
 "reset_password":"اعادة تعيين كلمة المرور",
 "getEmail":"سوف يتم ارسال رابط لتعيين كلمة المرور الى الايميل الخاص بك",
-"send_to_email":"ارسل الى الايميل"
+"send_to_email":"ارسل الى الايميل",
+"approved_vac":"الاجازات المقبولة"
 
 
 
