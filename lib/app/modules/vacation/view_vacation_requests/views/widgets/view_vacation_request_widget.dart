@@ -101,56 +101,76 @@ class ViewVacationRequestWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Future<void> downloadFileExample() async {
-                    //   //First you get the documents folder location on the device...
-                    //   Directory appDocDir =
-                    //       await getApplicationDocumentsDirectory();
-                    //   //Here you'll specify the file it should be saved as
-                    //   File downloadToFile =
-                    //       File('${appDocDir.path}/downloaded-pdf.pdf');
-                    //   //Here you'll specify the file it should download from Cloud Storage
-                    //   String fileToDownload =
-                    //       "https://ui-avatars.com/api/?name=${data[index]['file']}";
+                    String fileExtension = data[index]['file'];
 
-                    //   //Now you can try to download the specified file, and write it to the downloadToFile.
+// Use an if statement to check the file extension
 
-                    //   await firebase_storage.FirebaseStorage.instance
-                    //       .ref(fileToDownload)
-                    //       .writeToFile(downloadToFile);
-                    // }
-
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: Text("attached_files".tr),
-                        content: ClipRRect(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            child: //Image.network(
-                                SfPdfViewer.network(
-                              // 'https://firebasestorage.googleapis.com/v0/b/biometri-app.appspot.com/o/vacationRequest%2F2.pdf?alt=media&token=9f3d09f8-4cb1-4fc0-9c29-c7ba3ac6a88c'
-                              (data[index]['file'] == null ||
-                                      data[index]['file'] == "")
-                                  ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
-                                  : data[index]['file'],
-                              //   fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(ctx).pop();
-                            },
+                    if (fileExtension.contains('.pdf')) {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text("attached_files".tr),
+                          content: ClipRRect(
                             child: Container(
-                              padding: const EdgeInsets.all(14),
-                              child: const Text("okay"),
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              child: //Image.network(
+                                  SfPdfViewer.network(
+                                (data[index]['file'] == null ||
+                                        data[index]['file'] == "")
+                                    ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                    : data[index]['file'],
+                                //   fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
-                    );
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                child: const Text("okay"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text("attached_files".tr),
+                          content: ClipRRect(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              child: Image.network(
+                                (data[index]['file'] == null ||
+                                        data[index]['file'] == "")
+                                    ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                    : data[index]['file'],
+                                //   fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(14),
+                                child: const Text("okay"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    // Handle other file types
+// }
                   },
                   child: Container(
                     decoration: BoxDecoration(
