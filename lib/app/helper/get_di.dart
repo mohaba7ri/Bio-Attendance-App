@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/controllers/biometric_controller.dart';
 import 'package:presence/app/controllers/loading_config.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +32,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(ProfileController());
   Get.put(LoadingConfig());
   Get.put(HomeController(), permanent: true);
+  Get.put(BiometricController());
 
   for (LanguageModel languageModel in AppConstants.languages) {
     String jsonStringValues = await rootBundle

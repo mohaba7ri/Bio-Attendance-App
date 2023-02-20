@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:path_provider/path_provider.dart';
 import 'package:presence/app/modules/home/controllers/home_controller.dart';
-
+import 'package:uuid/uuid.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class VacationRequestController extends GetxController {
@@ -124,7 +123,6 @@ class VacationRequestController extends GetxController {
     vacationUrl = await ref.getDownloadURL();
   }
 
-
   void submit() async {
     if (leaveTypeValue.value == 'please select') {
       CustomToast.errorToast('please select leave type');
@@ -140,9 +138,9 @@ class VacationRequestController extends GetxController {
 
   Future storeVacationData() async {
     isloading!.value = true;
-
-    await vacationRequest.doc().set({
-      'vacationId': 'uid',
+    String vacationId = const Uuid().v4();
+    await vacationRequest.doc(vacationId).set({
+      'vacationId': vacationId,
       'vacationType': leaveTypeValue.value,
       'startDate': startDateController.value.text,
       'endDate': endDateController.value.text,

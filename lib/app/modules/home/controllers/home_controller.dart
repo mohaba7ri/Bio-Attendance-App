@@ -191,7 +191,8 @@ class HomeController extends GetxController {
 
   Future<String> getDistanceToOffice() async {
     print('calleeeed');
-    Map<String, dynamic> determinePosition = await _determinePosition();
+    Map<String, dynamic> determinePosition = 
+    await _determinePosition();
     if (!determinePosition["error"]) {
       Position position = determinePosition["position"];
       double distance = Geolocator.distanceBetween(

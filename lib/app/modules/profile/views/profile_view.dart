@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:presence/app/controllers/biometric_controller.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
@@ -110,7 +112,31 @@ class ProfileView extends GetView<ProfileController> {
                         Get.toNamed(Routes.UPDATE_POFILE, arguments: userData);
                       },
                     ),
-
+                    GetBuilder<BiometricController>(
+                      builder: (controller) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 28),
+                        child: Row(
+                          children: [
+                            Switch(
+                                value: controller.isEnabled,
+                                onChanged: (value) {
+                                  controller.enabledFingerPrint(value);
+                                  controller.isEnabled = value;
+                                  print(controller.isEnabled);
+                                }),
+                            Text(
+                              'Enable Biometric',
+                              style: robotoMedium,
+                            ),
+                            Spacer(),
+                            Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 18,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     Container(
                       height: 1,
                       color: AppColor.primaryExtraSoft,

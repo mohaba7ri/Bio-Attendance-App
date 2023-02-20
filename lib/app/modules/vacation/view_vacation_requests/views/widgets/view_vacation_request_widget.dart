@@ -253,7 +253,8 @@ class ViewVacationRequestWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 5.0),
-              child: acceptDeny_buttons(index),
+              child: acceptDeny_buttons(
+                  isIndex == true ? data[index] : data['vacationId']),
             ),
           ]),
         ),

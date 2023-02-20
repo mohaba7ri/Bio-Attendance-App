@@ -183,7 +183,7 @@ class LoginView extends GetView<LoginController> {
                                 IconButton(
                                   onPressed: () {
                                     controller.emailC.text =
-                                        'moha18ba7ri@gmail.com'; // 'codetech2023@gmail.com';
+                                        'en.ameenalsharafi@gmail.com'; // 'codetech2023@gmail.com';
                                     controller.passC.text = "123456";
                                   },
                                   icon: Icon(Icons.copy_outlined),

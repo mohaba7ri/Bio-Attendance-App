@@ -34,23 +34,24 @@ class ViewVacationRequestsController extends GetxController {
     update();
     Get.back();
   }
-}
 
-CollectionReference vacation =
-    FirebaseFirestore.instance.collection('vacationRequest');
+  CollectionReference vacation =
+      FirebaseFirestore.instance.collection('vacationRequest');
 
-Future<void> accept() async {
-  try {
-    await vacation.doc().update({'status': "Accepted"});
-  } catch (e) {
-    print('error');
+  Future<void> accept(String docId) async {
+    try {
+      await vacation.doc(docId).update({'status': "Accepted"});
+    } catch (e) {
+      print('the error$e');
+    }
   }
-}
 
-Future<void> deny() async {
-  try {
-    await vacation.doc().update({'status': "Denied"});
-  } catch (e) {
-    print('error');
+  Future<void> deny(String docId) async {
+    try {
+      await vacation.doc(docId).update({'status': "Denied"});
+      update();
+    } catch (e) {
+      print('the error$e');
+    }
   }
 }
