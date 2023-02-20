@@ -41,7 +41,7 @@ CollectionReference vacation =
 
 Future<void> accept() async {
   try {
-    await vacation.doc("Dce1u6CRTm99kicZ8cX7").update({'status': "Accepted"});
+    await vacation.doc().update({'status': "Accepted"});
   } catch (e) {
     print('error');
   }
@@ -49,7 +49,7 @@ Future<void> accept() async {
 
 Future<void> deny() async {
   try {
-    await vacation.doc("KAmM3rhPvI5Qm9cUDEBT").update({'status': "Denied"});
+    await vacation.doc().update({'status': "Denied"});
   } catch (e) {
     print('error');
   }
