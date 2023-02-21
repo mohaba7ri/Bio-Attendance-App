@@ -25,6 +25,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
       body: CustomeWidget(
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
+        title: "Company",
         mainWidget: StreamBuilder<QuerySnapshot>(
           stream: companyStream,
           builder:
@@ -57,6 +58,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             CustomMenuTile(
                               title: 'view_details'.tr,
                               icon: Image.asset(
+                                color: AppColor.primarySoft,
                                 Images.details,
                               ),
                               onTap: () => Get.toNamed(Routes.COMPANY_DETAILS,
@@ -81,6 +83,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             CustomMenuTile(
                               title: 'settings'.tr,
                               icon: Image.asset(
+                                color: AppColor.primarySoft,
                                 Images.settings,
                               ),
                               onTap: () {

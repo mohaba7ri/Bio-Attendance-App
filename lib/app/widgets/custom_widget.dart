@@ -38,12 +38,15 @@ class CustomeWidget extends StatelessWidget {
                       top: MediaQuery.of(context).padding.top + 10,
                       left: 0,
                       right: 0,
-                      child: Text(
-                        title!,
-                        textAlign: TextAlign.center,
-                        style: robotoRegular.copyWith(
-                            fontSize: Dimensions.fontSizeLarge,
-                            color: Theme.of(context).cardColor),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Text(
+                          title!,
+                          textAlign: TextAlign.center,
+                          style: robotoHuge.copyWith(
+                              fontSize: Dimensions.fontSizeLarge,
+                              color: Theme.of(context).cardColor),
+                        ),
                       ),
                     )
                   : SizedBox(),
