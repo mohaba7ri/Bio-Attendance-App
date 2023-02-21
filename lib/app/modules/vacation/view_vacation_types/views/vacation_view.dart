@@ -82,7 +82,8 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                         Container(
                                           margin: EdgeInsets.only(
                                               top: 2, bottom: 8),
-                                          child: Text('Vacation_Type '.tr,
+                                          child: Text(
+                                              'Vacation_Type'.tr + " : ",
                                               style: robotoBold),
                                         ),
                                         Container(
@@ -115,7 +116,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                           margin: EdgeInsets.only(
                                               top: 4, bottom: 12),
                                           child: Text(
-                                            ' 7',
+                                            date[index]['vacationDays'],
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'poppins',
