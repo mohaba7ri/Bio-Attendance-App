@@ -19,13 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        'Employees on Vacation',
-        style: TextStyle(
-          color: AppColor.secondary,
-          fontSize: 14,
-        ),
-      ),
+      title: Text(title),
       leading: IconButton(
           onPressed: () => Get.back(),
           icon: Icon(
