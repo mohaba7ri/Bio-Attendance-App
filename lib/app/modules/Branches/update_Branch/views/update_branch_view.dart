@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/modules/Branches/general_settings/view/branch_setting_view.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
-import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../controllers/update_branch_controller.dart';
 
@@ -25,7 +25,9 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
           actions: [
             IconButton(
               onPressed: () {
-                Get.toNamed(Routes.BRACH_SETTING);
+                showDialog(
+                    context: context,
+                    builder: (context) => BranchSettingView());
               },
               icon: Icon(Icons.settings),
               color: AppColor.blackColor,
