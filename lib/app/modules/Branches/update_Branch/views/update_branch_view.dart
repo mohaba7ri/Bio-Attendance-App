@@ -10,7 +10,7 @@ import '../controllers/update_branch_controller.dart';
 class UpdateBranchView extends GetView<UpdateBranchController> {
   UpdateBranchController _updateController = UpdateBranchController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
