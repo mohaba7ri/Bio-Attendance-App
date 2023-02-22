@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../widgets/toast/custom_toast.dart';
@@ -10,14 +9,9 @@ class BranchSettingView extends GetView<BranchSettingController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Branch_working_times'.tr),
-        elevation: 1,
-        backgroundColor: AppColor.containerColor,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Dialog(
         child: Obx(
           () => SingleChildScrollView(
             reverse: true,

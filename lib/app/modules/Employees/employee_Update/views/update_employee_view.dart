@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/update_employee_controller.dart';
 
 class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
@@ -34,22 +35,13 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
           onPressed: () => Get.back(),
           icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
         ),
-        // actions: [
-        //   Obx(
-        //     () => TextButton(
-        //       onPressed: () {
-        //         // if (controller.isLoading.isFalse) {
-        //         //   controller.updateEmployee();
-        //         // }
-        //       },
-        //       child:
-        //           Text((controller.isLoading.isFalse) ? 'Done' : 'Loading...'),
-        //       style: TextButton.styleFrom(
-        //         foregroundColor: AppColor.primary,
-        //       ),
-        //     ),
-        //   ),
-        // ],
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.HOME),
+            icon: Icon(Icons.home),
+            color: AppColor.blackColor,
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

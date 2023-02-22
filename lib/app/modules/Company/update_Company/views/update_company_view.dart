@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../controllers/update_company_controller.dart';
 
@@ -20,6 +21,13 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
             style: robotoMedium,
           ),
           leading: backButton,
+          actions: [
+            IconButton(
+              onPressed: () => Get.toNamed(Routes.HOME),
+              icon: Icon(Icons.home),
+              color: AppColor.blackColor,
+            )
+          ],
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,

@@ -65,8 +65,7 @@ void main() async {
             return GetMaterialApp(
               //  title: "Application",
               debugShowCheckedModeBanner: false,
-              initialRoute:
-                  snapshot.data != null ? Routes.EMP_UPDATE : Routes.EMP_UPDATE,
+              initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
               getPages: AppPages.routes,
               locale: languageController.locale,
               translations: Messages(languages: _languages),

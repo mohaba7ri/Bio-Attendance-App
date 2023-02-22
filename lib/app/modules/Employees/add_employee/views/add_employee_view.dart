@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/add_employee_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -27,6 +28,13 @@ class AddEmployeeView extends StatelessWidget {
             color: AppColor.blackColor,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.HOME),
+            icon: Icon(Icons.home),
+            color: AppColor.blackColor,
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
