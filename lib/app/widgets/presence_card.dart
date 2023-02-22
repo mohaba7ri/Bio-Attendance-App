@@ -10,11 +10,12 @@ class PresenceCard extends StatelessWidget {
   final Color color;
   final bool isColor;
 
-  PresenceCard(
-      {required this.userData,
-      required this.todayPresenceData,
-      this.color = AppColor.primary,
-      this.isColor = false});
+  PresenceCard({
+    required this.userData,
+    required this.todayPresenceData,
+    this.color = AppColor.primary,
+    this.isColor = false,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -132,7 +132,8 @@
 "reset_password":"Reset Password",
 "getEmail":"We will send password reset link to\nyour email.",
 "send_to_email":"Send to Email",
-"approved_vac":"Approved Vacation"
+"approved_vac":"Approved Vacation",
+"details":"Details"
 
 
 }

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/widgets/custom_input.dart';
 import 'package:presence/app/widgets/presence_card.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../controllers/employee_details_controller.dart';
@@ -12,10 +14,14 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'details',
-        
+        title: 'details'.tr,
         isColor: true,
         color: AppColor.primary,
+        action: [
+          IconButton(
+              onPressed: () => Get.toNamed(Routes.EMP_UPDATE),
+              icon: Icon(Icons.edit))
+        ],
       ),
       body: Stack(
         children: [
@@ -32,13 +38,13 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
             ),
           ),
           Positioned(
-              top: MediaQuery.of(context).size.height * 0.18,
+              top: MediaQuery.of(context).size.height * 0.10,
               left: MediaQuery.of(context).size.width * 0.03,
               right: MediaQuery.of(context).size.width * 0.03,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -47,7 +53,6 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
                           blurRadius: 10,
                           offset: Offset(10, 10)),
                     ],
-                    color: AppColor.greyColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
@@ -91,7 +96,7 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
 
                                 var todayPresenceData = snapshot.data?.data();
                                 return Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: PresenceCard(
                                       userData: user,
                                       isColor: true,
@@ -106,36 +111,80 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
                 ),
               )),
           Positioned(
-              top: MediaQuery.of(context).size.height * 0.40,
-              bottom: MediaQuery.of(context).size.height * 0,
-              child: GetBuilder<EmployeeDetailController>(
-                  builder: (_controller) => Container(
-                      height: MediaQuery.of(context).size.width * 0.7,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                    color: AppColor.whiteColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12,
-                                          blurRadius: 10,
-                                          offset: Offset(10, 10)),
-                                    ]),
-                                child: Row(
-                                  children: [Text(_controller.EmpList['name'])],
-                                )),
-                          )
-                        ],
-                      ))))
+            top: MediaQuery.of(context).size.height * 0.35,
+            bottom: MediaQuery.of(context).size.height * 0,
+            child: GetBuilder<EmployeeDetailController>(
+              builder: (_controller) => Container(
+                height: MediaQuery.of(context).size.width * 0.7,
+                width: MediaQuery.of(context).size.width,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            color: AppColor.whiteColor,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(10, 10)),
+                            ]),
+                        child: Column(
+                          children: [
+                            // Text(_controller.EmpList['name']),
+
+                            CustomInput(
+                              controller: controller.nameC,
+                              label: 'Full_Name'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.emailC,
+                              label: 'email'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.jobC,
+                              label: 'Job'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.addressC,
+                              label: 'Address'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.phoneC,
+                              label: 'Phone'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              keyboardType: TextInputType.number,
+                              controller: controller.salaryPerHour,
+                              label: 'salary_per_hour'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

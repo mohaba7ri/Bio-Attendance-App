@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/Branches/update_Branch/controllers/update_branch_controller.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/util/images.dart';
 import 'package:presence/app/util/styles.dart';
@@ -11,8 +10,6 @@ import '../../../../style/app_color.dart';
 import '../controllers/list_branch_controller.dart';
 
 class listBranchView extends GetView<listBranchController> {
-
-
   @override
   Widget build(BuildContext context) {
     listBranchController _listBranchController = listBranchController();
@@ -24,6 +21,13 @@ class listBranchView extends GetView<listBranchController> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.HOME),
+            icon: Icon(Icons.home),
+            color: AppColor.blackColor,
+          )
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Container(
