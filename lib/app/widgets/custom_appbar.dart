@@ -8,9 +8,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool isBackBotton;
   final bool isaction;
   final action;
+  final color;
+  final isColor;
   const CustomAppBar({
     super.key,
     this.title,
+    this.isColor = false,
+    this.color,
     this.action,
     this.isBackBotton = false,
     this.isaction = false,
@@ -26,7 +30,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Icons.arrow_back_ios,
             color: AppColor.blackColor,
           )),
-      backgroundColor: Colors.white,
+      backgroundColor: isColor == true ? color : Colors.white,
       elevation: 0,
       centerTitle: true,
       actions: action,

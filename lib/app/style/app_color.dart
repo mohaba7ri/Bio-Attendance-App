@@ -6,7 +6,7 @@ class AppColor {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
-  static Color primary = Color(0xFF266EF1);
+  static const Color primary = Color(0xFF266EF1);
   static Color primarySoft = Color(0xFF548DF3);
   static Color primaryExtraSoft = Color(0xFFEFF3FC);
   static Color secondary = Color(0xFF1B1F24);

@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/page_index_controller.dart';
 import '../controllers/presence_controller.dart';
 import '../model/language_model.dart';
+import '../modules/Branches/general_settings/controller/branch_seting_controlleer.dart';
 import '../modules/home/controllers/home_controller.dart';
 import '../modules/languages/bindings/language_repo.dart';
 import '../modules/profile/controllers/profile_controller.dart';
@@ -32,7 +33,10 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(ProfileController(sharedPreferences: Get.find()));
   Get.put(LoadingConfig());
   Get.put(HomeController(sharedPreferences: Get.find()), permanent: true);
-  Get.put(BiometricController( sharedPreferences: Get.find()),);
+  Get.put(
+    BiometricController(sharedPreferences: Get.find()),
+  );
+   Get.lazyPut(() => BranchSettingController());
 
   for (LanguageModel languageModel in AppConstants.languages) {
     String jsonStringValues = await rootBundle

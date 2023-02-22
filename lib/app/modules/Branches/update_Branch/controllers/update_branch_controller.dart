@@ -15,12 +15,12 @@ class UpdateBranchController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getBranchInfo();
 
+    getBranchInfo(branchId['branchId']);
     determineBranchPosition();
+    print('the branchId${Get.arguments}');
   }
 
-  dynamic brancList;
   // String branchId = Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
@@ -30,6 +30,7 @@ class UpdateBranchController extends GetxController {
   final AddressC = TextEditingController().obs;
   final latitudeC = TextEditingController().obs;
   final longitudeC = TextEditingController().obs;
+  dynamic branchId = Get.arguments;
 
   CollectionReference branch = FirebaseFirestore.instance.collection('branch');
   launchOfficeOnMap() {
@@ -43,17 +44,10 @@ class UpdateBranchController extends GetxController {
     }
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> streamBranch(
-      String branchId) async* {
-    print("called");
-    var firestore = FirebaseFirestore.instance;
-    yield* firestore.collection("branch").doc(branchId).snapshots();
-  }
-
-  void getBranchInfo() {
+  void getBranchInfo(String branchId) {
     final branch = FirebaseFirestore.instance
         .collection('branch')
-        .where('branchId', isEqualTo: brancList);
+        .where('branchId', isEqualTo: branchId);
     branch.get().then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         print('name${doc['name']}');
@@ -103,7 +97,7 @@ class UpdateBranchController extends GetxController {
         longitudeC.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await branch.doc(brancList).update({
+        await branch.doc(branchId['branchId']).update({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,

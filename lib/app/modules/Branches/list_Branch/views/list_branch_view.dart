@@ -11,7 +11,7 @@ import '../../../../style/app_color.dart';
 import '../controllers/list_branch_controller.dart';
 
 class listBranchView extends GetView<listBranchController> {
-  final detialBranch = Get.put(UpdateBranchController(), permanent: true);
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +46,17 @@ class listBranchView extends GetView<listBranchController> {
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    var date = snapshot.data!.docs;
+                    var data = snapshot.data!.docs;
 
-                    return date[index]['name'] == 'name'
+                    return data[index]['name'] == 'name'
                         ? SizedBox()
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                                 onTap: () {
-                                  detialBranch.brancList =
-                                      snapshot.data!.docs[index];
-
-                                  print(detialBranch.brancList['name']);
+                                  print(snapshot.data!.docs[index]['name']);
                                   Get.toNamed(Routes.UPDATE_BRANCH,
-                                      arguments: detialBranch.brancList);
+                                      arguments: data[index]);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
@@ -86,7 +83,7 @@ class listBranchView extends GetView<listBranchController> {
                                             color: Colors.black),
                                       ),
                                       title: Text(
-                                        date[index]['name'],
+                                        data[index]['name'],
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
@@ -95,7 +92,7 @@ class listBranchView extends GetView<listBranchController> {
                                         children: <Widget>[
                                           Icon(Icons.linear_scale,
                                               color: Colors.yellowAccent),
-                                          Text(date[index]['address'],
+                                          Text(data[index]['address'],
                                               style: TextStyle(
                                                   color: Colors.black))
                                         ],
