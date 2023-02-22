@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class EmployeeDetailController extends GetxController {
   dynamic EmpList = Get.arguments;
@@ -30,5 +31,21 @@ class EmployeeDetailController extends GetxController {
         print('the name${data['name']}');
       });
     });
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
+    yield* firestore.collection("user").doc(EmpList['userId']).snapshots();
+  }
+  Stream<DocumentSnapshot<Map<String, dynamic>>> streamTodayPresence() async* {
+    String uid =  EmpList['userId'];
+   
+    String todayDocId =
+        DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
+    yield* firestore
+        .collection("user")
+        .doc(uid)
+        .collection("presence")
+        .doc(todayDocId)
+        .snapshots();
   }
 }

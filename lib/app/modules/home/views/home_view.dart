@@ -15,7 +15,8 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavigationBar(),
       extendBody: true,
-      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      body:
+       StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: controller.streamUser(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
