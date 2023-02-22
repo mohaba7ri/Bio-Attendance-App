@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../controllers/employee_details_controller.dart';
 
@@ -295,7 +296,7 @@ class EmployeeDetailView extends StatelessWidget {
                                       //     snapshot.data!.docs[index];
                                       controller.getBranch();
                                       print(controller.EmpList['name']);
-                                      // Get.toNamed(Routes.EMP_UPDATE);
+                                      Get.toNamed(Routes.EMP_UPDATE);
                                     },
                                     icon: Icon(Icons.edit_rounded),
                                     label: Text(

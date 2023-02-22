@@ -34,22 +34,22 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
           onPressed: () => Get.back(),
           icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
         ),
-        actions: [
-          Obx(
-            () => TextButton(
-              onPressed: () {
-                // if (controller.isLoading.isFalse) {
-                //   controller.updateEmployee();
-                // }
-              },
-              child:
-                  Text((controller.isLoading.isFalse) ? 'Done' : 'Loading...'),
-              style: TextButton.styleFrom(
-                foregroundColor: AppColor.primary,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Obx(
+        //     () => TextButton(
+        //       onPressed: () {
+        //         // if (controller.isLoading.isFalse) {
+        //         //   controller.updateEmployee();
+        //         // }
+        //       },
+        //       child:
+        //           Text((controller.isLoading.isFalse) ? 'Done' : 'Loading...'),
+        //       style: TextButton.styleFrom(
+        //         foregroundColor: AppColor.primary,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -72,22 +72,70 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
           //section 2 - user data
           CustomInput(
             controller: controller.nameC,
-            label: "Full_Name".tr,
-            hint: "Your Full Name",
-            margin: EdgeInsets.only(bottom: 16, top: 42),
-          ),
-          CustomInput(
-            controller: controller.employeeAddressC,
-            label: "Address".tr,
-            hint: "",
-            disabled: true,
+            label: 'Full_Name'.tr,
+            hint: 'Johnn Doe',
           ),
           CustomInput(
             controller: controller.emailC,
-            label: "email".tr,
-            hint: "youremail@email.com",
-            disabled: true,
+            label: 'email'.tr,
+            hint: 'youremail@email.com',
           ),
+          CustomInput(
+            controller: controller.jobC,
+            label: 'Job'.tr,
+            hint: 'Employee Job',
+          ),
+          CustomInput(
+            controller: controller.addressC,
+            label: 'Address'.tr,
+            hint: 'hail street',
+          ),
+          CustomInput(
+            controller: controller.phoneC,
+            label: 'Phone'.tr,
+            hint: '7****',
+          ),
+          CustomInput(
+            keyboardType: TextInputType.number,
+            controller: controller.salaryPerHour,
+            label: 'salary_per_hour'.tr,
+            hint: '1500',
+          ),
+          SizedBox(height: 8),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: ElevatedButton(
+              onPressed: () {
+                // controller.changeid();
+
+                // if (controller.isLoading == false) {
+                //   controller.addEmployee();
+                // }
+                // if (controller.isSelectedPolicy == true) {
+                //   print('userID' +
+                //       controller.store.read('userID'));
+                // }
+              },
+              child: Text(
+                (controller.isLoading == false) ? 'edit'.tr : 'Loading'.tr,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'poppins',
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.primary,
+                padding: EdgeInsets.symmetric(vertical: 18),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

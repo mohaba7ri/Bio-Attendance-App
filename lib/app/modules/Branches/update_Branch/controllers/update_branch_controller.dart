@@ -20,7 +20,8 @@ class UpdateBranchController extends GetxController {
     determineBranchPosition();
   }
 
-  String branchId = Get.arguments;
+  dynamic brancList;
+  // String branchId = Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;
@@ -52,7 +53,7 @@ class UpdateBranchController extends GetxController {
   void getBranchInfo() {
     final branch = FirebaseFirestore.instance
         .collection('branch')
-        .where('branchId', isEqualTo: branchId);
+        .where('branchId', isEqualTo: brancList);
     branch.get().then((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         print('name${doc['name']}');
@@ -102,7 +103,7 @@ class UpdateBranchController extends GetxController {
         longitudeC.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await branch.doc(branchId).update({
+        await branch.doc(brancList).update({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,

@@ -110,18 +110,15 @@ class ViewVacationRequestWidget extends StatelessWidget {
                         context: context,
                         builder: (ctx) => AlertDialog(
                           title: Text("attached_files".tr),
-                          content: ClipRRect(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
-                              child: //Image.network(
-                                  SfPdfViewer.network(
-                                (data[index]['file'] == null ||
-                                        data[index]['file'] == "")
-                                    ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
-                                    : data[index]['file'],
-                                //   fit: BoxFit.cover,
-                              ),
+                          content: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: SfPdfViewer.network(
+                              (data[index]['file'] == null ||
+                                      data[index]['file'] == "")
+                                  ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                  : data[index]['file'],
+                              //   fit: BoxFit.cover,
                             ),
                           ),
                           actions: <Widget>[

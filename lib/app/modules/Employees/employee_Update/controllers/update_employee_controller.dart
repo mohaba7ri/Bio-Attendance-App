@@ -13,9 +13,13 @@ class UpdateEmployeeController extends GetxController {
     //  yield* firestore.collection('branch').where('branchId', isEqualTo: branchId).snapshots();
   }
 
-  TextEditingController employeeAddressC = TextEditingController();
   TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
+  TextEditingController jobC = TextEditingController();
+  TextEditingController adminPassC = TextEditingController();
+  TextEditingController addressC = TextEditingController();
+  TextEditingController phoneC = TextEditingController();
+  TextEditingController salaryPerHour = TextEditingController();
 
   final ImagePicker picker = ImagePicker();
   XFile? image;

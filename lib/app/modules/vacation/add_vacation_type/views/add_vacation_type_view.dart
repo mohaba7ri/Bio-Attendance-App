@@ -65,16 +65,12 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
             SizedBox(
               height: 10,
             ),
-            Obx(
-              () => controller.isPaid.value == false
-                  ? SizedBox()
-                  : Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomInput(
-                          controller: controller.vacationDays.value,
-                          label: 'Vacation Days',
-                          hint: '1'),
-                    ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: CustomInput(
+                  controller: controller.vacationDays.value,
+                  label: 'Vacation Days',
+                  hint: '1'),
             ),
             SizedBox(
               height: 10,
@@ -113,27 +109,6 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                     SizedBox(
                       width: 30,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Is Paid Vacation'),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.20,
-                          child: DropdownButton(
-                              value: controller.isPaidValue.value,
-                              items: controller.isPaidItems.map((String items) {
-                                return DropdownMenuItem(
-                                  child: Text(items),
-                                  value: items,
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                controller.changeIsPaidValue(value!);
-                                controller.changeIsPaid();
-                              }),
-                        ),
-                      ],
-                    ),
                   ],
                 )),
             SizedBox(
@@ -146,7 +121,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('Cancel'),
+                  child: Text('Cancel'.tr),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(Colors.red.shade400)),
@@ -158,7 +133,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                   onPressed: () {
                     controller.stroreVacationType();
                   },
-                  child: Text('Save'),
+                  child: Text('Save'.tr),
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll<Color>(
                           Colors.teal.shade400)),

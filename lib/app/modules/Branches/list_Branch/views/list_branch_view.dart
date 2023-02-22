@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/modules/Branches/update_Branch/controllers/update_branch_controller.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/util/images.dart';
 import 'package:presence/app/util/styles.dart';
@@ -11,7 +12,7 @@ import '../../branch_Details/controllers/branch_details_controller.dart';
 import '../controllers/list_branch_controller.dart';
 
 class listBranchView extends GetView<listBranchController> {
-  final detialBranch = Get.put(detailBranchController(), permanent: true);
+  final detialBranch = Get.put(UpdateBranchController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class listBranchView extends GetView<listBranchController> {
                                       snapshot.data!.docs[index];
 
                                   print(detialBranch.brancList['name']);
-                                  Get.toNamed(Routes.BRANCH_DETAILS);
+                                  Get.toNamed(Routes.UPDATE_BRANCH);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),

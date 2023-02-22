@@ -27,6 +27,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
       body: CustomeWidget(
         backButton: true,
         backRout: () => Get.toNamed(Routes.HOME),
+        title: "Company",
         mainWidget: StreamBuilder<QuerySnapshot>(
           stream: companyStream,
           builder:

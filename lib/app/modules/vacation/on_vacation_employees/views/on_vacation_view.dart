@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../../style/app_color.dart';
+import '../../../../util/images.dart';
+import '../../../../util/styles.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../controllers/on_vacation_requests_controller.dart';
 
@@ -18,7 +21,7 @@ class OnVacationView extends GetView<OnVacationController> {
       appBar: CustomAppBar(
         isaction: true,
         isBackBotton: true,
-        title: 'Employees on Vacation',
+        title: 'approved_vac'.tr,
         action: [
           Container(
             width: 44,
@@ -82,9 +85,9 @@ class OnVacationView extends GetView<OnVacationController> {
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    var date = snapshot.data!.docs;
+                    var data = snapshot.data!.docs;
 
-                    return date[index]['days'] == 'please select'
+                    return data[index]['days'] == 'please select'
                         ? SizedBox()
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -100,47 +103,198 @@ class OnVacationView extends GetView<OnVacationController> {
                                 ],
                               ),
                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GetBuilder<OnVacationController>(
+                                    builder: (_controller) => Row(
                                       children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 4, bottom: 12),
-                                          child: Text(
-                                            'Vacation Type: ',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
+                                        Row(children: [
+                                          ClipOval(
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              child: Image.asset(
+                                                Images.profile,
+                                                // (controller.VacList["avatar"] == null ||
+                                                //         controller.VacList['avatar'] == "")
+                                                //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"
+                                                //     : controller.VacList['avatar'],
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
+                                          )
+                                        ]),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                top: 4, bottom: 5),
+                                            child: Text('Name'.tr + ' : ',
+                                                style: robotoMedium),
                                           ),
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(
-                                              top: 4, bottom: 12),
-                                          child: Text(
-                                            date[index]['vacationType'],
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
+                                              top: 4, bottom: 5),
+                                          child: Text(data[index]['userName'],
+                                              style: robotoMedium),
                                         ),
                                       ],
                                     ),
-                                    Container(
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 2, bottom: 5),
+                                          child: Text('Vacation_Type'.tr,
+                                              style: robotoMedium),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 2, bottom: 5),
+                                          child: Text(
+                                              data[index]['vacationType'],
+                                              style: robotoMedium),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(children: [
+                                      Text(
+                                        "attached_files".tr,
+                                        style: robotoMedium,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          String fileExtension =
+                                              data[index]['file'];
+
+// Use an if statement to check the file extension
+
+                                          if (fileExtension.contains('.pdf')) {
+                                            showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title:
+                                                    Text("attached_files".tr),
+                                                content: Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                                  child: SfPdfViewer.network(
+                                                    (data[index]['file'] ==
+                                                                null ||
+                                                            data[index]
+                                                                    ['file'] ==
+                                                                "")
+                                                        ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                                        : data[index]['file'],
+                                                    //   fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              14),
+                                                      child: const Text("okay"),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title:
+                                                    Text("attached_files".tr),
+                                                content: ClipRRect(
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .height,
+                                                    child: Image.network(
+                                                      (data[index]['file'] ==
+                                                                  null ||
+                                                              data[index][
+                                                                      'file'] ==
+                                                                  "")
+                                                          ? "https://ui-avatars.com/api/?name=${data[index]['file']}/"
+                                                          : data[index]['file'],
+                                                      //   fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              14),
+                                                      child: const Text("okay"),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                          // Handle other file types
+// }
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: AppColor.primary,
+                                          ),
+                                          width: 90,
+                                          height: 30,
+                                          child: Center(
+                                            child: Text(
+                                              data[index]['file'] == 'No file'
+                                                  ? "no_file".tr
+                                                  : 'file'.tr,
+                                              style: robotoMediumWhite,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Icon(Icons.file_present_outlined)
+                                    ]),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5.0),
+                                    child: Container(
                                       width: MediaQuery.of(context).size.width,
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 8, vertical: 16),
                                       decoration: BoxDecoration(
-                                        color: AppColor.primarySoft,
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        color: AppColor.primary,
                                       ),
                                       child: Row(
                                         children: [
@@ -151,22 +305,11 @@ class OnVacationView extends GetView<OnVacationController> {
                                                 Container(
                                                   margin: EdgeInsets.only(
                                                       bottom: 6),
-                                                  child: Text(
-                                                    "Days",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
+                                                  child: Text("Days".tr,
+                                                      style: robotoMediumWhite),
                                                 ),
-                                                Text(
-                                                  date[index]['days'],
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
+                                                Text(data[index]['days'],
+                                                    style: robotoMediumWhite),
                                               ],
                                             ),
                                           ),
@@ -181,22 +324,11 @@ class OnVacationView extends GetView<OnVacationController> {
                                                 Container(
                                                   margin: EdgeInsets.only(
                                                       bottom: 6),
-                                                  child: Text(
-                                                    "Start Date",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
+                                                  child: Text("start_date".tr,
+                                                      style: robotoMediumWhite),
                                                 ),
-                                                Text(
-                                                  date[index]['startDate'],
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
+                                                Text(data[index]['startDate'],
+                                                    style: robotoMediumWhite),
                                               ],
                                             ),
                                           ),
@@ -211,22 +343,11 @@ class OnVacationView extends GetView<OnVacationController> {
                                                 Container(
                                                   margin: EdgeInsets.only(
                                                       bottom: 6),
-                                                  child: Text(
-                                                    "End Date",
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
+                                                  child: Text("end_date".tr,
+                                                      style: robotoMediumWhite),
                                                 ),
-                                                Text(
-                                                  date[index]['endDate'],
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
+                                                Text(data[index]['endDate'],
+                                                    style: robotoMediumWhite),
                                               ],
                                             ),
                                           ),
@@ -234,7 +355,9 @@ class OnVacationView extends GetView<OnVacationController> {
                                         ],
                                       ),
                                     ),
-                                  ]),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                   },
@@ -248,4 +371,3 @@ class OnVacationView extends GetView<OnVacationController> {
     );
   }
 }
-
