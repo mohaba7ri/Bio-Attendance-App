@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
 import '../controllers/add_branch_controller.dart';
@@ -19,6 +20,13 @@ class AddBranchView extends GetView<AddBranchController> {
           style: robotoMedium,
         ),
         leading: backButton,
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.HOME),
+            icon: Icon(Icons.home),
+            color: AppColor.blackColor,
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

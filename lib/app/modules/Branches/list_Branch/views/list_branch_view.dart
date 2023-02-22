@@ -8,7 +8,6 @@ import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-import '../../branch_Details/controllers/branch_details_controller.dart';
 import '../controllers/list_branch_controller.dart';
 
 class listBranchView extends GetView<listBranchController> {
@@ -59,7 +58,8 @@ class listBranchView extends GetView<listBranchController> {
                                       snapshot.data!.docs[index];
 
                                   print(detialBranch.brancList['name']);
-                                  Get.toNamed(Routes.UPDATE_BRANCH);
+                                  Get.toNamed(Routes.UPDATE_BRANCH,
+                                      arguments: detialBranch.brancList);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.fromLTRB(15, 24, 24, 16),

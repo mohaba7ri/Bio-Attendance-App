@@ -35,6 +35,7 @@ import 'package:presence/app/modules/vacation/add_vacation_type/bindings/add_vac
 import 'package:presence/app/modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_binding/my_vacation_binding.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_view/my_vacation_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../modules/Branches/add_Branch/bindings/add_branch_binding.dart';
 import '../modules/Branches/add_Branch/views/add_branch_view.dart';
@@ -59,8 +60,8 @@ import '../modules/Employees/employee_Update/bindings/update_employee_binding.da
 import '../modules/Employees/employee_Update/views/update_employee_view.dart';
 import '../modules/Employees/view_Employee/bindings/Employees_binding.dart';
 import '../modules/Employees/view_Employee/views/Employees_view.dart';
-import '../modules/dashboard/bindings/Dashboard_binding.dart';
-import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/dashboard/bindings/attendance_binding.dart';
+import '../modules/dashboard/views/attendance_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
@@ -78,6 +79,7 @@ import '../modules/vacation/view_vacation_requests/views/view_vacation_request_v
 part 'app_routes.dart';
 
 class AppPages {
+  final sharedPreferences = SharedPreferences.getInstance();
   AppPages._();
 
   static const INITIAL = Routes.HOME;
@@ -91,7 +93,9 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => LoginView(
+        sharedPreferences: Get.find(),
+      ),
       binding: LoginBinding(),
     ),
     GetPage(
@@ -106,7 +110,9 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => ProfileView(),
+      page: () => ProfileView(
+        sharedPreferences: Get.find(),
+      ),
       binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
@@ -225,9 +231,9 @@ class AppPages {
         page: () => UpdateCompanyView(),
         binding: UpdateCompanyBinding()),
     GetPage(
-        name: _Paths.DASHBOARD,
-        page: () => DashboardView(),
-        binding: DashboardBinding()),
+        name: _Paths.ATTENDANCE,
+        page: () => AttendanceView(),
+        binding: AttendanceBinding()),
     GetPage(
         name: _Paths.MANAGE_POLICIES,
         page: () => ManagePoliciesView(),

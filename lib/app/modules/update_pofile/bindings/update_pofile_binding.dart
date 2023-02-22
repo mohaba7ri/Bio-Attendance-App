@@ -6,7 +6,7 @@ class UpdatePofileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UpdatePofileController>(
-      () => UpdatePofileController(),
+      () => UpdatePofileController(sharedPreferences: Get.find()),
     );
   }
 }

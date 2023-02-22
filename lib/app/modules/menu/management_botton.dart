@@ -6,7 +6,6 @@ import 'package:presence/app/modules/profile/controllers/profile_controller.dart
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
 import '../../util/images.dart';
 
@@ -30,7 +29,6 @@ class MenuButton extends StatelessWidget {
               message: 'sure'.tr,
               onConfirm: () {
                 profileController.logout();
-                Get.offAllNamed(Routes.LOGIN);
               },
               onCancel: () => Get.back());
         } else

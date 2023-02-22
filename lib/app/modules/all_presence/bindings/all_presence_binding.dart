@@ -6,7 +6,7 @@ class AllPresenceBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AllPresenceController>(
-      () => AllPresenceController(),
+      () => AllPresenceController(sharedPreferences: Get.find()),
     );
   }
 }

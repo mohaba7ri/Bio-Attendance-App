@@ -107,7 +107,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                           builder:
                               (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                             final data = snapshot.data!.docs.where((element) =>
-                                element['userName'].contains(
+                                element['userName'].toLowerCase().contains(
                                     _controller.searchValue.toLowerCase()));
                             switch (snapshot.connectionState) {
                               case ConnectionState.waiting:
