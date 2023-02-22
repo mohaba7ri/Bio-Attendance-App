@@ -6,7 +6,7 @@ class BranchHomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<BranchHomeController>(
-      () => BranchHomeController(),
+      () => BranchHomeController(sharedPreferences: Get.find()),
     );
   }
 }

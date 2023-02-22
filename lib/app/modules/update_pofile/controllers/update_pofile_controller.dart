@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdatePofileController extends GetxController {
   RxBool isLoading = false.obs;
+  final SharedPreferences sharedPreferences;
+  UpdatePofileController({required this.sharedPreferences});
   TextEditingController employeeidC = TextEditingController();
   TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
@@ -22,7 +25,7 @@ class UpdatePofileController extends GetxController {
   XFile? image;
 
   Future<void> updateProfile() async {
-    String uid = auth.currentUser!.uid;
+    String uid = sharedPreferences.getString('userId')!;
     if (employeeidC.text.isNotEmpty &&
         nameC.text.isNotEmpty &&
         emailC.text.isNotEmpty) {
@@ -44,15 +47,14 @@ class UpdatePofileController extends GetxController {
         await firestore.collection("user").doc(uid).update(data);
         image = null;
         Get.back();
-        CustomToast.successToast( 'Success Update Profile');
+        CustomToast.successToast('Success Update Profile');
       } catch (e) {
-        CustomToast.errorToast(
-             'Cant Update Profile. Err : ${e.toString()}');
+        CustomToast.errorToast('Cant Update Profile. Err : ${e.toString()}');
       } finally {
         isLoading.value = false;
       }
     } else {
-      CustomToast.errorToast( 'You must fill all form');
+      CustomToast.errorToast('You must fill all form');
     }
   }
 
@@ -66,7 +68,7 @@ class UpdatePofileController extends GetxController {
   }
 
   void deleteProfile() async {
-    String uid = auth.currentUser!.uid;
+    String uid = sharedPreferences.getString('userId')!;
     try {
       await firestore.collection("user").doc(uid).update({
         "avatar": FieldValue.delete(),

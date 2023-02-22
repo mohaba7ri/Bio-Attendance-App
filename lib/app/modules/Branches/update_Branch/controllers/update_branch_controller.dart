@@ -85,7 +85,7 @@ class UpdateBranchController extends GetxController {
   }
 
   Future<void> storePosition(Position position, String address) async {
-    //  String uid = auth.currentUser!.uid;
+    //  String uid = sharedPreferences.getString('userId')!;
     await branch.doc().set({
       "position": {
         "latitude": position.latitude,

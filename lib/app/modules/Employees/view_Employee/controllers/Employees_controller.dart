@@ -9,7 +9,7 @@ class ListEmployeeController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> Employee() async* {
     print("called");
-    // String uid = auth.currentUser!.uid;
+    // String uid = sharedPreferences.getString('userId')!;
     yield* firestore.collection("user").snapshots();
   }
 }
