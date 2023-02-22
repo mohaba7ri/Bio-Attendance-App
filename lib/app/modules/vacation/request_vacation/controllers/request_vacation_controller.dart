@@ -2,17 +2,19 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:presence/app/modules/home/controllers/home_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class VacationRequestController extends GetxController {
-  var homeController = HomeController();
+  final SharedPreferences sharedPreferences;
+  VacationRequestController({required this.sharedPreferences});
+  var homeController = HomeController(sharedPreferences: Get.find());
   final formKey = GlobalKey<FormState>();
   final startDateController = TextEditingController().obs;
   final endDateController = TextEditingController().obs;
@@ -25,17 +27,14 @@ class VacationRequestController extends GetxController {
   String? userName;
   String? branchName;
   String? adminDeviceToken;
+  DateTime date = DateTime.now();
   // FilePickerResult? vacationFile;
-  String uid = FirebaseAuth.instance.currentUser!.uid;
+
   RxString leaveTypeValue = 'please select'.obs;
 
   final vacationTypeList = <DropdownMenuItem<String>>[].obs;
 
-  CollectionReference vacationRequest =
-      FirebaseFirestore.instance.collection('vacationRequest');
-  CollectionReference leaveTypeStore =
-      FirebaseFirestore.instance.collection('vacationType');
-  CollectionReference user = FirebaseFirestore.instance.collection('user');
+  var firebase = FirebaseFirestore.instance;
 
   @override
   void onInit() async {
@@ -48,8 +47,9 @@ class VacationRequestController extends GetxController {
   }
 
   Future getUserData() async {
+    String uid = sharedPreferences.getString('userId')!;
     try {
-      await user.doc(uid).get().then((query) {
+      await firebase.collection('user').doc(uid).get().then((query) {
         Map<String, dynamic> data = query.data() as Map<String, dynamic>;
         userName = data['name'];
 
@@ -59,15 +59,16 @@ class VacationRequestController extends GetxController {
   }
 
   Future getAdminData() async {
-    print('heloooooo');
+  
     try {
-      await user
+      await firebase
+          .collection('user')
           .where('role', isEqualTo: 'Admin')
           .where('branchName', isEqualTo: branchName)
           .get()
           .then((query) {
         query.docs.forEach((doc) {
-          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          Map<String, dynamic> data = doc.data();
           print('Admin:${data['name']}');
           adminDeviceToken = data['deviceToken'];
           print('Admin token$adminDeviceToken');
@@ -137,9 +138,10 @@ class VacationRequestController extends GetxController {
   }
 
   Future storeVacationData() async {
+    String uid = sharedPreferences.getString('userId')!;
     isloading!.value = true;
     String vacationId = const Uuid().v4();
-    await vacationRequest.doc(vacationId).set({
+    await firebase.collection('vacationRequest').doc(vacationId).set({
       'vacationId': vacationId,
       'vacationType': leaveTypeValue.value,
       'startDate': startDateController.value.text,
@@ -153,8 +155,13 @@ class VacationRequestController extends GetxController {
       'status': 'Pending',
       'cancelled': '',
     }).whenComplete(() async {
-      await homeController.sendPushMessage(
-          adminDeviceToken!, userName!, 'Vacation Request by:');
+      String userDevice = sharedPreferences.getString('deviceToken')!;
+      storeNotefications(
+          adminDeviceToken: adminDeviceToken,
+          body: userName,
+          docId: vacationId,
+          title: 'Vacation Request By :',
+          userDeviceToken: userDevice);
       isloading!.value = false;
       fileName = '';
       filePath = '';
@@ -162,6 +169,27 @@ class VacationRequestController extends GetxController {
       fileController.value.text = ' ';
       CustomToast.successToast('your_request_sent_successfully');
     });
+  }
+
+  String _noteficationId = const Uuid().v4();
+  Future storeNotefications(
+      {String? adminDeviceToken,
+      String? userDeviceToken,
+      String? body,
+      String? docId,
+      String? title}) async {
+    try {
+      await firebase.collection('notefications').doc(docId).set({
+        'body': body,
+        'userDeviceToken': userDeviceToken,
+        'title': title,
+        'adminDeviceToken': adminDeviceToken,
+        'date': date
+      }).whenComplete(() async {
+        await homeController.sendPushMessage(
+            adminDeviceToken!, userName!, 'Vacation Request by:');
+      });
+    } catch (e) {}
   }
 
   void calculateDays() {

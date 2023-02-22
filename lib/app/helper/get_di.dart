@@ -27,12 +27,12 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => ApiClient(sharedPreferences: Get.find()));
   Get.lazyPut(() => LanguagesController(
       sharedPreferences: Get.find(), apiClient: Get.find()));
-  Get.put(PresenceController(), permanent: true);
+  Get.put(PresenceController(sharedPreferences: Get.find()), permanent: true);
   Get.put(PageIndexController(), permanent: true);
-  Get.put(ProfileController());
+  Get.put(ProfileController(sharedPreferences: Get.find()));
   Get.put(LoadingConfig());
-  Get.put(HomeController(), permanent: true);
-  Get.put(BiometricController());
+  Get.put(HomeController(sharedPreferences: Get.find()), permanent: true);
+  Get.put(BiometricController( sharedPreferences: Get.find()),);
 
   for (LanguageModel languageModel in AppConstants.languages) {
     String jsonStringValues = await rootBundle

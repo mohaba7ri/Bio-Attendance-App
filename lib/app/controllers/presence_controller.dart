@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:presence/company_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PresenceController extends GetxController {
   RxBool isLoading = false.obs;
@@ -17,7 +18,8 @@ class PresenceController extends GetxController {
   DateTime? overlyTime;
   DateTime? currentTime = DateTime.now();
   String? timeStatus;
-
+  final SharedPreferences sharedPreferences;
+  PresenceController({required this.sharedPreferences});
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -132,7 +134,8 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
+    bool allowCheckIn =
+        await checkVacationStatus(sharedPreferences.getString('userId')!);
     if (allowCheckIn) {
       CustomAlertDialog.showPresenceAlert(
         title: "do_you_want_to_check_in?".tr,
@@ -227,7 +230,8 @@ class PresenceController extends GetxController {
     bool in_area,
   ) async {
     update();
-    bool allowCheckIn = await checkVacationStatus(auth.currentUser!.uid);
+    bool allowCheckIn =
+        await checkVacationStatus(sharedPreferences.getString('userId')!);
 
     if (allowCheckIn) {
       bool checkIn = await calCheckIn();
@@ -276,7 +280,8 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckOut = await checkVacationStatus(auth.currentUser!.uid);
+    bool allowCheckOut =
+        await checkVacationStatus(sharedPreferences.getString('userId')!);
 
     if (allowCheckOut) {
       bool chechOut = await calCheckOut();
@@ -326,7 +331,7 @@ class PresenceController extends GetxController {
 
   Future<void> processPresence(
       Position position, String address, double distance) async {
-    String uid = auth.currentUser!.uid;
+    String uid = sharedPreferences.getString('userId')!;
     String todayDocId =
         DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
 
@@ -368,7 +373,7 @@ class PresenceController extends GetxController {
   }
 
   Future<void> updatePosition(Position position, String address) async {
-    String uid = auth.currentUser!.uid;
+    String uid = sharedPreferences.getString('userId')!;
     await firestore.collection("user").doc(uid).update({
       "position": {
         "latitude": position.latitude,

@@ -36,7 +36,7 @@ class AddBranchController extends GetxController {
         BranchData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast( 'Error : ${e}');
+      CustomToast.errorToast('Error : ${e}');
     }
   }
 
@@ -62,7 +62,7 @@ class AddBranchController extends GetxController {
   }
 
   Future<void> storePosition(Position position, String address) async {
-    //  String uid = auth.currentUser!.uid;
+    //  String uid = sharedPreferences.getString('userId')!;
     await branch.doc().set({
       "position": {
         "latitude": position.latitude,
@@ -91,13 +91,13 @@ class AddBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast( "Added branch successfully");
+        CustomToast.successToast("Added branch successfully");
         Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast( "You need to fill all fields");
+      CustomToast.errorToast("You need to fill all fields");
     }
   }
 

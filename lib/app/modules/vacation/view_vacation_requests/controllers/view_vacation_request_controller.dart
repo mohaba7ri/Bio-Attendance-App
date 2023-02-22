@@ -1,12 +1,17 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/modules/home/controllers/home_controller.dart';
 
 class ViewVacationRequestsController extends GetxController {
+  final homeController = Get.find<HomeController>();
   RxBool switchValue = false.obs;
   String searchValue = '';
   DateTime? start;
   DateTime end = DateTime.now();
   String? userName;
+  String? vacationId;
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -35,23 +40,39 @@ class ViewVacationRequestsController extends GetxController {
     Get.back();
   }
 
-  CollectionReference vacation =
-      FirebaseFirestore.instance.collection('vacationRequest');
-
-  Future<void> accept(String docId) async {
+  Future accept(String docId) async {
     try {
-      await vacation.doc(docId).update({'status': "Accepted"});
+      await firestore
+          .collection('vacationRequest')
+          .doc(docId)
+          .update({'status': "Accepted"});
     } catch (e) {
       print('the error$e');
     }
   }
 
-  Future<void> deny(String docId) async {
+  Future deny(String docId) async {
     try {
-      await vacation.doc(docId).update({'status': "Denied"});
+      await firestore
+          .collection('vacationRequest')
+          .doc(docId)
+          .update({'status': "Denied"});
       update();
     } catch (e) {
       print('the error$e');
     }
+  }
+
+  Future getNotefication(String? docId, String status) async {
+    await firestore
+        .collection('notefications')
+        .doc(docId)
+        .get()
+        .then((query) async {
+      Map<String, dynamic> data = query.data() as Map<String, dynamic>;
+      String userDeviceToken = data['userDeviceToken'];
+      String title = 'Your Vacation has been : \n';
+      homeController.sendPushMessage(userDeviceToken, status, title);
+    });
   }
 }

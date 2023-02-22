@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:presence/app/controllers/biometric_controller.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
+import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/util/styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
@@ -15,6 +17,8 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final pageIndexController = Get.find<PageIndexController>();
+  final SharedPreferences sharedPreferences;
+  ProfileView({required this.sharedPreferences});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,25 +117,32 @@ class ProfileView extends GetView<ProfileController> {
                       },
                     ),
                     GetBuilder<BiometricController>(
-                      builder: (controller) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 28),
+                      builder: (_controller) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 16),
                         child: Row(
                           children: [
                             Switch(
-                                value: controller.isEnabled,
+                                value: _controller.isEnabled,
                                 onChanged: (value) {
-                                  controller.enabledFingerPrint(value);
-                                  controller.isEnabled = value;
-                                  print(controller.isEnabled);
+                                  String userId = controller.sharedPreferences
+                                      .getString('userId')!;
+                                  _controller.enabledFingerPrint(userId, value);
+
+                                  print(_controller.isEnabled);
                                 }),
                             Text(
                               'Enable Biometric',
                               style: robotoMedium,
                             ),
                             Spacer(),
-                            Icon(
-                              Icons.arrow_back_ios_new,
-                              size: 18,
+                            GetBuilder<LanguagesController>(
+                              builder: (_controller) => Icon(
+                                _controller.isLtr == false
+                                    ? Icons.keyboard_arrow_left
+                                    : Icons.keyboard_arrow_right,
+                                size: 25,
+                              ),
                             )
                           ],
                         ),

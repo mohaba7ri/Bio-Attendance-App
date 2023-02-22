@@ -1,23 +1,43 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:presence/app/routes/app_pages.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BiometricController extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+    loadUser();
+    isFingerPrintEnabled();
+  }
+
+  final SharedPreferences sharedPreferences;
+  BiometricController({required this.sharedPreferences});
+
   bool isEnabled = false;
 
   final LocalAuthentication _localAuthentication = LocalAuthentication();
-  //this function to check whether your phone enable fingerprint or not
+
   Future<bool> isFingerPrintEnabled() async {
     bool fingerPrintEnabled = await _localAuthentication.canCheckBiometrics;
-
     return fingerPrintEnabled;
   }
 
-//this function  for authentication an ensure the fingerprint the same in your phone
   Future<bool> isAuth(String reason) async {
-    bool auth = await _localAuthentication.authenticate(
+    bool auth = false;
+    try {
+      auth = await _localAuthentication.authenticate(
         localizedReason: reason,
-        options: AuthenticationOptions(biometricOnly: true));
+        options: const AuthenticationOptions(
+          biometricOnly: true,
+          useErrorDialogs: false,
+        ),
+      );
+    } on PlatformException catch (e) {
+      print(e);
+    }
     return auth;
   }
 
@@ -27,13 +47,14 @@ class BiometricController extends GetxController {
     update();
   }
 
-  void enabledFingerPrint(value) async {
+  void enabledFingerPrint(String userId, value) async {
     update();
     if (value) {
-      //ensure that fingerprint is enabled
       bool isFingerprintEnabled = await isFingerPrintEnabled();
       if (isFingerprintEnabled) {
         await UserStorage.setFingerprint();
+        sharedPreferences.setString('userId', userId);
+        sharedPreferences.setString(userId, value.toString());
       }
     } else {
       await UserStorage._storage.delete(key: 'fingerprint');
@@ -42,11 +63,19 @@ class BiometricController extends GetxController {
     update();
   }
 
+  String fprint = '';
+  void isFingerprintEnabled() async {
+    fprint = await UserStorage.getFingerprint() ?? '';
+    update();
+  }
+
   void fingerprintLogin() async {
     bool isFingerprintEnabled = await isFingerPrintEnabled();
     if (isFingerprintEnabled) {
       bool _isEnabled = await isAuth('login using finger print');
-      if (_isEnabled) {}
+      if (_isEnabled) {
+        Get.offAllNamed(Routes.HOME);
+      }
     }
   }
 }

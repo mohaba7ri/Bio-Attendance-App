@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/view_vacation_requests/controllers/view_vacation_request_controller.dart';
 import 'package:presence/app/util/styles.dart';
 
-class acceptDeny_buttons extends StatelessWidget {
+class acceptDeny_buttons extends GetView<ViewVacationRequestsController> {
   final data;
+
   const acceptDeny_buttons(
     this.data, {
     super.key,
@@ -22,7 +23,6 @@ class acceptDeny_buttons extends StatelessWidget {
         child: Row(
           children: [
             //  check in
-
             Expanded(
               child: Column(
                 children: [
@@ -34,9 +34,10 @@ class acceptDeny_buttons extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent,
                         ),
-                        onPressed: () {
-                          print(data['vacationId']);
-                          controller.deny(data['vacationId']);
+                        onPressed: () async {
+                          await controller.deny(data['vacationId']);
+                          await controller.getNotefication(
+                              data['vacationId'], 'Denied');
                         },
                         child: Padding(
                           padding: EdgeInsets.all(10),
@@ -62,8 +63,10 @@ class acceptDeny_buttons extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: ElevatedButton(
-                        onPressed: () {
-                          controller.accept(data['vacationId']);
+                        onPressed: () async {
+                          await controller.accept(data['vacationId']);
+                          await controller.getNotefication(
+                              data['vacationId'], 'Accepted');
                         },
                         child: Padding(
                           padding: EdgeInsets.all(10),

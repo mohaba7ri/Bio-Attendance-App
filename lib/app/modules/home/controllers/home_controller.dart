@@ -13,6 +13,7 @@ import 'package:presence/app/widgets/toast/custom_toast.dart';
 import 'package:presence/company_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../util/images.dart';
 import '../../../widgets/dialog/custom_alert_dialog.dart';
@@ -21,6 +22,8 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxString officeDistance = "-".obs;
+  SharedPreferences sharedPreferences;
+  HomeController({required this.sharedPreferences});
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -191,8 +194,7 @@ class HomeController extends GetxController {
 
   Future<String> getDistanceToOffice() async {
     print('calleeeed');
-    Map<String, dynamic> determinePosition = 
-    await _determinePosition();
+    Map<String, dynamic> determinePosition = await _determinePosition();
     if (!determinePosition["error"]) {
       Position position = determinePosition["position"];
       double distance = Geolocator.distanceBetween(
@@ -266,12 +268,14 @@ class HomeController extends GetxController {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
-    String uid = auth.currentUser!.uid;
+    String uid = sharedPreferences.getString('userId')!;
+
     yield* firestore.collection("user").doc(uid).snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastPresence() async* {
-    String uid = auth.currentUser!.uid;
+    String uid =sharedPreferences.getString('userId')!;
+    //uid.isEmpty ? sharedPreferences.getString('userId')! : uid;
     yield* firestore
         .collection("user")
         .doc(uid)
@@ -282,7 +286,8 @@ class HomeController extends GetxController {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamTodayPresence() async* {
-    String uid = auth.currentUser!.uid;
+    String uid =  sharedPreferences.getString('userId')!;
+   
     String todayDocId =
         DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
     yield* firestore

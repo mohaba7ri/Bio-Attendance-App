@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/loading_config.dart';
 import 'package:presence/app/controllers/page_index_controller.dart';
 import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_widget.dart';
@@ -39,14 +37,19 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              //   EasyLoading.instance.maskColor = Colors.amber;
-              Get.find<LoadingConfig>().configLoading();
-              controller.isLoading == false
-                  ? EasyLoading.show(
-                      status: 'please wait...',
-                      maskType: EasyLoadingMaskType.custom)
-                  : SizedBox();
-              Timer(Duration(milliseconds: 1000), () => EasyLoading.dismiss());
+              // EasyLoading.instance.maskColor = Colors.amber;
+              // Get.find<LoadingConfig>().configLoading();
+              // controller.isLoading == false
+              //     ? EasyLoading.show(
+              //         status: 'please wait...',
+              //         maskType: EasyLoadingMaskType.custom)
+              //     : SizedBox();
+              // Timer(Duration(milliseconds: 1000), () => EasyLoading.dismiss());
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColor.blueColor,
+                ),
+              );
             }
             if (snapshot.data == null) {
               return Center(

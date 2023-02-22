@@ -23,7 +23,7 @@ class UpdateEmployeeController extends GetxController {
 
 
   // Future<void> updateEmployee() async {
-  //   String uid = auth.currentUser!.uid;
+  //   String uid = sharedPreferences.getString('userId')!;
   //   if (employeeAddressC.text.isNotEmpty &&
   //       nameC.text.isNotEmpty &&
   //       emailC.text.isNotEmpty) {
@@ -67,7 +67,7 @@ class UpdateEmployeeController extends GetxController {
   // }
 
   // void deleteProfile() async {
-  //   String uid = auth.currentUser!.uid;
+  //   String uid = sharedPreferences.getString('userId')!;
   //   try {
   //     await firestore.collection("user").doc(uid).update({
   //       "avatar": FieldValue.delete(),
