@@ -110,6 +110,7 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
                 //   print('userID' +
                 //       controller.store.read('userID'));
                 // }
+                controller.updateEmployee();
               },
               child: Text(
                 (controller.isLoading == false) ? 'edit'.tr : 'Loading'.tr,

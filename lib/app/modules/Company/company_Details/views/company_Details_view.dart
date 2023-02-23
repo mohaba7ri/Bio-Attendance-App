@@ -42,7 +42,7 @@ class CompanyDetailsView extends GetView<CompanyDetailsController> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 1,
-              color: AppColor.secondaryExtraSoft,
+              color: AppColor.greyShade200,
             ),
           ),
         ),

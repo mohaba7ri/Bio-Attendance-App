@@ -133,7 +133,17 @@
 "getEmail":"We will send password reset link to\nyour email.",
 "send_to_email":"Send to Email",
 "approved_vac":"Approved Vacation",
-"details":"Details"
+"details":"Details",
+"emp_reports":"Employee Reports",
+"from":"From",
+"to":"To",
+"all_emps_rep":"All Employees Reports",
+"emp_rep":"Employee Reports",
+"branche_rep":"Branch Reports",
+"all_branches_rep":"All Branches Reports",
+"choose_emp":"Choose Employee",
+"choose_branch":"Choose Branch",
+"select_the_dates":"Select the Dates"
 
 
 }

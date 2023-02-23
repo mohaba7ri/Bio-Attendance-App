@@ -59,9 +59,7 @@ void main() async {
             return GetMaterialApp(
               //  title: "Application",
               debugShowCheckedModeBanner: false,
-              initialRoute: snapshot.data != null
-                  ? Routes.LIST_EMPLOYEES
-                  : Routes.LIST_EMPLOYEES,
+              initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
               getPages: AppPages.routes,
               builder: EasyLoading.init(),
               locale: languageController.locale,

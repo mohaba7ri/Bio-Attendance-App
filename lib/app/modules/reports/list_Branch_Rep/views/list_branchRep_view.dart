@@ -1,24 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/Employees/employee_Update/controllers/update_employee_controller.dart';
 import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 import 'package:presence/app/util/images.dart';
 import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-import '../controllers/list_branch_controller.dart';
+import '../controllers/list_branchRep_controller.dart';
 
-class listBranchView extends GetView<listBranchController> {
+class listBranchRepView extends GetView<listBranchRepController> {
   @override
   Widget build(BuildContext context) {
-
-    listBranchController _listBranchController = listBranchController();
+    listBranchRepController _listBranchRepController =
+        listBranchRepController();
     return Scaffold(
       backgroundColor: AppColor.greyColor,
       appBar: AppBar(
-        title: Text('Branches'.tr, style: robotoMedium),
+        title: Text('choose_branch'.tr, style: robotoMedium),
         leading: backButton,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -42,7 +41,7 @@ class listBranchView extends GetView<listBranchController> {
       body: Container(
         color: Colors.grey[200],
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: _listBranchController.branch(),
+          stream: _listBranchRepController.branch(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -61,7 +60,7 @@ class listBranchView extends GetView<listBranchController> {
                             child: GestureDetector(
                                 onTap: () {
                                   print(snapshot.data!.docs[index]['name']);
-                                  Get.toNamed(Routes.UPDATE_BRANCH,
+                                  Get.toNamed(Routes.BRANCH_REP,
                                       arguments: data[index]);
                                 },
                                 child: Container(

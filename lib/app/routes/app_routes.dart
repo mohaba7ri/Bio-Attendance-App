@@ -45,6 +45,13 @@ abstract class Routes {
   static const LANGUAGES = _Paths.LANGUAGES;
   static const MY_VACATION = _Paths.MY_VACATION;
   static const MANAGE_VACATION = _Paths.MANAGE_VACATION;
+  static const EMP_REPORTS = _Paths.EMP_REPORTS;
+  static const REP_HOME = _Paths.REP_HOME;
+  static const LIST_EMPLOYEES_REP = _Paths.LIST_EMPLOYEES_REP;
+  static const ALL_EMPS_REP = _Paths.ALL_EMPS_REP;
+  static const ALL_BRANCHES_REP = _Paths.ALL_BRANCHES_REP;
+  static const LIST_BRANCHES_REP = _Paths.LIST_BRANCHES_REP;
+  static const BRANCH_REP = _Paths.BRANCH_REP;
 }
 
 abstract class _Paths {
@@ -90,4 +97,11 @@ abstract class _Paths {
   static const LANGUAGES = '/LANGUAGES';
   static const MY_VACATION = '/MY_VACATION';
   static const MANAGE_VACATION = '/MANAGE_VACATION';
+  static const EMP_REPORTS = '/EMP_REPORTS';
+  static const REP_HOME = '/REP_HOME';
+  static const LIST_EMPLOYEES_REP = '/LIST_EMPLOYEES_REP';
+  static const ALL_EMPS_REP = '/ALL_EMPS_REP';
+  static const ALL_BRANCHES_REP = '/ALL_BRANCHES_REP';
+  static const LIST_BRANCHES_REP = '/LIST_BRANCHES_REP';
+  static const BRANCH_REP = '/BRANCH_REP';
 }

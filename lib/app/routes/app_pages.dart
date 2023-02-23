@@ -62,6 +62,21 @@ import '../modules/Employees/view_Employee/bindings/Employees_binding.dart';
 import '../modules/Employees/view_Employee/views/Employees_view.dart';
 import '../modules/dashboard/bindings/attendance_binding.dart';
 import '../modules/dashboard/views/attendance_view.dart';
+import '../modules/reports/allBranchesReports/binding/all_branches_reports_binding.dart';
+import '../modules/reports/allBranchesReports/view/all_branches_reports_views.dart';
+import '../modules/reports/allEmpsReports/binding/all_emps_reports_binding.dart';
+import '../modules/reports/allEmpsReports/view/all_emps_reports_view.dart';
+import '../modules/reports/branchReports/binding/branch_reports_binding.dart';
+import '../modules/reports/branchReports/view/branch_reports_view.dart';
+import '../modules/reports/empReports/binding/emp_reports_binding.dart';
+import '../modules/reports/empReports/view/emp_reports_view.dart';
+import '../modules/reports/list_Branch_Rep/bindings/list_branchRep_binding.dart';
+import '../modules/reports/list_Branch_Rep/views/list_branchRep_view.dart';
+import '../modules/reports/reportsHome/bindings/reports_home_binding.dart';
+import '../modules/reports/reportsHome/views/reports_home_view.dart';
+
+import '../modules/reports/view_EmployeeRep/bindings/EmployeesRep_binding.dart';
+import '../modules/reports/view_EmployeeRep/views/EmployeesRep_view.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
@@ -247,5 +262,36 @@ class AppPages {
       page: () => MyVacationView(),
       binding: MyVacationBinding(),
     ),
+    GetPage(
+        name: _Paths.EMP_REPORTS,
+        page: () => EmpReportsView(),
+        binding: EmpReportsBinding()),
+    GetPage(
+        name: _Paths.REP_HOME,
+        page: () => ReportsHomeView(),
+        binding: ReportsHomeBinding()),
+    GetPage(
+        name: _Paths.LIST_EMPLOYEES_REP,
+        page: () => ListEmployeeRepView(),
+        binding: ListEmployeeRepBinding()),
+           GetPage(
+        name: _Paths.ALL_EMPS_REP,
+        page: () => AllEmpsReportsView(),
+        binding: AllEmpsReportsBinding()),
+
+ GetPage(
+        name: _Paths.ALL_BRANCHES_REP,
+        page: () => AllBranchesReportsView(),
+        binding: AllBranchesReportsBinding()),
+         GetPage(
+        name: _Paths.LIST_BRANCHES_REP,
+        page: () => listBranchRepView(),
+        binding: listBranchRepBinding()),
+             GetPage(
+        name: _Paths.BRANCH_REP,
+        page: () => BranchReportsView(),
+        binding: BranchReportsBinding()),
+
+
   ];
 }

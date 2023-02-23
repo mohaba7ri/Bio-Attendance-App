@@ -7,9 +7,12 @@ import 'package:presence/app/widgets/presence_card.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widgets/custom_appbar.dart';
+import '../../employee_Update/controllers/update_employee_controller.dart';
 import '../controllers/employee_details_controller.dart';
 
 class EmployeeDetailView extends GetView<EmployeeDetailController> {
+  final updateEmp = Get.put(UpdateEmployeeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +22,11 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
         color: AppColor.primary,
         action: [
           IconButton(
-              onPressed: () => Get.toNamed(Routes.EMP_UPDATE),
+              onPressed: () {
+                Get.toNamed(Routes.EMP_UPDATE,
+                    arguments: updateEmp.EmpDetail['userId']);
+               // print(updateEmp.EmpDetail['userId']);
+              },
               icon: Icon(Icons.edit))
         ],
       ),
