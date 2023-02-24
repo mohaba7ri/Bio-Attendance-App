@@ -36,9 +36,7 @@ class ManagementScreen extends StatelessWidget {
           title: 'attendance'.tr,
           route: Routes.ATTENDANCE),
       MenuModel(
-          icon: Images.employess,
-          title: 'reports'.tr,
-          route: Routes.REP_HOME),
+          icon: Images.report, title: 'reports'.tr, route: Routes.REP_HOME),
       MenuModel(
           icon: Images.language, title: 'language'.tr, route: Routes.LANGUAGES),
       MenuModel(

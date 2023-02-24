@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
+import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
 import '../controller/all_branches_reports_controller.dart';
@@ -53,6 +54,13 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Image.asset(
+                          Images.report_ani,
+                        )),
+                      ),
                       Row(
                         children: [
                           Padding(

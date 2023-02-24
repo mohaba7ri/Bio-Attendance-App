@@ -28,4 +28,9 @@ class Images {
   static const String leave = 'assets/icons/leave.png';
   static const String myVacations = 'assets/icons/my_vacations.png';
   static const String editCom = 'assets/icons/edit_company.png';
+  static const String emp_one = 'assets/icons/emp_one.png';
+  static const String branches = 'assets/icons/buildings.png';
+  static const String report = 'assets/icons/report.png';
+  static const String report_ani = 'assets/icons/report_ani.gif';
+  static const String branch = 'assets/icons/office.png';
 }

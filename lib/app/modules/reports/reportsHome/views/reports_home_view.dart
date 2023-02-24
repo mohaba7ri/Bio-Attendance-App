@@ -61,7 +61,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                         isDanger: true,
                         title: 'all_emps_rep'.tr,
                         icon: Image.asset(
-                          Images.addEmp,
+                          Images.employess,
                         ),
                         onTap: () => Get.toNamed(Routes.ALL_EMPS_REP),
                       ),
@@ -69,7 +69,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                         isDanger: true,
                         title: 'emp_rep'.tr,
                         icon: Image.asset(
-                          Images.viewEmps,
+                          Images.emp_one,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.LIST_EMPLOYEES_REP,
@@ -80,7 +80,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                         isDanger: true,
                         title: 'all_branches_rep'.tr,
                         icon: Image.asset(
-                          Images.addEmp,
+                          Images.branches,
                         ),
                         onTap: () => Get.toNamed(Routes.ALL_BRANCHES_REP),
                       ),
@@ -88,7 +88,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                         isDanger: true,
                         title: 'branche_rep'.tr,
                         icon: Image.asset(
-                          Images.viewEmps,
+                          Images.branch,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.LIST_BRANCHES_REP,
