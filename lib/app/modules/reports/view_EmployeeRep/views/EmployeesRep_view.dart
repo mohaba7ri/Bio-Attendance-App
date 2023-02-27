@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-import '../../../languages/controller/languages_controller.dart';
+import '../../../vacation/view_vacation_requests/views/widgets/view_vacation_request_widget.dart';
 import '../controllers/EmployeesRep_controller.dart';
 
 class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
@@ -50,87 +49,105 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
       ),
       body: Container(
         color: AppColor.greyShade200,
-        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: _listEmployeeRepController.Employee(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(child: CircularProgressIndicator());
-              case ConnectionState.active:
-              case ConnectionState.done:
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var date = snapshot.data!.docs;
-
-                    return date[index]['name'] == 'name'
-                        ? SizedBox()
-                        : Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Get.toNamed(Routes.EMP_REPORTS,
-                                    arguments: snapshot.data!.docs[index]);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black12, blurRadius: 10)
-                                  ],
+        child: GetBuilder<ListEmployeeRepController>(
+          builder: (_controller) => Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onSaved: (value) {
+                        print(value);
+                      },
+                      onChanged: (value) {
+                        _controller.changeSearchValue(value);
+                      },
+                      // controller: editingController,
+                      decoration: InputDecoration(
+                          labelText: "Search".tr,
+                          hintText: "",
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25.0)))),
+                    ),
+                  ),
+                  controller.searchValue == ''
+                      ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: _controller.Employee(),
+                          builder:
+                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              print('the error${snapshot.error}');
+                              return const Text('Something went wrong');
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (snapshot.data!.docs.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'There is No Data !',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      letterSpacing: 1.5,
+                                      color: Colors.blueGrey,
+                                      fontFamily: 'Acme',
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                child: ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 5.0, vertical: 1.0),
-                                    leading: Container(
-                                      padding: EdgeInsets.only(right: 12.0),
-                                      decoration: new BoxDecoration(
-                                          border: new Border(
-                                              right: new BorderSide(
-                                                  width: 2.0,
-                                                  color: Colors.black))),
-                                      child: Image.asset(Images.profile,
-                                          color: Colors.black),
-                                    ),
-                                    title: Text(
-                                      date[index]['name'],
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.work_outline,
-                                            color: Colors.black),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Text(date[index]['job'],
-                                              style: TextStyle(
-                                                  color: Colors.black)),
-                                        )
-                                      ],
-                                    ),
-                                    trailing: GetBuilder<LanguagesController>(
-                                      builder: (controller) => Icon(
-                                        controller.isLtr == false
-                                            ? Icons.keyboard_arrow_left
-                                            : Icons.keyboard_arrow_right,
-                                      ),
-                                    )),
-                              ),
-                            ));
-                  },
-                );
-
-              default:
-                return SizedBox();
-            }
-          },
+                              );
+                            }
+                            dynamic data = snapshot.data!.docs;
+                            return ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  dynamic data = snapshot.data!.docs;
+                                  return ViewVacationRequestWidget(
+                                    data: data,
+                                    index: index,
+                                    isIndex: true,
+                                  );
+                                });
+                          },
+                        )
+                      : StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: _controller.Employee(),
+                          builder:
+                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                            final data = snapshot.data!.docs.where((element) =>
+                                element['name'].toLowerCase().contains(
+                                    _controller.searchValue.toLowerCase()));
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              case ConnectionState.active:
+                              case ConnectionState.done:
+                                return ListView(
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  children: data
+                                      .map((e) => ViewVacationRequestWidget(
+                                            data: e,
+                                          ))
+                                      .toList(),
+                                );
+                              default:
+                                return SizedBox();
+                            }
+                          },
+                        )
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -32,7 +32,8 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
           ),
         ),
       ),
-      body: Container(
+      body: 
+      Container(
         color: AppColor.greyShade200,
         child: GetBuilder<ViewVacationRequestsController>(
           builder: (_controller) => Container(
@@ -58,6 +59,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                                   BorderRadius.all(Radius.circular(25.0)))),
                     ),
                   ),
+               
                   controller.searchValue == ''
                       ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: _controller.vacationRequests(),
@@ -135,6 +137,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
           ),
         ),
       ),
+   
     );
   }
 }

@@ -64,7 +64,8 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
 
                     return date[index]['name'] == 'name'
                         ? SizedBox()
-                        : Padding(
+                        : 
+                        Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                               onTap: () {
@@ -82,7 +83,8 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                         color: Colors.black12, blurRadius: 10)
                                   ],
                                 ),
-                                child: ListTile(
+                                child:
+                                 ListTile(
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 5.0, vertical: 1.0),
                                     leading: Container(
@@ -121,8 +123,10 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                             : Icons.keyboard_arrow_right,
                                       ),
                                     )),
+                             
                               ),
                             ));
+                 
                   },
                 );
 

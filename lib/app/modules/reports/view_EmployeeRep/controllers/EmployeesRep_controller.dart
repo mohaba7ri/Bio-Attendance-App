@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/state_manager.dart';
 
 class ListEmployeeRepController extends GetxController {
+  String searchValue = '';
   //dynamic EmpList;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -11,5 +12,10 @@ class ListEmployeeRepController extends GetxController {
     print("called");
     // String uid = sharedPreferences.getString('userId')!;
     yield* firestore.collection("user").snapshots();
+  }
+
+  changeSearchValue(String value) {
+    searchValue = value;
+    update();
   }
 }

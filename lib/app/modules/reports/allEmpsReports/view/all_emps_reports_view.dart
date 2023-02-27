@@ -82,7 +82,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -102,16 +102,15 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                     if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -129,7 +128,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -144,21 +143,20 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                       if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                      if (endDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(endDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -171,11 +169,13 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                               
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),
-                            width: MediaQuery.of(context).size.width * 0.8,
+                            width: MediaQuery.of(context).size.width * 0.7,
                             height: 40,
                           ),
                         )
