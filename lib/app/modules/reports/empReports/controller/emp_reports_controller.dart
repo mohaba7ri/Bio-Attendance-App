@@ -5,10 +5,16 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EmpReportsController extends GetxController {
-  dynamic EmpList = Get.arguments;
+  String employeeName = Get.arguments;
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    employeeName = '';
+  }
 
- final startDateController = TextEditingController().obs;
+  final startDateController = TextEditingController().obs;
   final endDateController = TextEditingController().obs;
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {

@@ -66,7 +66,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                             padding: const EdgeInsets.all(0.8),
                             child: SizedBox(
                               child: Text(
-                                _Controller.EmpList['name'],
+                                _Controller.employeeName,
                                 style: robotoHuge,
                               ),
                             ),
