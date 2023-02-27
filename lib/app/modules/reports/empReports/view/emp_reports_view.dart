@@ -103,10 +103,16 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (startDate != null) {
+                                            controller
+                                                    .startDateController.value =
+                                                TextEditingController(
+                                                    text: DateFormat.yMMMd()
+                                                        .format(startDate));
+                                          } else {
+                                            controller.startDateController.value
+                                                .text = '';
+                                          }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -144,10 +150,16 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (startDate != null) {
+                                            controller
+                                                    .startDateController.value =
+                                                TextEditingController(
+                                                    text: DateFormat.yMMMd()
+                                                        .format(startDate));
+                                          } else {
+                                            controller.startDateController.value
+                                                .text = '';
+                                          }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
