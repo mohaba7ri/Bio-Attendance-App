@@ -57,18 +57,23 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
-                                child: DropdownButton2(
-                                  isExpanded: true,
-                                  dropdownWidth:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                  buttonWidth:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                  value: controller.leaveTypeValue.value,
-                                  items: controller.vacationTypeList,
-                                  onChanged: (String? selectedValue) {
-                                    controller.leaveTypeValue.value =
-                                        selectedValue!;
-                                  },
+                                child: GetBuilder<VacationRequestController>(
+                                  builder: (_controller) => DropdownButton2(
+                                    hint: Text('Please Select'),
+                                    isExpanded: true,
+                                    dropdownWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.45,
+                                    buttonWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.45,
+                                    items: _controller.vacationTypeList,
+                                    value: _controller.leaveTypeValue,
+                                    onChanged: (String? selectedValue) {
+                                      _controller
+                                          .changeLeaveType(selectedValue);
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
@@ -99,15 +104,21 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                     hint: '',
                                     suffixIcon: IconButton(
                                         onPressed: () async {
-                                          DateTime startDate =
+                                          DateTime? startDate =
                                               await controller.showDatePickers(
                                                   context,
                                                   controller.startDateController
                                                       .value.text);
-                                          controller.startDateController.value =
-                                              TextEditingController(
-                                                  text: DateFormat.yMMMd()
-                                                      .format(startDate));
+                                          if (startDate != null) {
+                                            controller
+                                                    .startDateController.value =
+                                                TextEditingController(
+                                                    text: DateFormat.yMMMd()
+                                                        .format(startDate));
+                                          } else {
+                                            controller.startDateController.value
+                                                .text = '';
+                                          }
                                         },
                                         icon: Icon(Icons.date_range)),
                                   ),
@@ -141,16 +152,21 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                     hint: '',
                                     suffixIcon: IconButton(
                                         onPressed: () async {
-                                          DateTime startDate =
+                                          DateTime? startDate =
                                               await controller.showDatePickers(
                                                   context,
                                                   controller.endDateController
                                                       .value.text);
-                                          controller.endDateController.value =
-                                              TextEditingController(
-                                                  text: DateFormat.yMMMd()
-                                                      .format(startDate));
-                                          controller.calculateDays();
+                                          if (startDate != null) {
+                                            controller.endDateController.value =
+                                                TextEditingController(
+                                                    text: DateFormat.yMMMd()
+                                                        .format(startDate));
+                                            controller.calculateDays();
+                                          } else {
+                                            controller.endDateController.value
+                                                .text = '';
+                                          }
                                         },
                                         icon: Icon(Icons.date_range)),
                                   ),

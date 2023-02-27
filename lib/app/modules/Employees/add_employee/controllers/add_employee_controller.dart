@@ -26,9 +26,9 @@ class AddEmployeeController extends GetxController {
 
   GetStorage store = new GetStorage();
 
-  String roleValue = 'Please Select';
-  String branchValue = 'Please Select';
-  var roleList = ['Please Select', 'Admin', 'Employee'];
+  String? roleValue;
+  String? branchValue;
+  var roleList = [ 'Admin', 'Employee'];
   bool isLoading = false;
   bool isLoadingCreatePegawai = false;
   bool isSelectedPolicy = false;

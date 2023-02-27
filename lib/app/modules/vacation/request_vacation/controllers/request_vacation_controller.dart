@@ -30,9 +30,9 @@ class VacationRequestController extends GetxController {
   DateTime date = DateTime.now();
   // FilePickerResult? vacationFile;
 
-  RxString leaveTypeValue = 'please select'.obs;
+  String? leaveTypeValue;
 
-  final vacationTypeList = <DropdownMenuItem<String>>[].obs;
+  final vacationTypeList = <DropdownMenuItem<String>>[];
 
   var firebase = FirebaseFirestore.instance;
 
@@ -40,10 +40,14 @@ class VacationRequestController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    await returnVacationType();
     await getUserData();
     await getAdminData();
+  }
 
-    returnVacationType();
+  changeLeaveType(value) {
+    update();
+    leaveTypeValue = value;
   }
 
   Future getUserData() async {
@@ -59,7 +63,6 @@ class VacationRequestController extends GetxController {
   }
 
   Future getAdminData() async {
-  
     try {
       await firebase
           .collection('user')
@@ -97,8 +100,8 @@ class VacationRequestController extends GetxController {
     print('the file name${fileName}');
   }
 
-  void returnVacationType() {
-    final leaveTypeStore = FirebaseFirestore.instance
+  Future returnVacationType() async {
+    final leaveTypeStore = await FirebaseFirestore.instance
         .collection('vacationType')
         .where('vacationStatus', isEqualTo: 'active');
 
@@ -109,6 +112,7 @@ class VacationRequestController extends GetxController {
           child: Text(data['vacationType']),
           value: data['vacationType'],
         ));
+        update();
       });
     });
   }
@@ -125,7 +129,7 @@ class VacationRequestController extends GetxController {
   }
 
   void submit() async {
-    if (leaveTypeValue.value == 'please select') {
+    if (leaveTypeValue == 'please select') {
       CustomToast.errorToast('please select leave type');
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
@@ -143,7 +147,7 @@ class VacationRequestController extends GetxController {
     String vacationId = const Uuid().v4();
     await firebase.collection('vacationRequest').doc(vacationId).set({
       'vacationId': vacationId,
-      'vacationType': leaveTypeValue.value,
+      'vacationType': leaveTypeValue,
       'startDate': startDateController.value.text,
       'endDate': endDateController.value.text,
       'requestDate': DateTime.now().toIso8601String(),
@@ -165,7 +169,7 @@ class VacationRequestController extends GetxController {
       isloading!.value = false;
       fileName = '';
       filePath = '';
-      leaveTypeValue.value = 'please select';
+      leaveTypeValue = 'please select';
       fileController.value.text = ' ';
       CustomToast.successToast('your_request_sent_successfully');
     });
@@ -204,7 +208,7 @@ class VacationRequestController extends GetxController {
     }
   }
 
-  Future<DateTime> showDatePickers(
+  Future<DateTime?> showDatePickers(
       BuildContext context, String initialDateString) async {
     var initialDate = DateTime.now();
     if (initialDateString.isNotEmpty) {
@@ -221,7 +225,7 @@ class VacationRequestController extends GetxController {
       lastDate: DateTime(2100),
     );
 
-    return date!;
+    return date;
   }
 
   startDayValdate() {
@@ -231,6 +235,6 @@ class VacationRequestController extends GetxController {
   }
 
   changeLeaveValue(String value) {
-    leaveTypeValue.value = value;
+    leaveTypeValue != value;
   }
 }

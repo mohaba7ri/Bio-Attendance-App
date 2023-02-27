@@ -108,7 +108,7 @@ class AddEmployeeView extends StatelessWidget {
                                               child:
                                                   DropdownButtonHideUnderline(
                                                 child: DropdownButton2(
-                                                  value: controller.roleValue,
+                                                  hint: Text('Please Select'),
                                                   buttonHeight: 50,
                                                   buttonWidth: 40,
                                                   itemHeight: 40,
@@ -122,6 +122,7 @@ class AddEmployeeView extends StatelessWidget {
                                                         ),
                                                       )
                                                       .toList(),
+                                                  value: controller.roleValue,
                                                   onChanged: (value) {
                                                     controller
                                                         .changeRoleValue(value);
@@ -167,11 +168,12 @@ class AddEmployeeView extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   left: 15),
                                               child: DropdownButton2(
+                                                hint: Text('Please Select'),
                                                 buttonHeight: 50,
                                                 buttonWidth: 40,
                                                 itemHeight: 40,
-                                                value: controller.branchValue,
                                                 items: controller.branchesList,
+                                                value: controller.branchValue,
                                                 onChanged:
                                                     (String? selectedValue) {
                                                   controller.changeBranchValue(
