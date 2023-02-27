@@ -52,7 +52,7 @@ class LoginController extends GetxController {
     if (deviceToken!.isNotEmpty) {
       await firestore
           .collection('user')
-          .doc(auth.currentUser!.uid)
+          .doc(sharedPreferences.getString('userId')!)
           .update({"deviceToken": deviceToken});
     }
   }
@@ -65,7 +65,7 @@ class LoginController extends GetxController {
           email: emailC.text.trim(),
           password: passC.text,
         );
-
+        sharedPreferences.setString('userId', auth.currentUser!.uid);
         update();
         if (credential.user != null) {
           if (credential.user!.emailVerified) {

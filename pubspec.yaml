@@ -16,6 +16,8 @@ dependencies:
   syncfusion_flutter_charts: ^20.4.49
   pie_chart: any
   firebase_messaging: ^14.2.2
+ 
+  syncfusion_flutter_pdfviewer: ^20.4.50
 
   flutter:
     sdk: flutter
@@ -41,6 +43,7 @@ dependencies:
   uuid: ^3.0.6
   shared_preferences: ^2.0.11
   flutter_local_notifications: ^13.0.0
+  flutter_easyloading: ^3.0.5
 
 
 dev_dependencies:

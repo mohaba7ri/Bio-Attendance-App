@@ -1,15 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
 import 'package:presence/app/widgets/custom_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../controllers/biometric_controller.dart';
 import '../../../util/styles.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
+  var biometricController = Get.find<BiometricController>();
+  final SharedPreferences sharedPreferences;
+  LoginView({required this.sharedPreferences});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,10 +130,22 @@ class LoginView extends GetView<LoginController> {
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    if (controller.isLoading.isFalse) {
-                                      await controller.login();
-                                      await controller.getUserToken(FirebaseAuth
-                                          .instance.currentUser!.uid);
+                                    if (biometricController.isEnabled ==
+                                        false) {
+                                      if (controller.isLoading.isFalse) {
+                                        await controller.login();
+                                        // await controller.getUserToken(FirebaseAuth
+                                        //     .instance.currentUser!.uid);
+                                      }
+                                    } else if (biometricController.isEnabled ==
+                                        true) {
+                                      biometricController.fingerprintLogin();
+                                      // String user = sharedPreferences
+                                      //     .getString('userId')!;
+                                      // String uid =
+                                      //     sharedPreferences.getString(user)!;
+                                      // print('the userid $user');
+                                      // print('UID$uid');
                                     }
                                   },
                                   child: Text(
@@ -156,7 +172,7 @@ class LoginView extends GetView<LoginController> {
                               child: TextButton(
                                 onPressed: () =>
                                     Get.toNamed(Routes.FORGOT_PASSWORD),
-                                child: Text("Forgot your password?"),
+                                child: Text("forgot_your_password".tr),
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColor.secondarySoft,
                                 ),
@@ -165,11 +181,25 @@ class LoginView extends GetView<LoginController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('Copy Email and Password'),
+                                Text('Admin'),
                                 IconButton(
                                   onPressed: () {
                                     controller.emailC.text =
-                                        'moha18ba7ri@gmail.com'; // 'codetech2023@gmail.com';
+                                        'codetech2023@gmail.com'; // 'codetech2023@gmail.com';
+                                    controller.passC.text = "123456";
+                                  },
+                                  icon: Icon(Icons.copy_outlined),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('Employee'),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.emailC.text =
+                                        'en.ameenalsharafi@gmail.com'; // 'codetech2023@gmail.com';
                                     controller.passC.text = "123456";
                                   },
                                   icon: Icon(Icons.copy_outlined),

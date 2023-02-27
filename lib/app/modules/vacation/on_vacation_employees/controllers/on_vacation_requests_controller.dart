@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 
 class OnVacationController extends GetxController {
   RxBool switchValue = false.obs;
 
- DateTime? start;
+  DateTime? start;
   DateTime end = DateTime.now();
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationRequests() async* {
-    yield* firestore.collection('vacationRequest').snapshots();
+    yield* firestore
+        .collection('vacationRequest')
+        .where("status", isEqualTo: "Approved")
+        .snapshots();
   }
-
 
   void pickDate(DateTime pickStart, DateTime pickEnd) {
     start = pickStart;

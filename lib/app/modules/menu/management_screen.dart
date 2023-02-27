@@ -27,21 +27,21 @@ class ManagementScreen extends StatelessWidget {
           title: 'employees'.tr,
           route: Routes.EMPLOYEE_HOME),
       MenuModel(
-        icon: Images.profile,
+        icon: Images.vacation,
         title: 'vacation'.tr,
         route: Routes.VACATION_HOME,
       ),
       MenuModel(
-          icon: Images.office, title: 'attendance'.tr, route: Routes.DASHBOARD),
+          icon: Images.office,
+          title: 'attendance'.tr,
+          route: Routes.ATTENDANCE),
       MenuModel(
-          icon: Images.employess,
-          title: 'reports'.tr,
-          route: Routes.ADD_EMPLOYEE),
+          icon: Images.report, title: 'reports'.tr, route: Routes.REP_HOME),
       MenuModel(
           icon: Images.language, title: 'language'.tr, route: Routes.LANGUAGES),
       MenuModel(
           icon: Images.profile, title: 'profile'.tr, route: Routes.PROFILE),
-      MenuModel(icon: Images.office, title: 'company'.tr, route: ''),
+      //  MenuModel(icon: Images.office, title: 'company'.tr, route: ''),
       MenuModel(icon: Images.logout, title: 'logout'.tr, route: ''),
     ];
     return PointerInterceptor(

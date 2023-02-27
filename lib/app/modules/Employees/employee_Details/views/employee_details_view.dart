@@ -1,321 +1,198 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/widgets/custom_input.dart';
+import 'package:presence/app/widgets/presence_card.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../employee_Update/controllers/update_employee_controller.dart';
 import '../controllers/employee_details_controller.dart';
 
-class EmployeeDetailView extends StatelessWidget {
-  /// final updateEmployee = Get.put(UpdateEmployeeController(), permanent: true);
+class EmployeeDetailView extends GetView<EmployeeDetailController> {
+  final updateEmp = Get.put(UpdateEmployeeController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Employee_Details'.tr,
-          style: TextStyle(
-            color: AppColor.secondary,
-            fontSize: 16,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 1,
-            color: AppColor.secondaryExtraSoft,
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: 'details'.tr,
+        isColor: true,
+        color: AppColor.primary,
+        action: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed(Routes.EMP_UPDATE,
+                    arguments: updateEmp.EmpDetail['userId']);
+               // print(updateEmp.EmpDetail['userId']);
+              },
+              icon: Icon(Icons.edit))
+        ],
       ),
-      body: GetBuilder<EmployeeDetailController>(
-        builder: (controller) => Container(
-          padding: const EdgeInsets.all(8.0),
-          color: Colors.grey[200],
-          child: Container(
-            padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+      body: Stack(
+        children: [
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.7,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                  color: AppColor.primary,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40))),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        'Name: '.tr,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 4, bottom: 12),
-                        child: Text(
-                          controller.EmpList['name'],
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        'Address:'.tr,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        '${controller.EmpList['address']}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Inter',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        'Active: '.tr,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        '${controller.EmpList['status']}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Inter',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        'Job: '.tr,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        '${controller.EmpList['job']}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Inter',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        'Branch: '.tr,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 4, bottom: 12),
-                      child: Text(
-                        '${controller.branchName}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Inter',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(),
-                Container(
+          ),
+          Positioned(
+              top: MediaQuery.of(context).size.height * 0.10,
+              left: MediaQuery.of(context).size.width * 0.03,
+              right: MediaQuery.of(context).size.width * 0.03,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   decoration: BoxDecoration(
-                    color: AppColor.primarySoft,
-                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          offset: Offset(10, 10)),
+                    ],
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      //  check in
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 6),
-                              child: Text(
-                                "Email".tr,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${controller.EmpList['email']}',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 1.5,
-                        height: 24,
-                        color: Colors.white,
-                      ),
-                      // check out
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 6),
-                              child: Text(
-                                'Phone'.tr,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${controller.EmpList['phone']}',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                          stream: controller.streamUser(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text('Somthing went wrong');
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: Text('There is no Data'),
+                              );
+                            }
+                            Map<String, dynamic> user = snapshot.data!.data()!;
+
+                            return StreamBuilder(
+                              stream: controller.streamTodayPresence(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('Somthing went wrong');
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: Text('There is no Data'),
+                                  );
+                                }
+
+                                var todayPresenceData = snapshot.data?.data();
+                                return Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: PresenceCard(
+                                      userData: user,
+                                      isColor: true,
+                                      color: AppColor.whiteColor,
+                                      todayPresenceData: todayPresenceData),
+                                );
+                              },
+                            );
+                          })
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 16),
-                    decoration: BoxDecoration(
-                      // color: AppColor.primarySoft,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        //  check in
+              )),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.35,
+            bottom: MediaQuery.of(context).size.height * 0,
+            child: GetBuilder<EmployeeDetailController>(
+              builder: (_controller) => Container(
+                height: MediaQuery.of(context).size.width * 0.7,
+                width: MediaQuery.of(context).size.width,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            color: AppColor.whiteColor,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 10,
+                                  offset: Offset(10, 10)),
+                            ]),
+                        child: Column(
+                          children: [
+                            // Text(_controller.EmpList['name']),
 
-                        // check out
-                        Expanded(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // controller.EmpList =
-                                      //     snapshot.data!.docs[index];
-                                      controller.getBranch();
-                                      print(controller.EmpList['name']);
-                                      // Get.toNamed(Routes.EMP_UPDATE);
-                                    },
-                                    icon: Icon(Icons.edit_rounded),
-                                    label: Text(
-                                      'edit_information'.tr,
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  ),
-                                  width: double.infinity,
-                                  height: 100.0),
-                            ],
-                          ),
+                            CustomInput(
+                              controller: controller.nameC,
+                              label: 'Full_Name'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.emailC,
+                              label: 'email'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.jobC,
+                              label: 'Job'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.addressC,
+                              label: 'Address'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              controller: controller.phoneC,
+                              label: 'Phone'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                            CustomInput(
+                              keyboardType: TextInputType.number,
+                              controller: controller.salaryPerHour,
+                              label: 'salary_per_hour'.tr,
+                              hint: '',
+                              disabled: true,
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

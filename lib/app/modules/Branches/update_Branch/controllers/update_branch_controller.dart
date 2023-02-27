@@ -15,12 +15,13 @@ class UpdateBranchController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getBranchInfo();
 
+    getBranchInfo(branchId['branchId']);
     determineBranchPosition();
+    print('the branchId${Get.arguments}');
   }
 
-  String branchId = Get.arguments;
+  // String branchId = Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;
@@ -29,6 +30,7 @@ class UpdateBranchController extends GetxController {
   final AddressC = TextEditingController().obs;
   final latitudeC = TextEditingController().obs;
   final longitudeC = TextEditingController().obs;
+  dynamic branchId = Get.arguments;
 
   CollectionReference branch = FirebaseFirestore.instance.collection('branch');
   launchOfficeOnMap() {
@@ -38,18 +40,11 @@ class UpdateBranchController extends GetxController {
         BranchData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast( 'Error : ${e}');
+      CustomToast.errorToast('Error : ${e}');
     }
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> streamBranch(
-      String branchId) async* {
-    print("called");
-    var firestore = FirebaseFirestore.instance;
-    yield* firestore.collection("branch").doc(branchId).snapshots();
-  }
-
-  void getBranchInfo() {
+  void getBranchInfo(String branchId) {
     final branch = FirebaseFirestore.instance
         .collection('branch')
         .where('branchId', isEqualTo: branchId);
@@ -84,7 +79,7 @@ class UpdateBranchController extends GetxController {
   }
 
   Future<void> storePosition(Position position, String address) async {
-    //  String uid = auth.currentUser!.uid;
+    //  String uid = sharedPreferences.getString('userId')!;
     await branch.doc().set({
       "position": {
         "latitude": position.latitude,
@@ -102,7 +97,7 @@ class UpdateBranchController extends GetxController {
         longitudeC.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await branch.doc(branchId).update({
+        await branch.doc(branchId['branchId']).update({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,
@@ -111,13 +106,13 @@ class UpdateBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast( "update branch successfully");
+        CustomToast.successToast("update branch successfully");
         Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast( "You need to fill all fields");
+      CustomToast.errorToast("You need to fill all fields");
     }
   }
 

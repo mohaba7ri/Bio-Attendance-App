@@ -15,7 +15,8 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavigationBar(),
       extendBody: true,
-      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      body:
+       StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: controller.streamUser(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -75,19 +76,27 @@ class HomeView extends GetView<HomeController> {
                       stream: controller.streamTodayPresence(),
                       builder: (context, snapshot) {
                         // #TODO: make skeleton
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return Center(child: CircularProgressIndicator());
-                          case ConnectionState.active:
-                          case ConnectionState.done:
-                            var todayPresenceData = snapshot.data?.data();
-                            return PresenceCard(
-                              userData: user,
-                              todayPresenceData: todayPresenceData,
-                            );
-                          default:
-                            return SizedBox();
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text('something went wrong'),
+                          );
                         }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (snapshot.data == null) {
+                          return Center(
+                            child: Text('There is no Data'),
+                          );
+                        }
+                        var todayPresenceData = snapshot.data?.data();
+                        return PresenceCard(
+                          userData: user,
+                          todayPresenceData: todayPresenceData,
+                        );
                       }),
                   // last location
                   Container(

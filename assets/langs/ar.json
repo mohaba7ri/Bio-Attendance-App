@@ -23,7 +23,7 @@
   "settings":"الاعدادات",
   "welcome_to":"مرحباَ\n",
   "view_details":"عرض البيانات ",
-  "edit_information":"تعديل البينات ",
+  "edit_information":"تعديل البيانات ",
   "Presence_Detail":"تفاصيل الحضور",
   "status":"الحالة",
   "In_area_presence":"داخل منطقة الحضور",
@@ -67,9 +67,9 @@
   "View_Employees":"عرض الموظفين",
   "Edit_Employee":"تعديل بيانات الموظف",
   "Vacation_Types":"انواع الاجازات",
-  "Add_Vacation_Request":"اضافة طلب اجازة",
+  "Add_Vacation_Request":" طلب اجازة",
   "View_Vacation_Requests":"عرض طلبات الاجازة",
-  "Employees_on_Vacation":"الفتالين",
+  "Employees_on_Vacation":"الاجازات المقبولة",
   "Request_Vacation":"طلب اجازة",
   "end_date":"نوع الاجازة",
   "start_date":"من تاريخ ",
@@ -88,7 +88,7 @@
   "user_name":"أسم الموظف",
   "total_requests":"اجمالي الطلبات",
   "approved":"مقبول",
-  
+  "details":"التفاصيل",
 
   "denied":"مرفوض",
   "you_requests_history":"سجل طلباتك",
@@ -123,7 +123,30 @@
 "file":"ملف",
 "save":"حفظ",
 "please_pick_end_date":"يرجى تحديد تاريخ الانتهاء",
-"please_start_date":"يرجى تحديد تاريخ البداية"
+"please_start_date":"يرجى تحديد تاريخ البداية",
+"pick_file":"ارفق ملف",
+"forgot_your_password":"هل نسيت كلمة المرور؟",
+"sure":"هل تريد بالفعل تسجيل الخروج ؟",
+"error":"خطأ",
+"confirm":"تأكيد",
+"No":"لا",
+"Yes":"نعم",
+"reset_password":"اعادة تعيين كلمة المرور",
+"getEmail":"سوف يتم ارسال رابط لتعيين كلمة المرور الى الايميل الخاص بك",
+"send_to_email":"ارسل الى الايميل",
+"approved_vac":"الاجازات المقبولة",
+"emp_reports":"تقارير الموظفين",
+"from":"من",
+"to":"الى",
+"all_emps_rep":"تقارير جميع الموظفين",
+"emp_rep":"تقاير موظف",
+"branche_rep":"تقاير فرع",
+"all_branches_rep":"تقارير جميع الفروع",
+"choose_emp":"اختر موظف",
+"choose_branch":"اختر فرع",
+"select_the_dates":"حدد التواريخ",
+"branches_reports":"تقارير جميع الفروع"
+
 
 
 

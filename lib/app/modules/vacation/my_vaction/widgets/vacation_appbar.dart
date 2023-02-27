@@ -17,7 +17,7 @@ class MyVacationAppBar extends StatelessWidget with PreferredSizeWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text('my_vacation'.tr),
       ),
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: AppColor.primary,
       elevation: 0,
       leading: IconButton(
         onPressed: () => Get.back(),

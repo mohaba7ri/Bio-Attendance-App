@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:presence/app/modules/vacation/my_vaction/my_vacation_controller/my_vacation_controller.dart';
 import 'package:presence/app/style/app_color.dart';
 
-import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
+import '../widgets/floatingContainer.dart';
 import '../widgets/vacation_appbar.dart';
 
 class MyVacationView extends StatelessWidget {
@@ -24,118 +24,13 @@ class MyVacationView extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: AppColor.primary,
                 borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(15), right: Radius.circular(15)),
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.05,
-            left: MediaQuery.of(context).size.width * 0.03,
-            right: MediaQuery.of(context).size.width * 0.03,
-            // bottom: MediaQuery.of(context).size.width * 0.99,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.27,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10,
-                        offset: Offset(10, 10)),
-                  ]),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "you_requests_history".tr,
-                          style: robotoBlack,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 15),
-                    child: Row(
-                      children: [
-                        //  check in
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                Images.list,
-                                width: 40,
-                                height: 40,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                child: Text("total_requests".tr,
-                                    style: robotoMedium),
-                              ),
-                              Text("15", style: robotoMedium),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: 1.5,
-                          height: 60,
-                          color: AppColor.primary,
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              // ImageIcon(AssetImage(
-                              //   Images.approved,
-                              // )),
-                              Image.asset(
-                                Images.approve_ani,
-                                width: 40,
-                                height: 40,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                child: Text("approved".tr, style: robotoMedium),
-                              ),
-                              Text('9', style: robotoMedium),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: 1.5,
-                          height: 60,
-                          color: AppColor.primary,
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                Images.deny_ani,
-                                width: 40,
-                                height: 40,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                child: Text("denied".tr, style: robotoMedium),
-                              ),
-                              Text("6", style: robotoMedium),
-                            ],
-                          ),
-                        ),
-                        // check out
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          floatingContainer(),
           Positioned(
               top: MediaQuery.of(context).size.height * 0.32,
               bottom: MediaQuery.of(context).size.height * 0,
@@ -314,6 +209,7 @@ class MyVacationView extends StatelessWidget {
                   ),
                 ),
               ))
+        
         ],
       ),
     );

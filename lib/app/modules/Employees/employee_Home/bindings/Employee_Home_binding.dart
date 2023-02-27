@@ -6,7 +6,7 @@ class EmployeeHomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<EmployeeHomeController>(
-      () => EmployeeHomeController(),
+      () => EmployeeHomeController(sharedPreferences: Get.find()),
     );
   }
 }

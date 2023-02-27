@@ -7,12 +7,12 @@ import '../util/dinmensions.dart';
 import '../util/images.dart';
 import '../util/styles.dart';
 
-class MenuSheet extends StatelessWidget {
+class CustomMenuTile extends StatelessWidget {
   final String title;
   final Widget icon;
   final void Function() onTap;
   final bool isDanger;
-  MenuSheet({
+  CustomMenuTile({
     required this.title,
     required this.icon,
     required this.onTap,
@@ -47,13 +47,7 @@ class MenuSheet extends StatelessWidget {
               child: icon,
             ),
             Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.secondary,
-                ),
-              ),
+              child: Text(title, style: robotoMedium),
             ),
             Container(
                 margin: EdgeInsets.only(left: 24),

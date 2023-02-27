@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:presence/app/modules/Branches/general_settings/view/branch_setting_view.dart';
 import 'package:presence/app/widgets/custom_input.dart';
 
 import '../../../../style/app_color.dart';
@@ -9,8 +10,7 @@ import '../controllers/update_branch_controller.dart';
 class UpdateBranchView extends GetView<UpdateBranchController> {
   UpdateBranchController _updateController = UpdateBranchController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final String branchId = Get.arguments;
-
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +22,17 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
               fontSize: 14,
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => BranchSettingView());
+              },
+              icon: Icon(Icons.settings),
+              color: AppColor.blackColor,
+            )
+          ],
           leading: IconButton(
             onPressed: () => Get.back(),
             icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
@@ -106,8 +117,8 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                       child: Column(
                                         children: [
                                           Center(
-                                              child:
-                                                  Text('Set_Branch_Location'.tr)),
+                                              child: Text(
+                                                  'Set_Branch_Location'.tr)),
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -215,7 +226,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                   },
                                   child: Text(
                                     (controller.isLoading.isFalse)
-                                        ? 'Add'.tr
+                                        ? 'edit'.tr
                                         : 'Loading'.tr,
                                     style: TextStyle(
                                       fontSize: 16,

@@ -28,6 +28,13 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
             color: AppColor.blackColor,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.HOME),
+            icon: Icon(Icons.home),
+            color: AppColor.blackColor,
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

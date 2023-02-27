@@ -11,7 +11,6 @@ import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class UpdateCompanyController extends GetxController {
-
   @override
   void onInit() {
     // TODO: implement onInit
@@ -21,7 +20,7 @@ class UpdateCompanyController extends GetxController {
     determineBranchPosition();
   }
 
-  String companyId =Get.arguments;
+  String companyId = Get.arguments;
   final presenceController = Get.find<PresenceController>();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;
@@ -41,7 +40,7 @@ class UpdateCompanyController extends GetxController {
         BranchData.office['longitude'],
       );
     } catch (e) {
-      CustomToast.errorToast( 'Error : ${e}');
+      CustomToast.errorToast('Error : ${e}');
     }
   }
 
@@ -88,7 +87,7 @@ class UpdateCompanyController extends GetxController {
   }
 
   Future<void> storePosition(Position position, String address) async {
-    //  String uid = auth.currentUser!.uid;
+    //  String uid = sharedPreferences.getString('userId')!;
     await company.doc().set({
       "position": {
         "latitude": position.latitude,
@@ -117,13 +116,13 @@ class UpdateCompanyController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast( "update company successfully");
+        CustomToast.successToast("update company successfully");
         Get.toNamed(Routes.COMPANY_DETAILS);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast( "You need to fill all fields");
+      CustomToast.errorToast("You need to fill all fields");
     }
   }
 

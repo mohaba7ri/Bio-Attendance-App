@@ -67,7 +67,7 @@
   "View_Employees":"View Employees",
   "Edit_Employee":"Edit Employee's Information",
   "Vacation_Types":"Vacation Types",
-  "Add_Vacation_Request":"Add Vacation Request",
+  "Add_Vacation_Request":"Request Vacation",
   "View_Vacation_Requests":"View Vacation Requests",
   "Employees_on_Vacation":"Employees on Vacation",
   "Request_Vacation":"Request Vacation",
@@ -121,8 +121,30 @@
 "file":"File",
 "save":"Save",
 "please_pick_end_date":"Please Pick End Date",
-"please_start_date":"Please Pick Start Date"
-
+"please_start_date":"Please Pick Start Date",
+"pick_file":"Pick File",
+"forgot_your_password":"Forgot your password?",
+"sure":"Are you sure to logout ?",
+"error":"Error",
+"confirm":"Confirm",
+"No":"No",
+"Yes":"Yes",
+"reset_password":"Reset Password",
+"getEmail":"We will send password reset link to\nyour email.",
+"send_to_email":"Send to Email",
+"approved_vac":"Approved Vacation",
+"details":"Details",
+"emp_reports":"Employee Reports",
+"from":"From",
+"to":"To",
+"all_emps_rep":"All Employees Reports",
+"emp_rep":"Employee Reports",
+"branche_rep":"Branch Reports",
+"all_branches_rep":"All Branches Reports",
+"choose_emp":"Choose Employee",
+"choose_branch":"Choose Branch",
+"select_the_dates":"Select the Dates",
+"branches_reports":"All Branches Reports"
 
 
 }

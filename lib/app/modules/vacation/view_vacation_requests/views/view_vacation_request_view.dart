@@ -15,6 +15,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
     ViewVacationRequestsController _listVacationRequestsController =
         ViewVacationRequestsController();
     return Scaffold(
+      backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text('Requests'.tr, style: robotoMedium),
         leading: backButton,
@@ -59,8 +60,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                   ),
                   controller.searchValue == ''
                       ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: _listVacationRequestsController
-                              .vacationRequests(),
+                          stream: _controller.vacationRequests(),
                           builder:
                               (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                             if (snapshot.hasError) {
@@ -88,19 +88,26 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                               );
                             }
                             dynamic data = snapshot.data!.docs;
-                            return ViewVacationRequestWidget(
-                              data: data,
-                              snapshot: snapshot,
-                            );
+                            return ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  dynamic data = snapshot.data!.docs;
+                                  return ViewVacationRequestWidget(
+                                    data: data,
+                                    index: index,
+                                    isIndex: true,
+                                  );
+                                });
                           },
                         )
                       : StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                          stream: _listVacationRequestsController
-                              .vacationRequests(),
+                          stream: _controller.vacationRequests(),
                           builder:
                               (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                             final data = snapshot.data!.docs.where((element) =>
-                                element['vacationType'].contains(
+                                element['userName'].toLowerCase().contains(
                                     _controller.searchValue.toLowerCase()));
                             switch (snapshot.connectionState) {
                               case ConnectionState.waiting:
@@ -114,7 +121,6 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                                   children: data
                                       .map((e) => ViewVacationRequestWidget(
                                             data: e,
-                                            snapshot: snapshot,
                                           ))
                                       .toList(),
                                 );

@@ -39,12 +39,19 @@ abstract class Routes {
   static const COMPANY_HOME = _Paths.COMPANY_HOME;
   static const COMPANY_DETAILS = _Paths.COMPANY_DETAILS;
   static const UPDATE_COMPANY = _Paths.UPDATE_COMPANY;
-  static const DASHBOARD = _Paths.DASHBOARD;
+  static const ATTENDANCE = _Paths.ATTENDANCE;
   static const Req_DETAILS = _Paths.Req_DETAILS;
   static const MANAGE_POLICIES = _Paths.MANAGE_POLICIES;
   static const LANGUAGES = _Paths.LANGUAGES;
   static const MY_VACATION = _Paths.MY_VACATION;
   static const MANAGE_VACATION = _Paths.MANAGE_VACATION;
+  static const EMP_REPORTS = _Paths.EMP_REPORTS;
+  static const REP_HOME = _Paths.REP_HOME;
+  static const LIST_EMPLOYEES_REP = _Paths.LIST_EMPLOYEES_REP;
+  static const ALL_EMPS_REP = _Paths.ALL_EMPS_REP;
+  static const ALL_BRANCHES_REP = _Paths.ALL_BRANCHES_REP;
+  static const LIST_BRANCHES_REP = _Paths.LIST_BRANCHES_REP;
+  static const BRANCH_REP = _Paths.BRANCH_REP;
 }
 
 abstract class _Paths {
@@ -84,10 +91,17 @@ abstract class _Paths {
   static const COMPANY_DETAILS = '/COMPANY_DETAILS';
 
   static const UPDATE_COMPANY = '/UPDATE_COMPANY';
-  static const DASHBOARD = '/DASHBOARD';
+  static const ATTENDANCE = '/DASHBOARD';
   static const Req_DETAILS = '/Req_DETAILS';
   static const MANAGE_POLICIES = '/MANAGE_POLICIES';
   static const LANGUAGES = '/LANGUAGES';
   static const MY_VACATION = '/MY_VACATION';
   static const MANAGE_VACATION = '/MANAGE_VACATION';
+  static const EMP_REPORTS = '/EMP_REPORTS';
+  static const REP_HOME = '/REP_HOME';
+  static const LIST_EMPLOYEES_REP = '/LIST_EMPLOYEES_REP';
+  static const ALL_EMPS_REP = '/ALL_EMPS_REP';
+  static const ALL_BRANCHES_REP = '/ALL_BRANCHES_REP';
+  static const LIST_BRANCHES_REP = '/LIST_BRANCHES_REP';
+  static const BRANCH_REP = '/BRANCH_REP';
 }
