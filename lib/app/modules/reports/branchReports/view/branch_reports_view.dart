@@ -98,21 +98,20 @@ class BranchReportsView extends GetView<BranchReportsController> {
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime? startDate =
                                           await controller.showDatePickers(
                                               context,
                                               controller.startDateController
                                                   .value.text);
                                       if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -150,16 +149,15 @@ class BranchReportsView extends GetView<BranchReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                       if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
