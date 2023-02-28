@@ -49,7 +49,8 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:                   EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
+
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,9 +167,8 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                           ),
                         ],
                       ),
-                      Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                       Row(children: [
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
                               onPressed: () {},

@@ -26,7 +26,8 @@ class PdfEmpReport {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.employeeName['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${employeeReport.employeeName['name'] + 'Report'}.pdf',
+        pdf: pdf);
   }
 
   static Widget buildHeader(Invoice invoice) => Column(
@@ -60,7 +61,7 @@ class PdfEmpReport {
   static Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: 2/28/2023',
+          Text('Employee Name: امين الجلوة',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Text('Branch Name: Tech Now'),
         ],

@@ -101,15 +101,6 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               onPressed: () {
-                // controller.changeid();
-
-                // if (controller.isLoading == false) {
-                //   controller.addEmployee();
-                // }
-                // if (controller.isSelectedPolicy == true) {
-                //   print('userID' +
-                //       controller.store.read('userID'));
-                // }
                 controller.updateEmployee();
               },
               child: Text(

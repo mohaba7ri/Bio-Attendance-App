@@ -49,7 +49,8 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,17 +166,14 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                         ],
                       ),
                       Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {
-                               
-                              },
+                              onPressed: () {},
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: MediaQuery.of(context).size.width * 0.8,
                             height: 40,
                           ),
                         )

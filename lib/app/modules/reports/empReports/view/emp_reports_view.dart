@@ -15,7 +15,6 @@ import '../controller/emp_reports_controller.dart';
 class EmpReportsView extends GetView<EmpReportsController> {
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
@@ -51,7 +50,8 @@ class EmpReportsView extends GetView<EmpReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,8 +172,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                         ],
                       ),
                       Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
                               onPressed: () async {
