@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:presence/app/modules/reports/empReports/view/pdf_report_view.dart';
 
+import '../../../../controllers/pdf_controller.dart';
+import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
@@ -12,7 +15,7 @@ import '../controller/emp_reports_controller.dart';
 class EmpReportsView extends GetView<EmpReportsController> {
   @override
   Widget build(BuildContext context) {
-    EmpReportsController _Controller = EmpReportsController();
+    
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
@@ -66,7 +69,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                             padding: const EdgeInsets.all(0.8),
                             child: SizedBox(
                               child: Text(
-                                _Controller.employeeName,
+                                controller.employeeName['name'],
                                 style: robotoHuge,
                               ),
                             ),
@@ -104,15 +107,15 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                               controller.startDateController
                                                   .value.text);
                                       if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                        controller.start = startDate;
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -145,21 +148,22 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
-                                      if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                              controller.endDateController.value
+                                                  .text);
+                                      if (endDate != null) {
+                                        controller.endDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(endDate));
+                                        controller.end = endDate;
+                                        print('the endDate${controller.end}');
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -172,7 +176,34 @@ class EmpReportsView extends GetView<EmpReportsController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final date =
+                                    DateConverter.estimatedDate(DateTime.now());
+                                final dueDate = DateTime.now();
+
+                                final invoice = Invoice(
+                                  info: InvoiceInfo(
+                                    date: date,
+                                    dueDate: dueDate,
+                                    description: 'My description...',
+                                    number: '${DateTime.now().year}',
+                                  ),
+                                  items: [
+                                    InvoiceItem(
+                                      description: 'Coffee',
+                                      date: date,
+                                      quantity: 3,
+                                      vat: 0.19,
+                                      unitPrice: 5.99,
+                                    ),
+                                  ],
+                                );
+
+                                final pdfFile =
+                                    await PdfEmpReport.generate(invoice);
+
+                                PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),

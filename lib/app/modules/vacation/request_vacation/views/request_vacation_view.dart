@@ -61,12 +61,6 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   builder: (_controller) => DropdownButton2(
                                     hint: Text('Please Select'),
                                     isExpanded: true,
-                                    dropdownWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.45,
-                                    buttonWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.45,
                                     items: _controller.vacationTypeList,
                                     value: _controller.leaveTypeValue,
                                     onChanged: (String? selectedValue) {

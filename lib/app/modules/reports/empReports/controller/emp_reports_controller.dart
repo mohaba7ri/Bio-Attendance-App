@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EmpReportsController extends GetxController {
-  String employeeName = Get.arguments;
+  dynamic employeeName = Get.arguments;
 
   @override
   void onClose() {
@@ -14,8 +14,11 @@ class EmpReportsController extends GetxController {
     employeeName = '';
   }
 
+  final firestore = FirebaseFirestore.instance;
   final startDateController = TextEditingController().obs;
   final endDateController = TextEditingController().obs;
+  DateTime end = DateTime.now();
+  DateTime? start;
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {
     var initialDate = DateTime.now();
@@ -40,6 +43,37 @@ class EmpReportsController extends GetxController {
     var startDateController;
     if (startDateController.value.text.isEmpty) {
       return 'pick date';
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
+    String uid = employeeName['userId'];
+    if (startDateController == null) {
+      QuerySnapshot<Map<String, dynamic>> query = await firestore
+          .collection("user")
+          .doc(uid)
+          .collection("presence")
+          .where("date", isLessThan: end.toIso8601String())
+          .orderBy(
+            "date",
+            descending: true,
+          )
+          .get();
+      return query;
+    } else {
+      QuerySnapshot<Map<String, dynamic>> query = await firestore
+          .collection("user")
+          .doc(uid)
+          .collection("presence")
+          .where("date", isGreaterThan: start!.toIso8601String())
+          .where("date",
+              isLessThan: end.add(Duration(days: 1)).toIso8601String())
+          .orderBy(
+            "date",
+            descending: true,
+          )
+          .get();
+      return query;
     }
   }
 }

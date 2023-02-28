@@ -109,9 +109,7 @@ class AddEmployeeView extends StatelessWidget {
                                                   DropdownButtonHideUnderline(
                                                 child: DropdownButton2(
                                                   hint: Text('Please Select'),
-                                                  buttonHeight: 50,
-                                                  buttonWidth: 40,
-                                                  itemHeight: 40,
+
                                                   items: controller.roleList
                                                       .map(
                                                         (roleValue) =>
@@ -169,9 +167,6 @@ class AddEmployeeView extends StatelessWidget {
                                                   left: 15),
                                               child: DropdownButton2(
                                                 hint: Text('Please Select'),
-                                                buttonHeight: 50,
-                                                buttonWidth: 40,
-                                                itemHeight: 40,
                                                 items: controller.branchesList,
                                                 value: controller.branchValue,
                                                 onChanged:

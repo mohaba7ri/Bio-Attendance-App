@@ -33,4 +33,5 @@ class Images {
   static const String report = 'assets/icons/report.png';
   static const String report_ani = 'assets/icons/report_ani.gif';
   static const String branch = 'assets/icons/office.png';
+  static const String company_logo = 'assets/icons/tech-now-logo.png';
 }

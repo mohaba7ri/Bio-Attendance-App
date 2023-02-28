@@ -104,7 +104,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
                                       onTap: () {
                                         Get.toNamed(
                                           Routes.EMP_REPORTS,
-                                           arguments: data['name'].toString()
+                                           arguments: data
                                         );
                                       },
                                       child: Container(

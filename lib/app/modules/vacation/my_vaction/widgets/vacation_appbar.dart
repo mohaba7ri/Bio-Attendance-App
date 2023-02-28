@@ -29,15 +29,15 @@ class MyVacationAppBar extends StatelessWidget with PreferredSizeWidget {
                   padding: const EdgeInsets.only(right: 15, top: 10),
                   child: DropdownButton2(
                     value: controller.requestValue,
-                    buttonDecoration: BoxDecoration(
-                        color: AppColor.whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              offset: Offset(10, 10)),
-                        ]),
+                    // buttonDecoration: BoxDecoration(
+                    //     color: AppColor.whiteColor,
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //           color: Colors.black12,
+                    //           blurRadius: 10,
+                    //           offset: Offset(10, 10)),
+                    //     ]),
                     items: controller.requestItems
                         .map((items) => DropdownMenuItem(
                               child: Text(
