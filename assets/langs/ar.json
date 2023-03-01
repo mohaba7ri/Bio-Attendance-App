@@ -163,8 +163,9 @@
 "minutes":"دقائق",
 "Unable_to_access_because_you_denied_the_location_request":"لا يمكن الوصول الى بيانات الموقع بسبب رفض طلب السماح"
 ,"Location_permissions_are_permanently_denied_we_cannot_request_permissions":"امكانية الوصول الى بيانات الموقع الجغرافي غير ممنوحة"
-
-
+,"please_select_leave_type":"يرجى تحديد نوع الاجازة",
+"vacation_request_by":"طلب اجازة من : ",
+"your_request_sent_successfully":"تم ارسال طلبك بنجاح"
 
 
 

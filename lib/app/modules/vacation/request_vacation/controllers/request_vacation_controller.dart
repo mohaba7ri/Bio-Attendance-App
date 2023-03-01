@@ -130,7 +130,7 @@ class VacationRequestController extends GetxController {
 
   void submit() async {
     if (leaveTypeValue == 'please select') {
-      CustomToast.errorToast('please select leave type');
+      CustomToast.errorToast('please_select_leave_type'.tr);
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
@@ -164,14 +164,14 @@ class VacationRequestController extends GetxController {
           adminDeviceToken: adminDeviceToken,
           body: userName,
           docId: vacationId,
-          title: 'Vacation Request By :',
+          title: 'vacation_request_by'.tr,
           userDeviceToken: userDevice);
       isloading!.value = false;
       fileName = '';
       filePath = '';
       leaveTypeValue = 'please select';
       fileController.value.text = ' ';
-      CustomToast.successToast('your_request_sent_successfully');
+      CustomToast.successToast('your_request_sent_successfully'.tr);
     });
   }
 
@@ -191,7 +191,7 @@ class VacationRequestController extends GetxController {
         'date': date
       }).whenComplete(() async {
         await homeController.sendPushMessage(
-            adminDeviceToken!, userName!, 'Vacation Request by:');
+            adminDeviceToken!, userName!, 'vacation_request_by'.tr);
       });
     } catch (e) {}
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchBar extends StatelessWidget {
   
@@ -15,8 +16,8 @@ class SearchBar extends StatelessWidget {
         },
         // controller: editingController,
         decoration: InputDecoration(
-            labelText: "Search",
-            hintText: "Search",
+            labelText: "Search".tr,
+            hintText: "Search".tr,
             prefixIcon: Icon(Icons.search),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(25.0)))),
