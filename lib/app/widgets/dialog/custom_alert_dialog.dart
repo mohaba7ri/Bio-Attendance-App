@@ -25,7 +25,7 @@ class CustomAlertDialog {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: robotoHuge),
+                Text(title, style: robotoMediumWhite,),
                 SizedBox(height: 16),
                 Text(
                   message,
@@ -40,7 +40,7 @@ class CustomAlertDialog {
           CustomInput(
             margin: EdgeInsets.only(bottom: 24),
             controller: controller,
-            label: 'password',
+            label: 'password'.tr,
             hint: '*************',
             obsecureText: true,
           ),
@@ -54,10 +54,10 @@ class CustomAlertDialog {
                     onPressed: onCancel,
                     child: Text(
                       "cancel".tr,
-                      style: TextStyle(color: AppColor.secondarySoft),
+                      style:  robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: AppColor.primary,
+                    
                       padding: EdgeInsets.symmetric(vertical: 12),
                       backgroundColor: AppColor.primaryExtraSoft,
                       elevation: 0,
@@ -69,7 +69,7 @@ class CustomAlertDialog {
                   flex: 6,
                   child: ElevatedButton(
                     onPressed: onConfirm,
-                    child: Text("confirm".tr),
+                    child: Text("confirm".tr, style: robotoMediumWhite,),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
