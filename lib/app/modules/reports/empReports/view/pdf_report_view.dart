@@ -28,7 +28,7 @@ class PdfEmpReport extends GetxController {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.employeeName['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
   }
 
   static Widget buildHeader(Invoice invoice) => Column(
