@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:helpers/helpers.dart';
 
+import '../../util/styles.dart';
+
 class AppWidgets {
   MyDialog(
           {required BuildContext context,
@@ -86,7 +88,7 @@ class AppWidgets {
           ),
           Headline5(
             title,
-            style: TextStyle(color: Colors.grey),
+             style: robotoMediumWhite,
             textAlign: TextAlign.center,
           )
         ],

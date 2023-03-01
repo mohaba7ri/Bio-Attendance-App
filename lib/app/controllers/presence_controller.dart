@@ -199,7 +199,7 @@ class PresenceController extends GetxController {
       print('lateHour$lateMinutes');
 
       Get.snackbar('Late'.tr,
-          'You are being late for${lateHours}:${lateMinutesRemainder} minutes');
+          'You_are_being_late_for'.tr+'${lateHours}:${lateMinutesRemainder}'+ 'minutes'.tr);
       return chechIn = true;
     }
   }
@@ -407,7 +407,7 @@ class PresenceController extends GetxController {
         // your App should show an explanatory UI now.
         // return Future.error('Location permissions are denied');
         return {
-          "message": "Unable to access because you denied the location request",
+          "message": "Unable_to_access_because_you_denied_the_location_request".tr,
           "error": true,
         };
       }
@@ -417,7 +417,7 @@ class PresenceController extends GetxController {
       // Permissions are denied forever, handle appropriately.
       return {
         "message":
-            "Location permissions are permanently denied, we cannot request permissions.",
+            "Location_permissions_are_permanently_denied_we_cannot_request_permissions".tr,
         "error": true,
       };
     }

@@ -155,9 +155,15 @@
 "vacation_type":"Vacation Type",
 "sick":"Sick",
 "vacation_days":"Vacation Days",
-"There_is_No_Data":"There is No Data !"
-
-
-
+"There_is_No_Data":"There is No Data !",
+"Leave_type":"Leave Type",
+"there_are_no_Reqs":"No Requests !",
+"You_are_being_late_for":"You are being late for ",
+"minutes":"Minutes",
+"Unable_to_access_because_you_denied_the_location_request":"Unable to access because you denied the location request"
+ ,"Location_permissions_are_permanently_denied_we_cannot_request_permissions":"Location permissions are permanently denied we cannot request permissions."
+,"please_select_leave_type":"Please Select Leave Type",
+"vacation_request_by":"Vacation Request By :",
+"your_request_sent_successfully":"Your Request was Sent Successfully"
 
 }

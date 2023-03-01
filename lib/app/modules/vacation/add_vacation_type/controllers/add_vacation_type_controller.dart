@@ -28,12 +28,11 @@ class AddVacationTypeController extends GetxController {
     if (vacationType.value.text.isNotEmpty) {
       vacationStore.doc().set({
         'vacationType': vacationType.value.text,
-        'isPaid': isPaidValue.value,
         'vacationStatus': vacationStatus.value,
-        'vacationDays': isPaid.value == true ? vacationDays.value.text : '',
+        'vacationDays': vacationDays.value.text,
       }).whenComplete(() {
-        isPaid.value = false;
         vacationType.value.text = '';
+        vacationDays.value.text = '';
       });
     }
   }
