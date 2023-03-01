@@ -12,7 +12,17 @@ import '../controller/emp_reports_controller.dart';
 EmpReportsController employeeReport = EmpReportsController();
 
 class PdfEmpReport extends GetxController {
-  static Future<File> generate(Invoice invoice) async {
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    start;
+  }
+
+  var start;
+  dynamic allPrecens;
+  PdfEmpReport({required this.start,required this.allPrecens});
+  Future<File> generate(Invoice invoice) async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
@@ -62,7 +72,7 @@ class PdfEmpReport extends GetxController {
   static Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: 2/28/2023',
+          Text('Employee Name: ${employeeReport.user['name']}',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Text('Branch Name: Tech Now'),
         ],
@@ -88,17 +98,17 @@ class PdfEmpReport extends GetxController {
     );
   }
 
-  static Widget buildTitle(Invoice invoice) => Column(
+  Widget buildTitle(Invoice invoice) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Text('Date From : ${employeeReport.start}'),
+            Text('Date From : ${start}'),
             Text('Date To:${employeeReport.end}')
           ])
         ],
       );
 
-  static Widget buildInvoice(Invoice invoice) {
+   Widget buildInvoice(Invoice invoice) {
     final headers = [
       'Date',
       'Check In ',

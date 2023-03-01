@@ -167,6 +167,10 @@ class EmpReportsView extends GetView<EmpReportsController> {
                           child: Container(
                             child: ElevatedButton.icon(
                               onPressed: () async {
+                                controller.getData();
+                                final allPrecens= controller.allPrecens;
+                                final pdfEmpReport = PdfEmpReport(
+                                    start: controller.start, allPrecens: allPrecens);
                                 final date =
                                     DateConverter.estimatedDate(DateTime.now());
                                 final dueDate = DateTime.now();
@@ -190,14 +194,14 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                 );
 
                                 final pdfFile =
-                                    await PdfEmpReport.generate(invoice);
+                                    await pdfEmpReport.generate(invoice);
 
                                 PdfController.openFile(pdfFile);
                               },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),
-                            width: MediaQuery.of(context).size.width * 0.8,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             height: 40,
                           ),
                         )
