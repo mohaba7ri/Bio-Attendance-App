@@ -233,8 +233,4 @@ class VacationRequestController extends GetxController {
       return 'pick date';
     }
   }
-
-  changeLeaveValue(String value) {
-    leaveTypeValue != value;
-  }
 }

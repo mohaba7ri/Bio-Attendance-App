@@ -21,7 +21,10 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
           ),
         ),
         leading: IconButton(
-          onPressed: () => Get.back(),
+          onPressed: () {
+            Get.delete<ListEmployeeRepController>();
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new_outlined,
             color: AppColor.blackColor,
@@ -102,10 +105,8 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(
-                                          Routes.EMP_REPORTS,
-                                           arguments: data
-                                        );
+                                        Get.toNamed(Routes.EMP_REPORTS,
+                                            arguments: data);
                                       },
                                       child: Container(
                                         padding:

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -8,10 +9,11 @@ import 'package:presence/app/controllers/pdf_controller.dart';
 
 import '../controller/emp_reports_controller.dart';
 
-class PdfEmpReport {
+EmpReportsController employeeReport = EmpReportsController();
+
+class PdfEmpReport extends GetxController {
   static Future<File> generate(Invoice invoice) async {
     final pdf = Document();
-    final employeeReport = EmpReportsController();
 
     pdf.addPage(MultiPage(
       build: (context) => [
@@ -26,7 +28,7 @@ class PdfEmpReport {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.employeeName['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
   }
 
   static Widget buildHeader(Invoice invoice) => Column(
@@ -60,7 +62,7 @@ class PdfEmpReport {
   static Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: 2/28/2023',
+          Text('Employee Name: ${employeeReport.user['name']}',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Text('Branch Name: Tech Now'),
         ],
@@ -90,8 +92,8 @@ class PdfEmpReport {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Text('Date From : ${invoice.info.date}'),
-            Text('Date To:${invoice.info.date}')
+            Text('Date From : ${employeeReport.start}'),
+            Text('Date To:${employeeReport.end}')
           ])
         ],
       );

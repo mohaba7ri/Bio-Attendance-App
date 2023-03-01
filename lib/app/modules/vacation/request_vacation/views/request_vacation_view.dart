@@ -60,7 +60,6 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 child: GetBuilder<VacationRequestController>(
                                   builder: (_controller) => DropdownButton2(
                                     hint: Text('Please Select'),
-                                    isExpanded: true,
                                     items: _controller.vacationTypeList,
                                     value: _controller.leaveTypeValue,
                                     onChanged: (String? selectedValue) {

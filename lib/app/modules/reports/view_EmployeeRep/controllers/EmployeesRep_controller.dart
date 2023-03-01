@@ -3,6 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/state_manager.dart';
 
 class ListEmployeeRepController extends GetxController {
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    searchValue = '';
+  }
+
   String searchValue = '';
   //dynamic EmpList;
   FirebaseAuth auth = FirebaseAuth.instance;

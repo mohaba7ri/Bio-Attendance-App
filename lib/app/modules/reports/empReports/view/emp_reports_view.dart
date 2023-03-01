@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:presence/app/modules/reports/empReports/view/pdf_report_view.dart';
 
 import '../../../../controllers/pdf_controller.dart';
@@ -15,7 +14,6 @@ import '../controller/emp_reports_controller.dart';
 class EmpReportsView extends GetView<EmpReportsController> {
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
@@ -40,7 +38,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
         centerTitle: true,
       ),
       body: GetBuilder<EmpReportsController>(
-        builder: (controller) => Container(
+        builder: (_controller) => Container(
           color: AppColor.greyShade200,
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -69,7 +67,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                             padding: const EdgeInsets.all(0.8),
                             child: SizedBox(
                               child: Text(
-                                controller.employeeName['name'],
+                                controller.user['name'],
                                 style: robotoHuge,
                               ),
                             ),
@@ -95,8 +93,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.startDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
@@ -104,17 +101,14 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                       DateTime startDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
+                                              controller
+                                                  .startDateController.text);
                                       if (startDate != null) {
-                                        controller.startDateController.value =
-                                            TextEditingController(
-                                                text: DateFormat.yMMMd()
-                                                    .format(startDate));
+                                        controller.changeStartDate(startDate);
                                         controller.start = startDate;
                                       } else {
-                                        controller.startDateController.value
-                                            .text = '';
+                                        controller.startDateController.text =
+                                            '';
                                       }
                                     },
                                     icon: Icon(Icons.date_range)),
@@ -142,8 +136,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.endDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
@@ -151,18 +144,15 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                       DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.endDateController.value
-                                                  .text);
+                                              controller
+                                                  .endDateController.text);
                                       if (endDate != null) {
-                                        controller.endDateController.value =
-                                            TextEditingController(
-                                                text: DateFormat.yMMMd()
-                                                    .format(endDate));
-                                        controller.end = endDate;
+                                        controller.changeEndDate(endDate);
+
                                         print('the endDate${controller.end}');
                                       } else {
-                                        controller.startDateController.value
-                                            .text = '';
+                                        controller.startDateController.text =
+                                            '';
                                       }
                                     },
                                     icon: Icon(Icons.date_range)),

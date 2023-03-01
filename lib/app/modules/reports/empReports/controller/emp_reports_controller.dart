@@ -1,22 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EmpReportsController extends GetxController {
-  dynamic employeeName = Get.arguments;
+  dynamic user = Get.arguments;
 
   @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
-    employeeName = '';
+    user = '';
   }
 
   final firestore = FirebaseFirestore.instance;
-  final startDateController = TextEditingController().obs;
-  final endDateController = TextEditingController().obs;
+  var startDateController = TextEditingController();
+  var endDateController = TextEditingController();
   DateTime end = DateTime.now();
   DateTime? start;
   Future<DateTime> showDatePickers(
@@ -39,6 +38,21 @@ class EmpReportsController extends GetxController {
     return date!;
   }
 
+  changeStartDate(startDate) {
+    update();
+    startDateController =
+        TextEditingController(text: DateFormat.yMMMd().format(startDate));
+    start = startDate;
+    print('start$start');
+  }
+
+  changeEndDate(endDate) {
+    update();
+    endDateController =
+        TextEditingController(text: DateFormat.yMMMd().format(endDate));
+    end = endDate;
+  }
+
   startDayValdate() {
     var startDateController;
     if (startDateController.value.text.isEmpty) {
@@ -47,7 +61,7 @@ class EmpReportsController extends GetxController {
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-    String uid = employeeName['userId'];
+    String uid = user['userId'];
     if (startDateController == null) {
       QuerySnapshot<Map<String, dynamic>> query = await firestore
           .collection("user")
