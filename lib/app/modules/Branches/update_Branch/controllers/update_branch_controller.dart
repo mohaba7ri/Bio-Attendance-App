@@ -106,19 +106,20 @@ class UpdateBranchController extends GetxController {
             'longitude': longitudeC.value.text,
           },
         });
-        CustomToast.successToast("update branch successfully");
+        CustomToast.successToast("update_branch_successfully".tr);
         Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {
         print('error');
       }
     } else {
-      CustomToast.errorToast("You need to fill all fields");
+      CustomToast.errorToast("You_need_to_fill_all_fields".tr);
     }
   }
 
   var textDecoration = InputDecoration(
-    labelText: 'Full name',
-    hintText: 'Enter branch name',
+    labelText: 'full_name'.tr,
+    hintText: 'Enter_branch_name'.tr
+    ,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
     ),

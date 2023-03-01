@@ -144,7 +144,20 @@
 "choose_emp":"Choose Employee",
 "choose_branch":"Choose Branch",
 "select_the_dates":"Select the Dates",
-"branches_reports":"All Branches Reports"
+"branches_reports":"All Branches Reports",
+"name":"Name",
+"update_branch_successfully":"Branch Updated Successfully",
+"You_need_to_fill_all_fields":"You Need to Fill All the Fields",
+"full_name":"Full Name",
+"Enter_branch_name":"Enter Branch Name",
+"update_emp_successfully":"Employee Updated Successfully",
+"add_vacation_type":"Add Vacation Type",
+"vacation_type":"Vacation Type",
+"sick":"Sick",
+"vacation_days":"Vacation Days",
+"There_is_No_Data":"There is No Data !"
+
+
 
 
 }

@@ -76,14 +76,14 @@ class UpdateEmployeeController extends GetxController {
             .update(data);
 
         Get.back();
-        CustomToast.successToast('Success');
+        CustomToast.successToast("update_emp_successfully".tr);
       } catch (e) {
         CustomToast.errorToast('Error');
       } finally {
         isLoading.value = false;
       }
     } else {
-      CustomToast.errorToast('Error');
+      CustomToast.errorToast('You_need_to_fill_all_fields'.tr);
     }
   }
 }

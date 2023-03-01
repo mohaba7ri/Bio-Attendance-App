@@ -145,8 +145,18 @@
 "choose_emp":"اختر موظف",
 "choose_branch":"اختر فرع",
 "select_the_dates":"حدد التواريخ",
-"branches_reports":"تقارير جميع الفروع"
-
+"branches_reports":"تقارير جميع الفروع",
+"name":"الاسم",
+"update_branch_successfully":"تم تحديث بيانات الفرع بنجاح",
+"You_need_to_fill_all_fields":"يجب عليك تعبئة جميع الحقول الفارغة",
+"full_name":"الاسم الكامل",
+"Enter_branch_name":"ادخل اسم الفرع",
+"update_emp_successfully":"تم تحديث بيانات الموظف بنجاح",
+"add_vacation_type":"اضافة نوع اجازة",
+"vacation_type":"نوع الاجازة",
+"sick":"مرضية",
+"vacation_days":"عدد الايام",
+"There_is_No_Data":"! لا توجد بيانات "
 
 
 

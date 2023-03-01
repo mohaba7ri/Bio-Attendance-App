@@ -76,9 +76,9 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                               );
                             }
                             if (snapshot.data!.docs.isEmpty) {
-                              return const Center(
+                              return  Center(
                                 child: Text(
-                                  'There is No Data !',
+                                  'There_is_No_Data'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       letterSpacing: 1.5,
