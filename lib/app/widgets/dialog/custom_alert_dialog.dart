@@ -104,9 +104,9 @@ class CustomAlertDialog {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: robotoMedium),
+                Text(title, style: robotoHuge),
                 SizedBox(height: 16),
-                Text(message, style: robotoMedium),
+                Text(message, style: robotoHuge),
               ],
             ),
           ),
@@ -123,7 +123,6 @@ class CustomAlertDialog {
                       style: robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
                       backgroundColor: AppColor.primaryExtraSoft,
                       elevation: 0,

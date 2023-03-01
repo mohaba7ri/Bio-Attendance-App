@@ -156,9 +156,13 @@
 "vacation_type":"نوع الاجازة",
 "sick":"مرضية",
 "vacation_days":"عدد الايام",
-"There_is_No_Data":"! لا توجد بيانات "
-
-
+"There_is_No_Data":" لا توجد بيانات !",
+"Leave_type":"نوع الاجازة",
+"there_are_no_Reqs":"لا توجد طلبات اجازة !",
+"You_are_being_late_for":"انت متأخر ل ",
+"minutes":"دقائق",
+"Unable_to_access_because_you_denied_the_location_request":"لا يمكن الوصول الى بيانات الموقع بسبب رفض طلب السماح"
+,"Location_permissions_are_permanently_denied_we_cannot_request_permissions":"امكانية الوصول الى بيانات الموقع الجغرافي غير ممنوحة"
 
 
 

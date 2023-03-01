@@ -32,8 +32,7 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
           ),
         ),
       ),
-      body: 
-      Container(
+      body: Container(
         color: AppColor.greyShade200,
         child: GetBuilder<ViewVacationRequestsController>(
           builder: (_controller) => Container(
@@ -59,7 +58,6 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                                   BorderRadius.all(Radius.circular(25.0)))),
                     ),
                   ),
-               
                   controller.searchValue == ''
                       ? StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                           stream: _controller.vacationRequests(),
@@ -76,9 +74,9 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                               );
                             }
                             if (snapshot.data!.docs.isEmpty) {
-                              return  Center(
+                              return Center(
                                 child: Text(
-                                  'There_is_No_Data'.tr,
+                                  'there_are_no_Reqs'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       letterSpacing: 1.5,
@@ -137,7 +135,6 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
           ),
         ),
       ),
-   
     );
   }
 }
