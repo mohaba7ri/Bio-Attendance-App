@@ -14,6 +14,7 @@ import '../controllers/page_index_controller.dart';
 import '../controllers/presence_controller.dart';
 import '../model/language_model.dart';
 import '../modules/Branches/general_settings/controller/branch_seting_controlleer.dart';
+import '../modules/Company/company_settings/controller/company_seting_controlleer.dart';
 import '../modules/home/controllers/home_controller.dart';
 import '../modules/languages/bindings/language_repo.dart';
 import '../modules/profile/controllers/profile_controller.dart';
@@ -36,7 +37,9 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(
     BiometricController(sharedPreferences: Get.find()),
   );
-   Get.lazyPut(() => BranchSettingController());
+  Get.lazyPut(() => BranchSettingController());
+  Get.lazyPut<CompanySettingController>(() => CompanySettingController(),
+      fenix: true);
 
   for (LanguageModel languageModel in AppConstants.languages) {
     String jsonStringValues = await rootBundle

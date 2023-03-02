@@ -40,6 +40,7 @@ class AllPresenceController extends GetxController {
             descending: true,
           )
           .get();
+      print(start);
       return query;
     }
   }
