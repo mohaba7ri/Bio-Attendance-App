@@ -106,7 +106,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                                   .startDateController.text);
                                       if (startDate != null) {
                                         controller.changeStartDate(startDate);
-                                        controller.start = startDate;
+                                        // controller.start = startDate;
                                       } else {
                                         controller.startDateController.text =
                                             '';
@@ -167,10 +167,13 @@ class EmpReportsView extends GetView<EmpReportsController> {
                           child: Container(
                             child: ElevatedButton.icon(
                               onPressed: () async {
-                                controller.getData();
-                                final allPrecens= controller.allPrecens;
+                                await controller.getAllPresence();
+                                await controller.getData();
+
                                 final pdfEmpReport = PdfEmpReport(
-                                    start: controller.start, allPrecens: allPrecens);
+                                    start: controller.start,
+                                    allPrecens: controller.allPrecens,
+                                    end: controller.end);
                                 final date =
                                     DateConverter.estimatedDate(DateTime.now());
                                 final dueDate = DateTime.now();
@@ -179,8 +182,8 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                   info: InvoiceInfo(
                                     date: date,
                                     dueDate: dueDate,
-                                    description: 'My description...',
-                                    number: '${DateTime.now().year}',
+                                  
+                                   
                                   ),
                                   items: [
                                     InvoiceItem(

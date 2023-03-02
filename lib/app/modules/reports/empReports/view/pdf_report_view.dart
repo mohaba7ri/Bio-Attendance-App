@@ -19,9 +19,11 @@ class PdfEmpReport extends GetxController {
     start;
   }
 
-  var start;
-  dynamic allPrecens;
-  PdfEmpReport({required this.start, required this.allPrecens});
+  final start;
+  final allPrecens;
+  final end;
+  PdfEmpReport(
+      {required this.start, required this.allPrecens, required this.end});
   Future<File> generate(Invoice invoice) async {
     final pdf = Document();
 
@@ -30,6 +32,7 @@ class PdfEmpReport extends GetxController {
         buildHeader(invoice),
         SizedBox(height: 2 * PdfPageFormat.cm),
         buildTitle(invoice),
+        SizedBox(height: 5 * PdfPageFormat.mm),
         buildInvoice(invoice),
         Divider(),
         buildTotal(invoice),
@@ -55,21 +58,20 @@ class PdfEmpReport extends GetxController {
                 Text('Lean Code',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ]),
-              Row(children: [
-                Text('Address :',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(width: 8),
-                Text('AL Zobairy Street ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ]),
-              Row(children: [
-                Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(width: 8),
-                Text('+967 7777845788 ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ]),
             ],
           ),
+          Row(children: [
+            Text('Address :', style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(width: 8),
+            Text('AL Zobairy Street ',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+          ]),
+          Row(children: [
+            Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(width: 8),
+            Text('+967 7777845788 ',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+          ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -96,8 +98,7 @@ class PdfEmpReport extends GetxController {
       'Report Date :${info.date}',
     ];
     final data = <String>[
-      info.number,
-      Utils.formatDate(info.dueDate),
+      info.date,
     ];
 
     return Column(
@@ -114,10 +115,16 @@ class PdfEmpReport extends GetxController {
   Widget buildTitle(Invoice invoice) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Text('Date From : ${start}'),
-            Text('Date To:${employeeReport.end}'),
-          ])
+          Row(children: [
+            SizedBox(width: 30 * PdfPageFormat.mm),
+            Text('Date From : '),
+            Text('${DateFormat("M/d/yyyy").format(start)}',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(width: 15 * PdfPageFormat.mm),
+            Text('Date To : '),
+            Text('${DateFormat("M/d/yyyy").format(end)}',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+          ]),
         ],
       );
 
@@ -141,8 +148,8 @@ class PdfEmpReport extends GetxController {
 
     return Table.fromTextArray(
       headers: headers,
-      data: data,
-      border: null,
+      data: allPrecens,
+      border: TableBorder.all(width: 1.0, color: PdfColors.black),
       headerStyle: TextStyle(fontWeight: FontWeight.bold),
       headerDecoration: BoxDecoration(color: PdfColors.grey300),
       cellHeight: 30,
@@ -256,14 +263,14 @@ class Invoice {
 }
 
 class InvoiceInfo {
-  final String description;
-  final String number;
+  
+ 
   final String date;
   final DateTime dueDate;
 
   const InvoiceInfo({
-    required this.description,
-    required this.number,
+    
+    
     required this.date,
     required this.dueDate,
   });
@@ -283,9 +290,4 @@ class InvoiceItem {
     required this.vat,
     required this.unitPrice,
   });
-}
-
-class Utils {
-  static formatPrice(double price) => '\$ ${price.toStringAsFixed(2)}';
-  static formatDate(DateTime date) => DateFormat.yMd().format(date);
 }
