@@ -18,6 +18,7 @@ class PresenceController extends GetxController {
   DateTime? overlyTime;
   DateTime? currentTime = DateTime.now();
   String? timeStatus;
+  String? hoursWork;
   final SharedPreferences sharedPreferences;
   PresenceController({required this.sharedPreferences});
   @override
@@ -198,8 +199,11 @@ class PresenceController extends GetxController {
       print(currentTime);
       print('lateHour$lateMinutes');
 
-      Get.snackbar('Late'.tr,
-          'You_are_being_late_for'.tr+'${lateHours}:${lateMinutesRemainder}'+ 'minutes'.tr);
+      Get.snackbar(
+          'Late'.tr,
+          'You_are_being_late_for'.tr +
+              '${lateHours}:${lateMinutesRemainder}' +
+              'minutes'.tr);
       return chechIn = true;
     }
   }
@@ -219,6 +223,42 @@ class PresenceController extends GetxController {
       print("Check-out time has passed.");
       return chechOut = true;
     }
+  }
+
+  calHoursWork() async {
+    String? durationString;
+    final userId = sharedPreferences.getString('userId')!;
+    String todayDocId =
+        DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
+    try {
+      await firestore
+          .collection('user')
+          .doc(userId)
+          .collection('presence')
+          .doc(todayDocId)
+          .get()
+          .then((data) {
+        String startTimeStr = data['checkIn']['date'];
+
+        DateTime startTime = DateTime.parse(startTimeStr);
+        DateTime endTime = DateTime.now();
+
+        Duration difference = endTime.difference(startTime);
+
+        int hours = difference.inHours;
+
+        int minutes = difference.inMinutes.remainder(60);
+
+        print('Hours: $hours, Minutes: $minutes');
+
+        print('chechIn${data['checkIn']['date']}');
+        durationString = '$hours:${minutes.toString().padLeft(2, '0')}';
+
+        print('Duration: $durationString');
+        hoursWork = durationString;
+        update();
+      });
+    } catch (e) {}
   }
 
   checkinPresence(
@@ -310,7 +350,8 @@ class PresenceController extends GetxController {
                   "address": address,
                   "in_area": in_area,
                   "distance": distance,
-                }
+                },
+                'hoursWork': hoursWork
               },
             );
             Get.back();
@@ -360,6 +401,7 @@ class PresenceController extends GetxController {
           // case : already check in and check out
           CustomToast.successToast("you_already_check_in_and_check_out".tr);
         } else {
+          await calHoursWork();
           // case : already check in and not yet check out ( check out )
           checkoutPresence(presenceCollection, todayDocId, position, address,
               distance, in_area);
@@ -407,7 +449,8 @@ class PresenceController extends GetxController {
         // your App should show an explanatory UI now.
         // return Future.error('Location permissions are denied');
         return {
-          "message": "Unable_to_access_because_you_denied_the_location_request".tr,
+          "message":
+              "Unable_to_access_because_you_denied_the_location_request".tr,
           "error": true,
         };
       }
@@ -417,7 +460,8 @@ class PresenceController extends GetxController {
       // Permissions are denied forever, handle appropriately.
       return {
         "message":
-            "Location_permissions_are_permanently_denied_we_cannot_request_permissions".tr,
+            "Location_permissions_are_permanently_denied_we_cannot_request_permissions"
+                .tr,
         "error": true,
       };
     }

@@ -21,14 +21,14 @@ class PdfEmpReport extends GetxController {
 
   var start;
   dynamic allPrecens;
-  PdfEmpReport({required this.start,required this.allPrecens});
+  PdfEmpReport({required this.start, required this.allPrecens});
   Future<File> generate(Invoice invoice) async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
       build: (context) => [
         buildHeader(invoice),
-        SizedBox(height: 3 * PdfPageFormat.cm),
+        SizedBox(height: 2 * PdfPageFormat.cm),
         buildTitle(invoice),
         buildInvoice(invoice),
         Divider(),
@@ -53,6 +53,19 @@ class PdfEmpReport extends GetxController {
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: 8),
                 Text('Lean Code',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ]),
+              Row(children: [
+                Text('Address :',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(width: 8),
+                Text('AL Zobairy Street ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ]),
+              Row(children: [
+                Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(width: 8),
+                Text('+967 7777845788 ',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ]),
             ],
@@ -103,12 +116,12 @@ class PdfEmpReport extends GetxController {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             Text('Date From : ${start}'),
-            Text('Date To:${employeeReport.end}')
+            Text('Date To:${employeeReport.end}'),
           ])
         ],
       );
 
-   Widget buildInvoice(Invoice invoice) {
+  Widget buildInvoice(Invoice invoice) {
     final headers = [
       'Date',
       'Check In ',

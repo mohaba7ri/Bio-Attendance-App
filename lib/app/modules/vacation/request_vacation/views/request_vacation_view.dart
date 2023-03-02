@@ -62,9 +62,13 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                     hint: Text('Please Select'),
                                     items: _controller.vacationTypeList,
                                     value: _controller.leaveTypeValue,
+                                    
                                     onChanged: (String? selectedValue) {
                                       _controller
                                           .changeLeaveType(selectedValue);
+                                      _controller.leaveTypeValue =
+                                          selectedValue;
+                                      print(_controller.leaveTypeValue);
                                     },
                                   ),
                                 ),

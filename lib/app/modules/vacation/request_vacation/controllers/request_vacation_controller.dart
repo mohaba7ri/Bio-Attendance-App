@@ -46,8 +46,8 @@ class VacationRequestController extends GetxController {
   }
 
   changeLeaveType(value) {
-    update();
     leaveTypeValue = value;
+    update();
   }
 
   Future getUserData() async {
@@ -129,7 +129,7 @@ class VacationRequestController extends GetxController {
   }
 
   void submit() async {
-    if (leaveTypeValue == 'please select') {
+    if (leaveTypeValue == null) {
       CustomToast.errorToast('please_select_leave_type'.tr);
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
@@ -169,7 +169,7 @@ class VacationRequestController extends GetxController {
       isloading!.value = false;
       fileName = '';
       filePath = '';
-      leaveTypeValue = 'please select';
+
       fileController.value.text = ' ';
       CustomToast.successToast('your_request_sent_successfully'.tr);
     });
