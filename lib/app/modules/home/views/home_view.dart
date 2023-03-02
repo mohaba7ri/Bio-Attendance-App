@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:presence/app/routes/app_pages.dart';
 import 'package:presence/app/style/app_color.dart';
+import 'package:presence/app/util/styles.dart';
 import 'package:presence/app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:presence/app/widgets/presence_card.dart';
 import 'package:presence/app/widgets/presence_tile.dart';
@@ -15,8 +16,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavigationBar(),
       extendBody: true,
-      body:
-       StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: controller.streamUser(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -136,13 +136,8 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 Obx(
                                   () => Text(
-                                    '${controller.officeDistance.value}',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                                      '${controller.officeDistance.value}',
+                                      style: robotoMedium),
                                 ),
                               ],
                             ),
@@ -179,13 +174,7 @@ class HomeView extends GetView<HomeController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Presence_History".tr,
-                          style: TextStyle(
-                            fontFamily: "poppins",
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        Text("Presence_History".tr, style: robotoMedium),
                         TextButton(
                           onPressed: () => Get.toNamed(Routes.ALL_PRESENCE),
                           child: Text('show_all'.tr),

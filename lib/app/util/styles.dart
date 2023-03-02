@@ -10,9 +10,9 @@ final robotoRegular = TextStyle(
   fontSize: Dimensions.fontSizeDefault,
 );
 
-final   robotoMedium = TextStyle(
+final robotoMedium = TextStyle(
     fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     fontSize: Dimensions.fontSizeLarge,
     color: AppColor.blackColor);
 
@@ -21,6 +21,14 @@ final robotoMediumWhite = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: Dimensions.fontSizeLarge,
     color: AppColor.whiteColor);
+
+
+final robotoHugeWhite = TextStyle(
+    fontFamily: 'Roboto',
+ fontWeight: FontWeight.w700,
+  fontSize: Dimensions.fontSizeExtraLarge,
+    color: AppColor.whiteColor);
+
 
 final robotoBold = TextStyle(
   fontFamily: 'Roboto',
