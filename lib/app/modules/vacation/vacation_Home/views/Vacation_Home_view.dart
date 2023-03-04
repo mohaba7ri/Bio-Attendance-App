@@ -40,7 +40,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'Vacation_Types'.tr,
                         icon: Image.asset(
-                          Images.changePassword,
+                          Images.vacationTypes,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
@@ -71,7 +71,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
-                          Images.leave,
+                          Images.viewVacations,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () {
@@ -82,7 +82,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'Employees_on_Vacation'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.empOnVac,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () {
