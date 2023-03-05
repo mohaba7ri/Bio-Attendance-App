@@ -59,7 +59,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: GetBuilder<VacationRequestController>(
                                   builder: (_controller) => DropdownButton2(
-                                    hint: Text('please_select'.tr),
+                                    hint: Text('Please Select'),
                                     items: _controller.vacationTypeList,
                                     value: _controller.leaveTypeValue,
                                     onChanged: (String? selectedValue) {
@@ -235,7 +235,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 style: redElevatedButStyle,
                                 child: Text(
                                   'Cancel'.tr,
-                                  style: robotoMediumWhite,
+                                  style: robotoMedium,
                                 ),
                               ),
                               controller.isloading == true
@@ -249,7 +249,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                       style: elevatedButStyle,
                                       child: Text(
                                         'Send'.tr,
-                                        style: robotoMediumWhite,
+                                        style: robotoMedium,
                                       ),
                                     ),
                             ],

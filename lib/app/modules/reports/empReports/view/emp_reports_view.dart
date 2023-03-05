@@ -178,26 +178,9 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                     DateConverter.estimatedDate(DateTime.now());
                                 final dueDate = DateTime.now();
 
-                                final invoice = Invoice(
-                                  info: InvoiceInfo(
-                                    date: date,
-                                    dueDate: dueDate,
-                                  
-                                   
-                                  ),
-                                  items: [
-                                    InvoiceItem(
-                                      description: 'Coffee',
-                                      date: date,
-                                      quantity: 3,
-                                      vat: 0.19,
-                                      unitPrice: 5.99,
-                                    ),
-                                  ],
-                                );
+                               
 
-                                final pdfFile =
-                                    await pdfEmpReport.generate(invoice);
+                                final pdfFile = await pdfEmpReport.generate();
 
                                 PdfController.openFile(pdfFile);
                               },

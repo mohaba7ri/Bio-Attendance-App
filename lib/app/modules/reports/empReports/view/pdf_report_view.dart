@@ -7,6 +7,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:presence/app/controllers/pdf_controller.dart';
 
+import '../../../../helper/date_converter.dart';
 import '../controller/emp_reports_controller.dart';
 
 EmpReportsController employeeReport = EmpReportsController();
@@ -24,27 +25,27 @@ class PdfEmpReport extends GetxController {
   final end;
   PdfEmpReport(
       {required this.start, required this.allPrecens, required this.end});
-  Future<File> generate(Invoice invoice) async {
+  Future<File> generate() async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
       build: (context) => [
-        buildHeader(invoice),
+        buildHeader(),
         SizedBox(height: 2 * PdfPageFormat.cm),
-        buildTitle(invoice),
+        buildTitle(),
         SizedBox(height: 5 * PdfPageFormat.mm),
-        buildInvoice(invoice),
+        buildAttendance(),
         Divider(),
-        buildTotal(invoice),
+        buildTotal(),
       ],
-      footer: (context) => buildFooter(invoice),
+      footer: (context) => buildFooter(),
     ));
 
     return PdfController.saveDocument(
         name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader(Invoice invoice) => Column(
+  static Widget buildHeader() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //  SizedBox(height: 1 * PdfPageFormat.cm),
@@ -78,7 +79,7 @@ class PdfEmpReport extends GetxController {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               buildEmployee(),
-              buildInvoiceInfo(invoice.info),
+              buildInvoiceInfo(),
             ],
           ),
         ],
@@ -93,26 +94,28 @@ class PdfEmpReport extends GetxController {
         ],
       );
 
-  static Widget buildInvoiceInfo(InvoiceInfo info) {
+  static Widget buildInvoiceInfo() {
     final titles = <String>[
-      'Report Date :${info.date}',
+      'Report Date :${DateConverter.estimatedDate(DateTime.now())}',
     ];
-    final data = <String>[
-      info.date,
-    ];
-
+//  final data = <String>[
+//       info.number,
+//       Utils.formatDate(info.date),
+//       paymentTerms,
+//       Utils.formatDate(info.dueDate),
+//     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(titles.length, (index) {
         final title = titles[index];
-        final value = data[index];
+        //   final value = data[index];
 
-        return buildText(title: title, value: value, width: 200);
+        return buildText(title: title, value: '555', width: 200);
       }),
     );
   }
 
-  Widget buildTitle(Invoice invoice) => Column(
+  Widget buildTitle() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
@@ -128,7 +131,7 @@ class PdfEmpReport extends GetxController {
         ],
       );
 
-  Widget buildInvoice(Invoice invoice) {
+  Widget buildAttendance() {
     final headers = [
       'Date',
       'Check In ',
@@ -137,14 +140,14 @@ class PdfEmpReport extends GetxController {
       'Status',
       'Hours Work',
     ];
-    final List<List<dynamic>> data = [
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-      ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    ];
+    // final List<List<dynamic>> data = [
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    // ];
 
     return Table.fromTextArray(
       headers: headers,
@@ -164,13 +167,13 @@ class PdfEmpReport extends GetxController {
     );
   }
 
-  static Widget buildTotal(Invoice invoice) {
-    final netTotal = invoice.items
-        .map((item) => item.unitPrice * item.quantity)
-        .reduce((item1, item2) => item1 + item2);
-    final vatPercent = invoice.items.first.vat;
-    final vat = netTotal * vatPercent;
-    final total = netTotal + vat;
+  static Widget buildTotal() {
+    // final netTotal = invoice.items
+    //     .map((item) => item.unitPrice * item.quantity)
+    //     .reduce((item1, item2) => item1 + item2);
+    // final vatPercent = invoice.items.first.vat;
+    // final vat = netTotal * vatPercent;
+    // final total = netTotal + vat;
 
     return Container(
       alignment: Alignment.centerRight,
@@ -204,7 +207,7 @@ class PdfEmpReport extends GetxController {
     );
   }
 
-  static Widget buildFooter(Invoice invoice) => Column(
+  static Widget buildFooter() => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Divider(),
@@ -249,45 +252,4 @@ class PdfEmpReport extends GetxController {
       ),
     );
   }
-}
-
-class Invoice {
-  final InvoiceInfo info;
-
-  final List<InvoiceItem> items;
-
-  const Invoice({
-    required this.info,
-    required this.items,
-  });
-}
-
-class InvoiceInfo {
-  
- 
-  final String date;
-  final DateTime dueDate;
-
-  const InvoiceInfo({
-    
-    
-    required this.date,
-    required this.dueDate,
-  });
-}
-
-class InvoiceItem {
-  final String description;
-  final String date;
-  final int quantity;
-  final double vat;
-  final double unitPrice;
-
-  const InvoiceItem({
-    required this.description,
-    required this.date,
-    required this.quantity,
-    required this.vat,
-    required this.unitPrice,
-  });
 }
