@@ -14,7 +14,7 @@ class PageIndexController extends GetxController {
     switch (index) {
       case 1:
         if (biometricController.isEnabled == true) {
-          biometricController.fingerprintLogin();
+          biometricController.bioMetricPresence();
           presenceController
             ..checkTime()
             ..presence();

@@ -13,6 +13,7 @@ class BiometricController extends GetxController {
     loadUser();
     isFingerPrintEnabled();
   }
+
   final presenceController = Get.find<PresenceController>();
 
   final SharedPreferences sharedPreferences;
@@ -81,15 +82,14 @@ class BiometricController extends GetxController {
     }
   }
 
-  void bioMetricPrecense () async{
-    bool isEnabled =   await isFingerPrintEnabled();
-    if(isEnabled){
-       bool _isEnabled = await isAuth('login using finger print');
+  void bioMetricPresence() async {
+    bool isEnabled = await isFingerPrintEnabled();
+    if (isEnabled) {
+      bool _isEnabled = await isAuth('Register presence using Biometrics');
       if (_isEnabled) {
-         presenceController
+        presenceController
           ..checkTime()
           ..presence();
-
       }
     }
   }
