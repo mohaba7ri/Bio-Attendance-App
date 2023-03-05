@@ -45,7 +45,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                         width: 50,
                         height: 50,
                         child: Image.asset(
-                          Images.profile,
+                          Images.userProfile,
                           // (controller.VacList["avatar"] == null ||
                           //         controller.VacList['avatar'] == "")
                           //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"

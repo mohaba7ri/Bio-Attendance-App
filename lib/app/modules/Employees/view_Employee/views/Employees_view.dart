@@ -94,7 +94,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                               right: new BorderSide(
                                                   width: 2.0,
                                                   color: Colors.black))),
-                                      child: Image.asset(Images.profile,
+                                      child: Image.asset(Images.userProfile,
                                           color: Colors.black),
                                     ),
                                     title: Text(

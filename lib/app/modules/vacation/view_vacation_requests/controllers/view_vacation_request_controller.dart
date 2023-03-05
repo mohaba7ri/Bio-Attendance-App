@@ -45,7 +45,7 @@ class ViewVacationRequestsController extends GetxController {
       await firestore
           .collection('vacationRequest')
           .doc(docId)
-          .update({'status': "Accepted"});
+          .update({'status': "Approved"});
     } catch (e) {
       print('the error$e');
     }

@@ -71,8 +71,10 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                           style: robotoMedium,
                         ),
                         Spacer(),
-                        Icon(
-                          Icons.ac_unit_sharp,
+                        Image.asset(
+                          Images.info,
+                          width: 25,
+                          height: 25,
                         )
                       ],
                     ),
@@ -184,7 +186,7 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                 height: 60,
                               ),
                               Text(
-                                "Employees\n" +
+                                "employees\n".tr +
                                     '${controller.userNumbers.toString()}',
                                 style: robotoMedium,
                                 textAlign: TextAlign.center,
@@ -196,7 +198,10 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                           width: 40,
                         ),
                         Card(
+                          
+                        
                           shape: RoundedRectangleBorder(
+                            
                               borderRadius: BorderRadius.circular(8)),
                           elevation: 4,
                           child: Column(
@@ -207,7 +212,7 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                 height: 60,
                               ),
                               Text(
-                                "Branches\n".tr +
+                                "branches\n".tr +
                                     '${controller.branchNumbers.toString()}',
                                 style: robotoMedium,
                                 textAlign: TextAlign.center,
@@ -223,7 +228,7 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                         height: 4,
                       ),
                     ),
-                    Text("General Settings", style: robotoHuge),
+                    Text("General_Settings".tr, style: robotoHuge),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(

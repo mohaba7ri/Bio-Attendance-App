@@ -165,6 +165,14 @@
 ,"please_select_leave_type":"Please Select Leave Type",
 "vacation_request_by":"Vacation Request By :",
 "your_request_sent_successfully":"Your Request was Sent Successfully",
-"Branches_Employees":"Branches and Employees"
+"Branches_Employees":"Branches and Employees",
+"edit_profile":"Edit Profile",
+"change_password":"Change Password",
+"enable_biometric":"Enable Biometric",
+"please_select":"Please Select",
+"General_Settings":"General Settings"
+,"branches":"Branches",
+"dashboard":"Dashboard"
+,"done":"Done"
 
 }
