@@ -193,7 +193,9 @@
 ,
 "Approved":"المقبولة",
 "Pending":"قيد الانتظار",
-"Attendance_Summary":"ملخص الحضور"
+"Attendance_Summary":"ملخص الحضور",
+"Admin_confirmation":"تأكيد المدير",
+"adminConfirm":"يجب عليك تأكيد انك المدير من خلال ادخال الرمز هنا"
 
 
 

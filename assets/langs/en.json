@@ -192,6 +192,8 @@
 ,
 "Approved":"Approved",
 "Pending":"Pending"
-,"Attendance_Summary":"Attendance Summary"
+,"Attendance_Summary":"Attendance Summary",
+"Admin_confirmation":"Admin Confirmation",
+"adminConfirm":"you need to confirm that you are an administrator by inputting your password"
 
 }
