@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:presence/app/model/menu_model.dart';
-import 'package:presence/app/modules/menu/management_botton.dart';
 
+
+import '../../model/menu_model.dart';
 import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
 import '../../util/images.dart';
+import 'management_botton.dart';
 
 class ManagementScreen extends StatelessWidget {
   ManagementScreen({super.key});

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
+
+import '../style/app_color.dart';
+import '../util/styles.dart';
+
 
 class PresenceCard extends StatelessWidget {
   final Map<String, dynamic> userData;

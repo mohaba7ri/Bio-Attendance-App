@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:presence/app/modules/Company/company_settings/controller/company_seting_controlleer.dart';
+
+import '../controller/company_seting_controlleer.dart';
 
 class CompanySettingBinding implements Bindings {
   @override

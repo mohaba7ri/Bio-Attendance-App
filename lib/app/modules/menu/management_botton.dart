@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/model/menu_model.dart';
-import 'package:presence/app/modules/home/controllers/home_controller.dart';
-import 'package:presence/app/modules/profile/controllers/profile_controller.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../model/menu_model.dart';
 import '../../util/dinmensions.dart';
 import '../../util/images.dart';
+import '../../widgets/dialog/custom_alert_dialog.dart';
+import '../home/controllers/home_controller.dart';
+import '../profile/controllers/profile_controller.dart';
 
 class MenuButton extends StatelessWidget {
   final profileController = Get.find<ProfileController>();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/Company/company_settings/controller/company_seting_controlleer.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/custom_input.dart';
+import '../../../../style/app_color.dart';
+import '../../../../widgets/custom_input.dart';
+import '../controller/company_seting_controlleer.dart';
 
 class CompanySettingView extends GetView<CompanySettingController> {
   late String? companyId;

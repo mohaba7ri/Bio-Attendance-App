@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
+
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../../../../style/app_color.dart';
 import '../../../../../util/images.dart';
 import '../../../../../util/styles.dart';
 import '../../controllers/view_vacation_request_controller.dart';

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
+
+import '../controller/languages_controller.dart';
 
 class LanguagesBinding extends Bindings {
   @override

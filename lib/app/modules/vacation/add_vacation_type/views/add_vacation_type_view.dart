@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../widgets/custom_input.dart';
 import '../controllers/add_vacation_type_controller.dart';
 
 class AddVacationTypeView extends GetView<AddVacationTypeController> {

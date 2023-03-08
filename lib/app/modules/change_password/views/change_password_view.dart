@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/custom_input.dart';
-import 'package:presence/app/widgets/custom_widget.dart';
+
 
 import '../../../routes/app_pages.dart';
+import '../../../style/app_color.dart';
+import '../../../widgets/custom_input.dart';
+import '../../../widgets/custom_widget.dart';
 import '../controllers/change_password_controller.dart';
 
 class ChangePasswordView extends GetView<ChangePasswordController> {

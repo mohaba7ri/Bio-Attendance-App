@@ -1,7 +1,9 @@
+import 'package:Biometric/app/modules/reports/allBranchesReports/view/pdf_branch_reports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../controllers/pdf_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
@@ -49,8 +51,8 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding:                   EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
-
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,16 +105,15 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                   if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -150,16 +151,15 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                     if (startDate != null) {
-                                            controller
-                                                    .startDateController.value =
-                                                TextEditingController(
-                                                    text: DateFormat.yMMMd()
-                                                        .format(startDate));
-                                          } else {
-                                            controller.startDateController.value
-                                                .text = '';
-                                          }
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -167,11 +167,21 @@ class AllBranchesReportsView extends GetView<AllBranchesReportsController> {
                           ),
                         ],
                       ),
-                       Row(children: [
+                      Row(children: [
                         Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                // final pdfEmpReport = PdfAllBranch();
+                                // final date =
+                                //     DateConverter.estimatedDate(DateTime.now());
+                                // final dueDate = DateTime.now();
+
+                                final pdfEmpReport = PdfAllBranch();
+                                final pdfFile = await pdfEmpReport.generate();
+
+                                PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),

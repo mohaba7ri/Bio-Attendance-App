@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
 
+
+import '../modules/languages/controller/languages_controller.dart';
 import '../style/app_color.dart';
 import '../util/dinmensions.dart';
 import '../util/images.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
-import 'package:presence/app/modules/sign_up/admin/controllers/admin_sing_up_controller.dart';
+
 
 import '../../../../style/app_color.dart';
+import '../controllers/admin_sing_up_controller.dart';
 
 class AdminSignUpView extends GetView<AdminSignUpController> {
   AdminSignUpController _adminSignUpController = AdminSignUpController();

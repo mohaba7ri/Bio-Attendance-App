@@ -1,7 +1,10 @@
+import 'package:Biometric/app/controllers/presence_controller.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/biometric_controller.dart';
-import 'package:presence/app/controllers/presence_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
+
+
+
+import '../routes/app_pages.dart';
+import 'biometric_controller.dart';
 
 class PageIndexController extends GetxController {
   final presenceController = Get.find<PresenceController>();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/reports/empReports/view/pdf_report_view.dart';
 
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
@@ -9,6 +8,7 @@ import '../../../../style/app_color.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
+import '../../branchReports/view/pdf_branch_reports.dart';
 import '../controller/emp_reports_controller.dart';
 
 class EmpReportsView extends GetView<EmpReportsController> {

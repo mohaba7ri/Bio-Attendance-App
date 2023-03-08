@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
-import 'package:presence/app/widgets/custom_input.dart';
+
+
+import '../../style/app_color.dart';
+import '../../util/styles.dart';
+import '../custom_input.dart';
 
 class CustomAlertDialog {
   static confirmAdmin({
@@ -25,7 +27,10 @@ class CustomAlertDialog {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: robotoMediumWhite,),
+                Text(
+                  title,
+                  style: robotoMediumWhite,
+                ),
                 SizedBox(height: 16),
                 Text(
                   message,
@@ -54,10 +59,9 @@ class CustomAlertDialog {
                     onPressed: onCancel,
                     child: Text(
                       "cancel".tr,
-                      style:  robotoMediumWhite,
+                      style: robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
-                    
                       padding: EdgeInsets.symmetric(vertical: 12),
                       backgroundColor: AppColor.primaryExtraSoft,
                       elevation: 0,
@@ -69,7 +73,10 @@ class CustomAlertDialog {
                   flex: 6,
                   child: ElevatedButton(
                     onPressed: onConfirm,
-                    child: Text("confirm".tr, style: robotoMediumWhite,),
+                    child: Text(
+                      "confirm".tr,
+                      style: robotoMediumWhite,
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primary,
                       padding: EdgeInsets.symmetric(vertical: 12),
@@ -120,7 +127,7 @@ class CustomAlertDialog {
                     onPressed: onCancel,
                     child: Text(
                       "cancel".tr,
-                      style: robotoMediumWhite,
+                      style: robotoMedium,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12),

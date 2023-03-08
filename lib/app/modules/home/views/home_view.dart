@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
-import 'package:presence/app/widgets/custom_bottom_navigation_bar.dart';
-import 'package:presence/app/widgets/presence_card.dart';
-import 'package:presence/app/widgets/presence_tile.dart';
 
+
+import '../../../routes/app_pages.dart';
+import '../../../style/app_color.dart';
+import '../../../util/styles.dart';
+import '../../../widgets/custom_bottom_navigation_bar.dart';
+import '../../../widgets/presence_card.dart';
+import '../../../widgets/presence_tile.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

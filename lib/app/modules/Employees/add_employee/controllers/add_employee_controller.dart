@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+
+import '../../../../../company_data.dart';
+import '../../../../widgets/dialog/custom_alert_dialog.dart';
+import '../../../../widgets/toast/custom_toast.dart';
+
 
 class AddEmployeeController extends GetxController {
   @override
@@ -234,7 +236,7 @@ class AddEmployeeController extends GetxController {
           DocumentReference employee =
               firestore.collection("user").doc(uid.value);
           await employee.set({
-            "salary": salaryPerHour.text,
+            "salaryPerHour": salaryPerHour.text,
             "name": nameC.text,
             "email": emailC.text,
             "role": roleValue,

@@ -5,10 +5,12 @@ import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../company_data.dart';
+import '../widgets/dialog/custom_alert_dialog.dart';
+import '../widgets/toast/custom_toast.dart';
 
 class PresenceController extends GetxController {
   RxBool isLoading = false.obs;

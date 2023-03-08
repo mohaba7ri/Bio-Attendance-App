@@ -1,10 +1,12 @@
+import 'package:Biometric/app/controllers/presence_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:presence/app/controllers/presence_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../routes/app_pages.dart';
 
 class BiometricController extends GetxController {
   @override

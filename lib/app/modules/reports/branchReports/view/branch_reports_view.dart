@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
@@ -170,7 +171,19 @@ class BranchReportsView extends GetView<BranchReportsController> {
                         Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final date =
+                                    DateConverter.estimatedDate(DateTime.now());
+                                final dueDate = DateTime.now();
+                                // final pdfEmpReport = PdfEmpReport(
+                                //   start: controller.start,
+                                //   allPrecens: controller.allPrecens,
+                                //   end: controller.end);
+
+                                //  final pdfFile = await pdfEmpReport.generate();
+
+                                // PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),

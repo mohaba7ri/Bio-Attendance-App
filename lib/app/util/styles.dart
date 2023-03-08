@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
 
+
+import '../style/app_color.dart';
 import 'dinmensions.dart';
 
 final robotoRegular = TextStyle(

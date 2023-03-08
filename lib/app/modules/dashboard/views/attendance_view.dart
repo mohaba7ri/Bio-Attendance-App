@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
 
+
+import '../../../style/app_color.dart';
 import '../../../util/images.dart';
+import '../../../util/styles.dart';
 import '../controllers/attendance_controller.dart';
 
 class AttendanceView extends GetView<AttendanceController> {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/util/styles.dart';
-import 'package:presence/app/widgets/custom_input.dart';
+
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
+import '../../../../widgets/custom_input.dart';
 import '../controllers/update_company_controller.dart';
 
 class UpdateCompanyView extends GetView<UpdateCompanyController> {

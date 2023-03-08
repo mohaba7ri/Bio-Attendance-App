@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/home/controllers/home_controller.dart';
+
+import '../../../home/controllers/home_controller.dart';
 
 class ViewVacationRequestsController extends GetxController {
   final homeController = Get.find<HomeController>();

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/sign_up/company/controlles/company_sing_up_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/widgets/custom_input.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
 
+
+
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../widgets/custom_input.dart';
+import '../../../../widgets/dialog/custom_alert_dialog.dart';
+import '../controlles/company_sing_up_controller.dart';
 
 class CompanySignUpView extends GetView<CompanySignUpController> {
   CompanySignUpController _signUpController = CompanySignUpController();

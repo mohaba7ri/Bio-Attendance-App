@@ -2,13 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/util/app_constants.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../controllers/page_index_controller.dart';
+import '../../../routes/app_pages.dart';
+import '../../../util/app_constants.dart';
+import '../../../widgets/dialog/custom_alert_dialog.dart';
+import '../../../widgets/toast/custom_toast.dart';
+import '../../languages/controller/languages_controller.dart';
 
 class LoginController extends GetxController {
   @override

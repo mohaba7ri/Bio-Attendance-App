@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
-import 'package:presence/app/controllers/pdf_controller.dart';
 
+import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 import '../controller/emp_reports_controller.dart';
 

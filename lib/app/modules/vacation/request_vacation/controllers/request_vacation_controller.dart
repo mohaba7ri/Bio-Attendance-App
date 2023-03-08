@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:presence/app/modules/home/controllers/home_controller.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../widgets/toast/custom_toast.dart';
+import '../../../home/controllers/home_controller.dart';
 
 class VacationRequestController extends GetxController {
   final SharedPreferences sharedPreferences;

@@ -1,4 +1,4 @@
-name: presence
+name: Biometric
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
@@ -6,6 +6,9 @@ environment:
   sdk: '>=2.18.2 <3.0.0'
 
 dependencies:
+
+  flutter:
+    sdk: flutter
   cloud_firestore: ^4.3.1
   convex_bottom_bar: ^3.1.0+1
   cupertino_icons: ^1.0.2
@@ -13,15 +16,14 @@ dependencies:
   firebase_core: ^2.4.1
   firebase_storage: ^11.0.10
   fl_chart: ^0.61.0
-  syncfusion_flutter_charts: ^20.4.49
+
   pie_chart: any
   firebase_messaging: ^14.2.2
-  syncfusion_flutter_pdfviewer: ^20.4.50
+  syncfusion_flutter_pdfviewer: '20.4.53'
 
-  flutter:
-    sdk: flutter
+
   flutter_secure_storage: ^8.0.0
-  flutter_svg: ^2.0.2
+  flutter_svg: ^1.1.6
   geocoding: ^2.0.5
   geolocator: ^9.0.2
   get: ^4.6.5
@@ -42,15 +44,18 @@ dependencies:
   shared_preferences: ^2.0.11
   flutter_local_notifications: ^12.0.4
   flutter_easyloading: ^3.0.5
-  pdf: ^3.9.0
-  open_file: ^3.1.0
+
+  open_file: ^3.2.1
+  pdf: '3.8.4'
+  path_provider: ^2.0.13
+
 
 
 
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
-  flutter_launcher_icons: "^0.12.0"
+  flutter_lints: '2.0.0'
+  flutter_launcher_icons: "^0.10.0"
   flutter_test:
     sdk: flutter
 
@@ -116,6 +121,18 @@ flutter:
           weight: 700
         - asset: assets/fonts/roboto/Roboto-Black.ttf
           weight: 900
+    - family: Tajawal
+      fonts:
+        
+        - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Tajawal/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Tajawal/Tajawal-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Tajawal/Tajawal-Black.ttf
+          weight: 900
+
 flutter_icons:
   android: "launcher_icon"
   ios: true

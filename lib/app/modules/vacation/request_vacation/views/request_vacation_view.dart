@@ -1,8 +1,8 @@
+import 'package:Biometric/app/modules/vacation/request_vacation/views/widgets/vacation_appbar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:presence/app/modules/vacation/request_vacation/views/widgets/vacation_appbar.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
@@ -230,7 +230,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  controller.getAdminData();
+                                  Get.back();
                                 },
                                 style: redElevatedButStyle,
                                 child: Text(

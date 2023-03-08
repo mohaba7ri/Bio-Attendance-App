@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/widgets/custom_widget.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
 
 import '../../../routes/app_pages.dart';
 import '../../../style/app_color.dart';
@@ -10,7 +8,10 @@ import '../../../util/app_constants.dart';
 import '../../../util/dinmensions.dart';
 import '../../../util/styles.dart';
 import '../../../widgets/custom_button.dart';
+import '../../../widgets/custom_widget.dart';
 import '../../../widgets/language_widget.dart';
+import '../../../widgets/toast/custom_toast.dart';
+import '../controller/languages_controller.dart';
 
 class LanguagesView extends StatelessWidget {
   const LanguagesView({super.key});
