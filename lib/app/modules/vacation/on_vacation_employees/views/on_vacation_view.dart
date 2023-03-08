@@ -18,8 +18,9 @@ class OnVacationView extends GetView<OnVacationController> {
       appBar: AppBar(
         title: Text('approved_vac'.tr),
         leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(Icons.arrow_back_ios_new_outlined)),
+          onPressed: () => Get.back(),
+          icon: Icon(Icons.arrow_back_ios),
+        ),
       ),
       body: Container(
         color: Colors.grey[200],

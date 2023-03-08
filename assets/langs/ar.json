@@ -187,8 +187,13 @@
 "Cant_send_email_verification_Error_because":"لا يمكن ارسال ايميل التوثيق بسبب وجود خطأ : ",
 "we_sent_email":"لقد تم ارسال ايميل التوثيق الى الايميل الخاص بك",
 "Email_not_yet_verified":"الحساب غير موثق بعد",
-"Are_you_want_to_send_email_verification":"هل تريد ارسال ايميل التوثيق؟"
-
+"Are_you_want_to_send_email_verification":"هل تريد ارسال ايميل التوثيق؟",
+"All":"الكل",
+"Denied":"المرفوضة"
+,
+"Approved":"المقبولة",
+"Pending":"قيد الانتظار",
+"Attendance_Summary":"ملخص الحضور"
 
 
 

@@ -24,7 +24,7 @@ buttonArrow(BuildContext) {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Icon(
-                Icons.arrow_back_ios_new_outlined,
+                Icons.arrow_back_ios,
                 size: 30,
                 color: AppColor.whiteColor,
               ),

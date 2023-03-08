@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
 class MyVacationController extends GetxController {
   void onInit() {
@@ -10,11 +10,17 @@ class MyVacationController extends GetxController {
     getDeniedNumber();
   }
 
-  String requestValue = 'All';
-  List<String> requestItems = ['All', 'Pending', 'Approved', 'Denied'];
+  String requestValue = 'All'.tr;
+  List<String> requestItems = [
+    'All'.tr,
+    'Pending'.tr,
+    'Approved'.tr,
+    'Denied'.tr
+  ];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationRequests() async* {
-    if (requestValue == 'All') {
+    if (requestValue == 'All'.tr) {
       yield* firestore.collection('vacationRequest').snapshots();
       update();
     } else {
