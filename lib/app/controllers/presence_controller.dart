@@ -137,41 +137,45 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckIn =
-        await checkVacationStatus(sharedPreferences.getString('userId')!);
-    if (allowCheckIn) {
-      CustomAlertDialog.showPresenceAlert(
-        title: "do_you_want_to_check_in?".tr,
-        message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-        onCancel: () => Get.back(),
-        onConfirm: () async {
-          await presenceCollection.doc(todayDocId).set(
-            {
-              "date": DateTime.now().toIso8601String(),
-              "status": 'Present',
-              "checkIn": {
-                "status": timeStatus,
-                "date": DateTime.now().toIso8601String(),
-                "latitude": position.latitude,
-                "longitude": position.longitude,
-                "address": address,
-                "in_area": in_area,
-                "distance": distance,
-              }
-            },
-          );
-          Get.back();
-          CustomToast.successToast("success_check_in".tr);
-        },
-      );
+    if (in_area == false) {
+      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
     } else {
-      CustomAlertDialog.showPresenceAlert(
-          title: 'vacations'.tr,
-          message:
-              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                  .tr,
-          onConfirm: () {},
-          onCancel: () => Get.back());
+      bool allowCheckIn =
+          await checkVacationStatus(sharedPreferences.getString('userId')!);
+      if (allowCheckIn) {
+        CustomAlertDialog.showPresenceAlert(
+          title: "do_you_want_to_check_in?".tr,
+          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+          onCancel: () => Get.back(),
+          onConfirm: () async {
+            await presenceCollection.doc(todayDocId).set(
+              {
+                "date": DateTime.now().toIso8601String(),
+                "status": 'Present',
+                "checkIn": {
+                  "status": timeStatus,
+                  "date": DateTime.now().toIso8601String(),
+                  "latitude": position.latitude,
+                  "longitude": position.longitude,
+                  "address": address,
+                  "in_area": in_area,
+                  "distance": distance,
+                }
+              },
+            );
+            Get.back();
+            CustomToast.successToast("success_check_in".tr);
+          },
+        );
+      } else {
+        CustomAlertDialog.showPresenceAlert(
+            title: 'vacations'.tr,
+            message:
+                'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                    .tr,
+            onConfirm: () {},
+            onCancel: () => Get.back());
+      }
     }
   }
 
