@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
@@ -110,7 +109,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Container(
-                                          height: 200,
+                                          height: 280,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -183,6 +182,24 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                               disabled: true,
                                                             ),
                                                           ),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          SizedBox(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.5,
+                                                            child: CustomInput(
+                                                              controller:
+                                                                  controller
+                                                                      .zoneC
+                                                                      .value,
+                                                              label: 'zone'.tr,
+                                                              hint: '50 m',
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -194,7 +211,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                         onTap: controller
                                                             .launchOfficeOnMap,
                                                         child: Container(
-                                                          height: 84,
+                                                          height: 90,
                                                           alignment:
                                                               Alignment.center,
                                                           decoration:
