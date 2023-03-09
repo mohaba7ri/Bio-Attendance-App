@@ -63,7 +63,7 @@ class CustomAlertDialog {
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12),
-                      backgroundColor: AppColor.primaryExtraSoft,
+                      backgroundColor: AppColor.redColor,
                       elevation: 0,
                     ),
                   ),

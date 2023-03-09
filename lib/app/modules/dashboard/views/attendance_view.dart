@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../style/app_color.dart';
 import '../../../util/images.dart';
 import '../../../util/styles.dart';
@@ -40,13 +39,13 @@ class AttendanceView extends GetView<AttendanceController> {
                           Row(
                             children: [
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => Get.back(),
                                   icon: Icon(
-                                    Icons.arrow_back_ios_new_outlined,
+                                    Icons.arrow_back_ios,
                                     color: AppColor.whiteColor,
                                   )),
                               Text(
-                                "Attendance Summary",
+                                "Attendance_Summary".tr,
                                 style: robotoHugeWhite,
                               )
                             ],

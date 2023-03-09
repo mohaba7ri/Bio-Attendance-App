@@ -26,7 +26,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
             Get.back();
           },
           icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
+            Icons.arrow_back_ios,
             color: AppColor.blackColor,
           ),
         ),

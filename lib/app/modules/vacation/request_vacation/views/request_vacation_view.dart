@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 import '../controllers/request_vacation_controller.dart';
 
 class RequestVacationView extends GetView<VacationRequestController> {
@@ -85,7 +86,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.6,
                                   child: CustomInput(
                                     disabled: true,
                                     valdate: (value) {
@@ -133,7 +134,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.6,
                                   child: CustomInput(
                                     disabled: true,
                                     valdate: (value) {
@@ -181,7 +182,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.6,
                                   child: CustomInput(
                                     disabled: true,
                                     controller: controller.daysController.value,
@@ -203,7 +204,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.6,
                                   child: CustomInput(
                                     // valdate: (value) {
                                     //   if (value!.isEmpty) {
@@ -225,31 +226,30 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               ),
                             ],
                           ),
+                 
+                        
                           Row(
+                            
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                style: redElevatedButStyle,
-                                child: Text(
-                                  'Cancel'.tr,
-                                  style: robotoMedium,
-                                ),
-                              ),
                               controller.isloading == true
                                   ? CircularProgressIndicator()
-                                  : ElevatedButton(
-                                      onPressed: controller.isloading == true
-                                          ? null
-                                          : () {
-                                              controller.submit();
-                                            },
-                                      style: elevatedButStyle,
-                                      child: Text(
-                                        'Send'.tr,
-                                        style: robotoMedium,
+                                  : Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                        
+                                      child: ElevatedButton(
+                                        
+                                        
+                                        onPressed: controller.isloading == true
+                                            ? null
+                                            : () {
+                                                controller.submit();
+                                              },
+                                        child: Text(
+                                          'Send'.tr,
+                                          style: robotoMediumWhite,
+                                        ),
                                       ),
                                     ),
                             ],

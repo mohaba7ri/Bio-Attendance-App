@@ -8,7 +8,6 @@ import '../../../../../company_data.dart';
 import '../../../../widgets/dialog/custom_alert_dialog.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
-
 class AddEmployeeController extends GetxController {
   @override
   void onInit() async {
@@ -30,7 +29,7 @@ class AddEmployeeController extends GetxController {
 
   String? roleValue;
   String? branchValue;
-  var roleList = [ 'Admin', 'Employee'];
+  var roleList = ['Admin', 'Employee'];
   bool isLoading = false;
   bool isLoadingCreatePegawai = false;
   bool isSelectedPolicy = false;
@@ -170,9 +169,8 @@ class AddEmployeeController extends GetxController {
         isLoading = true;
         update();
         CustomAlertDialog.confirmAdmin(
-          title: 'Admin confirmation',
-          message:
-              'you need to confirm that you are an administrator by inputting your password',
+          title: 'Admin_confirmation'.tr,
+          message: 'adminConfirm'.tr,
           onCancel: () {
             isLoading = false;
             update();
@@ -244,6 +242,7 @@ class AddEmployeeController extends GetxController {
             "phone": phoneC.text,
             "address": addressC.text,
             "status": "Active",
+            "userId": uid.value,
             "createdAt": DateTime.now().toIso8601String(),
             "branchId": branchId,
           }).whenComplete(() {

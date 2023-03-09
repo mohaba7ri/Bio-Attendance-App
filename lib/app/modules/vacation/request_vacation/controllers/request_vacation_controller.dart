@@ -28,6 +28,7 @@ class VacationRequestController extends GetxController {
   String? userName;
   String? branchName;
   String? adminDeviceToken;
+  String? userRole;
   DateTime date = DateTime.now();
   // FilePickerResult? vacationFile;
 
@@ -57,6 +58,7 @@ class VacationRequestController extends GetxController {
       await firebase.collection('user').doc(uid).get().then((query) {
         Map<String, dynamic> data = query.data() as Map<String, dynamic>;
         userName = data['name'];
+        userRole = data['Employee'];
 
         update();
       });
@@ -141,6 +143,8 @@ class VacationRequestController extends GetxController {
       }
     }
   }
+
+
 
   Future storeVacationData() async {
     String uid = sharedPreferences.getString('userId')!;

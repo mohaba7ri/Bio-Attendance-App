@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
@@ -13,7 +12,6 @@ import '../controllers/list_branch_controller.dart';
 class listBranchView extends GetView<listBranchController> {
   @override
   Widget build(BuildContext context) {
-
     listBranchController _listBranchController = listBranchController();
     return Scaffold(
       backgroundColor: AppColor.greyColor,
@@ -96,8 +94,6 @@ class listBranchView extends GetView<listBranchController> {
                                       ),
                                       subtitle: Row(
                                         children: <Widget>[
-                                          Icon(Icons.linear_scale,
-                                              color: Colors.yellowAccent),
                                           Text(data[index]['address'],
                                               style: TextStyle(
                                                   color: Colors.black))

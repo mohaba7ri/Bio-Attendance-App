@@ -175,6 +175,25 @@
 "dashboard":"Dashboard"
 ,"done":"Done",
 "view":"View",
-"ignore":"Ignore"
+"ignore":"Ignore",
+"use_bio":"Use Biometrics",
+"Bio_not_enables":"Biometrics not Enabled",
+"Account_not_found":"Account not Found",
+"Wrong_Password":"Wrong Password",
+"Error_because":"Error Because : ",
+"You_need_to_fill_email_and_password_form":"You need to fill email and password form"
+,
+"Cant_send_email_verification_Error_because":"Cant send email verification. Error because : ",
+"we_sent_email":"We've send email verification to your email",
+"Email_not_yet_verified":"Email not verified yet",
+"Are_you_want_to_send_email_verification":"Are you want to send email verification?",
+"All":"All",
+"Denied":"Denied"
+,
+"Approved":"Approved",
+"Pending":"Pending"
+,"Attendance_Summary":"Attendance Summary",
+"Admin_confirmation":"Admin Confirmation",
+"adminConfirm":"you need to confirm that you are an administrator by inputting your password"
 
 }
