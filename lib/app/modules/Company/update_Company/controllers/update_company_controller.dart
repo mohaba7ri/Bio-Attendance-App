@@ -30,6 +30,7 @@ class UpdateCompanyController extends GetxController {
   final EmailC = TextEditingController().obs;
   final latitudeC = TextEditingController().obs;
   final longitudeC = TextEditingController().obs;
+  final zoneC = TextEditingController().obs;
 
   CollectionReference company =
       FirebaseFirestore.instance.collection('company');
