@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/presence_tile.dart';
+
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../../../style/app_color.dart';
+import '../../../widgets/presence_tile.dart';
 import '../controllers/all_presence_controller.dart';
 
 class AllPresenceView extends GetView<AllPresenceController> {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
+
+
+import '../style/app_color.dart';
+import '../util/styles.dart';
 
 class CustomInput extends StatefulWidget {
   final TextEditingController controller;

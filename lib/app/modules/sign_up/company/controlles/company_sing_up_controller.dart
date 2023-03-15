@@ -4,9 +4,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:presence/app/controllers/presence_controller.dart';
+
 
 import '../../../../../company_data.dart';
+import '../../../../controllers/presence_controller.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class CompanySignUpController extends GetxController {

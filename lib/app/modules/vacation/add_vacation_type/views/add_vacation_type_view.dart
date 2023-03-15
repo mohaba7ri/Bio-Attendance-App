@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../widgets/custom_input.dart';
 import '../controllers/add_vacation_type_controller.dart';
 
 class AddVacationTypeView extends GetView<AddVacationTypeController> {
@@ -46,7 +46,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
               height: 10,
             ),
             Text(
-              "Add Vacation Type",
+              "add_vacation_type".tr,
               style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
@@ -59,8 +59,8 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: CustomInput(
                   controller: controller.vacationType.value,
-                  label: 'Vacation Type',
-                  hint: 'Sick'),
+                  label: 'vacation_type'.tr,
+                  hint: 'sick'.tr),
             ),
             SizedBox(
               height: 10,
@@ -69,7 +69,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: CustomInput(
                   controller: controller.vacationDays.value,
-                  label: 'Vacation Days',
+                  label: 'vacation_days'.tr,
                   hint: '1'),
             ),
             SizedBox(
@@ -82,7 +82,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Status'),
+                          Text('status'.tr),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.25,
                             child: DropdownButton(

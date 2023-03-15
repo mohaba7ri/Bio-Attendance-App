@@ -2,13 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/util/app_constants.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../controllers/page_index_controller.dart';
+import '../../../routes/app_pages.dart';
+import '../../../util/app_constants.dart';
+import '../../../widgets/dialog/custom_alert_dialog.dart';
+import '../../../widgets/toast/custom_toast.dart';
+import '../../languages/controller/languages_controller.dart';
 
 class LoginController extends GetxController {
   @override
@@ -73,19 +75,19 @@ class LoginController extends GetxController {
             checkDefaultPassword();
           } else {
             CustomAlertDialog.showPresenceAlert(
-              title: "Email not yet verified",
-              message: "Are you want to send email verification?",
+              title: "Email_not_yet_verified".tr,
+              message: "Are_you_want_to_send_email_verification".tr,
               onCancel: () => Get.back(),
               onConfirm: () async {
                 try {
                   await credential.user!.sendEmailVerification();
                   Get.back();
                   CustomToast.successToast(
-                      "We've send email verification to your email");
+                      "we_sent_email".tr);
                   isLoading.value = false;
                 } catch (e) {
                   CustomToast.errorToast(
-                      "Cant send email verification. Error because : ${e.toString()}");
+                      "Cant_send_email_verification_Error_because".tr +" ${e.toString()}");
                 }
               },
             );
@@ -97,15 +99,15 @@ class LoginController extends GetxController {
       } on FirebaseAuthException catch (e) {
         isLoading.value = false;
         if (e.code == 'user-not-found') {
-          CustomToast.errorToast("Account not found");
+          CustomToast.errorToast("Account_not_found".tr);
         } else if (e.code == 'wrong-password') {
-          CustomToast.errorToast("Wrong Password");
+          CustomToast.errorToast("Wrong_Password".tr);
         }
       } catch (e) {
-        CustomToast.errorToast("Error because : ${e.toString()}");
+        CustomToast.errorToast("Error_because".tr +"${e.toString()}");
       }
     } else {
-      CustomToast.errorToast("You need to fill email and password form");
+      CustomToast.errorToast("You_need_to_fill_email_and_password_form".tr);
     }
   }
 }

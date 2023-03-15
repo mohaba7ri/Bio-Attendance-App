@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:presence/app/modules/home/controllers/home_controller.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../widgets/toast/custom_toast.dart';
+import '../../../home/controllers/home_controller.dart';
 
 class VacationRequestController extends GetxController {
   final SharedPreferences sharedPreferences;
@@ -27,6 +28,7 @@ class VacationRequestController extends GetxController {
   String? userName;
   String? branchName;
   String? adminDeviceToken;
+  String? userRole;
   DateTime date = DateTime.now();
   // FilePickerResult? vacationFile;
 
@@ -46,8 +48,8 @@ class VacationRequestController extends GetxController {
   }
 
   changeLeaveType(value) {
-    update();
     leaveTypeValue = value;
+    update();
   }
 
   Future getUserData() async {
@@ -56,6 +58,7 @@ class VacationRequestController extends GetxController {
       await firebase.collection('user').doc(uid).get().then((query) {
         Map<String, dynamic> data = query.data() as Map<String, dynamic>;
         userName = data['name'];
+        userRole = data['Employee'];
 
         update();
       });
@@ -129,8 +132,8 @@ class VacationRequestController extends GetxController {
   }
 
   void submit() async {
-    if (leaveTypeValue == 'please select') {
-      CustomToast.errorToast('please select leave type');
+    if (leaveTypeValue == null) {
+      CustomToast.errorToast('please_select_leave_type'.tr);
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
@@ -140,6 +143,8 @@ class VacationRequestController extends GetxController {
       }
     }
   }
+
+
 
   Future storeVacationData() async {
     String uid = sharedPreferences.getString('userId')!;
@@ -164,14 +169,14 @@ class VacationRequestController extends GetxController {
           adminDeviceToken: adminDeviceToken,
           body: userName,
           docId: vacationId,
-          title: 'Vacation Request By :',
+          title: 'vacation_request_by'.tr,
           userDeviceToken: userDevice);
       isloading!.value = false;
       fileName = '';
       filePath = '';
-      leaveTypeValue = 'please select';
+
       fileController.value.text = ' ';
-      CustomToast.successToast('your_request_sent_successfully');
+      CustomToast.successToast('your_request_sent_successfully'.tr);
     });
   }
 
@@ -191,7 +196,7 @@ class VacationRequestController extends GetxController {
         'date': date
       }).whenComplete(() async {
         await homeController.sendPushMessage(
-            adminDeviceToken!, userName!, 'Vacation Request by:');
+            adminDeviceToken!, userName!, 'vacation_request_by'.tr);
       });
     } catch (e) {}
   }
@@ -232,9 +237,5 @@ class VacationRequestController extends GetxController {
     if (startDateController.value.text.isEmpty) {
       return 'pick date';
     }
-  }
-
-  changeLeaveValue(String value) {
-    leaveTypeValue != value;
   }
 }

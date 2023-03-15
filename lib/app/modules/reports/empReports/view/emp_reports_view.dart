@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
+import '../../../../controllers/pdf_controller.dart';
+import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
+import '../../branchReports/view/pdf_branch_reports.dart';
 import '../controller/emp_reports_controller.dart';
 
 class EmpReportsView extends GetView<EmpReportsController> {
   @override
   Widget build(BuildContext context) {
-    EmpReportsController _Controller = EmpReportsController();
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
@@ -37,7 +38,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
         centerTitle: true,
       ),
       body: GetBuilder<EmpReportsController>(
-        builder: (controller) => Container(
+        builder: (_controller) => Container(
           color: AppColor.greyShade200,
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -48,7 +49,8 @@ class EmpReportsView extends GetView<EmpReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +68,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                             padding: const EdgeInsets.all(0.8),
                             child: SizedBox(
                               child: Text(
-                                _Controller.EmpList['name'],
+                                controller.user['name'],
                                 style: robotoHuge,
                               ),
                             ),
@@ -92,8 +94,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.startDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
@@ -101,12 +102,15 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                       DateTime startDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                              controller
+                                                  .startDateController.text);
+                                      if (startDate != null) {
+                                        controller.changeStartDate(startDate);
+                                        // controller.start = startDate;
+                                      } else {
+                                        controller.startDateController.text =
+                                            '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -133,21 +137,24 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.endDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                              controller
+                                                  .endDateController.text);
+                                      if (endDate != null) {
+                                        controller.changeEndDate(endDate);
+
+                                        print('the endDate${controller.end}');
+                                      } else {
+                                        controller.startDateController.text =
+                                            '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -156,15 +163,31 @@ class EmpReportsView extends GetView<EmpReportsController> {
                         ],
                       ),
                       Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await controller.getAllPresence();
+                                await controller.getData();
+
+                                final pdfEmpReport = PdfEmpReport(
+                                    start: controller.start,
+                                    allPrecens: controller.allPrecens,
+                                    end: controller.end);
+                                final date =
+                                    DateConverter.estimatedDate(DateTime.now());
+                                final dueDate = DateTime.now();
+
+                               
+
+                                final pdfFile = await pdfEmpReport.generate();
+
+                                PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),
-                            width: MediaQuery.of(context).size.width * 0.8,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             height: 40,
                           ),
                         )

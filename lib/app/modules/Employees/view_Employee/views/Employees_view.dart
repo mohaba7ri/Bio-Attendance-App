@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/util/images.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/images.dart';
 import '../../../languages/controller/languages_controller.dart';
 import '../controllers/Employees_controller.dart';
 
@@ -24,7 +24,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
         leading: IconButton(
           onPressed: () => Get.back(),
           icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
+            Icons.arrow_back_ios,
             color: AppColor.blackColor,
           ),
         ),
@@ -92,7 +92,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                                               right: new BorderSide(
                                                   width: 2.0,
                                                   color: Colors.black))),
-                                      child: Image.asset(Images.profile,
+                                      child: Image.asset(Images.userProfile,
                                           color: Colors.black),
                                     ),
                                     title: Text(

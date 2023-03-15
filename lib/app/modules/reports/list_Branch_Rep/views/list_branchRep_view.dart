@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/util/images.dart';
-import 'package:presence/app/util/styles.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/images.dart';
+import '../../../../util/styles.dart';
+import '../../../languages/controller/languages_controller.dart';
 import '../controllers/list_branchRep_controller.dart';
 
 class listBranchRepView extends GetView<listBranchRepController> {
@@ -95,8 +95,6 @@ class listBranchRepView extends GetView<listBranchRepController> {
                                       ),
                                       subtitle: Row(
                                         children: <Widget>[
-                                          Icon(Icons.linear_scale,
-                                              color: Colors.yellowAccent),
                                           Text(data[index]['address'],
                                               style: TextStyle(
                                                   color: Colors.black))

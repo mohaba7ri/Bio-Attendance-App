@@ -49,7 +49,7 @@ class EmployeeDetailController extends GetxController {
     jobC.text = EmpList['job'];
     addressC.text = EmpList['address'];
     phoneC.text = EmpList['phone'];
-    salaryPerHour.text = EmpList['salary'];
+    salaryPerHour.text = EmpList['salaryPerHour'];
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {

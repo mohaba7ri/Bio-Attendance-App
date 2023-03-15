@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/vacation/view_vacation_requests/controllers/view_vacation_request_controller.dart';
-import 'package:presence/app/util/styles.dart';
+
+
+import '../../../../util/styles.dart';
+import '../controllers/view_vacation_request_controller.dart';
 
 class acceptDeny_buttons extends GetView<ViewVacationRequestsController> {
   final data;

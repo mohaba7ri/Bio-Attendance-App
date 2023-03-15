@@ -8,15 +8,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../company_data.dart';
+import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
 import '../../../widgets/dialog/custom_alert_dialog.dart';
+import '../../../widgets/toast/custom_toast.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;

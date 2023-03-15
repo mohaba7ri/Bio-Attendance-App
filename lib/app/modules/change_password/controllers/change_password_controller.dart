@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
+import '../../../widgets/toast/custom_toast.dart';
+
 
 class ChangePasswordController extends GetxController {
   RxBool isLoading = false.obs;

@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+
+
+import '../../../../company_data.dart';
+import '../../../controllers/page_index_controller.dart';
+import '../../../routes/app_pages.dart';
+import '../../../widgets/toast/custom_toast.dart';
 
 class NewPasswordController extends GetxController {
   final pageIndexController = Get.find<PageIndexController>();

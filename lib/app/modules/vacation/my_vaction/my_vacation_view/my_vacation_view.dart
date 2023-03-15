@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:presence/app/modules/vacation/my_vaction/my_vacation_controller/my_vacation_controller.dart';
-import 'package:presence/app/style/app_color.dart';
-
+import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
+import '../my_vacation_controller/my_vacation_controller.dart';
 import '../widgets/floatingContainer.dart';
 import '../widgets/vacation_appbar.dart';
 
@@ -124,7 +123,8 @@ class MyVacationView extends StatelessWidget {
                                                         ),
                                                       ),
                                                       Text(data[index]['days'],
-                                                          style: robotoMedium),
+                                                          style:
+                                                              robotoMediumWhite),
                                                     ],
                                                   ),
                                                 ),
@@ -209,7 +209,6 @@ class MyVacationView extends StatelessWidget {
                   ),
                 ),
               ))
-        
         ],
       ),
     );

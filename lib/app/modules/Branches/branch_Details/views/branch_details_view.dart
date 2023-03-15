@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/util/styles.dart';
+
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
 import '../controllers/branch_details_controller.dart';
 
 final conttroler = Get.put(detailBranchController(), permanent: true);

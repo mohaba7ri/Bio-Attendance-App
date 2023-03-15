@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/style/app_color.dart';
 
+
+import '../../../../controllers/page_index_controller.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../widgets/custom_menu_tile.dart';
 import '../../../../widgets/custom_widget.dart';
@@ -40,7 +41,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'Vacation_Types'.tr,
                         icon: Image.asset(
-                          Images.changePassword,
+                          Images.vacationTypes,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
@@ -71,7 +72,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'View_Vacation_Requests'.tr,
                         icon: Image.asset(
-                          Images.leave,
+                          Images.viewVacations,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () {
@@ -82,7 +83,7 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         isDanger: true,
                         title: 'Employees_on_Vacation'.tr,
                         icon: Image.asset(
-                          Images.editProfile,
+                          Images.empOnVac,
                           color: AppColor.primarySoft,
                         ),
                         onTap: () {

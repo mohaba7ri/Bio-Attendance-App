@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:presence/app/modules/sign_up/admin/controllers/admin_sing_up_controller.dart';
+
+import '../controllers/admin_sing_up_controller.dart';
 
 class AdminSignUpBinding extends Bindings {
   @override

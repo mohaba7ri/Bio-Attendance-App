@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:presence/app/controllers/biometric_controller.dart';
-import 'package:presence/app/controllers/page_index_controller.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/util/styles.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../controllers/biometric_controller.dart';
+import '../../../controllers/page_index_controller.dart';
 import '../../../routes/app_pages.dart';
+import '../../../style/app_color.dart';
 import '../../../util/images.dart';
+import '../../../util/styles.dart';
 import '../../../widgets/custom_menu_tile.dart';
 import '../../../widgets/custom_profile_appbar.dart';
+import '../../languages/controller/languages_controller.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -82,19 +82,7 @@ class ProfileView extends GetView<ProfileController> {
 
                     CustomMenuTile(
                       isDanger: true,
-                      title: 'Theme',
-                      icon: Container(
-                        color: Colors.red,
-                        child: Icon(
-                          Ionicons.sunny,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onTap: controller.logout,
-                    ),
-                    CustomMenuTile(
-                      isDanger: true,
-                      title: 'Change Password',
+                      title: 'change_password'.tr,
                       icon: Image.asset(
                         Images.changePassword,
                         color: AppColor.primary,
@@ -105,7 +93,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     CustomMenuTile(
                       isDanger: true,
-                      title: 'Edit profile',
+                      title: 'edit_profile'.tr,
                       icon: Image.asset(
                         Images.editProfile,
                         color: AppColor.primary,
@@ -132,7 +120,7 @@ class ProfileView extends GetView<ProfileController> {
                                   print(_controller.isEnabled);
                                 }),
                             Text(
-                              'Enable Biometric',
+                              'enable_biometric'.tr,
                               style: robotoMedium,
                             ),
                             Spacer(),

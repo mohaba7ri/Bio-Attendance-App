@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:presence/app/modules/vacation/my_vaction/my_vacation_controller/my_vacation_controller.dart';
+
+import '../my_vacation_controller/my_vacation_controller.dart';
 
 class MyVacationBinding extends Bindings {
   @override

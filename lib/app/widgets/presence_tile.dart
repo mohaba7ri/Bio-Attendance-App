@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/style/app_color.dart';
 
+
+import '../routes/app_pages.dart';
+import '../style/app_color.dart';
 import '../util/styles.dart';
 
 class PresenceTile extends StatelessWidget {

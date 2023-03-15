@@ -1,6 +1,8 @@
+import 'package:Biometric/app/modules/fingerprint_auth/home.dart';
 import 'package:flutter/material.dart';
-import 'package:presence/app/modules/fingerprint_auth/fingerprint_auth.dart';
-import 'package:presence/app/modules/fingerprint_auth/home.dart';
+
+import '../../controllers/biometric_controller.dart';
+import 'fingerprint_auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -29,16 +31,13 @@ class _LogINState extends State<LogIN> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isFingerprintEnabled();
+
   }
 
   final FingerPrint _fingerprint = new FingerPrint();
 
   String fprint = '';
-  void isFingerprintEnabled() async {
-    fprint = await UserStorage.getFingerprint() ?? '';
-    setState(() {});
-  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:presence/app/style/app_color.dart';
 
+
+import '../../../style/app_color.dart';
 import '../controllers/detail_presence_controller.dart';
 
 class DetailPresenceView extends GetView<DetailPresenceController> {

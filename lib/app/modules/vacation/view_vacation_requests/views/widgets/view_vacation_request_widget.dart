@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
+
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../../../../style/app_color.dart';
 import '../../../../../util/images.dart';
 import '../../../../../util/styles.dart';
 import '../../controllers/view_vacation_request_controller.dart';
@@ -45,7 +46,7 @@ class ViewVacationRequestWidget extends StatelessWidget {
                         width: 50,
                         height: 50,
                         child: Image.asset(
-                          Images.profile,
+                          Images.userProfile,
                           // (controller.VacList["avatar"] == null ||
                           //         controller.VacList['avatar'] == "")
                           //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"

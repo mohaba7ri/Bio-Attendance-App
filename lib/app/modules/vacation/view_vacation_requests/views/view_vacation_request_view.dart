@@ -1,11 +1,12 @@
+import 'package:Biometric/app/modules/vacation/view_vacation_requests/views/widgets/filterWidget.dart';
+import 'package:Biometric/app/modules/vacation/view_vacation_requests/views/widgets/view_vacation_request_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/vacation/view_vacation_requests/views/widgets/filterWidget.dart';
-import 'package:presence/app/modules/vacation/view_vacation_requests/views/widgets/view_vacation_request_widget.dart';
-import 'package:presence/app/util/styles.dart';
+
 
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
 import '../controllers/view_vacation_request_controller.dart';
 
 class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
@@ -74,9 +75,9 @@ class ViewVacationRequestView extends GetView<ViewVacationRequestsController> {
                               );
                             }
                             if (snapshot.data!.docs.isEmpty) {
-                              return const Center(
+                              return Center(
                                 child: Text(
-                                  'There is No Data !',
+                                  'there_are_no_Reqs'.tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       letterSpacing: 1.5,

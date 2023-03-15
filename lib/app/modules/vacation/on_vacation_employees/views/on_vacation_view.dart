@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
-import '../../../../widgets/custom_appbar.dart';
 import '../controllers/on_vacation_requests_controller.dart';
 
 final conttroler = Get.put(OnVacationController(), permanent: true);
@@ -18,59 +15,12 @@ class OnVacationView extends GetView<OnVacationController> {
   Widget build(BuildContext context) {
     OnVacationController _onVacationController = OnVacationController();
     return Scaffold(
-      appBar: CustomAppBar(
-        isaction: true,
-        isBackBotton: true,
-        title: 'approved_vac'.tr,
-        action: [
-          Container(
-            width: 44,
-            height: 44,
-            margin: EdgeInsets.only(bottom: 8, top: 8, right: 8),
-            child: ElevatedButton(
-              onPressed: () {
-                Get.dialog(
-                  Dialog(
-                    child: Container(
-                      height: 372,
-                      child: SfDateRangePicker(
-                        headerHeight: 50,
-                        headerStyle: DateRangePickerHeaderStyle(
-                            textAlign: TextAlign.center),
-                        monthViewSettings:
-                            DateRangePickerMonthViewSettings(firstDayOfWeek: 1),
-                        selectionMode: DateRangePickerSelectionMode.range,
-                        selectionColor: AppColor.primary,
-                        rangeSelectionColor: AppColor.primary.withOpacity(0.2),
-                        viewSpacing: 10,
-                        showActionButtons: true,
-                        onCancel: () => Get.back(),
-                        onSubmit: (data) {
-                          if (data != null) {
-                            PickerDateRange range = data as PickerDateRange;
-                            if (range.endDate != null) {
-                              controller.pickDate(
-                                  range.startDate!, range.endDate!);
-                            }
-                          }
-                          //else skip
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
-              child: SvgPicture.asset('assets/icons/filter.svg'),
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          )
-        ],
+      appBar: AppBar(
+        title: Text('approved_vac'.tr),
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Icons.arrow_back_ios),
+        ),
       ),
       body: Container(
         color: Colors.grey[200],
@@ -114,7 +64,7 @@ class OnVacationView extends GetView<OnVacationController> {
                                               width: 50,
                                               height: 50,
                                               child: Image.asset(
-                                                Images.profile,
+                                                Images.userProfile,
                                                 // (controller.VacList["avatar"] == null ||
                                                 //         controller.VacList['avatar'] == "")
                                                 //     ? "https://ui-avatars.com/api/?name=${controller.VacList['userName']}/"

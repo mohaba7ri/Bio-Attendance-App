@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+
+import '../../../../../company_data.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 
 class CompanyDetailsController extends GetxController {
   @override
@@ -13,12 +17,25 @@ class CompanyDetailsController extends GetxController {
     companySettings;
   }
 
+  launchOfficeOnMap() {
+    try {
+      MapsLauncher.launchCoordinates(
+        CompanyData.office['latitude'],
+        CompanyData.office['longitude'],
+      );
+    } catch (e) {
+      CustomToast.errorToast('Error : ${e}');
+    }
+  }
+
   int? userNumbers;
   int? branchNumbers;
+
 
   RxBool isloading = false.obs;
   dynamic companyInfo = Get.arguments;
   RxMap companySettings = {}.obs;
+
   //dynamic EmpList;
   FirebaseAuth auth = FirebaseAuth.instance;
   var firestore = FirebaseFirestore.instance;
@@ -28,6 +45,7 @@ class CompanyDetailsController extends GetxController {
         .collection('companySettings')
         .where('companyId', isEqualTo: companyInfo['companyId'])
         .snapshots();
+
   }
 
   Future getUsers() async {

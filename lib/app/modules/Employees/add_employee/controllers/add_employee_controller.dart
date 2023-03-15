@@ -3,9 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:presence/app/widgets/dialog/custom_alert_dialog.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
-import 'package:presence/company_data.dart';
+
+import '../../../../../company_data.dart';
+import '../../../../widgets/dialog/custom_alert_dialog.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 
 class AddEmployeeController extends GetxController {
   @override
@@ -28,7 +29,7 @@ class AddEmployeeController extends GetxController {
 
   String? roleValue;
   String? branchValue;
-  var roleList = [ 'Admin', 'Employee'];
+  var roleList = ['Admin', 'Employee'];
   bool isLoading = false;
   bool isLoadingCreatePegawai = false;
   bool isSelectedPolicy = false;
@@ -168,9 +169,8 @@ class AddEmployeeController extends GetxController {
         isLoading = true;
         update();
         CustomAlertDialog.confirmAdmin(
-          title: 'Admin confirmation',
-          message:
-              'you need to confirm that you are an administrator by inputting your password',
+          title: 'Admin_confirmation'.tr,
+          message: 'adminConfirm'.tr,
           onCancel: () {
             isLoading = false;
             update();
@@ -234,7 +234,7 @@ class AddEmployeeController extends GetxController {
           DocumentReference employee =
               firestore.collection("user").doc(uid.value);
           await employee.set({
-            "salary": salaryPerHour.text,
+            "salaryPerHour": salaryPerHour.text,
             "name": nameC.text,
             "email": emailC.text,
             "role": roleValue,
@@ -242,6 +242,7 @@ class AddEmployeeController extends GetxController {
             "phone": phoneC.text,
             "address": addressC.text,
             "status": "Active",
+            "userId": uid.value,
             "createdAt": DateTime.now().toIso8601String(),
             "branchId": branchId,
           }).whenComplete(() {

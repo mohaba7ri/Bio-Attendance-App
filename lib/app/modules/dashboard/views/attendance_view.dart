@@ -2,68 +2,184 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../style/app_color.dart';
+import '../../../util/images.dart';
+import '../../../util/styles.dart';
 import '../controllers/attendance_controller.dart';
 
 class AttendanceView extends GetView<AttendanceController> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Dashboard'),
-        ),
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 20,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColor.greyColor),
-        )
-//  Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.stretch,
-//           children: [
-//             // Display the user's name (replace with actual user data)
-//             Text('User Name'),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: size.height * 3,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(Images.header),
+                  alignment: Alignment.topCenter),
+            ),
+          ),
+          SafeArea(
+              child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 64,
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () => Get.back(),
+                                  icon: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: AppColor.whiteColor,
+                                  )),
+                              Text(
+                                "Attendance_Summary".tr,
+                                style: robotoHugeWhite,
+                              )
+                            ],
+                          ),
 
-//             SizedBox(height: 16.0),
-
-//             // Dropdown menu to select the month
-//             Obx(() => DropdownButton<int>(
-//                   value: controller.selectedMonth.value,
-//                   items: controller.months
-//                       .asMap()
-//                       .entries
-//                       .map((entry) => DropdownMenuItem(
-//                             value: entry.key + 1,
-//                             child: Text(entry.value),
-//                           ))
-//                       .toList(),
-//                   onChanged: (value) {
-//                     controller.selectedMonth.value = value!;
-//                     // TODO: update total hours and late hours based on selected month
-//                   },
-//                 )),
-
-//             SizedBox(height: 16.0),
-
-//             // Display the total hours worked for the selected month
-//             Obx(() => Text('Total Hours: ${controller.totalHours.value}')),
-
-//             SizedBox(height: 16.0),
-
-//             // Display the number of hours the user was late for the selected month
-//             Obx(() => Text('Late Hours: ${controller.lateHours.value}')),
-
-//             SizedBox(height: 16.0),
-
-//             // Display the user's salary based on the total hours worked
-//             Obx(() =>
-//                 Text('Salary: \$${controller.salary.toStringAsFixed(2)}')),
-//           ],
-//         ),
-//       ),
-
-        );
+                          // Text("vfjk", style: robotoMediumWhite)
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: GridView.count(
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    primary: false,
+                    children: <Widget>[
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.profile,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.deny_ani,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.approve_ani,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.list,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.vacation,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        elevation: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              Images.leave,
+                              height: 120,
+                            ),
+                            Text(
+                              "total_attendance".tr,
+                              style: robotoMedium,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                    crossAxisCount: 2,
+                  ),
+                )
+              ],
+            ),
+          ))
+        ],
+      ),
+    );
   }
 }

@@ -33,4 +33,13 @@ class Images {
   static const String report = 'assets/icons/report.png';
   static const String report_ani = 'assets/icons/report_ani.gif';
   static const String branch = 'assets/icons/office.png';
+  static const String company_logo = 'assets/icons/tech-now-logo.png';
+  static const String header = 'assets/images/header.png';
+  static const String comExample = 'assets/images/comExample.jpg';
+  static const String dashboard = 'assets/icons/dashboard.png';
+  static const String userProfile = 'assets/icons/userProfile.png';
+  static const String vacationTypes = 'assets/icons/vacationTypes.png';
+  static const String viewVacations = 'assets/icons/viewVacations.png';
+  static const String empOnVac = 'assets/icons/empOnVac.png';
+  static const String info = 'assets/icons/info.png';
 }

@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'app/modules/languages/controller/languages_controller.dart';
 import 'app/util/app_constants.dart';
 import 'app/util/messages.dart';
 import 'firebase_options.dart';
@@ -59,9 +60,7 @@ void main() async {
             return GetMaterialApp(
               //  title: "Application",
               debugShowCheckedModeBanner: false,
-              initialRoute: snapshot.data != null
-                  ? Routes.LOGIN
-                  : Routes.LOGIN,
+              initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
               getPages: AppPages.routes,
               builder: EasyLoading.init(),
               locale: languageController.locale,

@@ -55,7 +55,7 @@ class UpdateEmployeeController extends GetxController {
     jobC.text = EmpDetail['job'];
     addressC.text = EmpDetail['address'];
     phoneC.text = EmpDetail['phone'];
-    salaryPerHour.text = EmpDetail['salary'];
+    salaryPerHour.text = EmpDetail['salaryPerHour'];
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
@@ -76,14 +76,14 @@ class UpdateEmployeeController extends GetxController {
             .update(data);
 
         Get.back();
-        CustomToast.successToast('Success');
+        CustomToast.successToast("update_emp_successfully".tr);
       } catch (e) {
         CustomToast.errorToast('Error');
       } finally {
         isLoading.value = false;
       }
     } else {
-      CustomToast.errorToast('Error');
+      CustomToast.errorToast('You_need_to_fill_all_fields'.tr);
     }
   }
 }

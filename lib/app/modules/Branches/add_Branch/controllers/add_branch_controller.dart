@@ -4,9 +4,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:presence/app/controllers/presence_controller.dart';
 
 import '../../../../../branch_data.dart';
+import '../../../../controllers/presence_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 import 'package:uuid/uuid.dart';

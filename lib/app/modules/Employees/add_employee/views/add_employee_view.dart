@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/custom_input.dart';
+
 
 import '../../../../routes/app_pages.dart';
+import '../../../../style/app_color.dart';
+import '../../../../widgets/custom_input.dart';
 import '../controllers/add_employee_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -109,9 +110,7 @@ class AddEmployeeView extends StatelessWidget {
                                                   DropdownButtonHideUnderline(
                                                 child: DropdownButton2(
                                                   hint: Text('Please Select'),
-                                                  buttonHeight: 50,
-                                                  buttonWidth: 40,
-                                                  itemHeight: 40,
+
                                                   items: controller.roleList
                                                       .map(
                                                         (roleValue) =>
@@ -169,9 +168,6 @@ class AddEmployeeView extends StatelessWidget {
                                                   left: 15),
                                               child: DropdownButton2(
                                                 hint: Text('Please Select'),
-                                                buttonHeight: 50,
-                                                buttonWidth: 40,
-                                                itemHeight: 40,
                                                 items: controller.branchesList,
                                                 value: controller.branchValue,
                                                 onChanged:

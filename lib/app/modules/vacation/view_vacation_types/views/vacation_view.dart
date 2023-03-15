@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/modules/vacation/view_vacation_types/controllers/vacation_controller.dart';
-import 'package:presence/app/util/styles.dart';
-import 'package:presence/app/widgets/custom_appbar.dart';
 
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
+import '../../../../widgets/custom_appbar.dart';
 import '../../add_vacation_type/views/add_vacation_type_view.dart';
+import '../controllers/vacation_controller.dart';
 
 final conttroler = Get.put(ListVacationTypeController(), permanent: true);
 
@@ -102,7 +102,7 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                           margin: EdgeInsets.only(
                                               top: 4, bottom: 12),
                                           child: Text(
-                                            'Days'.tr,
+                                            'Days'.tr +": " , 
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'poppins',
@@ -164,37 +164,8 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                                               ],
                                             ),
                                           ),
-                                          Container(
-                                            width: 1.5,
-                                            height: 24,
-                                            color: Colors.white,
-                                          ),
+
                                           // check out
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 6),
-                                                  child: Text(
-                                                    "Is_paid".tr,
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Yes',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ),

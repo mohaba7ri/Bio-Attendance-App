@@ -1,9 +1,12 @@
+import 'package:Biometric/app/controllers/presence_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:presence/app/routes/app_pages.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../routes/app_pages.dart';
 
 class BiometricController extends GetxController {
   @override
@@ -12,6 +15,8 @@ class BiometricController extends GetxController {
     loadUser();
     isFingerPrintEnabled();
   }
+
+  final presenceController = Get.find<PresenceController>();
 
   final SharedPreferences sharedPreferences;
   BiometricController({required this.sharedPreferences});
@@ -75,6 +80,18 @@ class BiometricController extends GetxController {
       bool _isEnabled = await isAuth('login using finger print');
       if (_isEnabled) {
         Get.offAllNamed(Routes.HOME);
+      }
+    }
+  }
+
+  void bioMetricPresence() async {
+    bool isEnabled = await isFingerPrintEnabled();
+    if (isEnabled) {
+      bool _isEnabled = await isAuth('Register presence using Biometrics');
+      if (_isEnabled) {
+        presenceController
+          ..checkTime()
+          ..presence();
       }
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 
@@ -48,7 +49,8 @@ class BranchReportsView extends GetView<BranchReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,15 +100,20 @@ class BranchReportsView extends GetView<BranchReportsController> {
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime? startDate =
                                           await controller.showDatePickers(
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -144,10 +151,15 @@ class BranchReportsView extends GetView<BranchReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -156,11 +168,22 @@ class BranchReportsView extends GetView<BranchReportsController> {
                         ],
                       ),
                       Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final date =
+                                    DateConverter.estimatedDate(DateTime.now());
+                                final dueDate = DateTime.now();
+                                // final pdfEmpReport = PdfEmpReport(
+                                //   start: controller.start,
+                                //   allPrecens: controller.allPrecens,
+                                //   end: controller.end);
+
+                                //  final pdfFile = await pdfEmpReport.generate();
+
+                                // PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),

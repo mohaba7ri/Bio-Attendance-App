@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:presence/app/modules/languages/controller/languages_controller.dart';
-
 import '../model/language_model.dart';
+import '../modules/languages/controller/languages_controller.dart';
 import '../util/app_constants.dart';
 import '../util/dinmensions.dart';
 import '../util/styles.dart';

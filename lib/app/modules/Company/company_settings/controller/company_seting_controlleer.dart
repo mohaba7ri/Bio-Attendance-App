@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
+import '../../../../widgets/toast/custom_toast.dart';
+
 
 class CompanySettingController extends GetxController {
   String? companyId;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/custom_input.dart';
+
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
+import '../../../../widgets/custom_input.dart';
 import '../controllers/add_branch_controller.dart';
 
 class AddBranchView extends GetView<AddBranchController> {

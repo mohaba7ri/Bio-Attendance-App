@@ -1,4 +1,4 @@
-name: presence
+name: Biometric
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
@@ -6,23 +6,23 @@ environment:
   sdk: '>=2.18.2 <3.0.0'
 
 dependencies:
+
+  flutter:
+    sdk: flutter
   cloud_firestore: ^4.3.1
   convex_bottom_bar: ^3.1.0+1
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.2.5
   firebase_core: ^2.4.1
   firebase_storage: ^11.0.10
-  fl_chart: ^0.60.0
-  syncfusion_flutter_charts: ^20.4.49
+  fl_chart: ^0.61.0
+
   pie_chart: any
   firebase_messaging: ^14.2.2
- 
-  syncfusion_flutter_pdfviewer: ^20.4.50
+  syncfusion_flutter_pdfviewer: '20.4.53'
 
-  flutter:
-    sdk: flutter
-  
-  flutter_secure_storage: ^7.0.1
+
+  flutter_secure_storage: ^8.0.0
   flutter_svg: ^1.1.6
   geocoding: ^2.0.5
   geolocator: ^9.0.2
@@ -37,18 +37,25 @@ dependencies:
   maps_launcher: ^2.0.1
   syncfusion_flutter_datepicker: ^20.1.51
   timeago: ^3.3.0
-  file_picker: ^5.2.4
+  file_picker: ^4.6.1
   pointer_interceptor: ^0.9.3+3
-  dropdown_button2: ^1.9.2
+  dropdown_button2: ^2.0.0
   uuid: ^3.0.6
   shared_preferences: ^2.0.11
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^12.0.4
   flutter_easyloading: ^3.0.5
+
+  open_file: ^3.2.1
+  pdf: '3.8.4'
+  path_provider: ^2.0.13
+
+
+
 
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
-  flutter_launcher_icons: ^0.11.0
+  flutter_lints: '2.0.0'
+  flutter_launcher_icons: "^0.10.0"
   flutter_test:
     sdk: flutter
 
@@ -114,6 +121,18 @@ flutter:
           weight: 700
         - asset: assets/fonts/roboto/Roboto-Black.ttf
           weight: 900
+    - family: Tajawal
+      fonts:
+        
+        - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Tajawal/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Tajawal/Tajawal-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Tajawal/Tajawal-Black.ttf
+          weight: 900
+
 flutter_icons:
   android: "launcher_icon"
   ios: true

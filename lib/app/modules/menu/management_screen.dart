@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:presence/app/model/menu_model.dart';
-import 'package:presence/app/modules/menu/management_botton.dart';
 
+
+import '../../model/menu_model.dart';
 import '../../routes/app_pages.dart';
 import '../../util/dinmensions.dart';
 import '../../util/images.dart';
+import 'management_botton.dart';
 
 class ManagementScreen extends StatelessWidget {
   ManagementScreen({super.key});
@@ -18,7 +19,7 @@ class ManagementScreen extends StatelessWidget {
       MenuModel(
           icon: Images.office, title: 'company'.tr, route: Routes.COMPANY_HOME),
       MenuModel(
-        icon: Images.office,
+        icon: Images.branches,
         title: 'branch'.tr,
         route: Routes.BRANCH_HOME,
       ),
@@ -32,15 +33,15 @@ class ManagementScreen extends StatelessWidget {
         route: Routes.VACATION_HOME,
       ),
       MenuModel(
-          icon: Images.office,
-          title: 'attendance'.tr,
+          icon: Images.dashboard,
+          title: 'dashboard'.tr,
           route: Routes.ATTENDANCE),
       MenuModel(
           icon: Images.report, title: 'reports'.tr, route: Routes.REP_HOME),
       MenuModel(
           icon: Images.language, title: 'language'.tr, route: Routes.LANGUAGES),
       MenuModel(
-          icon: Images.profile, title: 'profile'.tr, route: Routes.PROFILE),
+          icon: Images.userProfile, title: 'profile'.tr, route: Routes.PROFILE),
       //  MenuModel(icon: Images.office, title: 'company'.tr, route: ''),
       MenuModel(icon: Images.logout, title: 'logout'.tr, route: ''),
     ];

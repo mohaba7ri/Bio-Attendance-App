@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/custom_input.dart';
 
+import '../../../../widgets/custom_input.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 import '../controller/branch_seting_controlleer.dart';
 

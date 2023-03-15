@@ -49,7 +49,8 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
               ),
-              padding: EdgeInsets.only(left: 24, top: 20, right: 8, bottom: 20),
+              padding:
+                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +83,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -102,10 +103,15 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (startDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(startDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -123,7 +129,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -138,15 +144,20 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                 hint: '',
                                 suffixIcon: IconButton(
                                     onPressed: () async {
-                                      DateTime startDate =
+                                      DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
                                               controller.startDateController
                                                   .value.text);
-                                      controller.startDateController.value =
-                                          TextEditingController(
-                                              text: DateFormat.yMMMd()
-                                                  .format(startDate));
+                                      if (endDate != null) {
+                                        controller.startDateController.value =
+                                            TextEditingController(
+                                                text: DateFormat.yMMMd()
+                                                    .format(endDate));
+                                      } else {
+                                        controller.startDateController.value
+                                            .text = '';
+                                      }
                                     },
                                     icon: Icon(Icons.date_range)),
                               ),
@@ -155,8 +166,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                         ],
                       ),
                       Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Center(
                           child: Container(
                             child: ElevatedButton.icon(
                               onPressed: () {},

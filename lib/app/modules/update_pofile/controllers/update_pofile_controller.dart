@@ -6,8 +6,10 @@ import 'package:firebase_storage/firebase_storage.dart' as s;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/widgets/toast/custom_toast.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../widgets/toast/custom_toast.dart';
 
 class UpdatePofileController extends GetxController {
   RxBool isLoading = false.obs;

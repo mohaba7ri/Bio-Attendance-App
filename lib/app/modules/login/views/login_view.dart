@@ -1,13 +1,15 @@
+import 'package:Biometric/app/widgets/toast/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:presence/app/routes/app_pages.dart';
-import 'package:presence/app/style/app_color.dart';
-import 'package:presence/app/widgets/custom_widget.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../controllers/biometric_controller.dart';
+import '../../../routes/app_pages.dart';
+import '../../../style/app_color.dart';
 import '../../../util/styles.dart';
+import '../../../widgets/custom_widget.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -125,45 +127,82 @@ class LoginView extends GetView<LoginController> {
                                 ),
                               ),
                             ),
-                            Obx(
-                              () => Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (biometricController.isEnabled ==
-                                        false) {
-                                      if (controller.isLoading.isFalse) {
-                                        await controller.login();
-                                        // await controller.getUserToken(FirebaseAuth
-                                        //     .instance.currentUser!.uid);
-                                      }
-                                    } else if (biometricController.isEnabled ==
-                                        true) {
-                                      biometricController.fingerprintLogin();
-                                      // String user = sharedPreferences
-                                      //     .getString('userId')!;
-                                      // String uid =
-                                      //     sharedPreferences.getString(user)!;
-                                      // print('the userid $user');
-                                      // print('UID$uid');
-                                    }
-                                  },
-                                  child: Text(
-                                    (controller.isLoading.isFalse)
-                                        ? 'sign_in'.tr
-                                        : 'Loading'.tr,
-                                    style: robotoMediumWhite,
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.symmetric(vertical: 18),
-                                    backgroundColor: AppColor.primary,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                            Column(
+                              children: [
+                                Obx(
+                                  () => Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        if (controller.isLoading.isFalse) {
+                                          await controller.login();
+                                          // await controller.getUserToken(FirebaseAuth
+                                          //     .instance.currentUser!.uid);
+                                        }
+                                      },
+                                      child: Text(
+                                        (controller.isLoading.isFalse)
+                                            ? 'sign_in'.tr
+                                            : 'Loading'.tr,
+                                        style: robotoMediumWhite,
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 18),
+                                        backgroundColor: AppColor.primary,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Obx(
+                                  () => Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        if (biometricController.isEnabled ==
+                                            true) {
+                                          biometricController
+                                              .fingerprintLogin();
+                                        } else {
+                                          CustomToast.errorToast(
+                                              "Bio_not_enables".tr);
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            (controller.isLoading.isFalse)
+                                                ? 'use_bio'.tr
+                                                : 'Loading'.tr,
+                                            style: robotoMediumWhite,
+                                          ),
+                                          Icon(Icons.fingerprint_outlined)
+                                        ],
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 18),
+                                        backgroundColor: AppColor.primary,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
