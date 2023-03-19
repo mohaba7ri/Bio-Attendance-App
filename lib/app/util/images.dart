@@ -42,4 +42,6 @@ class Images {
   static const String viewVacations = 'assets/icons/viewVacations.png';
   static const String empOnVac = 'assets/icons/empOnVac.png';
   static const String info = 'assets/icons/info.png';
+  static const String presentEmp = 'assets/icons/presentEmp.png';
+  static const String absentEmp = 'assets/icons/absentEmp.png';
 }

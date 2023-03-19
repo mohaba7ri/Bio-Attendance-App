@@ -194,6 +194,8 @@
 "Pending":"Pending"
 ,"Attendance_Summary":"Attendance Summary",
 "Admin_confirmation":"Admin Confirmation",
-"adminConfirm":"you need to confirm that you are an administrator by inputting your password"
+"adminConfirm":"you need to confirm that you are an administrator by inputting your password",
+"total_absence":"Total Absence",
+"total_attendance":"Total Presence"
 
 }

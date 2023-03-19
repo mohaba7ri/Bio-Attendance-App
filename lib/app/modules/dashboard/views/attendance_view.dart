@@ -10,6 +10,7 @@ class AttendanceView extends GetView<AttendanceController> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    AttendanceController controller = new AttendanceController();
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -71,11 +72,12 @@ class AttendanceView extends GetView<AttendanceController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              Images.profile,
+                              Images.presentEmp,
                               height: 120,
                             ),
                             Text(
-                              "total_attendance".tr,
+                              "total_attendance\n".tr +
+                                  '${controller.PresentNumber.toString()}',
                               style: robotoMedium,
                             )
                           ],
@@ -89,11 +91,11 @@ class AttendanceView extends GetView<AttendanceController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
-                              Images.deny_ani,
+                              Images.absentEmp,
                               height: 120,
                             ),
                             Text(
-                              "total_attendance".tr,
+                              "total_absence".tr,
                               style: robotoMedium,
                             )
                           ],
