@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../company_data.dart';
 import '../widgets/dialog/custom_alert_dialog.dart';
 import '../widgets/toast/custom_toast.dart';
 
@@ -21,12 +20,15 @@ class PresenceController extends GetxController {
   DateTime? currentTime = DateTime.now();
   String? timeStatus;
   String? hoursWork;
+  RxString companyId = ''.obs;
   final SharedPreferences sharedPreferences;
+  RxMap office = {}.obs;
   PresenceController({required this.sharedPreferences});
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    await getCompany();
     await getCompanySetting();
   }
 
@@ -44,11 +46,31 @@ class PresenceController extends GetxController {
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future getCompany() async {
+    try {
+      await firestore.collection('company').get().then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+          companyId.value = data['companyId'];
+          // print('the companyId${companyId.value}');
+          if (data["position"][" latitude"] != null &&
+              data["position"]["longitude"] != null) {
+            print('the latitude${data["position"][" latitude"]}');
+            office["latitude"] = double.parse(data["position"][" latitude"]);
+            office["longitude"] = double.parse(data["position"]["longitude"]);
+            print(office["longitude"]);
+          } else {
+            print('true');
+          }
+        });
+      });
+    } catch (e) {}
+  }
 
   Future getCompanySetting() async {
     firestore
         .collection('companySettings')
-        .where('companyId', isEqualTo: 'J5RB7gH6aPnw8uVoqndS')
+        .where('companyId', isEqualTo: companyId.value)
         .get()
         .then((QuerySnapshot query) {
       query.docs.forEach((doc) {
@@ -57,8 +79,6 @@ class PresenceController extends GetxController {
         endTime = DateTime.parse(data['endTime']);
         lateTime = DateTime.parse(data['lateTime']);
         overlyTime = DateTime.parse(data['overlyTime']);
-        print('the company ID${data['companyId']}');
-        print('the company ID${startTime.runtimeType}');
       });
     });
   }
@@ -87,11 +107,8 @@ class PresenceController extends GetxController {
           await placemarkFromCoordinates(position.latitude, position.longitude);
       String address =
           "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality},${placemarks.first.name}";
-      double distance = Geolocator.distanceBetween(
-          CompanyData.office['latitude'],
-          CompanyData.office['longitude'],
-          position.latitude,
-          position.longitude);
+      double distance = Geolocator.distanceBetween(office['latitude'],
+          office['longitude'], position.latitude, position.longitude);
       //get the company Settings
       await getCompanySetting();
       // update position ( store to database )

@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-import '../../../../../company_data.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class CompanyDetailsController extends GetxController {
+  RxMap office = {}.obs;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -17,11 +17,33 @@ class CompanyDetailsController extends GetxController {
     companySettings;
   }
 
+  Future getCompany() async {
+    try {
+      await firestore.collection('company').get().then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+          print('the latitude${data["position"][" latitude"]}');
+          if (data["position"][" latitude"] != null &&
+              data["position"]["longitude"] != null) {
+            print('the latitude${data["position"][" latitude"]}');
+            office["latitude"] = double.parse(data["position"][" latitude"]);
+            office["longitude"] = double.parse(data["position"]["longitude"]);
+            print(office["longitude"]);
+          } else {
+            print('true');
+          }
+        });
+      });
+    } catch (e) {
+      print('something went wrong$e');
+    }
+  }
+
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        CompanyData.office['latitude'],
-        CompanyData.office['longitude'],
+        office['latitude'],
+        office['longitude'],
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
@@ -30,7 +52,6 @@ class CompanyDetailsController extends GetxController {
 
   int? userNumbers;
   int? branchNumbers;
-
 
   RxBool isloading = false.obs;
   dynamic companyInfo = Get.arguments;
@@ -45,7 +66,6 @@ class CompanyDetailsController extends GetxController {
         .collection('companySettings')
         .where('companyId', isEqualTo: companyInfo['companyId'])
         .snapshots();
-
   }
 
   Future getUsers() async {

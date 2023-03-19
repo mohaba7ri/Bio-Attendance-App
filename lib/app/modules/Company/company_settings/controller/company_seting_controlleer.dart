@@ -4,17 +4,17 @@ import 'package:get/get.dart';
 
 import '../../../../widgets/toast/custom_toast.dart';
 
-
 class CompanySettingController extends GetxController {
-  String? companyId;
   RxString companySettingId = ''.obs;
+  RxString companyId = ''.obs;
 
-  CompanySettingController({this.companyId});
+  CompanySettingController();
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    print('companyID${companyId}');
+
+    await getCompany();
     checkCompanySetting()
         .whenComplete(() => print('companySetting${companySettingId}'));
   }
@@ -26,7 +26,7 @@ class CompanySettingController extends GetxController {
   TextEditingController workingDays = TextEditingController();
   RxBool isExistSetting = false.obs;
 
-  final companySetting = FirebaseFirestore.instance;
+  final firebase = FirebaseFirestore.instance;
   Future<TimeOfDay> showTimePickers(
       BuildContext context, TimeOfDay initialTime) async {
     final time = await showTimePicker(
@@ -51,6 +51,18 @@ class CompanySettingController extends GetxController {
 
   void setOverlyTime(TimeOfDay time) {
     endTime.value = time;
+  }
+
+  Future getCompany() async {
+    try {
+      await firebase.collection('company').get().then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+          companyId.value = data['companyId'];
+          print('the companyId${companyId.value}');
+        });
+      });
+    } catch (e) {}
   }
 
   Future<void> checkCompanySetting() async {
@@ -81,7 +93,7 @@ class CompanySettingController extends GetxController {
         overlyTime.value.hour, overlyTime.value.minute);
     String overlyTimeIsoString = overlyTimeTimestamp.toIso8601String();
     try {
-      final companySettingRef = companySetting.collection('companySettings');
+      final companySettingRef = firebase.collection('companySettings');
       final querySnapshot = await companySettingRef.get();
       if (querySnapshot.docs.isEmpty) {
         companySettingRef.doc().set({
@@ -89,7 +101,7 @@ class CompanySettingController extends GetxController {
           'lateTime': lateTimeIsoString,
           'endTime': endTimeIsoString,
           'overlyTime': overlyTimeIsoString,
-          'companyId': companyId,
+          'companyId': companyId.value,
           'workingDays': workingDays.text
         });
         CustomToast.successToast('CompanySetting added successfully');
@@ -100,7 +112,7 @@ class CompanySettingController extends GetxController {
             'lateTime': lateTimeIsoString,
             'endTime': endTimeIsoString,
             'overlyTime': overlyTimeIsoString,
-            'companyId': companyId,
+            'companyId': companyId.value,
             'workingDays': workingDays.text
           });
           CustomToast.successToast('CompanySetting updated successfully');

@@ -4,9 +4,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:uuid/uuid.dart';
 
-
-import '../../../../../company_data.dart';
 import '../../../../controllers/presence_controller.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
@@ -31,8 +30,8 @@ class CompanySignUpController extends GetxController {
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        CompanyData.office['latitude'],
-        CompanyData.office['longitude'],
+        double.parse(latitudeController.value.text),
+        double.parse(longitudeController.value.text),
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
@@ -80,10 +79,12 @@ class CompanySignUpController extends GetxController {
         longitudeController.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await company.doc().set({
+        String companyId = const Uuid().v4();
+        await company.doc(companyId).set({
           'name': nameController.value.text,
           'phone': phoneController.value.text,
           'address': addressController.value.text,
+          'companyId': companyId,
           'position': {
             ' latitude': latitudeController.value.text,
             'longitude': longitudeController.value.text,
