@@ -25,8 +25,8 @@ class CompanySignUpController extends GetxController {
   final addressController = TextEditingController().obs;
   final latitudeController = TextEditingController().obs;
   final longitudeController = TextEditingController().obs;
-  CollectionReference company =
-      FirebaseFirestore.instance.collection('company');
+  final argument = ''.obs;
+  var firebase = FirebaseFirestore.instance;
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
@@ -62,7 +62,7 @@ class CompanySignUpController extends GetxController {
 
   Future<void> storePosition(Position position, String address) async {
     //  String uid = sharedPreferences.getString('userId')!;
-    await company.doc().set({
+    await firebase.collection('company').doc().set({
       "position": {
         "latitude": position.latitude,
         "longitude": position.longitude,
@@ -79,12 +79,23 @@ class CompanySignUpController extends GetxController {
         longitudeController.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        String companyId = const Uuid().v4();
-        await company.doc(companyId).set({
+        String docId = const Uuid().v4();
+        argument.value = docId;
+        await firebase.collection('company').doc(docId).set({
           'name': nameController.value.text,
           'phone': phoneController.value.text,
           'address': addressController.value.text,
-          'companyId': companyId,
+          'companyId': docId,
+          'position': {
+            ' latitude': latitudeController.value.text,
+            'longitude': longitudeController.value.text,
+          },
+        });
+        await firebase.collection('branch').doc(docId).set({
+          'name': nameController.value.text,
+          'phone': phoneController.value.text,
+          'address': addressController.value.text,
+          'branchId': docId,
           'position': {
             ' latitude': latitudeController.value.text,
             'longitude': longitudeController.value.text,

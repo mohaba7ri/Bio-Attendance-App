@@ -15,8 +15,8 @@ class CompanySettingController extends GetxController {
     super.onInit();
 
     await getCompany();
-    checkCompanySetting()
-        .whenComplete(() => print('companySetting${companySettingId}'));
+    // checkCompanySetting()
+    //     .whenComplete(() => print('companySetting${companySettingId}'));
   }
 
   Rx<TimeOfDay> startTime = TimeOfDay.now().obs;
@@ -65,18 +65,18 @@ class CompanySettingController extends GetxController {
     } catch (e) {}
   }
 
-  Future<void> checkCompanySetting() async {
-    final QuerySnapshot companySetting =
-        await FirebaseFirestore.instance.collection("companySettings").get();
-    for (var document in companySetting.docs) {
-      print(document.id);
-      companySettingId.value = document.id;
-      print('companySettingID${companySettingId}');
-    }
-    if (companySetting.docs.isNotEmpty) {
-      isExistSetting.value = true;
-    }
-  }
+  // Future<void> checkCompanySetting() async {
+  //   final QuerySnapshot companySetting =
+  //       await FirebaseFirestore.instance.collection("companySettings").get();
+  //   for (var document in companySetting.docs) {
+  //     print(document.id);
+  //     companySettingId.value = document.id;
+  //     print('companySettingID${companySettingId}');
+  //   }
+  //   if (companySetting.docs.isNotEmpty) {
+  //     isExistSetting.value = true;
+  //   }
+  // }
 
   Future<void> storeCompanySetting() async {
     DateTime now = DateTime.now();
@@ -93,7 +93,7 @@ class CompanySettingController extends GetxController {
         overlyTime.value.hour, overlyTime.value.minute);
     String overlyTimeIsoString = overlyTimeTimestamp.toIso8601String();
     try {
-      final companySettingRef = firebase.collection('companySettings');
+      final companySettingRef = firebase.collection('branchSettings');
       final querySnapshot = await companySettingRef.get();
       if (querySnapshot.docs.isEmpty) {
         companySettingRef.doc().set({

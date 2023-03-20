@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../style/app_color.dart';
 import '../util/styles.dart';
 
@@ -46,7 +45,7 @@ class _CustomInputState extends State<CustomInput> {
             maxLines: 1,
             controller: widget.controller,
             decoration: InputDecoration(
-              suffixIcon: widget.suffixIcon ?? SizedBox(),
+              suffixIcon: widget.suffixIcon,
               label: Text(widget.label,
                   style: robotoMedium.copyWith(color: AppColor.blackColor)),
               floatingLabelBehavior: FloatingLabelBehavior.always,

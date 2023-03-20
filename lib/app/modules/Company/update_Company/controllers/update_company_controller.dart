@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-import '../../../../../branch_data.dart';
 import '../../../../controllers/presence_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
@@ -36,10 +35,8 @@ class UpdateCompanyController extends GetxController {
       FirebaseFirestore.instance.collection('company');
   launchOfficeOnMap() {
     try {
-      MapsLauncher.launchCoordinates(
-        BranchData.office['latitude'],
-        BranchData.office['longitude'],
-      );
+      MapsLauncher.launchCoordinates(double.parse(latitudeC.value.text),
+          double.parse(longitudeC.value.text));
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
     }

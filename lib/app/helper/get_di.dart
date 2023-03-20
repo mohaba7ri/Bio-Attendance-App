@@ -40,7 +40,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(PageIndexController(), permanent: true);
   Get.put(ProfileController(sharedPreferences: Get.find()));
   Get.put(LoadingConfig());
-  Get.put(HomeController(sharedPreferences: Get.find()), permanent: true);
+  Get.put(HomeController(sharedPreferences: Get.find()),);
 
   Get.lazyPut(() => BranchSettingController());
   Get.lazyPut<CompanySettingController>(() => CompanySettingController(),

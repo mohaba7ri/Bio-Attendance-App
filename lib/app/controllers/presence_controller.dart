@@ -21,6 +21,7 @@ class PresenceController extends GetxController {
   String? timeStatus;
   String? hoursWork;
   RxString companyId = ''.obs;
+  RxString branchId = ''.obs;
   final SharedPreferences sharedPreferences;
   RxMap office = {}.obs;
   PresenceController({required this.sharedPreferences});
@@ -28,7 +29,8 @@ class PresenceController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    await getCompany();
+    // await getCompany();
+    await getBranch();
     await getCompanySetting();
   }
 
@@ -46,41 +48,64 @@ class PresenceController extends GetxController {
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Future getCompany() async {
-    try {
-      await firestore.collection('company').get().then((query) {
-        query.docs.forEach((doc) {
-          Map<String, dynamic> data = doc.data();
-          companyId.value = data['companyId'];
-          // print('the companyId${companyId.value}');
-          if (data["position"][" latitude"] != null &&
-              data["position"]["longitude"] != null) {
-            print('the latitude${data["position"][" latitude"]}');
-            office["latitude"] = double.parse(data["position"][" latitude"]);
-            office["longitude"] = double.parse(data["position"]["longitude"]);
-            print(office["longitude"]);
-          } else {
-            print('true');
-          }
-        });
-      });
-    } catch (e) {}
+  // Future getCompany() async {
+  //   try {
+  //     await firestore.collection('company').get().then((query) {
+  //       query.docs.forEach((doc) {
+  //         Map<String, dynamic> data = doc.data();
+  //         companyId.value = data['companyId'];
+  //         // print('the companyId${companyId.value}');
+  //         // if (data["position"][" latitude"] != null &&
+  //         //     data["position"]["longitude"] != null) {
+  //         //   print('the latitude${data["position"][" latitude"]}');
+  //         //   office["latitude"] = double.parse(data["position"][" latitude"]);
+  //         //   office["longitude"] = double.parse(data["position"]["longitude"]);
+  //         //   print(office["longitude"]);
+  //         // } else {
+  //         //   print('true');
+  //         // }
+  //       });
+  //     });
+  //   } catch (e) {}
+  // }
+
+  Future getBranch() async {
+    await firestore
+        .collection('user')
+        .doc(sharedPreferences.getString('userId')!)
+        .get()
+        .then((data) {
+      branchId.value = data['branchId'];
+    });
+    firestore.collection('branch').doc(branchId.value).get().then((data) {
+      if (data["position"][" latitude"] != null &&
+          data["position"]["longitude"] != null) {
+        print('the latitude${data["position"][" latitude"]}');
+        office["latitude"] = double.parse(data["position"][" latitude"]);
+        office["longitude"] = double.parse(data["position"]["longitude"]);
+        print(office["longitude"]);
+      } else {
+        print('true');
+      }
+    });
   }
 
   Future getCompanySetting() async {
-    firestore
-        .collection('companySettings')
-        .where('companyId', isEqualTo: companyId.value)
-        .get()
-        .then((QuerySnapshot query) {
-      query.docs.forEach((doc) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        startTime = DateTime.parse(data['startTime']);
-        endTime = DateTime.parse(data['endTime']);
-        lateTime = DateTime.parse(data['lateTime']);
-        overlyTime = DateTime.parse(data['overlyTime']);
+    try {
+      await firestore
+          .collection('branchSettings')
+          .where('branchId', isEqualTo: branchId.value)
+          .get()
+          .then((QuerySnapshot query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          startTime = DateTime.parse(data['startTime']);
+          endTime = DateTime.parse(data['endTime']);
+          lateTime = DateTime.parse(data['lateTime']);
+          overlyTime = DateTime.parse(data['overlyTime']);
+        });
       });
-    });
+    } catch (e) {}
   }
 
   Future getAddress() async {

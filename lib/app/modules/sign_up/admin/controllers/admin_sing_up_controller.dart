@@ -8,6 +8,7 @@ import '../../../../widgets/toast/custom_toast.dart';
 
 class AdminSignUpController extends GetxController {
   RxBool isLoading = false.obs;
+  RxString docId = Get.arguments;
   RxBool isLoadingCreatePegawai = false.obs;
   late String name;
   late String phone;
@@ -52,15 +53,15 @@ class AdminSignUpController extends GetxController {
         if (employeeCredential.user != null) {
           String uid = employeeCredential.user!.uid;
           await users.doc(uid).set({
-            'employee_id': '12345678',
+            'employeeId': '12345678',
             'name': name,
             'phone': phone,
             'email': email,
             'job': job,
             'role': role,
-            'created_at': DateTime.now().toIso8601String(),
-            'comp_id': '',
-            'branch_id': '',
+            'createdAt': DateTime.now().toIso8601String(),
+            'compId': docId.value,
+            'branchId': docId.value,
           });
           await employeeCredential.user!.sendEmailVerification();
           isLoadingCreatePegawai.value = false;

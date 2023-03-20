@@ -63,8 +63,8 @@ class CompanyDetailsController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getCompanySettings() async* {
     yield* firestore
-        .collection('companySettings')
-        .where('companyId', isEqualTo: companyInfo['companyId'])
+        .collection('branchSettings')
+        .where('branchId', isEqualTo: companyInfo['companyId'])
         .snapshots();
   }
 

@@ -23,6 +23,7 @@ class HomeController extends GetxController {
   RxString latitude = ''.obs;
   RxString longitude = ''.obs;
   RxMap office = {}.obs;
+  RxString branchId = ''.obs;
 
   RxString officeDistance = "-".obs;
   SharedPreferences sharedPreferences;
@@ -38,7 +39,8 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await getCompany();
+    await getBranch();
+    // await getCompany();
     await initialMessage();
     await getMessage();
 
@@ -61,26 +63,46 @@ class HomeController extends GetxController {
     listenFCM();
   }
 
-  Future getCompany() async {
-    try {
-      await firestore.collection('company').get().then((query) {
-        query.docs.forEach((doc) {
-          Map<String, dynamic> data = doc.data();
-          print('the latitude${data["position"][" latitude"]}');
-          if (data["position"][" latitude"] != null &&
-              data["position"]["longitude"] != null) {
-            print('the latitude${data["position"][" latitude"]}');
-            office["latitude"] = double.parse(data["position"][" latitude"]);
-            office["longitude"] = double.parse(data["position"]["longitude"]);
-            print(office["longitude"]);
-          } else {
-            print('true');
-          }
-        });
-      });
-    } catch (e) {
-      print('something went wrong$e');
-    }
+  // Future getCompany() async {
+  //   try {
+  //     await firestore.collection('company').get().then((query) {
+  //       query.docs.forEach((doc) {
+  //         Map<String, dynamic> data = doc.data();
+  //         print('the latitude${data["position"][" latitude"]}');
+  //         if (data["position"][" latitude"] != null &&
+  //             data["position"]["longitude"] != null) {
+  //           print('the latitude${data["position"][" latitude"]}');
+  //           office["latitude"] = double.parse(data["position"][" latitude"]);
+  //           office["longitude"] = double.parse(data["position"]["longitude"]);
+  //           print(office["longitude"]);
+  //         } else {
+  //           print('true');
+  //         }
+  //       });
+  //     });
+  //   } catch (e) {
+  //     print('something went wrong$e');
+  //   }
+  // }
+  Future getBranch() async {
+    await firestore
+        .collection('user')
+        .doc(sharedPreferences.getString('userId')!)
+        .get()
+        .then((data) {
+      branchId.value = data['branchId'];
+    });
+    firestore.collection('branch').doc(branchId.value).get().then((data) {
+      if (data["position"][" latitude"] != null &&
+          data["position"]["longitude"] != null) {
+        print('the latitude${data["position"][" latitude"]}');
+        office["latitude"] = double.parse(data["position"][" latitude"]);
+        office["longitude"] = double.parse(data["position"]["longitude"]);
+        print(office["longitude"]);
+      } else {
+        print('true');
+      }
+    });
   }
 
   initialMessage() async {

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widgets/custom_input.dart';
-import '../../../../widgets/dialog/custom_alert_dialog.dart';
 import '../controlles/company_sing_up_controller.dart';
 
 class CompanySignUpView extends GetView<CompanySignUpController> {
@@ -318,18 +315,9 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     if (controller.isLoading.isFalse) {
-                                      await controller.signUp().whenComplete(() =>
-                                          CustomAlertDialog.showPresenceAlert(
-                                              title: 'Company Setting',
-                                              message:
-                                                  'After the company being set up \nyou ned to add company Setting please Go to company setting ',
-                                              onConfirm: () {
-                                                Get.toNamed(
-                                                    Routes.ADD_COMPANY_SETTING);
-                                              },
-                                              onCancel: () {
-                                                Get.toNamed(Routes.HOME);
-                                              }));
+                                      await controller.signUp().whenComplete(
+                                          () =>
+                                              Get.offNamed(Routes.ADMINSIGNUP,arguments:controller.argument),);
                                     }
                                   }
                                 },

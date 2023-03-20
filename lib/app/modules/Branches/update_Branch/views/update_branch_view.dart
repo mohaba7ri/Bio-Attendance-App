@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../style/app_color.dart';
 import '../../../../widgets/custom_input.dart';
 import '../../general_settings/view/branch_setting_view.dart';
@@ -11,7 +10,7 @@ import '../controllers/update_branch_controller.dart';
 class UpdateBranchView extends GetView<UpdateBranchController> {
   UpdateBranchController _updateController = UpdateBranchController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,9 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (context) => BranchSettingView());
+                    builder: (context) => BranchSettingView(
+                          branchId: controller.branchId['branchId'],
+                        ));
               },
               icon: Icon(Icons.settings),
               color: AppColor.blackColor,
