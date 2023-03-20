@@ -194,7 +194,9 @@
 "Pending":"قيد الانتظار",
 "Attendance_Summary":"ملخص الحضور",
 "Admin_confirmation":"تأكيد المدير",
-"adminConfirm":"يجب عليك تأكيد انك المدير من خلال ادخال الرمز هنا"
+"adminConfirm":"يجب عليك تأكيد انك المدير من خلال ادخال الرمز هنا",
+"total_absence":"اجمالي الغياب",
+"total_attendance":"اجمالي الحضور"
 
 
 

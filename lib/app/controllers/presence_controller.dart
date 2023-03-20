@@ -344,6 +344,9 @@ class PresenceController extends GetxController {
                 }
               },
             );
+
+            ////////////////// putting another function to set the presence status
+
             Get.back();
             CustomToast.successToast("success_check_in".tr);
           },
