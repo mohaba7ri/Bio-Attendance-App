@@ -112,4 +112,9 @@ class LoginController extends GetxController {
       CustomToast.errorToast("You_need_to_fill_email_and_password_form".tr);
     }
   }
+
+
+
+
+
 }

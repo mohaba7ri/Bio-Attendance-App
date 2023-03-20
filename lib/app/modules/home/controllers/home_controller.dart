@@ -13,7 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../company_data.dart';
 import '../../../routes/app_pages.dart';
 import '../../../util/images.dart';
 import '../../../widgets/dialog/custom_alert_dialog.dart';
@@ -21,6 +20,10 @@ import '../../../widgets/toast/custom_toast.dart';
 
 class HomeController extends GetxController {
   RxBool isLoading = false.obs;
+  RxString latitude = ''.obs;
+  RxString longitude = ''.obs;
+  RxMap office = {}.obs;
+  RxString branchId = ''.obs;
 
   RxString officeDistance = "-".obs;
   SharedPreferences sharedPreferences;
@@ -36,6 +39,8 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    await getBranch();
+    // await getCompany();
     await initialMessage();
     await getMessage();
 
@@ -56,6 +61,48 @@ class HomeController extends GetxController {
     loadFCM();
 
     listenFCM();
+  }
+
+  // Future getCompany() async {
+  //   try {
+  //     await firestore.collection('company').get().then((query) {
+  //       query.docs.forEach((doc) {
+  //         Map<String, dynamic> data = doc.data();
+  //         print('the latitude${data["position"][" latitude"]}');
+  //         if (data["position"][" latitude"] != null &&
+  //             data["position"]["longitude"] != null) {
+  //           print('the latitude${data["position"][" latitude"]}');
+  //           office["latitude"] = double.parse(data["position"][" latitude"]);
+  //           office["longitude"] = double.parse(data["position"]["longitude"]);
+  //           print(office["longitude"]);
+  //         } else {
+  //           print('true');
+  //         }
+  //       });
+  //     });
+  //   } catch (e) {
+  //     print('something went wrong$e');
+  //   }
+  // }
+  Future getBranch() async {
+    await firestore
+        .collection('user')
+        .doc(sharedPreferences.getString('userId')!)
+        .get()
+        .then((data) {
+      branchId.value = data['branchId'];
+    });
+    firestore.collection('branch').doc(branchId.value).get().then((data) {
+      if (data["position"][" latitude"] != null &&
+          data["position"]["longitude"] != null) {
+        print('the latitude${data["position"][" latitude"]}');
+        office["latitude"] = double.parse(data["position"][" latitude"]);
+        office["longitude"] = double.parse(data["position"]["longitude"]);
+        print(office["longitude"]);
+      } else {
+        print('true');
+      }
+    });
   }
 
   initialMessage() async {
@@ -185,8 +232,8 @@ class HomeController extends GetxController {
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        CompanyData.office['latitude'],
-        CompanyData.office['longitude'],
+        office['latitude'],
+        office['longitude'],
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
@@ -198,11 +245,8 @@ class HomeController extends GetxController {
     Map<String, dynamic> determinePosition = await _determinePosition();
     if (!determinePosition["error"]) {
       Position position = determinePosition["position"];
-      double distance = Geolocator.distanceBetween(
-          CompanyData.office['latitude'],
-          CompanyData.office['longitude'],
-          position.latitude,
-          position.longitude);
+      double distance = Geolocator.distanceBetween(office['latitude'],
+          office['longitude'], position.latitude, position.longitude);
       if (distance > 1000) {
         return "${(distance / 1000).toStringAsFixed(2)}km";
       } else {
@@ -275,7 +319,7 @@ class HomeController extends GetxController {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamLastPresence() async* {
-    String uid =sharedPreferences.getString('userId')!;
+    String uid = sharedPreferences.getString('userId')!;
     //uid.isEmpty ? sharedPreferences.getString('userId')! : uid;
     yield* firestore
         .collection("user")
@@ -287,8 +331,8 @@ class HomeController extends GetxController {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamTodayPresence() async* {
-    String uid =  sharedPreferences.getString('userId')!;
-   
+    String uid = sharedPreferences.getString('userId')!;
+
     String todayDocId =
         DateFormat.yMd().format(DateTime.now()).replaceAll("/", "-");
     yield* firestore

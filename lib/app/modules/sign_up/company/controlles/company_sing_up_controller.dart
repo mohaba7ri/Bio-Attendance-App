@@ -4,9 +4,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:uuid/uuid.dart';
 
-
-import '../../../../../company_data.dart';
 import '../../../../controllers/presence_controller.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
@@ -26,13 +25,13 @@ class CompanySignUpController extends GetxController {
   final addressController = TextEditingController().obs;
   final latitudeController = TextEditingController().obs;
   final longitudeController = TextEditingController().obs;
-  CollectionReference company =
-      FirebaseFirestore.instance.collection('company');
+  final argument = ''.obs;
+  var firebase = FirebaseFirestore.instance;
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        CompanyData.office['latitude'],
-        CompanyData.office['longitude'],
+        double.parse(latitudeController.value.text),
+        double.parse(longitudeController.value.text),
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
@@ -63,7 +62,7 @@ class CompanySignUpController extends GetxController {
 
   Future<void> storePosition(Position position, String address) async {
     //  String uid = sharedPreferences.getString('userId')!;
-    await company.doc().set({
+    await firebase.collection('company').doc().set({
       "position": {
         "latitude": position.latitude,
         "longitude": position.longitude,
@@ -80,10 +79,23 @@ class CompanySignUpController extends GetxController {
         longitudeController.value.text.isNotEmpty) {
       isLoading.value = true;
       try {
-        await company.doc().set({
+        String docId = const Uuid().v4();
+        argument.value = docId;
+        await firebase.collection('company').doc(docId).set({
           'name': nameController.value.text,
           'phone': phoneController.value.text,
           'address': addressController.value.text,
+          'companyId': docId,
+          'position': {
+            ' latitude': latitudeController.value.text,
+            'longitude': longitudeController.value.text,
+          },
+        });
+        await firebase.collection('branch').doc(docId).set({
+          'name': nameController.value.text,
+          'phone': phoneController.value.text,
+          'address': addressController.value.text,
+          'branchId': docId,
           'position': {
             ' latitude': latitudeController.value.text,
             'longitude': longitudeController.value.text,

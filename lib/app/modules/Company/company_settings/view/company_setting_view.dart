@@ -10,7 +10,7 @@ class CompanySettingView extends GetView<CompanySettingController> {
   CompanySettingView({this.companyId});
   @override
   Widget build(BuildContext context) {
-    controller.companyId=companyId;
+  
     // TODO: implement build
     return Padding(
         padding: const EdgeInsets.all(15.0),

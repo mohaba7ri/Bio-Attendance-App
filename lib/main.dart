@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +41,18 @@ void main() async {
   FirebaseMessaging.onMessage.listen((event) {
     print('the message: ${event.notification!.body}');
   });
+  RxBool isCompanyExist = false.obs;
 
+  Future<void> checkCompanyExist() async {
+    final QuerySnapshot companySetting =
+        await FirebaseFirestore.instance.collection("company").get();
+
+    if (companySetting.docs.isNotEmpty) {
+      isCompanyExist.value = true;
+    }
+  }
+
+  await checkCompanyExist();
   runApp(
     StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -60,7 +72,11 @@ void main() async {
             return GetMaterialApp(
               //  title: "Application",
               debugShowCheckedModeBanner: false,
-              initialRoute: snapshot.data != null ? Routes.LOGIN : Routes.LOGIN,
+              initialRoute: isCompanyExist.isTrue
+                  ? snapshot.data != null
+                      ? Routes.LOGIN
+                      : Routes.LOGIN
+                  : Routes.COMPANYSIGNUP,
               getPages: AppPages.routes,
               builder: EasyLoading.init(),
               locale: languageController.locale,

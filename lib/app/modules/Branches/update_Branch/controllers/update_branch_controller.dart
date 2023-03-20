@@ -5,19 +5,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-
-import '../../../../../branch_data.dart';
 import '../../../../controllers/presence_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
 
 class UpdateBranchController extends GetxController {
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
 
     getBranchInfo(branchId['branchId']);
+    //  await getBranch();
     determineBranchPosition();
     print('the branchId${Get.arguments}');
   }
@@ -32,16 +31,39 @@ class UpdateBranchController extends GetxController {
   final latitudeC = TextEditingController().obs;
   final longitudeC = TextEditingController().obs;
   dynamic branchId = Get.arguments;
+  RxMap office = {}.obs;
 
-  CollectionReference branch = FirebaseFirestore.instance.collection('branch');
+  var branch = FirebaseFirestore.instance.collection('branch');
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        BranchData.office['latitude'],
-        BranchData.office['longitude'],
+        double.parse(latitudeC.value.text),
+        double.parse(longitudeC.value.text),
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
+    }
+  }
+
+  Future getBranch() async {
+    try {
+      await branch.where('branchId', isEqualTo: branchId['branchId']).get().then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+          print('the latitude${data["position"][" latitude"]}');
+          if (data["position"][" latitude"] != null &&
+              data["position"]["longitude"] != null) {
+            print('the latitude${data["position"][" latitude"]}');
+            office["latitude"] = double.parse(data["position"][" latitude"]);
+            office["longitude"] = double.parse(data["position"]["longitude"]);
+            print(office["longitude"]);
+          } else {
+            print('true');
+          }
+        });
+      });
+    } catch (e) {
+      print('something went wrong$e');
     }
   }
 
@@ -119,8 +141,7 @@ class UpdateBranchController extends GetxController {
 
   var textDecoration = InputDecoration(
     labelText: 'full_name'.tr,
-    hintText: 'Enter_branch_name'.tr
-    ,
+    hintText: 'Enter_branch_name'.tr,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
     ),
