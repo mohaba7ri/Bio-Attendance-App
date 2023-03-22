@@ -26,6 +26,8 @@ class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   RxBool isLoading = false.obs;
+    RxBool isLoading2 = false.obs;
+
   RxBool obsecureText = true.obs;
   TextEditingController emailC = TextEditingController();
   TextEditingController passC = TextEditingController();
@@ -110,4 +112,9 @@ class LoginController extends GetxController {
       CustomToast.errorToast("You_need_to_fill_email_and_password_form".tr);
     }
   }
+
+
+
+
+
 }

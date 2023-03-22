@@ -1,6 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class AttendanceController extends GetxController {
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getUsers();
+  }
+
+  int? PresentNumber;
+
+  var firestore = FirebaseFirestore.instance;
+
   String? username;
   // A list of months to display in the dropdown menu
   final months = [
@@ -32,4 +43,17 @@ class AttendanceController extends GetxController {
 
   // A function to calculate the user's salary based on the total hours worked
   double get salary => totalHours.value * hourlyRate;
+
+  Future getUsers() async {
+    await firestore
+        .collection('user')
+        .where("present", isEqualTo: true)
+        .get()
+        .then((QuerySnapshot query) {
+      PresentNumber = query.size;
+
+      print('number of presence$PresentNumber');
+      update();
+    });
+  }
 }

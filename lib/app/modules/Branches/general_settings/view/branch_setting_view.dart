@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/custom_input.dart';
-import '../../../../widgets/toast/custom_toast.dart';
 import '../controller/branch_seting_controlleer.dart';
 
 class BranchSettingView extends GetView<BranchSettingController> {
+  final branchId;
+  BranchSettingView({this.branchId});
   @override
   Widget build(BuildContext context) {
+    controller.branchId.value = branchId;
     // TODO: implement build
     return Padding(
       padding: const EdgeInsets.all(15.0),
@@ -125,7 +127,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                   child: MaterialButton(
                     color: Colors.blueAccent.shade400,
                     onPressed: () {
-                      CustomToast.successToast("Added_Successfully".tr);
+                      controller.storeBranchSetting();
                       Get.back();
                     },
                     child: Text('Save'.tr),

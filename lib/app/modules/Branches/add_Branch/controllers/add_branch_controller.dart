@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
-import '../../../../../branch_data.dart';
 import '../../../../controllers/presence_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../widgets/toast/custom_toast.dart';
@@ -32,8 +31,8 @@ class AddBranchController extends GetxController {
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
-        BranchData.office['latitude'],
-        BranchData.office['longitude'],
+        double.parse(latitudeC.value.text),
+        double.parse(longitudeC.value.text),
       );
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
@@ -59,17 +58,6 @@ class AddBranchController extends GetxController {
           "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.locality}";
       AddressC.value.text = address;
     }
-  }
-
-  Future<void> storePosition(Position position, String address) async {
-    //  String uid = sharedPreferences.getString('userId')!;
-    await branch.doc().set({
-      "position": {
-        "latitude": position.latitude,
-        "longitude": position.longitude,
-      },
-      "address": address,
-    });
   }
 
   Future<void> create() async {

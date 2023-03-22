@@ -113,7 +113,7 @@ class CompanyHomeView extends GetView<CompanyHomeController> {
                             // Get.put(CompanySettingController());
                             Get.lazyPut(
                               () => CompanySettingController(
-                                companyId: companyData['companyId'],
+                                
                               ),
                             );
 

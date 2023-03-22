@@ -48,7 +48,7 @@ class PdfAllBranch {
   }
 
   static Widget buildHeader() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           //  SizedBox(height: 1 * PdfPageFormat.cm),
           Row(
@@ -56,30 +56,30 @@ class PdfAllBranch {
             children: [
               Row(children: [
                 Text(
-                  'أسم الشركة :',
+                  ':أسم الشركة',
                 ),
                 SizedBox(width: 8),
                 Text(
-                  'Lean Code',
+                  'You',
                 ),
               ]),
             ],
           ),
           Row(children: [
             Text(
-              'العنوان :',
+              ':العنوان',
             ),
             SizedBox(width: 8),
             Text(
-              'AL Zobairy Street ',
+              'صنعاء- شارع الزبيري',
             ),
           ]),
           Row(children: [
             Text(
-              'رقم الهاتف :',
+              ':رقم الهاتف',
             ),
             SizedBox(width: 8),
-            Text('+967 7777845788 ',
+            Text('+967 733000588 ',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -95,11 +95,11 @@ class PdfAllBranch {
       );
 
   static Widget buildEmployee() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Text('Employee Name: ${employeeReport.user['name']}',
           //     style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('أسم الفرع: الزبيري'),
+          Text('تقرير كامل لجميع الفروع لشهر مارس'),
         ],
       );
 
@@ -142,18 +142,19 @@ class PdfAllBranch {
 
   Widget buildAttendance(ttf) {
     final headers = [
-      'أسم الفرع',
-      'العنوان',
-      'الهاتف',
+      'اجمالي الاجازات',
+      'أجمالي الغياب',
+      'أجمالي الحضور',
       'عدد الموظفين',
+      'أسم الفرع',
     ];
     final List<List<dynamic>> data = [
-      ['فرع  عطان  المركز  الرئيسي', 'عطان صنعاء', '730073350', '11'],
-      ['فرع  عطان  المركز  الرئيسي', 'عطان صنعاء', '730073350', '11'],
-      ['فرع  عطان  المركز  الرئيسي', 'عطان صنعاء', '730073350', '11'],
-      ['فرع  عطان  المركز  الرئيسي', 'عطان صنعاء', '730073350', '11'],
+      ['7', '%95', '%95', '12', 'فرع  عطان  المركز  الرئيسي'],
+      ['7', '%95', '%95', '12', 'فرع  عطان  المركز  الرئيسي'],
+      ['7', '%95', '%95', '12', 'فرع  عطان  المركز  الرئيسي'],
+      ['7', '%95', '%95', '12', 'فرع  عطان  المركز  الرئيسي'],
     ];
-// Load a custom Arabic font
+// Lo4d a custom Arabic font
 
     return Table.fromTextArray(
       headers: headers,

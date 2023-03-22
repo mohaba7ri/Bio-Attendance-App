@@ -181,7 +181,7 @@ class LoginView extends GetView<LoginController> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            (controller.isLoading.isFalse)
+                                            (controller.isLoading2.isFalse)
                                                 ? 'use_bio'.tr
                                                 : 'Loading'.tr,
                                             style: robotoMediumWhite,

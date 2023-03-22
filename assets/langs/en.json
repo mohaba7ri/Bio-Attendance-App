@@ -194,6 +194,50 @@
 "Pending":"Pending"
 ,"Attendance_Summary":"Attendance Summary",
 "Admin_confirmation":"Admin Confirmation",
-"adminConfirm":"you need to confirm that you are an administrator by inputting your password"
+"adminConfirm":"you need to confirm that you are an administrator by inputting your password",
+"total_absence":"Total Absence",
+"total_attendance":"Total Presence",
+"set_admin_information":"Set Admin Information",
+"please_enter_your_name":"please enter your name",
+"please_enter_your_phone_number":"please enter your phone number",
+"phone_number":"phone number",
+"please_enter_your_job":"please enter your job",
+"job":"job",
+"please_enter_your_email":"please enter your email",
+"Email_address":"Email Address",
+"please_enter_your_password":"please enter your password",
+"Log_in":"Login",
+"you_need_to_fill_all_fields":"You need to fill all fields",
+"Email_already_exist":"Email already exist",
+"wrong_passowrd":"wrong password",
+"something_want_wrong":"something want wrong",
+"Sing_Up":"Sing Up",
+"Enter_Company_Information":"Enter Company Information",
+"please_enter_the_name":"please enter the name",
+"please_enter_Phone":"please enter phone number",
+"update_profile_done":"Update Profile Done Successfully",
+"Cant_Update_Profile":"Cannot Update profile due to ",
+"Successfully_deleted_avatar_profile":"Delete Avatar Profile Done Successfully",
+"Cant_delete_avatar":"Cannot Delete Avatar Profile due to ",
+"New_Password":"New Password",
+"you_logged_create_pass":"You logged in with the default password. To continue, you must create a new password",
+"Confirm_New_Password":"Confirm New Password",
+"Continue":"Continue",
+"you_must_change_your_password":"you must change your password",
+"password_doesnt_match":"Password you entered does not match",
+"update_password_done":"Update Password Done Successfully",
+"password_too_weak_you_need_at_least_six_charachter":"password too weak, you need at least six charachter",
+"denied_vac":"Denied Vacations"
+
+
+
+
+
+
+
+
+
+
+
 
 }
