@@ -49,14 +49,14 @@ class UpdatePofileController extends GetxController {
         await firestore.collection("user").doc(uid).update(data);
         image = null;
         Get.back();
-        CustomToast.successToast('Success Update Profile');
+        CustomToast.successToast('update_profile_done'.tr);
       } catch (e) {
-        CustomToast.errorToast('Cant Update Profile. Err : ${e.toString()}');
+        CustomToast.errorToast('Cant_Update_Profile'.tr+': ${e.toString()}');
       } finally {
         isLoading.value = false;
       }
     } else {
-      CustomToast.errorToast('You must fill all form');
+      CustomToast.errorToast('you_need_to_fill_all_fields'.tr);
     }
   }
 
@@ -76,11 +76,12 @@ class UpdatePofileController extends GetxController {
         "avatar": FieldValue.delete(),
       });
       Get.back();
+        CustomToast.successToast('Successfully_deleted_avatar_profile'.tr);
 
-      Get.snackbar("Successfully", "Successfully deleted avatar profile");
+      
     } catch (e) {
-      Get.snackbar("There is an error",
-          "Unable to delete avatar profile. Because ${e.toString()}");
+              CustomToast.errorToast('Cant_delete_avatar'.tr+': ${e.toString()}');
+
     } finally {
       update();
     }

@@ -28,21 +28,21 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 30, horizontal: 100),
-                            child: Text('Sing Up'),
+                            child: Text('Sing_Up'.tr),
                           ),
                           SizedBox(
                               height: 40,
-                              child: Text('Enter Company Information')),
+                              child: Text('Enter_Company_Information'.tr)),
                           Obx(
                             () => Column(
                               children: [
                                 CustomInput(
                                   controller: controller.nameController.value,
-                                  label: 'Company Name',
-                                  hint: 'Code Tech',
+                                  label: 'Name',
+                                  hint: '',
                                   valdate: (value) {
                                     if (value!.isEmpty) {
-                                      return 'please enter  a company name';
+                                      return 'please_enter_the_name'.tr;
                                     }
                                     return null;
                                   },
@@ -68,11 +68,11 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                 ),
                                 CustomInput(
                                   controller: controller.phoneController.value,
-                                  label: 'Phone',
-                                  hint: '77777777',
+                                  label: 'Phone'.tr,
+                                  hint: '',
                                   valdate: (value) {
                                     if (value!.isEmpty) {
-                                      return 'please enter  a Phone Number';
+                                      return 'please_enter_Phone'.tr;
                                     }
                                     return null;
                                   },
@@ -100,8 +100,8 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                   disabled: true,
                                   controller:
                                       controller.addressController.value,
-                                  label: 'address',
-                                  hint: 'address',
+                                  label: 'address'.tr,
+                                  hint: '',
                                 ),
 
                                 // TextFormField(
@@ -132,7 +132,7 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                       children: [
                                         Center(
                                             child:
-                                                Text('Set Company Location ')),
+                                                Text('set_company_location'.tr)),
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -155,27 +155,11 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                                         controller: controller
                                                             .latitudeController
                                                             .value,
-                                                        label: 'Latitude',
-                                                        hint: '4.35424',
+                                                        label: 'Latitude'.tr,
+                                                        hint: '',
                                                         disabled: true,
                                                       ),
-                                                      // TextFormField(
-                                                      //   onChanged: ((String value) {
-                                                      //     _signUpController.latitudeController.value.text =
-                                                      //         value;
-                                                      //   }),
-                                                      //   decoration: _signUpController
-                                                      //       .textDecoration
-                                                      //       .copyWith(
-                                                      //           hintText: 'Latitude',
-                                                      //           labelText: 'Latitude'),
-                                                      //   validator: (value) {
-                                                      //     if (value!.isEmpty) {
-                                                      //       return 'please enter latitude';
-                                                      //     }
-                                                      //     return null;
-                                                      //   },
-                                                      // ),
+                                               
                                                     ),
                                                     SizedBox(
                                                       height: 8,
@@ -190,27 +174,11 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                                         controller: controller
                                                             .longitudeController
                                                             .value,
-                                                        label: 'Longitude',
-                                                        hint: '4.35424',
+                                                        label: 'Longitude'.tr,
+                                                        hint: '',
                                                         disabled: true,
                                                       ),
-                                                      //  TextFormField(
-                                                      //   onChanged: ((value) {
-                                                      //     _signUpController.longitudeController.value.text =
-                                                      //         value;
-                                                      //   }),
-                                                      //   decoration: _signUpController
-                                                      //       .textDecoration
-                                                      //       .copyWith(
-                                                      //           hintText: 'Longitude',
-                                                      //           labelText: 'Longitude'),
-                                                      //   validator: (value) {
-                                                      //     if (value!.isEmpty) {
-                                                      //       return 'please enter longitude';
-                                                      //     }
-                                                      //     return null;
-                                                      //   },
-                                                      // ),
+                                                   
                                                     ),
                                                   ],
                                                 ),
@@ -239,7 +207,7 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                                       ),
                                                     ),
                                                     child: Text(
-                                                      'Open in maps',
+                                                      'Open_in_maps'.tr,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w600),
@@ -323,8 +291,8 @@ class CompanySignUpView extends GetView<CompanySignUpController> {
                                 },
                                 child: Text(
                                   (controller.isLoading.isFalse)
-                                      ? 'Sign Up'
-                                      : 'Loading...',
+                                      ? 'Sign_Up'.tr
+                                      : 'Loading'.tr,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: 'poppins',
