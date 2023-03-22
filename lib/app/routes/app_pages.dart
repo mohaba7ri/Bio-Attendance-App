@@ -77,6 +77,8 @@ import '../modules/update_pofile/bindings/update_pofile_binding.dart';
 import '../modules/update_pofile/views/update_pofile_view.dart';
 import '../modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart';
 import '../modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
+import '../modules/vacation/denied_vacations/bindings/denied_vacations_binding.dart';
+import '../modules/vacation/denied_vacations/views/denied_vacations_view.dart';
 import '../modules/vacation/my_vaction/my_vacation_binding/my_vacation_binding.dart';
 import '../modules/vacation/my_vaction/my_vacation_view/my_vacation_view.dart';
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
@@ -291,7 +293,11 @@ class AppPages {
         name: _Paths.BRANCH_REP,
         page: () => BranchReportsView(),
         binding: BranchReportsBinding()),
-
+        
+GetPage(
+        name: _Paths.DEN_VAC,
+        page: () => DeniedVacationView(),
+        binding: DeniedVacationBinding()),
 
   ];
 }
