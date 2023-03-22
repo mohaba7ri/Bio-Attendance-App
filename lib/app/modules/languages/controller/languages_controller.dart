@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/vacation/my_vaction/my_vacation_controller/my_vacation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' as Foundation;
@@ -12,6 +13,7 @@ class LanguagesController extends GetxController implements GetxService {
   LanguagesController(
       {required this.sharedPreferences, required this.apiClient}) {
     loadCurrentLanguage();
+   
   }
 
   Locale _locale = Locale(AppConstants.languages[0].languageCode,
