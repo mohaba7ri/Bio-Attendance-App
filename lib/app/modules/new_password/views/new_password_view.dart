@@ -61,7 +61,7 @@ class NewPasswordView extends GetView<NewPasswordController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'New Password',
+                        'New_Password'.tr,
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'poppins',
@@ -70,7 +70,7 @@ class NewPasswordView extends GetView<NewPasswordController> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        "You log in with the default password. To continue, you must create a new password.",
+                        "you_logged_create_pass".tr,
                         style: TextStyle(
                           color: AppColor.secondarySoft,
                           height: 150 / 100,
@@ -82,8 +82,8 @@ class NewPasswordView extends GetView<NewPasswordController> {
                 Obx(
                   () => CustomInput(
                     controller: controller.passC,
-                    label: 'New Password',
-                    hint: '*****************',
+                    label: 'New_Password',
+                    hint: "***",
                     obsecureText: controller.newPassObs.value,
                     suffixIcon: IconButton(
                       icon: (controller.newPassObs.value != false)
@@ -99,7 +99,7 @@ class NewPasswordView extends GetView<NewPasswordController> {
                 Obx(
                   () => CustomInput(
                     controller: controller.confirmPassC,
-                    label: 'Confirm New Password',
+                    label: 'Confirm_New_Password'.tr,
                     hint: '*****************',
                     obsecureText: controller.newPassCObs.value,
                     suffixIcon: IconButton(
@@ -126,8 +126,8 @@ class NewPasswordView extends GetView<NewPasswordController> {
                       },
                       child: Text(
                         (controller.isLoading.isFalse)
-                            ? 'Continue'
-                            : 'Loading...',
+                            ? 'Continue'.tr
+                            : 'Loading'.tr,
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'poppins',

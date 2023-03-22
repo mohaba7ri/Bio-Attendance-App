@@ -14,7 +14,6 @@ class UpdatePofileView extends GetView<UpdatePofileController> {
   final Map<String, dynamic> user = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    controller.employeeidC.text = user["userId"];
     controller.nameC.text = user["name"];
     controller.emailC.text = user["email"];
     return Scaffold(
@@ -63,7 +62,6 @@ class UpdatePofileView extends GetView<UpdatePofileController> {
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(20),
         children: [
-          // section 1 - Profile Picture
           Center(
             child: Stack(
               children: [
@@ -121,19 +119,14 @@ class UpdatePofileView extends GetView<UpdatePofileController> {
               ],
             ),
           ),
-          //section 2 - user data
+
           CustomInput(
             controller: controller.nameC,
-            label: "Full Name",
-            hint: "Your Full Name",
+            label: "full_name".tr,
+            hint: "",
             margin: EdgeInsets.only(bottom: 16, top: 42),
           ),
-          CustomInput(
-            controller: controller.employeeidC,
-            label: "Employee ID",
-            hint: "100000000000",
-            disabled: true,
-          ),
+        
           CustomInput(
             controller: controller.emailC,
             label: "Email",

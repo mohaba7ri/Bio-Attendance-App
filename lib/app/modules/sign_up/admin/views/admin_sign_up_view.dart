@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 
@@ -24,7 +25,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                 Brightness.dark, // For Android (dark icons)
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
-          title: Text('Set Admin Information'),
+          title: Text('set_admin_information'.tr),
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
           foregroundColor: Colors.white,
@@ -40,7 +41,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
               TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'please enter your name';
+                      return 'please_enter_your_name'.tr;
                     }
                     return null;
                   },
@@ -48,7 +49,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                     _adminSignUpController.name = value;
                   },
                   decoration: _adminSignUpController.textDecoration
-                      .copyWith(labelText: 'full name', hintText: 'full name')),
+                      .copyWith(labelText: 'full_name'.tr, hintText: 'full_name'.tr)),
               SizedBox(
                 height: 10,
               ),
@@ -58,7 +59,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter your phone number';
+                    return 'please_enter_your_phone_number'.tr;
                   }
                   return null;
                 },
@@ -66,7 +67,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                   _adminSignUpController.phone = value;
                 },
                 decoration: _adminSignUpController.textDecoration
-                    .copyWith(labelText: 'phone number', hintText: ''),
+                    .copyWith(labelText: 'phone_number'.tr, hintText: ''),
               ),
               SizedBox(
                 height: 10,
@@ -74,7 +75,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
               TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter your job';
+                    return 'please_enter_your_job'.tr;
                   }
                   return null;
                 },
@@ -82,7 +83,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                   _adminSignUpController.job = value;
                 },
                 decoration: _adminSignUpController.textDecoration
-                    .copyWith(labelText: 'job', hintText: '777784581'),
+                    .copyWith(labelText: 'job'.tr, hintText: ''),
               ),
               SizedBox(
                 height: 10,
@@ -93,12 +94,12 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                 },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter your email';
+                    return 'please_enter_your_email'.tr;
                   }
                   return null;
                 },
                 decoration: _adminSignUpController.textDecoration.copyWith(
-                    labelText: 'Email address', hintText: 'example@gmail.com'),
+                    labelText: 'Email_address'.tr, hintText: 'example@gmail.com'),
               ),
               SizedBox(
                 height: 10,
@@ -109,12 +110,12 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                 },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'please enter your password';
+                    return 'please_enter_your_password'.tr;
                   }
                   return null;
                 },
                 decoration: _adminSignUpController.textDecoration
-                    .copyWith(labelText: 'password', hintText: 'password'),
+                    .copyWith(labelText: 'password'.tr, hintText: ''),
               ),
               Obx(
                 () => Container(
@@ -128,7 +129,7 @@ class AdminSignUpView extends GetView<AdminSignUpController> {
                       }
                     },
                     child: Text(
-                      (controller.isLoading.isFalse) ? 'Log in' : 'Loading...',
+                      (controller.isLoading.isFalse) ? 'Log_in'.tr : 'Loading'.tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'poppins',

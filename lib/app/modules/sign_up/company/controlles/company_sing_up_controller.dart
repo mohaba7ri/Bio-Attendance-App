@@ -107,13 +107,13 @@ class CompanySignUpController extends GetxController {
         print('error');
       }
     } else {
-      CustomToast.errorToast("You need to fill all fields");
+      CustomToast.errorToast("you_need_to_fill_all_fields".tr);
     }
   }
 
   var textDecoration = InputDecoration(
-    labelText: 'Full name',
-    hintText: 'Enter your full name',
+    labelText: 'full_name'.tr,
+    hintText: '',
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
     ),
