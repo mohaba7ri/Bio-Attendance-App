@@ -6,6 +6,6 @@ class MyVacationBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(MyVacationController(), permanent: true);
+    Get.put(MyVacationController(sharedPreferences: Get.find()));
   }
 }

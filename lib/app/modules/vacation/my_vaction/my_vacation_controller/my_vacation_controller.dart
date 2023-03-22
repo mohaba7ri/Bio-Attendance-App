@@ -1,78 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyVacationController extends GetxController {
-  void onInit() {
+  final SharedPreferences sharedPreferences;
+
+  MyVacationController({required this.sharedPreferences});
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    getVacationsNumber();
-    getApprovedNumber();
-    getDeniedNumber();
+
   }
 
-  String requestValue = 'All'.tr;
-  List<String> requestItems = [
-    'All'.tr,
-    'Pending'.tr,
-    'Approved'.tr,
-    'Denied'.tr
-  ];
+  String requestValue = 'All';
+  List<String> requestItems = ['All', 'Pending', 'Approved', 'Denied'];
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> vacationRequests() async* {
-    if (requestValue == 'All'.tr) {
-      yield* firestore.collection('vacationRequest').snapshots();
+    if (requestValue == 'All') {
+      yield* firestore
+          .collection('vacationRequest')
+          .where('userId', isEqualTo: sharedPreferences.getString('userId'))
+          .snapshots();
       update();
     } else {
       yield* firestore
           .collection('vacationRequest')
           .where('status', isEqualTo: requestValue)
+          .where('userId', isEqualTo: sharedPreferences.getString('userId'))
           .snapshots();
       update();
     }
   }
 
-  int? vacationsNumber;
-  int? approvedNumber;
-  int? deniedNumber;
+  String? vacationsNumber = '';
+  String? approvedNumber = '';
+  String? deniedNumber = '';
 
-  Future getVacationsNumber() async {
-    await firestore
-        .collection('vacationRequest')
-        .get()
-        .then((QuerySnapshot query) {
-      vacationsNumber = query.size;
-
-      print('number of Vacations$vacationsNumber');
-      update();
-    });
-  }
-
-  Future getApprovedNumber() async {
-    await firestore
-        .collection('vacationRequest')
-        .where('status', isEqualTo: "Approved")
-        .get()
-        .then((QuerySnapshot query) {
-      approvedNumber = query.size;
-
-      print('number of Approved$approvedNumber');
-      update();
-    });
-  }
-
-  Future getDeniedNumber() async {
-    await firestore
-        .collection('vacationRequest')
-        .where('status', isEqualTo: "Declined")
-        .get()
-        .then((QuerySnapshot query) {
-      deniedNumber = query.size;
-
-      print('number of Declined$deniedNumber');
-      update();
-    });
-  }
 
   changeRequestValue(String value) {
     requestValue = value;
