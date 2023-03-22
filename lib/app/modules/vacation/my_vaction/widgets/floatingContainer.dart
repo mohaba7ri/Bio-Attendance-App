@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
-import '../my_vacation_controller/my_vacation_controller.dart';
+import '../my_vacation_controller/my_vacation_static_controller.dart';
 
 class floatingContainer extends StatelessWidget {
   const floatingContainer({
@@ -18,7 +18,7 @@ class floatingContainer extends StatelessWidget {
       left: MediaQuery.of(context).size.width * 0.03,
       right: MediaQuery.of(context).size.width * 0.03,
       // bottom: MediaQuery.of(context).size.width * 0.99,
-      child: GetBuilder<MyVacationController>(
+      child: GetBuilder<MyVacationStaticController>(
         builder: (controller) => Container(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.27,

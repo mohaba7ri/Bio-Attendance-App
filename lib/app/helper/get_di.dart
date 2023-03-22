@@ -21,6 +21,7 @@ import '../modules/languages/controller/languages_controller.dart';
 import '../modules/profile/controllers/profile_controller.dart';
 import '../modules/reports/allBranchesReports/view/pdf.dart';
 import '../modules/reports/allBranchesReports/view/pdf_branch_reports.dart';
+import '../modules/vacation/my_vaction/my_vacation_controller/my_vacation_static_controller.dart';
 import '../util/app_constants.dart';
 import '../widgets/custom_animation.dart';
 
@@ -40,9 +41,13 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(PageIndexController(), permanent: true);
   Get.put(ProfileController(sharedPreferences: Get.find()));
   Get.put(LoadingConfig());
-  Get.put(HomeController(sharedPreferences: Get.find()),);
+  Get.put(
+    HomeController(sharedPreferences: Get.find()),
+  );
 
   Get.lazyPut(() => BranchSettingController());
+  Get.lazyPut(() => MyVacationStaticController(sharedPreferences: Get.find()),
+      fenix: true);
   Get.lazyPut<CompanySettingController>(() => CompanySettingController(),
       fenix: true);
 

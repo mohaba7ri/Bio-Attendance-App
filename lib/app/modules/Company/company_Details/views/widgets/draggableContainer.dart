@@ -246,7 +246,7 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
 
                                 return Container(
                                     width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height,
+                                    height: 150,
                                     child: ListView(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
@@ -265,24 +265,30 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                                         BorderRadius.circular(
                                                             8)),
                                                 elevation: 4,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.more_time_outlined,
-                                                      size: 60,
-                                                      color: AppColor.primary,
-                                                    ),
-                                                    Text(
-                                                      'Start_Time'.tr,
-                                                      style: robotoMedium,
-                                                    ),
-                                                    Text(
-                                                      "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}",
-                                                      style: robotoMedium,
-                                                    )
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons
+                                                            .more_time_outlined,
+                                                        size: 60,
+                                                        color: AppColor.primary,
+                                                      ),
+                                                      Text(
+                                                        'Start_Time'.tr,
+                                                        style: robotoMedium,
+                                                      ),
+                                                      Text(
+                                                        "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}",
+                                                        style: robotoMedium,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
@@ -294,24 +300,30 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                                         BorderRadius.circular(
                                                             8)),
                                                 elevation: 4,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.av_timer_rounded,
-                                                      size: 60,
-                                                      color: AppColor.primary,
-                                                    ),
-                                                    Text(
-                                                      'End_Time'.tr,
-                                                      style: robotoMedium,
-                                                    ),
-                                                    Text(
-                                                      '6'.tr,
-                                                      style: robotoMedium,
-                                                    )
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons.av_timer_rounded,
+                                                        size: 60,
+                                                        color: AppColor.primary,
+                                                      ),
+                                                      Text(
+                                                        'End_Time'.tr,
+                                                        style: robotoMedium,
+                                                      ),
+                                                      Text(
+                                                        '${DateFormat.jm().format(DateTime.parse(data["endTime"]))}'
+                                                            .tr,
+                                                        style: robotoMedium,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
@@ -323,25 +335,31 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                                         BorderRadius.circular(
                                                             8)),
                                                 elevation: 4,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons
-                                                          .share_arrival_time_outlined,
-                                                      size: 60,
-                                                      color: AppColor.primary,
-                                                    ),
-                                                    Text(
-                                                      'Late_Time'.tr,
-                                                      style: robotoMedium,
-                                                    ),
-                                                    Text(
-                                                      '6'.tr,
-                                                      style: robotoMedium,
-                                                    )
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons
+                                                            .share_arrival_time_outlined,
+                                                        size: 60,
+                                                        color: AppColor.primary,
+                                                      ),
+                                                      Text(
+                                                        'Late_Time'.tr,
+                                                        style: robotoMedium,
+                                                      ),
+                                                      Text(
+                                                        '${DateFormat.jm().format(DateTime.parse(data["lateTime"]))}'
+                                                            .tr,
+                                                        style: robotoMedium,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
@@ -353,24 +371,31 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                                                         BorderRadius.circular(
                                                             8)),
                                                 elevation: 4,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.more_time_outlined,
-                                                      size: 60,
-                                                      color: AppColor.primary,
-                                                    ),
-                                                    Text(
-                                                      'Overly_Time'.tr,
-                                                      style: robotoMedium,
-                                                    ),
-                                                    Text(
-                                                      '6'.tr,
-                                                      style: robotoMedium,
-                                                    )
-                                                  ],
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons
+                                                            .more_time_outlined,
+                                                        size: 60,
+                                                        color: AppColor.primary,
+                                                      ),
+                                                      Text(
+                                                        'Overly_Time'.tr,
+                                                        style: robotoMedium,
+                                                      ),
+                                                      Text(
+                                                        '${DateFormat.jm().format(DateTime.parse(data["overlyTime"]))}'
+                                                            .tr,
+                                                        style: robotoMedium,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(
