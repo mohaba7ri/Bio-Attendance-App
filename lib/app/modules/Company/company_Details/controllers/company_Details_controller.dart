@@ -61,7 +61,7 @@ class CompanyDetailsController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   var firestore = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getCompanySettings() async* {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getBranchSettings() async* {
     yield* firestore
         .collection('branchSettings')
         .where('branchId', isEqualTo: companyInfo['companyId'])
