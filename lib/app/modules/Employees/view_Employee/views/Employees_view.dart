@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
@@ -29,11 +29,43 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(Routes.HOME),
-            icon: Icon(Icons.home),
-            color: AppColor.blackColor,
-          )
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Text('branch'.tr),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: Colors.black12, blurRadius: 5)
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: SizedBox(
+                      //  height: MediaQuery.of(context).size.height * 50,
+                      width: MediaQuery.of(context).size.width * 45 / 100,
+                      child: DropdownButtonHideUnderline(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: DropdownButton2(
+                            hint: Text('Please Select'),
+                            items: controller.branchesList,
+                            value: controller.branchValue,
+                            onChanged: (String? selectedValue) {
+                              controller.changeBranchValue(selectedValue);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
         backgroundColor: Colors.white,
         elevation: 0,
