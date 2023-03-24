@@ -51,7 +51,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child: DropdownButton2(
-                            hint: Text('Please Select'),
+                            hint: Text('All'.tr),
                             items: controller.branchesList,
                             value: controller.branchValue,
                             onChanged: (String? selectedValue) {

@@ -94,7 +94,6 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         title: 'denied_vac'.tr,
                         icon: Image.asset(
                           Images.deny,
-                          color: AppColor.primarySoft,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.DEN_VAC);
