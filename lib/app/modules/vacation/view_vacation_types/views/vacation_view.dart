@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_appbar.dart';
@@ -63,113 +64,126 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                         ? SizedBox()
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: AppColor.whiteColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black12, blurRadius: 5)
-                                ],
-                              ),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 2, bottom: 8),
-                                          child: Text(
-                                              'Vacation_Type'.tr + " : ",
-                                              style: robotoBold),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 2, bottom: 8),
-                                          child: Text(
-                                              date[index]['vacationType'],
-                                              style: robotoBold.copyWith(
-                                                  letterSpacing: 2)),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 4, bottom: 12),
-                                          child: Text(
-                                            'Days'.tr +": " , 
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 4, bottom: 12),
-                                          child: Text(
-                                            date[index]['vacationDays'],
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'poppins',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 8),
-                                      decoration: BoxDecoration(
-                                        color: AppColor.primarySoft,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Row(
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.EDIT_VAC,
+                                    arguments: snapshot.data!.docs[index]);
+                                // Get.dialog(EditVacationTypeView(),
+                                //     arguments: snapshot.data!.docs[index]);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(15, 24, 24, 16),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: AppColor.whiteColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12, blurRadius: 5)
+                                  ],
+                                ),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
                                         children: [
-                                          //  check in
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 6),
-                                                  child: Text(
-                                                    "Status".tr,
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 2, bottom: 8),
+                                            child: Text(
+                                                'Vacation_Type'.tr + " : ",
+                                                style: robotoBold),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 2, bottom: 8),
+                                            child: Text(
+                                                date[index]['vacationType'],
+                                                style: robotoBold.copyWith(
+                                                    letterSpacing: 2)),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 4, bottom: 12),
+                                            child: Text(
+                                              'Days'.tr + ": ",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'poppins',
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 4, bottom: 12),
+                                            child: Text(
+                                              date[index]['vacationDays'],
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'poppins',
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: 2,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 8),
+                                        decoration: BoxDecoration(
+                                          color: AppColor.primarySoft,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            //  check in
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 6),
+                                                    child: Text(
+                                                      "Status".tr,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    date[index]
+                                                        ['vacationStatus'],
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                       color: Colors.white,
                                                     ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  date[index]['vacationStatus'],
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
 
-                                          // check out
-                                        ],
+                                            // check out
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ]),
+                                    ]),
+                              ),
                             ),
                           );
                   },

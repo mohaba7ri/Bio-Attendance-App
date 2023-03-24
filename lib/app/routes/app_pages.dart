@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/vacation/edit_vacation_type/views/edit_vacation_type_view.dart';
 import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -79,6 +80,7 @@ import '../modules/vacation/add_vacation_type/bindings/add_vacation_binding.dart
 import '../modules/vacation/add_vacation_type/views/add_vacation_type_view.dart';
 import '../modules/vacation/denied_vacations/bindings/denied_vacations_binding.dart';
 import '../modules/vacation/denied_vacations/views/denied_vacations_view.dart';
+import '../modules/vacation/edit_vacation_type/bindings/edit_vacation_binding.dart';
 import '../modules/vacation/my_vaction/my_vacation_binding/my_vacation_binding.dart';
 import '../modules/vacation/my_vaction/my_vacation_view/my_vacation_view.dart';
 import '../modules/vacation/on_vacation_employees/bindings/on_vacation_requests_binding.dart';
@@ -298,6 +300,11 @@ GetPage(
         name: _Paths.DEN_VAC,
         page: () => DeniedVacationView(),
         binding: DeniedVacationBinding()),
+
+        GetPage(
+        name: _Paths.EDIT_VAC,
+        page: () => EditVacationTypeView(),
+        binding: EditVacationTypeBinding()),
 
   ];
 }
