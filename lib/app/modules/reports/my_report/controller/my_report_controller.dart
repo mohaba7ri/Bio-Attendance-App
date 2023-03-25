@@ -2,23 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EmpReportsController extends GetxController {
-  dynamic user = Get.arguments;
-
+class MyReportController extends GetxController {
   @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-    user = '';
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await getUserDate();
   }
 
+  final SharedPreferences sharedPreferences;
+  MyReportController({required this.sharedPreferences});
   List<List<dynamic>>? allPrecens;
   final firestore = FirebaseFirestore.instance;
   var startDateController = TextEditingController();
   var endDateController = TextEditingController();
   DateTime end = DateTime.now();
   DateTime? start;
+  String userName = '';
+
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {
     var initialDate = DateTime.now();
@@ -63,37 +66,6 @@ class EmpReportsController extends GetxController {
     }
   }
 
-  // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-  //   String uid = user['userId'];
-  //   if (startDateController == null) {
-  //     QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //         .collection("user")
-  //         .doc(uid)
-  //         .collection("presence")
-  //         .where("date", isLessThan: end.toIso8601String())
-  //         .orderBy(
-  //           "date",
-  //           descending: true,
-  //         )
-  //         .get();
-  //     return query;
-  //   } else {
-  //     QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //         .collection("user")
-  //         .doc(uid)
-  //         .collection("presence")
-  //         .where("date", isGreaterThan: start!.toIso8601String())
-  //         .where("date",
-  //             isLessThan: end.add(Duration(days: 1)).toIso8601String())
-  //         .orderBy(
-  //           "date",
-  //           descending: true,
-  //         )
-  //         .get();
-  //     return query;
-  //   }
-  // }
-
   Future<List<List<dynamic>>> getData() async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
     List<List<dynamic>> data = [];
@@ -125,7 +97,7 @@ class EmpReportsController extends GetxController {
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-    String uid = user['userId'];
+    String? uid = sharedPreferences.getString('userId');
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
       if (startDateController == null) {
@@ -160,5 +132,14 @@ class EmpReportsController extends GetxController {
       print('error $e');
     }
     return query!;
+  }
+
+  Future getUserDate() async {
+    String? userId = sharedPreferences.getString('userId');
+    await firestore.collection('user').doc(userId).get().then((data) {
+      userName = data['name'];
+      print('the user Name$userName');
+    });
+    update();
   }
 }

@@ -1,6 +1,6 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
@@ -60,6 +60,59 @@ class AddBranchView extends GetView<AddBranchController> {
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                              GetBuilder<AddBranchController>(
+                                builder: (_controller) => Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4),
+                                        child: Text('admin_branch'.tr),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 5)
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: SizedBox(
+                                            //  height: MediaQuery.of(context).size.height * 50,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                60 /
+                                                100,
+                                            child: DropdownButtonHideUnderline(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15),
+                                                child: DropdownButton2(
+                                                  hint: Text('Please Select'),
+                                                  items: _controller.userList,
+                                                  value: _controller.userName,
+                                                  onChanged:
+                                                      (String? selectedValue) {
+                                                    _controller.changeUserValue(
+                                                        selectedValue);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               Obx(
                                 () => Column(
                                   children: [

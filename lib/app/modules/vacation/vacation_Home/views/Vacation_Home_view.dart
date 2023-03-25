@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../controllers/page_index_controller.dart';
 import '../../../../routes/app_pages.dart';
@@ -12,8 +13,11 @@ import '../controllers/Vacation_Home_controller.dart';
 
 class VacationHomeView extends GetView<VacationHomeController> {
   final pageIndexController = Get.find<PageIndexController>();
+  final SharedPreferences sharedPreferences;
+  VacationHomeView({required this.sharedPreferences});
   @override
   Widget build(BuildContext context) {
+    String? role = sharedPreferences.getString('role');
     return Scaffold(
       backgroundColor: AppColor.primary,
       body: CustomeWidget(
@@ -36,15 +40,18 @@ class VacationHomeView extends GetView<VacationHomeController> {
                     padding: EdgeInsets.symmetric(vertical: 36),
                     children: [
                       SizedBox(height: 16),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'Vacation_Types'.tr,
-                        icon: Image.asset(
-                          Images.vacationTypes,
-                          color: AppColor.primarySoft,
-                        ),
-                        onTap: () => Get.toNamed(Routes.VIEW_Vacation_TYPES),
-                      ),
+                      role == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'Vacation_Types'.tr,
+                              icon: Image.asset(
+                                Images.vacationTypes,
+                                color: AppColor.primarySoft,
+                              ),
+                              onTap: () =>
+                                  Get.toNamed(Routes.VIEW_Vacation_TYPES),
+                            ),
                       CustomMenuTile(
                         isDanger: true,
                         title: 'Add_Vacation_Request'.tr,
@@ -94,7 +101,6 @@ class VacationHomeView extends GetView<VacationHomeController> {
                         title: 'denied_vac'.tr,
                         icon: Image.asset(
                           Images.deny,
-                          color: AppColor.primarySoft,
                         ),
                         onTap: () {
                           Get.toNamed(Routes.DEN_VAC);

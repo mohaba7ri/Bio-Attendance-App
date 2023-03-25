@@ -9,10 +9,10 @@ import '../../../../util/styles.dart';
 import '../../../languages/controller/languages_controller.dart';
 import '../controllers/list_branch_controller.dart';
 
-class listBranchView extends GetView<listBranchController> {
+class listBranchView extends GetView<ListBranchController> {
   @override
   Widget build(BuildContext context) {
-    listBranchController _listBranchController = listBranchController();
+    ListBranchController _listBranchController = ListBranchController(sharedPreferences: Get.find());
     return Scaffold(
       backgroundColor: AppColor.greyColor,
       appBar: AppBar(

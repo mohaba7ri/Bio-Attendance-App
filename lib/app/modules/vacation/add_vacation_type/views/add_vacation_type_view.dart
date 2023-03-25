@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/custom_input.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 import '../controllers/add_vacation_type_controller.dart';
 
 class AddVacationTypeView extends GetView<AddVacationTypeController> {
@@ -132,6 +133,9 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                 ElevatedButton(
                   onPressed: () {
                     controller.stroreVacationType();
+                    Get.back();
+                    CustomToast.successToast(
+                        'Vacation type has been added successfully ');
                   },
                   child: Text('Save'.tr),
                   style: ButtonStyle(

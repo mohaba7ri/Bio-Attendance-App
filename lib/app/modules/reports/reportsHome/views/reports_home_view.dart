@@ -95,6 +95,16 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                               arguments: userData);
                         },
                       ),
+                      CustomMenuTile(
+                        isDanger: true,
+                        title: 'generate_report'.tr,
+                        icon: Image.asset(
+                          Images.emp_one,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.MY_REPORT, arguments: userData);
+                        },
+                      ),
                       Container(
                         height: 1,
                         color: AppColor.primaryExtraSoft,

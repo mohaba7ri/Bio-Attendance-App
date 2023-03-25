@@ -87,7 +87,7 @@ class HomeController extends GetxController {
   Future getBranch() async {
     await firestore
         .collection('user')
-        .doc(sharedPreferences.getString('userId')!)
+        .doc(sharedPreferences.getString('userId'))
         .get()
         .then((data) {
       branchId.value = data['branchId'];

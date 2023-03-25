@@ -136,6 +136,7 @@ class LoginView extends GetView<LoginController> {
                                       onPressed: () async {
                                         if (controller.isLoading.isFalse) {
                                           await controller.login();
+
                                           // await controller.getUserToken(FirebaseAuth
                                           //     .instance.currentUser!.uid);
                                         }

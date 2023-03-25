@@ -26,7 +26,7 @@ class LoginController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   RxBool isLoading = false.obs;
-    RxBool isLoading2 = false.obs;
+  RxBool isLoading2 = false.obs;
 
   RxBool obsecureText = true.obs;
   TextEditingController emailC = TextEditingController();
@@ -84,17 +84,18 @@ class LoginController extends GetxController {
                 try {
                   await credential.user!.sendEmailVerification();
                   Get.back();
-                  CustomToast.successToast(
-                      "we_sent_email".tr);
+                  CustomToast.successToast("we_sent_email".tr);
                   isLoading.value = false;
                 } catch (e) {
                   CustomToast.errorToast(
-                      "Cant_send_email_verification_Error_because".tr +" ${e.toString()}");
+                      "Cant_send_email_verification_Error_because".tr +
+                          " ${e.toString()}");
                 }
               },
             );
           }
           await updateUser();
+          await getUser();
           update();
         }
         isLoading.value = false;
@@ -106,15 +107,23 @@ class LoginController extends GetxController {
           CustomToast.errorToast("Wrong_Password".tr);
         }
       } catch (e) {
-        CustomToast.errorToast("Error_because".tr +"${e.toString()}");
+        CustomToast.errorToast("Error_because".tr + "${e.toString()}");
       }
     } else {
       CustomToast.errorToast("You_need_to_fill_email_and_password_form".tr);
     }
   }
 
-
-
-
-
+  Future getUser() async {
+    String? role;
+    await firestore
+        .collection('user')
+        .doc(sharedPreferences.getString('userId'))
+        .get()
+        .then((data) {
+      role = data['role'];
+      sharedPreferences.setString('role', role!);
+      print('the role is :${sharedPreferences.getString('role')}');
+    });
+  }
 }

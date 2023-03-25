@@ -12,10 +12,11 @@ import 'package:uuid/uuid.dart';
 
 class AddBranchController extends GetxController {
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
     determineBranchPosition();
+    await getUser();
   }
 
   final presenceController = Get.find<PresenceController>();
@@ -26,8 +27,12 @@ class AddBranchController extends GetxController {
   final AddressC = TextEditingController().obs;
   final latitudeC = TextEditingController().obs;
   final longitudeC = TextEditingController().obs;
+  final userList = <DropdownMenuItem<String>>[].obs;
+  String userId = '';
+  String? userName;
 
-  CollectionReference branch = FirebaseFirestore.instance.collection('branch');
+  final fireStore = FirebaseFirestore.instance;
+
   launchOfficeOnMap() {
     try {
       MapsLauncher.launchCoordinates(
@@ -37,6 +42,52 @@ class AddBranchController extends GetxController {
     } catch (e) {
       CustomToast.errorToast('Error : ${e}');
     }
+  }
+
+  Future getUser() async {
+    try {
+      await fireStore
+          .collection('user')
+          .where('role', isEqualTo: 'Admin')
+          .get()
+          .then((query) {
+        query.docs.forEach((query) {
+          Map<String, dynamic> data = query.data();
+          userList.add(DropdownMenuItem(
+            child: Text(data['name']),
+            value: data['name'],
+          ));
+          userId = data['userId'];
+          update();
+        });
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future updateUser(branchId) async {
+    await fireStore
+        .collection('user')
+        .doc(userId)
+        .update({'branchId': branchId});
+  }
+
+  changeUserValue(value) async {
+    userName = value;
+    update();
+    await fireStore
+        .collection('user')
+        .where('name', isEqualTo: userName)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        userId = data['userId'];
+        print('the userId$userId');
+        update();
+      });
+    });
   }
 
   determineBranchPosition() async {
@@ -69,16 +120,19 @@ class AddBranchController extends GetxController {
       isLoading.value = true;
       try {
         String branchId = const Uuid().v4();
-        await branch.doc(branchId).set({
+        await fireStore.collection('branch').doc(branchId).set({
           'name': nameC.value.text,
           'phone': phoneC.value.text,
           'address': AddressC.value.text,
+          'branchAdminId': userId,
+          'branchAdmin': userName,
           'branchId': branchId,
           'position': {
             ' latitude': latitudeC.value.text,
             'longitude': longitudeC.value.text,
           },
         });
+        await updateUser(branchId);
         CustomToast.successToast("Added branch successfully");
         Get.toNamed(Routes.LIST_BRANCH);
       } catch (e) {

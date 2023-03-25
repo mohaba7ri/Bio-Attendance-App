@@ -131,7 +131,7 @@ class AttendanceView extends GetView<AttendanceController> {
                               height: 120,
                             ),
                             Text(
-                              "total_attendance".tr,
+                              "total_requests".tr,
                               style: robotoMedium,
                             )
                           ],

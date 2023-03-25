@@ -18,7 +18,10 @@ class BranchHomeView extends GetView<BranchHomeController> {
       backgroundColor: AppColor.primary,
       body: CustomeWidget(
         backButton: true,
-        backRout: () => Get.toNamed(Routes.HOME),
+        backRout: () {
+          Get.toNamed(Routes.HOME);
+          Get.delete<BranchHomeController>();
+        },
         mainWidget: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: controller.streamUser(),
           builder: (context, snapshot) {
@@ -53,17 +56,19 @@ class BranchHomeView extends GetView<BranchHomeController> {
                       ),
                       // // section 2 - menu
 
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'Add_Branch'.tr,
-                        icon: Image.asset(
-                          Images.addBranch,
-                          color: AppColor.primarySoft,
-                          width: 20,
-                          height: 20,
-                        ),
-                        onTap: () => Get.toNamed(Routes.ADD_BRANCH),
-                      ),
+                      controller.role == 'Admin'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'Add_Branch'.tr,
+                              icon: Image.asset(
+                                Images.addBranch,
+                                color: AppColor.primarySoft,
+                                width: 20,
+                                height: 20,
+                              ),
+                              onTap: () => Get.toNamed(Routes.ADD_BRANCH),
+                            ),
                       CustomMenuTile(
                         isDanger: true,
                         title: 'View_Branches'.tr,

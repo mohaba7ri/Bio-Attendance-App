@@ -75,7 +75,8 @@ class AddEmployeeView extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
-                                child: Row(
+                                child:
+                                 Row(
                                   children: [
                                     Text('Role'.tr),
                                     Padding(
@@ -184,6 +185,7 @@ class AddEmployeeView extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                         
                             ],
                           ),
                           CustomInput(

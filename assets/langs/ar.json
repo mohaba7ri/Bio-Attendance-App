@@ -228,7 +228,8 @@
 "password_doesnt_match":" حقل تأكيد كلمة المرور غير مشابه لحقل كلمة المرور",
 "update_password_done":"تم تحديث كلمة المرور بنجاح",
 "password_too_weak_you_need_at_least_six_charachter":"كلمة المرور ضعيفة، يجب ان تحتوي على الاقل 6 احرف",
-"denied_vac":"الاجازات المرفوضة"
+"denied_vac":"الاجازات المرفوضة",
+"edit_vacation_type":"تعديل نوع الاجازة"
 
 
 
