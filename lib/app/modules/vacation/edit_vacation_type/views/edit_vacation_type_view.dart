@@ -3,148 +3,153 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/custom_input.dart';
+import '../../../../widgets/toast/custom_toast.dart';
 import '../controllers/edit_vacation_type_controller.dart';
 
 class EditVacationTypeView extends GetView<EditVacationTypeController> {
   @override
-  final presenceController = Get.put(EditVacationTypeController());
   Widget build(BuildContext context) {
-    //  AddVacationTypeController controller = AddVacationTypeController();
     // TODO: implement build
 
-    return Dialog(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-            child: Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Column(mainAxisSize: MainAxisSize.max, children: [
-            SizedBox(
-              height: 5,
-            ),
-            Center(
-              child: Container(
-                width: 38,
-                child: Divider(
-                  thickness: .6,
-                  color: Color(0xff008BC5),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
+    return Obx(
+      () => Dialog(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+              child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Column(mainAxisSize: MainAxisSize.max, children: [
+              SizedBox(
                 height: 5,
-                width: 23,
-                child: Divider(
-                  thickness: .6,
-                  color: Color(0xff008BC5),
+              ),
+              Center(
+                child: Container(
+                  width: 38,
+                  child: Divider(
+                    thickness: .6,
+                    color: Color(0xff008BC5),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "edit_vacation_type".tr,
-              style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff008BC5)),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: CustomInput(
-                  controller: controller.vacationType.value,
-                  label: 'vacation_type'.tr,
-                  hint: 'sick'.tr),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: CustomInput(
-                  controller: controller.vacationDays.value,
-                  label: 'vacation_days'.tr,
-                  hint: '1'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Obx(() => Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('status'.tr),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.25,
-                            child: DropdownButton(
-                                alignment: Alignment.center,
-                                value: controller.vacationStatus.value,
-                                items: controller.vacationStatusItems
-                                    .map((String items) {
-                                  return DropdownMenuItem(
-                                    alignment: AlignmentDirectional.center,
-                                    child: Text(items),
-                                    value: items,
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) {
-                                  controller.changeStatusValue(value!);
-                                }),
-                          ),
-                        ],
+              Center(
+                child: Container(
+                  height: 5,
+                  width: 23,
+                  child: Divider(
+                    thickness: .6,
+                    color: Color(0xff008BC5),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "edit_vacation_type".tr,
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff008BC5)),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: CustomInput(
+                    controller: controller.vacationType.value,
+                    label: 'vacation_type'.tr,
+                    hint: 'sick'.tr),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: CustomInput(
+                    controller: controller.vacationDays.value,
+                    label: 'vacation_days'.tr,
+                    hint: '1'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Obx(() => Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('status'.tr),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              child: DropdownButton(
+                                  alignment: Alignment.center,
+                                  value: controller.vacationStatus.value,
+                                  items: controller.vacationStatusItems
+                                      .map((String items) {
+                                    return DropdownMenuItem(
+                                      alignment: AlignmentDirectional.center,
+                                      child: Text(items),
+                                      value: items,
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    controller.changeStatusValue(value!);
+                                  }),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: Text('Cancel'.tr),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.red.shade400)),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    controller.stroreVacationType();
-                  },
-                  child: Text('Save'.tr),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll<Color>(
-                          Colors.teal.shade400)),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-          ]),
-        )),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                    ],
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.delete<EditVacationTypeController>();
+                      Get.back();
+                    },
+                    child: Text('Cancel'.tr),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(
+                            Colors.red.shade400)),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.stroreVacationType();
+                      Get.back();
+                      CustomToast.successToast(
+                          'Vacation type has been updated ');
+                    },
+                    child: Text('update'.tr),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(
+                            Colors.teal.shade400)),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+            ]),
+          )),
+        ),
       ),
     );
 

@@ -6,7 +6,7 @@ class EditVacationTypeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<EditVacationTypeController>(
-      () => EditVacationTypeController(),
+      () => EditVacationTypeController(vacation: Get.find()),
     );
     //if we want to save the data use this
   }

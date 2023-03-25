@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_appbar.dart';
 import '../../add_vacation_type/views/add_vacation_type_view.dart';
+import '../../edit_vacation_type/controllers/edit_vacation_type_controller.dart';
+import '../../edit_vacation_type/views/edit_vacation_type_view.dart';
 import '../controllers/vacation_controller.dart';
 
 final conttroler = Get.put(ListVacationTypeController(), permanent: true);
@@ -66,10 +67,14 @@ class ListVacationTypeView extends GetView<ListVacationTypeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                               onTap: () {
-                                Get.toNamed(Routes.EDIT_VAC,
-                                    arguments: snapshot.data!.docs[index]);
-                                // Get.dialog(EditVacationTypeView(),
+                                // Get.toNamed(Routes.EDIT_VAC,
                                 //     arguments: snapshot.data!.docs[index]);
+                                Get.lazyPut(
+                                  () => EditVacationTypeController(
+                                      vacation: snapshot.data!.docs[index]),
+                                );
+                                Get.dialog(EditVacationTypeView(),
+                                    arguments: snapshot.data!.docs[index]);
                               },
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(15, 24, 24, 16),

@@ -11,7 +11,8 @@ class EditVacationTypeController extends GetxController {
     await vacationInfo();
   }
 
-  dynamic vacaiton = Get.arguments;
+  final vacation;
+  EditVacationTypeController({required this.vacation});
 
   final vacationType = TextEditingController().obs;
   final vacationDays = TextEditingController().obs;
@@ -36,19 +37,20 @@ class EditVacationTypeController extends GetxController {
 
   void stroreVacationType() {
     if (vacationType.value.text.isNotEmpty) {
-      fireStore.doc(vacaiton['vacationId']).update({
+      fireStore.doc(vacation['vacationId']).update({
         'vacationType': vacationType.value.text,
         'vacationStatus': vacationStatus.value,
         'vacationDays': vacationDays.value.text,
       }).whenComplete(() {
-        vacationType.value.text = '';
-        vacationDays.value.text = '';
+
+        // Get.back();
       });
     }
   }
 
   Future vacationInfo() async {
-    //vacationType.value = vacaiton['vacationType'];
-    print(vacaiton['vacationType']);
+    vacationType.value.text = vacation['vacationType'];
+    vacationDays.value.text = vacation['vacationDays'];
+    print(vacation['vacationType']);
   }
 }
