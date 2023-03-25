@@ -8,11 +8,11 @@ import 'package:pdf/widgets.dart';
 
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
-import '../controller/emp_reports_controller.dart';
+import '../controller/my_report_controller.dart';
 
-EmpReportsController employeeReport = EmpReportsController();
+MyReportController myReport = MyReportController(sharedPreferences: Get.find());
 
-class PdfEmpReport extends GetxController {
+class PdfMyReport extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
@@ -23,7 +23,7 @@ class PdfEmpReport extends GetxController {
   final start;
   final allPrecens;
   final end;
-  PdfEmpReport(
+  PdfMyReport(
       {required this.start, required this.allPrecens, required this.end});
   Future<File> generate() async {
     final pdf = Document();
@@ -42,7 +42,7 @@ class PdfEmpReport extends GetxController {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${myReport.userName + 'Report'}.pdf', pdf: pdf);
   }
 
   static Widget buildHeader() => Column(
@@ -88,7 +88,7 @@ class PdfEmpReport extends GetxController {
   static Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${employeeReport.user['name']}',
+          Text('Employee Name: ${myReport.userName}',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Text('Branch Name: Tech Now'),
         ],
@@ -136,7 +136,7 @@ class PdfEmpReport extends GetxController {
       'Date',
       'Check In ',
       'Check Out',
-      'Timing',
+      'In Area',
       'Status',
       'Hours Work',
     ];

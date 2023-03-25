@@ -63,6 +63,8 @@ import '../modules/reports/empReports/binding/emp_reports_binding.dart';
 import '../modules/reports/empReports/view/emp_reports_view.dart';
 import '../modules/reports/list_Branch_Rep/bindings/list_branchRep_binding.dart';
 import '../modules/reports/list_Branch_Rep/views/list_branchRep_view.dart';
+import '../modules/reports/my_report/binding/my_report_binding.dart';
+import '../modules/reports/my_report/view/my_report_view.dart';
 import '../modules/reports/reportsHome/bindings/reports_home_binding.dart';
 import '../modules/reports/reportsHome/views/reports_home_view.dart';
 
@@ -209,7 +211,9 @@ class AppPages {
         binding: EmployeeHomeBinding()),
     GetPage(
         name: _Paths.VACATION_HOME,
-        page: () => VacationHomeView(),
+        page: () => VacationHomeView(
+              sharedPreferences: Get.find(),
+            ),
         binding: VacationHomeBinding()),
     GetPage(
         name: _Paths.VIEW_Vacation_TYPES,
@@ -276,28 +280,29 @@ class AppPages {
         name: _Paths.LIST_EMPLOYEES_REP,
         page: () => ListEmployeeRepView(),
         binding: ListEmployeeRepBinding()),
-           GetPage(
+    GetPage(
         name: _Paths.ALL_EMPS_REP,
         page: () => AllEmpsReportsView(),
         binding: AllEmpsReportsBinding()),
-
- GetPage(
+    GetPage(
         name: _Paths.ALL_BRANCHES_REP,
         page: () => AllBranchesReportsView(),
         binding: AllBranchesReportsBinding()),
-         GetPage(
+    GetPage(
         name: _Paths.LIST_BRANCHES_REP,
         page: () => listBranchRepView(),
         binding: listBranchRepBinding()),
-             GetPage(
+    GetPage(
         name: _Paths.BRANCH_REP,
         page: () => BranchReportsView(),
         binding: BranchReportsBinding()),
-        
-GetPage(
+    GetPage(
         name: _Paths.DEN_VAC,
         page: () => DeniedVacationView(),
         binding: DeniedVacationBinding()),
-
+            GetPage(
+        name: _Paths.MY_REPORT,
+        page: () => MyReportView(),
+        binding: MyReportBinding()),
   ];
 }

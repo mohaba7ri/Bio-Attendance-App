@@ -76,7 +76,7 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                           onTap: () => controller.changePage(2),
                           child: IconButton(
                               onPressed: () {
-                                Get.bottomSheet(ManagementScreen(),
+                                Get.bottomSheet(ManagementScreen(sharedPreferences: Get.find(),),
                                     backgroundColor: Colors.transparent);
                               },
                               icon: Icon(Icons.menu))),

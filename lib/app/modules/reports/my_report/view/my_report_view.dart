@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/reports/my_report/view/pdf_my_report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,13 +6,12 @@ import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
-import '../../branchReports/view/pdf_branch_reports.dart';
-import '../controller/emp_reports_controller.dart';
+import '../controller/my_report_controller.dart';
 
-class EmpReportsView extends GetView<EmpReportsController> {
+class MyReportView extends GetView<MyReportController> {
+  // TODO: implement build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: GetBuilder<EmpReportsController>(
+      body: GetBuilder<MyReportController>(
         builder: (_controller) => Container(
           color: AppColor.greyShade200,
           child: Padding(
@@ -68,7 +68,7 @@ class EmpReportsView extends GetView<EmpReportsController> {
                             padding: const EdgeInsets.all(0.8),
                             child: SizedBox(
                               child: Text(
-                                controller.user['name'],
+                                controller.userName,
                                 style: robotoHuge,
                               ),
                             ),
@@ -170,15 +170,13 @@ class EmpReportsView extends GetView<EmpReportsController> {
                                 await controller.getAllPresence();
                                 await controller.getData();
 
-                                final pdfEmpReport = PdfEmpReport(
+                                final pdfEmpReport = PdfMyReport(
                                     start: controller.start,
                                     allPrecens: controller.allPrecens,
                                     end: controller.end);
                                 final date =
                                     DateConverter.estimatedDate(DateTime.now());
                                 final dueDate = DateTime.now();
-
-                               
 
                                 final pdfFile = await pdfEmpReport.generate();
 
@@ -200,5 +198,4 @@ class EmpReportsView extends GetView<EmpReportsController> {
       ),
     );
   }
-
 }

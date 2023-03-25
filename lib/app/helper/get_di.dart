@@ -1,6 +1,7 @@
 // TODO Implement this library.
 import 'dart:convert';
 
+import 'package:Biometric/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -37,7 +38,11 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => ApiClient(sharedPreferences: Get.find()));
   Get.lazyPut(() => LanguagesController(
       sharedPreferences: Get.find(), apiClient: Get.find()));
-  Get.put(PresenceController(sharedPreferences: Get.find()), permanent: true);
+  Get.lazyPut(() =>
+      LoginController(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.put(
+    PresenceController(sharedPreferences: Get.find()),
+  );
   Get.put(PageIndexController(), permanent: true);
   Get.put(ProfileController(sharedPreferences: Get.find()));
   Get.put(LoadingConfig());

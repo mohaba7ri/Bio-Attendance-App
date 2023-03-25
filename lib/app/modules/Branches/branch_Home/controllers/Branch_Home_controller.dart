@@ -7,10 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../routes/app_pages.dart';
 
 class BranchHomeController extends GetxController {
+  BranchHomeController({required this.sharedPreferences});
   bool isLougout = false;
+  String? role;
+
   FirebaseAuth auth = FirebaseAuth.instance;
   final SharedPreferences sharedPreferences;
-  BranchHomeController({required this.sharedPreferences});
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
@@ -28,5 +31,12 @@ class BranchHomeController extends GetxController {
       await auth.signOut();
       Get.offAllNamed(Routes.LOGIN);
     }
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    role = sharedPreferences.getString('role');
   }
 }

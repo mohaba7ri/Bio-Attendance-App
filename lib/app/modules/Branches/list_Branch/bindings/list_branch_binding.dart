@@ -5,8 +5,8 @@ import '../controllers/list_branch_controller.dart';
 class listBranchBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<listBranchController>(
-      () => listBranchController(),
+    Get.lazyPut<ListBranchController>(
+      () => ListBranchController(sharedPreferences: Get.find()),
     );
   }
 }
