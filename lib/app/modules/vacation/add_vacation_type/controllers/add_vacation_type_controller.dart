@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
+import 'package:uuid/uuid.dart';
 
 class AddVacationTypeController extends GetxController {
   final vacationType = TextEditingController().obs;
@@ -25,8 +26,10 @@ class AddVacationTypeController extends GetxController {
   }
 
   void stroreVacationType() {
+    String docId = Uuid().v4();
     if (vacationType.value.text.isNotEmpty) {
-      vacationStore.doc().set({
+      vacationStore.doc(docId).set({
+        'vacationId': docId,
         'vacationType': vacationType.value.text,
         'vacationStatus': vacationStatus.value,
         'vacationDays': vacationDays.value.text,

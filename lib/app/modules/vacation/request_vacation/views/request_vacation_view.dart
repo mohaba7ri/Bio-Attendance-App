@@ -68,6 +68,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                           .changeLeaveType(selectedValue);
                                       _controller.leaveTypeValue =
                                           selectedValue;
+                                      _controller.changeVacationValue(selectedValue);
                                       print(_controller.leaveTypeValue);
                                     },
                                   ),
@@ -226,10 +227,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               ),
                             ],
                           ),
-                 
-                        
                           Row(
-                            
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               controller.isloading == true
@@ -237,10 +235,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                   : Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.6,
-                                        
                                       child: ElevatedButton(
-                                        
-                                        
                                         onPressed: controller.isloading == true
                                             ? null
                                             : () {

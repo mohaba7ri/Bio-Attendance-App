@@ -33,6 +33,7 @@ class VacationRequestController extends GetxController {
   // FilePickerResult? vacationFile;
 
   String? leaveTypeValue;
+  int? vacationDays;
 
   final vacationTypeList = <DropdownMenuItem<String>>[];
 
@@ -132,8 +133,11 @@ class VacationRequestController extends GetxController {
   }
 
   void submit() async {
+    int? selectedDays = int.parse(daysController.value.text);
     if (leaveTypeValue == null) {
       CustomToast.errorToast('please_select_leave_type'.tr);
+    } else if (selectedDays > vacationDays!) {
+      CustomToast.errorToast('مهند اكتب رساله تمام'.tr);
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)
@@ -144,7 +148,22 @@ class VacationRequestController extends GetxController {
     }
   }
 
-
+  changeVacationValue(value) async {
+    leaveTypeValue = value;
+    update();
+    await firebase
+        .collection('vacationType')
+        .where('vacationType', isEqualTo: leaveTypeValue)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        vacationDays = int.parse(data['vacationDays']);
+        print('the vacation Days$vacationDays');
+        update();
+      });
+    });
+  }
 
   Future storeVacationData() async {
     String uid = sharedPreferences.getString('userId')!;
