@@ -74,45 +74,38 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           Get.toNamed(Routes.MY_VACATION);
                         },
                       ),
-                      role == 'Employee'
-                          ? SizedBox()
-                          : CustomMenuTile(
-                              isDanger: true,
-                              title: 'View_Vacation_Requests'.tr,
-                              icon: Image.asset(
-                                Images.viewVacations,
-                                color: AppColor.primarySoft,
-                              ),
-                              onTap: () {
-                                Get.toNamed(Routes.LIST_VIEW_REQUESTS);
-                              },
-                            ),
-                      role == 'Employee'
-                          ? SizedBox()
-                          : CustomMenuTile(
-                              isDanger: true,
-                              title: 'Employees_on_Vacation'.tr,
-                              icon: Image.asset(
-                                Images.empOnVac,
-                                color: AppColor.primarySoft,
-                              ),
-                              onTap: () {
-                                Get.toNamed(Routes.ON_VACATION);
-                              },
-                            ),
-                      role == 'Employee'
-                          ? SizedBox()
-                          : CustomMenuTile(
-                              isDanger: true,
-                              title: 'denied_vac'.tr,
-                              icon: Image.asset(
-                                Images.deny,
-                                color: AppColor.primarySoft,
-                              ),
-                              onTap: () {
-                                Get.toNamed(Routes.DEN_VAC);
-                              },
-                            ),
+                      CustomMenuTile(
+                        isDanger: true,
+                        title: 'View_Vacation_Requests'.tr,
+                        icon: Image.asset(
+                          Images.viewVacations,
+                          color: AppColor.primarySoft,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.LIST_VIEW_REQUESTS);
+                        },
+                      ),
+                      CustomMenuTile(
+                        isDanger: true,
+                        title: 'Employees_on_Vacation'.tr,
+                        icon: Image.asset(
+                          Images.empOnVac,
+                          color: AppColor.primarySoft,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.ON_VACATION);
+                        },
+                      ),
+                      CustomMenuTile(
+                        isDanger: true,
+                        title: 'denied_vac'.tr,
+                        icon: Image.asset(
+                          Images.deny,
+                        ),
+                        onTap: () {
+                          Get.toNamed(Routes.DEN_VAC);
+                        },
+                      ),
                       Container(
                         height: 1,
                         color: AppColor.primaryExtraSoft,

@@ -44,16 +44,25 @@ class AttendanceController extends GetxController {
   // A function to calculate the user's salary based on the total hours worked
   double get salary => totalHours.value * hourlyRate;
 
-  Future getUsers() async {
-    await firestore
-        .collection('user')
-        .where("present", isEqualTo: true)
-        .get()
-        .then((QuerySnapshot query) {
-      PresentNumber = query.size;
+  // Future getUsers() async {
+  //   await firestore
+  //       .collection('user')
+  //       .where("present", isEqualTo: true)
+  //       .get()
+  //       .then((QuerySnapshot query) {
+  //     PresentNumber = query.size;
 
-      print('number of presence$PresentNumber');
-      update();
-    });
+  //     print('number of presence$PresentNumber');
+  //     update();
+  //   });
+  // }
+
+  Future<void> getUsers() async {
+    final querySnapshot = await firestore.collection('user').get();
+
+    PresentNumber = querySnapshot.size;
+
+    print('number of presence$PresentNumber');
+    update();
   }
 }

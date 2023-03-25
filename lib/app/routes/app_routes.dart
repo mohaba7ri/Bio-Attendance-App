@@ -53,7 +53,6 @@ abstract class Routes {
   static const LIST_BRANCHES_REP = _Paths.LIST_BRANCHES_REP;
   static const BRANCH_REP = _Paths.BRANCH_REP;
   static const DEN_VAC = _Paths.DEN_VAC;
-  static const MY_REPORT = _Paths.MY_REPORT;
 }
 
 abstract class _Paths {
@@ -107,5 +106,4 @@ abstract class _Paths {
   static const LIST_BRANCHES_REP = '/LIST_BRANCHES_REP';
   static const BRANCH_REP = '/BRANCH_REP';
   static const DEN_VAC = '/DEN_VAC';
-  static const MY_REPORT = '/MY_REPORT';
 }

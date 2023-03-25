@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class ListEmployeeController extends GetxController {
-  //dynamic EmpList;
-  FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final branchesList = <DropdownMenuItem<String>>[].obs;
-  String? branchValue;
-
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
 
     await getBranches();
   }
+
+  //dynamic EmpList;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final branchesList = <DropdownMenuItem<String>>[].obs;
+  String? branchValue;
 
   Future getBranches() async {
     final branches = FirebaseFirestore.instance.collection('branch');
