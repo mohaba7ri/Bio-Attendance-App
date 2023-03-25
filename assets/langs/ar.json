@@ -71,7 +71,6 @@
   "View_Vacation_Requests":"عرض طلبات الاجازة",
   "Employees_on_Vacation":"الاجازات المقبولة",
   "Request_Vacation":"طلب اجازة",
-  "end_date":"نوع الاجازة",
   "start_date":"من تاريخ ",
   "End_date":"الى تاريخ ",
   "Days":"عدد الايام",
@@ -229,7 +228,10 @@
 "update_password_done":"تم تحديث كلمة المرور بنجاح",
 "password_too_weak_you_need_at_least_six_charachter":"كلمة المرور ضعيفة، يجب ان تحتوي على الاقل 6 احرف",
 "denied_vac":"الاجازات المرفوضة",
-"edit_vacation_type":"تعديل نوع الاجازة"
+"edit_vacation_type":"تعديل نوع الاجازة",
+"Vacation_type_has_been_added_successfully":"لقد تم اضافة نوع الاجازة بنجاح",
+"you_exceeded_the_allowed_days_number":"لقد تجاوزت عدد الايام المسموح بها"
+
 
 
 

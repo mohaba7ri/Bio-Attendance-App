@@ -137,7 +137,7 @@ class VacationRequestController extends GetxController {
     if (leaveTypeValue == null) {
       CustomToast.errorToast('please_select_leave_type'.tr);
     } else if (selectedDays > vacationDays!) {
-      CustomToast.errorToast('مهند اكتب رساله تمام'.tr);
+      CustomToast.errorToast('you_exceeded_the_allowed_days_number'.tr);
     } else if (formKey.currentState!.validate()) {
       if (filePath != null) {
         await storeFile(filePath!, fileName!)

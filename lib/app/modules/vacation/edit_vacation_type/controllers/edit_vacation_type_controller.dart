@@ -42,8 +42,7 @@ class EditVacationTypeController extends GetxController {
         'vacationStatus': vacationStatus.value,
         'vacationDays': vacationDays.value.text,
       }).whenComplete(() {
-
-        // Get.back();
+        Get.back();
       });
     }
   }

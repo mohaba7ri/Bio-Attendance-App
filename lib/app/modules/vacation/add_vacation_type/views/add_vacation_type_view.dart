@@ -135,7 +135,7 @@ class AddVacationTypeView extends GetView<AddVacationTypeController> {
                     controller.stroreVacationType();
                     Get.back();
                     CustomToast.successToast(
-                        'Vacation type has been added successfully ');
+                        'Vacation_type_has_been_added_successfully'.tr);
                   },
                   child: Text('Save'.tr),
                   style: ButtonStyle(
