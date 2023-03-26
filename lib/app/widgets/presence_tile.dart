@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
 import '../routes/app_pages.dart';
 import '../style/app_color.dart';
 import '../util/styles.dart';
@@ -65,6 +64,9 @@ class PresenceTile extends StatelessWidget {
             ),
             Expanded(
               child: Text(
+                // presenceData["status"] == 'onVacation'
+                //     ? "${presenceData['date']}"
+                //     :
                 "${DateFormat.yMMMMEEEEd().format(DateTime.parse(presenceData["date"]))}",
                 style: TextStyle(
                   fontSize: 10,

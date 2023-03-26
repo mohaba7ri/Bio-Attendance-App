@@ -160,7 +160,7 @@ class PresenceController extends GetxController {
       var endDate = DateFormat("MMM dd, yyyy").parse(doc.data()['endDate']);
       print('thesartDate$startDate');
       var currentTime = DateTime.now();
-      if (status == 'approved' &&
+      if (status == 'Approved' &&
           currentTime.isAfter(startDate) &&
           currentTime.isBefore(endDate)) {
         print('satus$status');
@@ -320,53 +320,51 @@ class PresenceController extends GetxController {
   ) async {
     update();
 
-    if (in_area != true) {
-      print('the area$in_area');
-      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
-    } else {
-      bool allowCheckIn =
-          await checkVacationStatus(sharedPreferences.getString('userId')!);
+    bool allowCheckIn =
+        await checkVacationStatus(sharedPreferences.getString('userId')!);
 
-      if (allowCheckIn) {
-        bool checkIn = await calCheckIn();
-        if (checkIn) {
-          CustomAlertDialog.showPresenceAlert(
-            title: "do_you_want_to_check_in?".tr,
-            message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-            onCancel: () => Get.back(),
-            onConfirm: () async {
-              await presenceCollection.doc(todayDocId).set(
-                {
-                  "date": DateTime.now().toIso8601String(),
-                  "status": 'Absent',
-                  "checkIn": {
-                    "status": timeStatus,
-                    "date": DateTime.now().toIso8601String(),
-                    "latitude": position.latitude,
-                    "longitude": position.longitude,
-                    "address": address,
-                    "in_area": in_area,
-                    "distance": distance,
-                  }
-                },
-              );
-
-              ////////////////// putting another function to set the presence status
-
-              Get.back();
-              CustomToast.successToast("success_check_in".tr);
-            },
-          );
-        } else {}
-      } else {
+    if (allowCheckIn) {
+      bool checkIn = await calCheckIn();
+      if (in_area != true) {
+        print('the area$in_area');
+        CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
+      } else if (checkIn) {
         CustomAlertDialog.showPresenceAlert(
-            title: 'vacations'.tr,
-            message:
-                'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                    .tr,
-            onConfirm: () {},
-            onCancel: () => Get.back());
+          title: "do_you_want_to_check_in?".tr,
+          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+          onCancel: () => Get.back(),
+          onConfirm: () async {
+            await presenceCollection.doc(todayDocId).set(
+              {
+                "date": DateTime.now().toIso8601String(),
+                "status": 'present',
+                "checkIn": {
+                  "status": timeStatus,
+                  "date": DateTime.now().toIso8601String(),
+                  "latitude": position.latitude,
+                  "longitude": position.longitude,
+                  "address": address,
+                  "in_area": in_area,
+                  "distance": distance,
+                }
+              },
+            );
+
+            ////////////////// putting another function to set the presence status
+
+            Get.back();
+            CustomToast.successToast("success_check_in".tr);
+          },
+        );
       }
+    } else {
+      CustomAlertDialog.showPresenceAlert(
+          title: 'vacations'.tr,
+          message:
+              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                  .tr,
+          onConfirm: () {},
+          onCancel: () => Get.back());
     }
   }
 
