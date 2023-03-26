@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
-import '../../../../widgets/toast/custom_toast.dart';
 import '../controllers/request_vacation_controller.dart';
 
 class RequestVacationView extends GetView<VacationRequestController> {
@@ -68,7 +67,8 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                           .changeLeaveType(selectedValue);
                                       _controller.leaveTypeValue =
                                           selectedValue;
-                                      _controller.changeVacationValue(selectedValue);
+                                      _controller
+                                          .changeVacationValue(selectedValue);
                                       print(_controller.leaveTypeValue);
                                     },
                                   ),
@@ -127,7 +127,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                           Row(
                             children: [
                               Text(
-                                'end_date'.tr,
+                                'End_date'.tr,
                                 style: robotoHuge,
                               ),
                               Spacer(),
