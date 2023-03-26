@@ -26,7 +26,7 @@ class VacationRequestController extends GetxController {
   String? filePath;
   String? vacationUrl = 'No file';
   String? userName;
-  String? branchName;
+  String? branchId;
   String? adminDeviceToken;
   String? userRole;
   DateTime date = DateTime.now();
@@ -59,7 +59,8 @@ class VacationRequestController extends GetxController {
       await firebase.collection('user').doc(uid).get().then((query) {
         Map<String, dynamic> data = query.data() as Map<String, dynamic>;
         userName = data['name'];
-        userRole = data['Employee'];
+        userRole = data['role'];
+        branchId = data['branchId'];
 
         update();
       });
@@ -71,7 +72,7 @@ class VacationRequestController extends GetxController {
       await firebase
           .collection('user')
           .where('role', isEqualTo: 'Admin')
-          .where('branchName', isEqualTo: branchName)
+          .where('branchId', isEqualTo: branchId)
           .get()
           .then((query) {
         query.docs.forEach((doc) {
@@ -207,16 +208,15 @@ class VacationRequestController extends GetxController {
       String? docId,
       String? title}) async {
     try {
+      await homeController.sendPushMessage(
+          adminDeviceToken!, userName!, 'vacation_request_by'.tr);
       await firebase.collection('notefications').doc(docId).set({
         'body': body,
         'userDeviceToken': userDeviceToken,
         'title': title,
         'adminDeviceToken': adminDeviceToken,
         'date': date
-      }).whenComplete(() async {
-        await homeController.sendPushMessage(
-            adminDeviceToken!, userName!, 'vacation_request_by'.tr);
-      });
+      }).whenComplete(() async {});
     } catch (e) {}
   }
 

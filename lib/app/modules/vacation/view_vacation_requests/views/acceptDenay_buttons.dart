@@ -66,7 +66,7 @@ class acceptDeny_buttons extends GetView<ViewVacationRequestsController> {
                       padding: const EdgeInsets.all(5.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          await controller.accept(data['vacationId']);
+                          await controller.accept(data);
                           await controller.getNotefication(
                               data['vacationId'], 'Accepted');
                         },

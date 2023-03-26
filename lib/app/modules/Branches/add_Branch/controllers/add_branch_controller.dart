@@ -19,7 +19,7 @@ class AddBranchController extends GetxController {
     await getUser();
   }
 
-  final presenceController = Get.find<PresenceController>();
+  final presenceController = Get.find();
   RxBool isLoading = false.obs;
   RxBool isLoadingPosition = false.obs;
   final nameC = TextEditingController().obs;

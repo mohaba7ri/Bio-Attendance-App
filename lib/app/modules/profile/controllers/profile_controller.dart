@@ -1,4 +1,3 @@
-import 'package:Biometric/app/controllers/presence_controller.dart';
 import 'package:Biometric/app/modules/home/controllers/home_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +28,7 @@ class ProfileController extends GetxController {
   void logout() async {
     await auth.signOut();
     Get.delete<HomeController>();
-    Get.delete<PresenceController>();
+    //Get.delete<PresenceController>();
     Get.offAllNamed(Routes.LOGIN);
   }
 }
