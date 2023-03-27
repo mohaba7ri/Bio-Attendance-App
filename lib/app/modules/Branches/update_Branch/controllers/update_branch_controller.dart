@@ -33,6 +33,18 @@ class UpdateBranchController extends GetxController {
   dynamic branchId = Get.arguments;
   RxMap office = {}.obs;
 
+
+  var firestore = FirebaseFirestore.instance;
+
+
+ Stream<QuerySnapshot<Map<String, dynamic>>> getBranchSettings() async* {
+    yield* firestore
+        .collection('branchSettings')
+        .where('branchId', isEqualTo: branchId['branchId'])
+        .snapshots();
+  }
+
+
   var branch = FirebaseFirestore.instance.collection('branch');
   launchOfficeOnMap() {
     try {
