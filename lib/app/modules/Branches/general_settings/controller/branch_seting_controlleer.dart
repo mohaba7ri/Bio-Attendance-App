@@ -20,9 +20,9 @@ class BranchSettingController extends GetxController {
   }
 
   Rx<TimeOfDay> startTime = TimeOfDay.now().obs;
-  Rx<TimeOfDay> endTime = TimeOfDay(hour: 2, minute: 00).obs;
-  Rx<TimeOfDay> lateTime = TimeOfDay(hour: 8, minute: 30).obs;
-  Rx<TimeOfDay> overlyTime = TimeOfDay(hour: 2, minute: 30).obs;
+  Rx<TimeOfDay> endTime = TimeOfDay(hour: 00, minute: 00).obs;
+  Rx<TimeOfDay> lateTime = TimeOfDay(hour: 00, minute: 00).obs;
+  Rx<TimeOfDay> overlyTime = TimeOfDay(hour: 00, minute: 00).obs;
   TextEditingController workingDays = TextEditingController();
   RxBool isExistSetting = false.obs;
 
@@ -103,7 +103,6 @@ class BranchSettingController extends GetxController {
         'overlyTime': overlyTimeIsoString,
         'branchId': branchId.value,
         'settingId': docId,
-        'workingDays': workingDays.text
       });
       CustomToast.successToast('CompanySetting added successfully');
     } catch (e) {
