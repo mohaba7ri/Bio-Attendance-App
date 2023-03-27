@@ -191,11 +191,13 @@ class HomeController extends GetxController {
     await FirebaseMessaging.onMessage.listen((message) {
       String? _title = '${message.notification!.title}' + ' \n ';
       CustomToast.successToast(message.notification!.title);
-      CustomAlertDialog.customAlert(
+      CustomAlertDialog.vacationAlert(
           icon: Images.holidays,
           message: '$_title ${message.notification!.body} ',
           onCancel: () => Get.back(),
-          onConfirm: () => Get.toNamed(Routes.LIST_VIEW_REQUESTS));
+          onConfirm: () => message.notification!.body == 'Accepted'
+              ? Get.offNamed(Routes.MY_VACATION)
+              : Get.toNamed(Routes.LIST_VIEW_REQUESTS));
       update();
     });
   }
