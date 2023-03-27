@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/page_index_controller.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
@@ -11,7 +10,6 @@ import '../../../../widgets/custom_widget.dart';
 import '../controllers/reports_home_controller.dart';
 
 class ReportsHomeView extends GetView<ReportsHomeController> {
-  final pageIndexController = Get.find<PageIndexController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,44 +55,52 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                       ),
                       // section 2 - menu
 
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'all_emps_rep'.tr,
-                        icon: Image.asset(
-                          Images.employess,
-                        ),
-                        onTap: () => Get.toNamed(Routes.ALL_EMPS_REP),
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'emp_rep'.tr,
-                        icon: Image.asset(
-                          Images.emp_one,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.LIST_EMPLOYEES_REP,
-                              arguments: userData);
-                        },
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'all_branches_rep'.tr,
-                        icon: Image.asset(
-                          Images.branches,
-                        ),
-                        onTap: () => Get.toNamed(Routes.ALL_BRANCHES_REP),
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'branche_rep'.tr,
-                        icon: Image.asset(
-                          Images.branch,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.LIST_BRANCHES_REP,
-                              arguments: userData);
-                        },
-                      ),
+                      userData["role"] == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'all_emps_rep'.tr,
+                              icon: Image.asset(
+                                Images.employess,
+                              ),
+                              onTap: () => Get.toNamed(Routes.ALL_EMPS_REP),
+                            ),
+                      userData["role"] == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'emp_rep'.tr,
+                              icon: Image.asset(
+                                Images.emp_one,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.LIST_EMPLOYEES_REP,
+                                    arguments: userData);
+                              },
+                            ),
+                      userData["role"] == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'all_branches_rep'.tr,
+                              icon: Image.asset(
+                                Images.branches,
+                              ),
+                              onTap: () => Get.toNamed(Routes.ALL_BRANCHES_REP),
+                            ),
+                      userData["role"] == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'branche_rep'.tr,
+                              icon: Image.asset(
+                                Images.branch,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.LIST_BRANCHES_REP,
+                                    arguments: userData);
+                              },
+                            ),
                       CustomMenuTile(
                         isDanger: true,
                         title: 'generate_report'.tr,

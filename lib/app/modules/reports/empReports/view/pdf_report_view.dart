@@ -140,14 +140,6 @@ class PdfEmpReport extends GetxController {
       'Status',
       'Hours Work',
     ];
-    // final List<List<dynamic>> data = [
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    // ];
 
     return Table.fromTextArray(
       headers: headers,
