@@ -71,7 +71,7 @@
   "View_Vacation_Requests":"View Vacation Requests",
   "Employees_on_Vacation":"Employees on Vacation",
   "Request_Vacation":"Request Vacation",
-  "end_date":"Leave Type",
+  "end_date":"End Date",
   "start_date":"Start Date",
   "End_date":"End Date",
   "Days":"Days",
@@ -230,7 +230,11 @@
 "denied_vac":"Denied Vacations",
 "edit_vacation_type":"Edit Vacation Type",
 "Vacation_type_has_been_added_successfully":"Vacation type has been added successfully",
-"you_exceeded_the_allowed_days_number":"You exceded the allowed days number"
+"you_exceeded_the_allowed_days_number":"You exceded the allowed days number",
+"do_you_want_to_check_out":"Do you want to Check out?"
+,"Something_went_wrong":"Connection Error",
+"edit_times":"Edit Times",
+"edit":"Edit"
 
 
 

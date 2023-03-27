@@ -236,7 +236,7 @@ class DraggableScreen extends GetView<CompanyDetailsController> {
                               stream: controller.getBranchSettings(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasError) {
-                                  return Text('Something went wrong');
+                                  return Text('Something_went_wrong'.tr);
                                 }
 
                                 if (snapshot.connectionState ==

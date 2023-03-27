@@ -12,6 +12,7 @@ import '../controllers/Branch_Home_controller.dart';
 
 class BranchHomeView extends GetView<BranchHomeController> {
   final pageIndexController = Get.find<PageIndexController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

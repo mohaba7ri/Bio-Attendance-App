@@ -12,6 +12,7 @@ class ReportsHomeController extends GetxController {
   final SharedPreferences sharedPreferences;
   ReportsHomeController({required this.sharedPreferences});
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
     print("called");

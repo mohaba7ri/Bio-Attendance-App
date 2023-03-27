@@ -6,15 +6,16 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
-
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
-import '../../empReports/controller/emp_reports_controller.dart';
-
-
-EmpReportsController employeeReport = EmpReportsController();
 
 class PdfEmpReport extends GetxController {
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -25,8 +26,12 @@ class PdfEmpReport extends GetxController {
   final start;
   final allPrecens;
   final end;
+  final user;
   PdfEmpReport(
-      {required this.start, required this.allPrecens, required this.end});
+      {required this.start,
+      required this.allPrecens,
+      required this.end,
+      required this.user});
   Future<File> generate() async {
     final pdf = Document();
 
@@ -44,10 +49,10 @@ class PdfEmpReport extends GetxController {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${user['name'] + 'Report'}.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader() => Column(
+  Widget buildHeader() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //  SizedBox(height: 1 * PdfPageFormat.cm),
@@ -87,10 +92,10 @@ class PdfEmpReport extends GetxController {
         ],
       );
 
-  static Widget buildEmployee() => Column(
+  Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${employeeReport.user['name']}',
+          Text('Employee Name: ${user['name']}',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Text('Branch Name: Tech Now'),
         ],

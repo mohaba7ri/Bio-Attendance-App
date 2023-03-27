@@ -10,8 +10,11 @@ class MyReportController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     await getUserDate();
+    await getCompanyData();
+    await getBranchData();
   }
 
+  dynamic userData = Get.arguments;
   final SharedPreferences sharedPreferences;
   MyReportController({required this.sharedPreferences});
   List<List<dynamic>>? allPrecens;
@@ -21,7 +24,9 @@ class MyReportController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
-
+  String? branchName;
+  double totalSalary = 0;
+  Map<String, dynamic>? company;
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {
     var initialDate = DateTime.now();
@@ -96,6 +101,25 @@ class MyReportController extends GetxController {
     return data;
   }
 
+  Future<double> calculateTotalSalary() async {
+    List<List<dynamic>> data = await getData();
+
+    double totalSalary = 0;
+    data.forEach((row) {
+      if (row.length >= 6 && row[5] != null && row[5] != '') {
+        List<String> hoursAndMinutes = row[5].split(':');
+        if (hoursAndMinutes.length == 2) {
+          int hours = int.parse(hoursAndMinutes[0]);
+          int minutes = int.parse(hoursAndMinutes[1]);
+          double hoursWorked = hours + (minutes / 60);
+          totalSalary += hoursWorked * 750;
+        }
+      }
+    });
+
+    return totalSalary;
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
     String? uid = sharedPreferences.getString('userId');
     QuerySnapshot<Map<String, dynamic>>? query;
@@ -141,5 +165,23 @@ class MyReportController extends GetxController {
       print('the user Name$userName');
     });
     update();
+  }
+
+  Future getCompanyData() async {
+    await firestore.collection('company').get().then((query) {
+      query.docs.forEach((data) {
+        company = data.data();
+      });
+    });
+  }
+
+  Future getBranchData() async {
+    await firestore
+        .collection('branch')
+        .doc(userData['branchId'])
+        .get()
+        .then((data) {
+      branchName = data['name'];
+    });
   }
 }

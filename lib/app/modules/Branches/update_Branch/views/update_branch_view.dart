@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
 import '../../general_settings/view/branch_setting_view.dart';
 import '../controllers/update_branch_controller.dart';
@@ -25,13 +29,9 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
           actions: [
             IconButton(
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => BranchSettingView(
-                          branchId: controller.branchId['branchId'],
-                        ));
+                Get.toNamed(Routes.HOME);
               },
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.home),
               color: AppColor.blackColor,
             )
           ],
@@ -144,7 +144,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                                           controller: controller
                                                               .latitudeC.value,
                                                           label: 'Latitude'.tr,
-                                                          hint: '4.35424',
+                                                          hint: '',
                                                           disabled: true,
                                                         ),
                                                       ),
@@ -161,7 +161,7 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                                           controller: controller
                                                               .longitudeC.value,
                                                           label: 'Longitude'.tr,
-                                                          hint: '4.35424',
+                                                          hint: '',
                                                           disabled: true,
                                                         ),
                                                       ),
@@ -242,6 +242,246 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
                                     elevation: 0,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: Text("General_Settings".tr,
+                                      style: robotoHuge)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 200,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: Colors.brown.shade300)),
+                                child: StreamBuilder(
+                                  stream: controller.getBranchSettings(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                          child:
+                                              Text('Something_went_wrong'.tr));
+                                    }
+
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(child: Text("Loading".tr));
+                                    }
+
+                                    return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 150,
+                                        child: ListView(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            physics: BouncingScrollPhysics(),
+                                            children: snapshot.data!.docs.map(
+                                                (DocumentSnapshot document) {
+                                              Map<String, dynamic> data =
+                                                  document.data()!
+                                                      as Map<String, dynamic>;
+                                              return Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Card(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                    elevation: 4,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons
+                                                                .more_time_outlined,
+                                                            size: 60,
+                                                            color: AppColor
+                                                                .primary,
+                                                          ),
+                                                          Text(
+                                                            'Start_Time'.tr,
+                                                            style: robotoMedium,
+                                                          ),
+                                                          Text(
+                                                            "${DateFormat.jm().format(DateTime.parse(data["startTime"]))}",
+                                                            style: robotoMedium,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Card(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                    elevation: 4,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons
+                                                                .av_timer_rounded,
+                                                            size: 60,
+                                                            color: AppColor
+                                                                .primary,
+                                                          ),
+                                                          Text(
+                                                            'End_Time'.tr,
+                                                            style: robotoMedium,
+                                                          ),
+                                                          Text(
+                                                            '${DateFormat.jm().format(DateTime.parse(data["endTime"]))}'
+                                                                .tr,
+                                                            style: robotoMedium,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Card(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                    elevation: 4,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons
+                                                                .share_arrival_time_outlined,
+                                                            size: 60,
+                                                            color: AppColor
+                                                                .primary,
+                                                          ),
+                                                          Text(
+                                                            'Late_Time'.tr,
+                                                            style: robotoMedium,
+                                                          ),
+                                                          Text(
+                                                            '${DateFormat.jm().format(DateTime.parse(data["lateTime"]))}'
+                                                                .tr,
+                                                            style: robotoMedium,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Card(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
+                                                    elevation: 4,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons
+                                                                .more_time_outlined,
+                                                            size: 60,
+                                                            color: AppColor
+                                                                .primary,
+                                                          ),
+                                                          Text(
+                                                            'Overly_Time'.tr,
+                                                            style: robotoMedium,
+                                                          ),
+                                                          Text(
+                                                            '${DateFormat.jm().format(DateTime.parse(data["overlyTime"]))}'
+                                                                .tr,
+                                                            style: robotoMedium,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                ],
+                                              );
+                                            }).toList()));
+
+                                    //SizedBox();
+                                  },
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                width: 80,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => BranchSettingView(
+                                              branchId: controller
+                                                  .branchId['branchId'],
+                                            ));
+                                  },
+                                  child: Text('edit_times'.tr,
+                                      style: robotoMediumWhite),
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.symmetric(vertical: 18),
+                                    backgroundColor: AppColor.primary,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
                                   ),
                                 ),

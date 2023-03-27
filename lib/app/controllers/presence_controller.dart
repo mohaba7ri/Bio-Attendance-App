@@ -392,7 +392,7 @@ class PresenceController extends GetxController {
           print("Check-out time has passed.");
         }
         CustomAlertDialog.showPresenceAlert(
-          title: "do_you_want_to_check_out?".tr,
+          title: "do_you_want_to_check_out".tr,
           message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
           onCancel: () => Get.back(),
           onConfirm: () async {

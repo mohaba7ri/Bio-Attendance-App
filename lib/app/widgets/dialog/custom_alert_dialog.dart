@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../style/app_color.dart';
 import '../../util/styles.dart';
 import '../custom_input.dart';
@@ -201,8 +200,7 @@ class CustomAlertDialog {
                     onPressed: onCancel,
                     child: Text(
                       "No".tr,
-                      style:
-                       robotoMediumWhite,
+                      style: robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12),
@@ -236,8 +234,7 @@ class CustomAlertDialog {
     );
   }
 
-
-   static vacationAlert(
+  static vacationAlert(
       {required String icon,
       required String message,
       required void Function() onConfirm,
@@ -278,8 +275,7 @@ class CustomAlertDialog {
                     onPressed: onCancel,
                     child: Text(
                       "ignore".tr,
-                      style:
-                       robotoMediumWhite,
+                      style: robotoMediumWhite,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12),

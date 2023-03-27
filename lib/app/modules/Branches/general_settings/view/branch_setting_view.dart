@@ -1,3 +1,4 @@
+import 'package:Biometric/app/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +62,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       controller: TextEditingController(
                           text: controller.startTime.value.format(context)),
                       label: 'Start_Time'.tr,
-                      hint: '8:00',
+                      hint: '',
                       suffixIcon: IconButton(
                           onPressed: () async {
                             final initialTime = controller.startTime.value;
@@ -78,7 +79,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       controller: TextEditingController(
                           text: controller.lateTime.value.format(context)),
                       label: 'Late_Time'.tr,
-                      hint: '8:30',
+                      hint: '',
                       suffixIcon: IconButton(
                           onPressed: () async {
                             final initialTime = controller.startTime.value;
@@ -95,7 +96,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       controller: TextEditingController(
                           text: controller.endTime.value.format(context)),
                       label: 'End_Time'.tr,
-                      hint: '2:00',
+                      hint: '',
                       suffixIcon: IconButton(
                           onPressed: () async {
                             final initialTime = controller.startTime.value;
@@ -112,7 +113,7 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       controller: TextEditingController(
                           text: controller.overlyTime.value.format(context)),
                       label: 'Overly_Time'.tr,
-                      hint: '2:30',
+                      hint: '',
                       suffixIcon: IconButton(
                           onPressed: () async {
                             final initialTime = controller.startTime.value;
@@ -130,7 +131,10 @@ class BranchSettingView extends GetView<BranchSettingController> {
                       controller.storeBranchSetting();
                       Get.back();
                     },
-                    child: Text('Save'.tr),
+                    child: Text(
+                      'Save'.tr,
+                      style: robotoMediumWhite,
+                    ),
                   ),
                 ),
               ],
