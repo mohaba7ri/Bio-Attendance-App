@@ -28,9 +28,7 @@ class UpdatePofileController extends GetxController {
 
   Future<void> updateProfile() async {
     String uid = sharedPreferences.getString('userId')!;
-    if (employeeidC.text.isNotEmpty &&
-        nameC.text.isNotEmpty &&
-        emailC.text.isNotEmpty) {
+    if (nameC.text.isNotEmpty && emailC.text.isNotEmpty) {
       isLoading.value = true;
       try {
         Map<String, dynamic> data = {
@@ -51,7 +49,7 @@ class UpdatePofileController extends GetxController {
         Get.back();
         CustomToast.successToast('update_profile_done'.tr);
       } catch (e) {
-        CustomToast.errorToast('Cant_Update_Profile'.tr+': ${e.toString()}');
+        CustomToast.errorToast('Cant_Update_Profile'.tr + ': ${e.toString()}');
       } finally {
         isLoading.value = false;
       }
@@ -76,12 +74,9 @@ class UpdatePofileController extends GetxController {
         "avatar": FieldValue.delete(),
       });
       Get.back();
-        CustomToast.successToast('Successfully_deleted_avatar_profile'.tr);
-
-      
+      CustomToast.successToast('Successfully_deleted_avatar_profile'.tr);
     } catch (e) {
-              CustomToast.errorToast('Cant_delete_avatar'.tr+': ${e.toString()}');
-
+      CustomToast.errorToast('Cant_delete_avatar'.tr + ': ${e.toString()}');
     } finally {
       update();
     }
