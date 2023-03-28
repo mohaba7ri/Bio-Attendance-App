@@ -8,9 +8,6 @@ import 'package:pdf/widgets.dart';
 
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
-import '../controller/my_report_controller.dart';
-
-MyReportController myReport = MyReportController(sharedPreferences: Get.find());
 
 class PdfMyReport extends GetxController {
   @override
@@ -23,8 +20,18 @@ class PdfMyReport extends GetxController {
   final start;
   final allPrecens;
   final end;
+  final user;
+  final company;
+  final branch;
+  final totalSalary;
   PdfMyReport(
-      {required this.start, required this.allPrecens, required this.end});
+      {required this.start,
+      required this.totalSalary,
+      required this.allPrecens,
+      required this.end,
+      required this.user,
+      required this.company,
+      required this.branch});
   Future<File> generate() async {
     final pdf = Document();
 
@@ -41,11 +48,10 @@ class PdfMyReport extends GetxController {
       footer: (context) => buildFooter(),
     ));
 
-    return PdfController.saveDocument(
-        name: '${myReport.userName + 'Report'}.pdf', pdf: pdf);
+    return PdfController.saveDocument(name: '${user + 'Report'}.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader() => Column(
+  Widget buildHeader() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //  SizedBox(height: 1 * PdfPageFormat.cm),
@@ -56,7 +62,7 @@ class PdfMyReport extends GetxController {
                 Text('Company Name :',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: 8),
-                Text('Lean Code',
+                Text('${company['name']}',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ]),
             ],
@@ -64,7 +70,7 @@ class PdfMyReport extends GetxController {
           Row(children: [
             Text('Address :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('AL Zobairy Street ',
+            Text('${company['address']}',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           Row(children: [
@@ -85,12 +91,12 @@ class PdfMyReport extends GetxController {
         ],
       );
 
-  static Widget buildEmployee() => Column(
+  Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${myReport.userName}',
+          Text('Employee Name: ${user}',
               style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('Branch Name: Tech Now'),
+          Text('Branch Name: ${branch}'),
         ],
       );
 
@@ -167,7 +173,7 @@ class PdfMyReport extends GetxController {
     );
   }
 
-  static Widget buildTotal() {
+  Widget buildTotal() {
     // final netTotal = invoice.items
     //     .map((item) => item.unitPrice * item.quantity)
     //     .reduce((item1, item2) => item1 + item2);
@@ -187,7 +193,7 @@ class PdfMyReport extends GetxController {
               children: [
                 buildText(
                   title: 'Salary',
-                  value: '120000',
+                  value: '$totalSalary',
                   unite: true,
                 ),
                 buildText(

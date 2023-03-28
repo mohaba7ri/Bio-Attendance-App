@@ -169,16 +169,19 @@ class EmpReportsView extends GetView<EmpReportsController> {
                               onPressed: () async {
                                 await controller.getAllPresence();
                                 await controller.getData();
-
+                                Get.put(PdfEmpReport(
+                                    start: controller.start,
+                                    allPrecens: controller.allPrecens,
+                                    end: controller.end,
+                                    user: controller.user));
                                 final pdfEmpReport = PdfEmpReport(
                                     start: controller.start,
                                     allPrecens: controller.allPrecens,
-                                    end: controller.end);
+                                    end: controller.end,
+                                    user: controller.user);
                                 final date =
                                     DateConverter.estimatedDate(DateTime.now());
                                 final dueDate = DateTime.now();
-
-                               
 
                                 final pdfFile = await pdfEmpReport.generate();
 
@@ -200,5 +203,4 @@ class EmpReportsView extends GetView<EmpReportsController> {
       ),
     );
   }
-
 }

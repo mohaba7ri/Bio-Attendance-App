@@ -14,6 +14,7 @@ import '../controllers/loading_config.dart';
 import '../controllers/page_index_controller.dart';
 import '../controllers/presence_controller.dart';
 import '../model/language_model.dart';
+import '../modules/Branches/branch_Home/controllers/Branch_Home_controller.dart';
 import '../modules/Branches/general_settings/controller/branch_seting_controlleer.dart';
 import '../modules/Company/company_settings/controller/company_seting_controlleer.dart';
 import '../modules/home/controllers/home_controller.dart';
@@ -49,6 +50,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.put(
     HomeController(sharedPreferences: Get.find()),
   );
+  Get.lazyPut(() => BranchHomeController(sharedPreferences: Get.find()));
 
   Get.lazyPut(() => BranchSettingController());
   Get.lazyPut(() => MyVacationStaticController(sharedPreferences: Get.find()),

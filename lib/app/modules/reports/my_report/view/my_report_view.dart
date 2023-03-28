@@ -169,9 +169,16 @@ class MyReportView extends GetView<MyReportController> {
                               onPressed: () async {
                                 await controller.getAllPresence();
                                 await controller.getData();
+                                double totalSalary =
+                                    await controller.calculateTotalSalary();
+                                print('the salary:${controller.totalSalary}');
 
                                 final pdfEmpReport = PdfMyReport(
+                                    totalSalary: totalSalary,
+                                    company: controller.company,
+                                    branch: controller.branchName,
                                     start: controller.start,
+                                    user: controller.userName,
                                     allPrecens: controller.allPrecens,
                                     end: controller.end);
                                 final date =

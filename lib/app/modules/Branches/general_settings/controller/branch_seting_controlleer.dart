@@ -96,7 +96,7 @@ class BranchSettingController extends GetxController {
       final companySettingRef = firebase.collection('branchSettings');
       final querySnapshot = await companySettingRef.get();
       String docId = Uuid().v4();
-      await companySettingRef.doc(docId).set({
+      await companySettingRef.doc(branchId.value).set({
         'startTime': startTimeIsoString,
         'lateTime': lateTimeIsoString,
         'endTime': endTimeIsoString,
