@@ -56,7 +56,7 @@ class MyReportView extends GetView<MyReportController> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                             child: Image.asset(

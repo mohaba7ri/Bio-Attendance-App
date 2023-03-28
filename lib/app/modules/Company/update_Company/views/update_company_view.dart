@@ -109,7 +109,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Container(
-                                          height: 280,
+                                          height: 320,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -197,7 +197,7 @@ class UpdateCompanyView extends GetView<UpdateCompanyController> {
                                                                       .zoneC
                                                                       .value,
                                                               label: 'zone'.tr,
-                                                              hint: '50 m',
+                                                              hint: 'Min 20 m',
                                                             ),
                                                           ),
                                                         ],
