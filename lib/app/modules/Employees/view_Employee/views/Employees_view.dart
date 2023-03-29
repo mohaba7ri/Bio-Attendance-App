@@ -15,7 +15,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Employees'.tr,
+          'employees'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 16,
