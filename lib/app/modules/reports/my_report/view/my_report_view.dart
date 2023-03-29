@@ -6,6 +6,7 @@ import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
+import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
 import '../controller/my_report_controller.dart';
@@ -18,7 +19,7 @@ class MyReportView extends GetView<MyReportController> {
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text(
-          'emp_reports'.tr,
+          'generate_report'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 18,
@@ -55,6 +56,13 @@ class MyReportView extends GetView<MyReportController> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Image.asset(
+                          Images.report_ani,
+                        )),
+                      ),
                       Row(
                         children: [
                           Padding(
