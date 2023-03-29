@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -32,7 +31,10 @@ class UpdateEmployeeView extends GetView<UpdateEmployeeController> {
         ),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: AppColor.blackColor,
+          ),
         ),
         actions: [
           IconButton(

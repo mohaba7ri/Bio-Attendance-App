@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -37,7 +36,10 @@ class UpdateBranchView extends GetView<UpdateBranchController> {
           ],
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: SvgPicture.asset('assets/icons/arrow-left.svg'),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: AppColor.blackColor,
+            ),
           ),
           backgroundColor: Colors.white,
           elevation: 0,

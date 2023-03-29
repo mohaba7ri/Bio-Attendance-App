@@ -7,15 +7,15 @@ import '../util/images.dart';
 import '../util/styles.dart';
 
 class CustomProfileAppBar extends StatelessWidget {
-   Widget? circularImage;
-   late Widget? mainWidget;
-   bool backButton;
-   void Function()? backRout;
+  Widget? circularImage;
+  late Widget? mainWidget;
+  bool backButton;
+  void Function()? backRout;
   CustomProfileAppBar(
-      { this.mainWidget,
+      {this.mainWidget,
       this.circularImage,
       required this.backButton,
-       this.backRout});
+      this.backRout});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class CustomProfileAppBar extends StatelessWidget {
         backButton
             ? Positioned(
                 top: MediaQuery.of(context).padding.top,
-                left: 10,
+                right: 10,
                 child: IconButton(
                   icon: Icon(Icons.arrow_back_ios,
                       color: Theme.of(context).cardColor, size: 20),
@@ -83,9 +83,11 @@ class CustomProfileAppBar extends StatelessWidget {
           child: circularImage!,
         ),
       ]),
-     mainWidget==null?SizedBox(): Expanded(
-        child: mainWidget!,
-      ),
+      mainWidget == null
+          ? SizedBox()
+          : Expanded(
+              child: mainWidget!,
+            ),
     ]);
   }
 }
