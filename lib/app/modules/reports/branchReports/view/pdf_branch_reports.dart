@@ -9,7 +9,7 @@ import 'package:pdf/widgets.dart';
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 
-class PdfEmpReport extends GetxController {
+class PdfBranchReport extends GetxController {
   @override
   void onClose() {
     // TODO: implement onClose
@@ -27,7 +27,7 @@ class PdfEmpReport extends GetxController {
   final allPrecens;
   final end;
   final user;
-  PdfEmpReport(
+  PdfBranchReport(
       {required this.start,
       required this.allPrecens,
       required this.end,

@@ -59,6 +59,13 @@ class ListEmployeeController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> Employee() async* {
     print("called");
     // String uid = sharedPreferences.getString('userId')!;
-    yield* firestore.collection("user").snapshots();
+    if (branchId == null) {
+      yield* firestore.collection("user").snapshots();
+    } else {
+      yield* firestore
+          .collection("user")
+          .where('branchId', isEqualTo: branchId)
+          .snapshots();
+    }
   }
 }

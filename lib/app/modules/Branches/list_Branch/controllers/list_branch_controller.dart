@@ -16,11 +16,14 @@ class ListBranchController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> branch() async* {
-    if(role=='Admin'){
-     yield* firestore.collection('branch').snapshots();
-    }else{
-     yield* firestore.collection('branch').snapshots();
+    String? userId = sharedPreferences.getString('userId');
+    if (role == 'SuperAdmin') {
+      yield* firestore.collection('branch').snapshots();
+    } else {
+      yield* firestore
+          .collection('branch')
+          .where('branchAdminId', isEqualTo: userId)
+          .snapshots();
     }
-   
   }
 }

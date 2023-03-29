@@ -104,7 +104,6 @@ class MyReportController extends GetxController {
   Future<double> calculateTotalSalary() async {
     List<List<dynamic>> data = await getData();
 
-    double totalSalary = 0;
     data.forEach((row) {
       if (row.length >= 6 && row[5] != null && row[5] != '') {
         List<String> hoursAndMinutes = row[5].split(':');

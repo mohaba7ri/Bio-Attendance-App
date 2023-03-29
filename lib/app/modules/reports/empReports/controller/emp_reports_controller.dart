@@ -5,6 +5,12 @@ import 'package:intl/intl.dart';
 
 class EmpReportsController extends GetxController {
   dynamic user = Get.arguments;
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await getCompanyData();
+  }
 
   @override
   void onClose() {
@@ -17,8 +23,11 @@ class EmpReportsController extends GetxController {
   final firestore = FirebaseFirestore.instance;
   var startDateController = TextEditingController();
   var endDateController = TextEditingController();
+  double totalSalary = 0;
+  Map<String, dynamic>? company;
   DateTime end = DateTime.now();
   DateTime? start;
+  Map<String, dynamic>? branch;
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {
     var initialDate = DateTime.now();
@@ -63,36 +72,23 @@ class EmpReportsController extends GetxController {
     }
   }
 
-  // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-  //   String uid = user['userId'];
-  //   if (startDateController == null) {
-  //     QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //         .collection("user")
-  //         .doc(uid)
-  //         .collection("presence")
-  //         .where("date", isLessThan: end.toIso8601String())
-  //         .orderBy(
-  //           "date",
-  //           descending: true,
-  //         )
-  //         .get();
-  //     return query;
-  //   } else {
-  //     QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //         .collection("user")
-  //         .doc(uid)
-  //         .collection("presence")
-  //         .where("date", isGreaterThan: start!.toIso8601String())
-  //         .where("date",
-  //             isLessThan: end.add(Duration(days: 1)).toIso8601String())
-  //         .orderBy(
-  //           "date",
-  //           descending: true,
-  //         )
-  //         .get();
-  //     return query;
-  //   }
-  // }
+  Future getCompanyData() async {
+    await firestore.collection('company').get().then((query) {
+      query.docs.forEach((data) {
+        company = data.data();
+      });
+    });
+  }
+
+  Future getBranchData() async {
+    await firestore
+        .collection('branch')
+        .doc(user['branchId'])
+        .get()
+        .then((data) {
+      branch = data as Map<String, dynamic>;
+    });
+  }
 
   Future<List<List<dynamic>>> getData() async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
@@ -160,5 +156,23 @@ class EmpReportsController extends GetxController {
       print('error $e');
     }
     return query!;
+  }
+
+  Future<double> calculateTotalSalary() async {
+    List<List<dynamic>> data = await getData();
+
+    data.forEach((row) {
+      if (row.length >= 6 && row[5] != null && row[5] != '') {
+        List<String> hoursAndMinutes = row[5].split(':');
+        if (hoursAndMinutes.length == 2) {
+          int hours = int.parse(hoursAndMinutes[0]);
+          int minutes = int.parse(hoursAndMinutes[1]);
+          double hoursWorked = hours + (minutes / 60);
+          totalSalary += hoursWorked * 750;
+        }
+      }
+    });
+
+    return totalSalary;
   }
 }

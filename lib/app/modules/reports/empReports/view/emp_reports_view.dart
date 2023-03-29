@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/reports/empReports/view/pdf_report_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,6 @@ import '../../../../style/app_color.dart';
 
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
-import '../../branchReports/view/pdf_branch_reports.dart';
 import '../controller/emp_reports_controller.dart';
 
 class EmpReportsView extends GetView<EmpReportsController> {
@@ -169,12 +169,19 @@ class EmpReportsView extends GetView<EmpReportsController> {
                               onPressed: () async {
                                 await controller.getAllPresence();
                                 await controller.getData();
+                                await controller.calculateTotalSalary();
                                 Get.put(PdfEmpReport(
+                                    branch: controller.branch,
+                                    totalSalary: controller.totalSalary,
                                     start: controller.start,
+                                    company: controller.company,
                                     allPrecens: controller.allPrecens,
                                     end: controller.end,
                                     user: controller.user));
                                 final pdfEmpReport = PdfEmpReport(
+                                    company: controller.company,
+                                    branch: controller.branch,
+                                    totalSalary: controller.totalSalary,
                                     start: controller.start,
                                     allPrecens: controller.allPrecens,
                                     end: controller.end,
