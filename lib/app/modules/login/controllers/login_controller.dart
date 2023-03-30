@@ -123,16 +123,19 @@ class LoginController extends GetxController {
 
   Future getUser() async {
     String? role;
+    String? userName;
     await firestore
         .collection('user')
         .doc(sharedPreferences.getString('userId'))
         .get()
         .then((data) {
       role = data['role'];
+      userName = data['name'];
       data['status'] == 'Active'
           ? isActive.value = true
           : isActive.value = false;
       sharedPreferences.setString('role', role!);
+      sharedPreferences.setString('name', userName!);
       print('the role is :${sharedPreferences.getString('role')}');
     });
   }

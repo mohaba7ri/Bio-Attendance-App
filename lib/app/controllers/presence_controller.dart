@@ -22,6 +22,8 @@ class PresenceController extends GetxController {
   String? hoursWork;
   RxString companyId = ''.obs;
   RxString branchId = ''.obs;
+  RxString onTimig = ''.obs;
+  RxBool inArea = false.obs;
   final SharedPreferences sharedPreferences;
   RxMap office = {}.obs;
   PresenceController({required this.sharedPreferences});
@@ -179,47 +181,54 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckIn =
-        await checkVacationStatus(sharedPreferences.getString('userId')!);
-    if (allowCheckIn) {
-      if (in_area != true) {
-        print('the in area$in_area');
-        CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
+    if (in_area == true) {
+      bool allowCheckIn =
+          await checkVacationStatus(sharedPreferences.getString('userId')!);
+      bool checkIn = await calCheckIn();
+      if (allowCheckIn) {
+        print('the area$in_area');
+        if (checkIn) {
+          CustomAlertDialog.showPresenceAlert(
+            title: "do_you_want_to_check_in?".tr,
+            message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+            onCancel: () => Get.back(),
+            onConfirm: () async {
+              await presenceCollection.doc(todayDocId).set(
+                {
+                  "date": DateTime.now().toIso8601String(),
+                  "status": 'Present',
+                  "timing": onTimig.value,
+                  "name": sharedPreferences.getString('name'),
+                  "checkIn": {
+                    "status": timeStatus,
+                    "date": DateTime.now().toIso8601String(),
+                    "latitude": position.latitude,
+                    "longitude": position.longitude,
+                    "address": address,
+                    "in_area": in_area,
+                    "distance": distance,
+                  }
+                },
+              );
+
+              ////////////////// putting another function to set the presence status
+
+              Get.back();
+              CustomToast.successToast("success_check_in".tr);
+            },
+          );
+        }
       } else {
         CustomAlertDialog.showPresenceAlert(
-          title: "do_you_want_to_check_in?".tr,
-          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-          onCancel: () => Get.back(),
-          onConfirm: () async {
-            await presenceCollection.doc(todayDocId).set(
-              {
-                "date": DateTime.now().toIso8601String(),
-                "status": 'Present',
-                "timing": 'On Time',
-                "checkIn": {
-                  "status": timeStatus,
-                  "date": DateTime.now().toIso8601String(),
-                  "latitude": position.latitude,
-                  "longitude": position.longitude,
-                  "address": address,
-                  "in_area": in_area,
-                  "distance": distance,
-                }
-              },
-            );
-            Get.back();
-            CustomToast.successToast("success_check_in".tr);
-          },
-        );
+            title: 'vacations'.tr,
+            message:
+                'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                    .tr,
+            onConfirm: () {},
+            onCancel: () => Get.back());
       }
     } else {
-      CustomAlertDialog.showVacationAlert(
-          title: 'vacations'.tr,
-          message:
-              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                  .tr,
-          onConfirm: () {},
-          onCancel: () => Get.back());
+      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
     }
   }
 
@@ -236,7 +245,7 @@ class PresenceController extends GetxController {
       return chechIn = false;
     } else if (currentHour > startHour && currentHour <= lateHour) {
       print("Check-in is on time.");
-
+      onTimig.value = 'on Time';
       print(currentHour);
       update();
       print('lateHour$lateHour');
@@ -248,7 +257,7 @@ class PresenceController extends GetxController {
       int lateMinutesRemainder = lateMinutes % 60;
       print(currentTime);
       print('lateHour$lateMinutes');
-
+      onTimig.value = 'Late for:${lateHours}:${lateMinutesRemainder} ';
       Get.snackbar(
           'Late'.tr,
           'You_are_being_late_for'.tr +
@@ -319,54 +328,54 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    update();
-
-    bool allowCheckIn =
-        await checkVacationStatus(sharedPreferences.getString('userId')!);
-
-    if (allowCheckIn) {
+    if (in_area == true) {
+      bool allowCheckIn =
+          await checkVacationStatus(sharedPreferences.getString('userId')!);
       bool checkIn = await calCheckIn();
-      if (in_area != true) {
+      if (allowCheckIn) {
         print('the area$in_area');
-        CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
-      } else if (checkIn) {
-        CustomAlertDialog.showPresenceAlert(
-          title: "do_you_want_to_check_in?".tr,
-          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-          onCancel: () => Get.back(),
-          onConfirm: () async {
-            await presenceCollection.doc(todayDocId).set(
-              {
-                "date": DateTime.now().toIso8601String(),
-                "status": 'Present',
-                "timing": 'On Time',
-                "checkIn": {
-                  "status": timeStatus,
+        if (checkIn) {
+          CustomAlertDialog.showPresenceAlert(
+            title: "do_you_want_to_check_in?".tr,
+            message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+            onCancel: () => Get.back(),
+            onConfirm: () async {
+              await presenceCollection.doc(todayDocId).set(
+                {
                   "date": DateTime.now().toIso8601String(),
-                  "latitude": position.latitude,
-                  "longitude": position.longitude,
-                  "address": address,
-                  "in_area": in_area,
-                  "distance": distance,
-                }
-              },
-            );
+                  "status": 'Present',
+                  "timing": onTimig.value,
+                  "name": sharedPreferences.getString('name'),
+                  "checkIn": {
+                    "status": timeStatus,
+                    "date": DateTime.now().toIso8601String(),
+                    "latitude": position.latitude,
+                    "longitude": position.longitude,
+                    "address": address,
+                    "in_area": in_area,
+                    "distance": distance,
+                  }
+                },
+              );
 
-            ////////////////// putting another function to set the presence status
+              ////////////////// putting another function to set the presence status
 
-            Get.back();
-            CustomToast.successToast("success_check_in".tr);
-          },
-        );
+              Get.back();
+              CustomToast.successToast("success_check_in".tr);
+            },
+          );
+        }
+      } else {
+        CustomAlertDialog.showPresenceAlert(
+            title: 'vacations'.tr,
+            message:
+                'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                    .tr,
+            onConfirm: () {},
+            onCancel: () => Get.back());
       }
     } else {
-      CustomAlertDialog.showPresenceAlert(
-          title: 'vacations'.tr,
-          message:
-              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                  .tr,
-          onConfirm: () {},
-          onCancel: () => Get.back());
+      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
     }
   }
 
@@ -441,7 +450,9 @@ class PresenceController extends GetxController {
 
     bool in_area = false;
     if (distance <= 200) {
+      print('distance$distance');
       in_area = true;
+      inArea.value = true;
     }
 
     if (snapshotPreference.docs.length == 0) {
@@ -462,12 +473,12 @@ class PresenceController extends GetxController {
           await calHoursWork();
           // case : already check in and not yet check out ( check out )
           checkoutPresence(presenceCollection, todayDocId, position, address,
-              distance, in_area);
+              distance, inArea.value);
         }
       } else {
         // case : not yet check in today
         checkinPresence(presenceCollection, todayDocId, position, address,
-            distance, in_area);
+            distance, inArea.value);
       }
     }
   }
