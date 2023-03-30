@@ -159,6 +159,74 @@ class CustomAlertDialog {
     );
   }
 
+  static showVacationAlert({
+    required String title,
+    required String message,
+    required void Function() onConfirm,
+    required void Function() onCancel,
+  }) {
+    Get.defaultDialog(
+      title: "",
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+      radius: 8,
+      titlePadding: EdgeInsets.zero,
+      titleStyle: TextStyle(fontSize: 0),
+      content: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 32, top: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: robotoHuge),
+                SizedBox(height: 16),
+                Text(message, style: robotoHuge),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: ElevatedButton(
+                    onPressed: onCancel,
+                    child: Text(
+                      "no".tr,
+                      style: robotoMedium,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      backgroundColor: AppColor.redColor,
+                      elevation: 0,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  flex: 6,
+                  child: ElevatedButton(
+                    onPressed: onConfirm,
+                    child: Text(
+                      "yes".tr,
+                      style: robotoMediumWhite,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.primary,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      elevation: 0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   static customAlert(
       {required String icon,
       required String message,

@@ -97,6 +97,19 @@ class VacationHomeView extends GetView<VacationHomeController> {
                           ? SizedBox()
                           : CustomMenuTile(
                               isDanger: true,
+                              title: 'View_Cancel_Requests'.tr,
+                              icon: Image.asset(
+                                Images.viewVacations,
+                                color: AppColor.primarySoft,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.LIST_VIEW_REQUESTS);
+                              },
+                            ),
+                      role == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
                               title: 'Employees_on_Vacation'.tr,
                               icon: Image.asset(
                                 Images.empOnVac,
