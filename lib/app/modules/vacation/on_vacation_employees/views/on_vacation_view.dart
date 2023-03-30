@@ -8,12 +8,9 @@ import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../controllers/on_vacation_requests_controller.dart';
 
-final conttroler = Get.put(OnVacationController(), permanent: true);
-
 class OnVacationView extends GetView<OnVacationController> {
   @override
   Widget build(BuildContext context) {
-    OnVacationController _onVacationController = OnVacationController();
     return Scaffold(
       appBar: AppBar(
         title: Text('approved_vac'.tr),
@@ -25,7 +22,7 @@ class OnVacationView extends GetView<OnVacationController> {
       body: Container(
         color: Colors.grey[200],
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: _onVacationController.vacationRequests(),
+          stream: controller.vacationRequests(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:

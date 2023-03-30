@@ -2,6 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class OnVacationController extends GetxController {
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await vacationRequests();
+  }
+
   RxBool switchValue = false.obs;
   dynamic userInfo = Get.arguments;
 
@@ -18,7 +25,7 @@ class OnVacationController extends GetxController {
           .snapshots();
     } else {
       yield* firestore
-          .collection("user")
+          .collection("vacationRequest")
           .where("status", isEqualTo: "Approved")
           .where('branchId', isEqualTo: userInfo['branchId'])
           .snapshots();
