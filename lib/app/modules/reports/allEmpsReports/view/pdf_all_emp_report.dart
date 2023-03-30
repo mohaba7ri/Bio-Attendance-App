@@ -116,7 +116,7 @@ class PdfMyReport extends GetxController {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '555', width: 200);
+        return buildText(title: title, value: '', width: 200);
       }),
     );
   }
@@ -139,7 +139,7 @@ class PdfMyReport extends GetxController {
 
   Widget buildAttendance() {
     final headers = [
-      'name',
+      'Name',
       'Date',
       'Check In ',
       'Check Out',
@@ -198,7 +198,7 @@ class PdfMyReport extends GetxController {
                 ),
                 buildText(
                   title: 'Total Hours Work',
-                  value: '120',
+                  value: '',
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),
