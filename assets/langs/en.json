@@ -77,6 +77,7 @@
   "Days":"Days",
   "File":"File",
   "Cancel":"Cancel",
+  "cancel":"Cancel",
   "Send":"Send",
   "Request_Details":"Request Details",
   "Vacation_Type":"Vacation Type:",
@@ -237,7 +238,8 @@
 "edit":"Edit",
 "generate_report":"My Reports",
 "zone":"Zone",
-"all_emp_report":"All Employees reports"
+"all_emp_report":"All Employees reports",
+"you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area"
 
 
 

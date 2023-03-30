@@ -236,8 +236,10 @@
 "edit_times":"تعديل الاوقات",
 "generate_report":"تقاريري",
 "zone":"المساحة",
- "all_emp_report":"تقارير جميع الموظفين"
+ "all_emp_report":"تقارير جميع الموظفين",
 
+"cancel":"الغاء"
+,"you_cannot_check_in_you_are_out_area":"لا يمكنك تسجيل بصمة الحضور لانك خارج نطاق الحضور"
 
 
 
