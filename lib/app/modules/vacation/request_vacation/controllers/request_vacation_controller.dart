@@ -183,6 +183,7 @@ class VacationRequestController extends GetxController {
       'file': vacationUrl,
       'status': 'Pending',
       'cancelled': '',
+      'branchId': branchId
     }).whenComplete(() async {
       String userDevice = sharedPreferences.getString('deviceToken')!;
       storeNotefications(

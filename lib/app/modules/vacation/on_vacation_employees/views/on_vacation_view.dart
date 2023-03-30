@@ -90,6 +90,27 @@ class OnVacationView extends GetView<OnVacationController> {
                                           child: Text(data[index]['userName'],
                                               style: robotoMedium),
                                         ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                top: 4, bottom: 5),
+                                            child: Text(
+                                                'Request_Date'.tr + ' : ',
+                                                style: robotoMedium),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 4, bottom: 5),
+                                          child: Text(
+                                              data[index]['requestDate'],
+                                              style: robotoMedium),
+                                        ),
                                       ],
                                     ),
                                   ),

@@ -116,7 +116,8 @@ class VacationHomeView extends GetView<VacationHomeController> {
                                 color: AppColor.primarySoft,
                               ),
                               onTap: () {
-                                Get.toNamed(Routes.ON_VACATION);
+                                Get.toNamed(Routes.ON_VACATION,
+                                    arguments: userData['userId']);
                               },
                             ),
                       role == 'Employee'
