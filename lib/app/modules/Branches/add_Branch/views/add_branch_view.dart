@@ -119,7 +119,7 @@ class AddBranchView extends GetView<AddBranchController> {
                                     CustomInput(
                                       controller: controller.nameC.value,
                                       label: 'Branch_Name'.tr,
-                                      hint: 'Code Tech',
+                                      hint: '',
                                       valdate: (value) {
                                         if (value!.isEmpty) {
                                           return 'please enter the branch name';
@@ -131,9 +131,10 @@ class AddBranchView extends GetView<AddBranchController> {
                                       height: 5,
                                     ),
                                     CustomInput(
+                                      keyboardType: TextInputType.phone,
                                       controller: controller.phoneC.value,
                                       label: 'Phone'.tr,
-                                      hint: '77777777',
+                                      hint: '',
                                       valdate: (value) {
                                         if (value!.isEmpty) {
                                           return 'please enter the Phone Number';
@@ -145,9 +146,16 @@ class AddBranchView extends GetView<AddBranchController> {
                                       height: 5,
                                     ),
                                     CustomInput(
+                                      keyboardType: TextInputType.streetAddress,
                                       controller: controller.AddressC.value,
                                       label: 'address'.tr,
-                                      hint: 'address',
+                                      hint: '',
+                                      valdate: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'please enter the Address';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),

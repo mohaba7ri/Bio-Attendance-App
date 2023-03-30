@@ -71,36 +71,6 @@ class AllEmpsReportsController extends GetxController {
     }
   }
 
-  // Future<List<List<dynamic>>> getData() async {
-  //   QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
-  //   List<List<dynamic>> data = [];
-
-  //   snapshot.docs.forEach((doc) {
-  //     List<dynamic> row = [];
-  //     row.add(
-  //         DateFormat("M/d/yyyy").format(DateTime.parse(doc.data()["date"])));
-  //     row.add(
-  //         doc.data()["checkIn"] != null && doc.data()["checkIn"]["date"] != null
-  //             ? DateFormat.jm()
-  //                 .format(DateTime.parse(doc.data()["checkIn"]["date"]))
-  //             : '');
-  //     row.add(doc.data()["checkOut"] != null &&
-  //             doc.data()["checkOut"]["date"] != null
-  //         ? DateFormat.jm()
-  //             .format(DateTime.parse(doc.data()["checkOut"]["date"]))
-  //         : '');
-  //     row.add(doc.data()['timing'] != null ? doc.data()['timing'] : '');
-  //     row.add(doc.data()['status'] != null ? doc.data()['status'] : '');
-  //     row.add(doc.data()['hoursWork'] != null ? doc.data()['hoursWork'] : '');
-
-  //     data.add(row);
-  //   });
-  //   allPrecens = data;
-  //   update();
-  //   print('the all precens$data');
-  //   return data;
-  // }
-
   Future<List<List<dynamic>>> getData() async {
     List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshots =
         await getAllPresence();
@@ -156,44 +126,6 @@ class AllEmpsReportsController extends GetxController {
 
     return totalSalary;
   }
-
-  // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-  //   String? uid = sharedPreferences.getString('userId');
-  //   QuerySnapshot<Map<String, dynamic>>? query;
-  //   try {
-  //     if (startDateController == null) {
-  //       query = await firestore
-  //           .collection("user")
-  //           .doc(uid)
-  //           .collection("presence")
-  //           .where("date", isLessThan: end.toIso8601String())
-  //           .orderBy(
-  //             "date",
-  //             descending: true,
-  //           )
-  //           .get();
-
-  //       return query;
-  //     } else {
-  //       QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //           .collection("user")
-  //           .doc(uid)
-  //           .collection("presence")
-  //           .where("date", isGreaterThan: start!.toIso8601String())
-  //           .where("date",
-  //               isLessThan: end.add(Duration(days: 1)).toIso8601String())
-  //           .orderBy(
-  //             "date",
-  //             descending: true,
-  //           )
-  //           .get();
-  //       return query;
-  //     }
-  //   } catch (e) {
-  //     print('error $e');
-  //   }
-  //   return query!;
-  // }
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
       getAllPresence() async {

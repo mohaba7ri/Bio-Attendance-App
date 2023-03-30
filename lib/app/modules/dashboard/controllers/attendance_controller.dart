@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AttendanceController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getUsers();
+    // getUsers();
+    getAllSubCollectionDocuments();
   }
 
   int? PresentNumber;
@@ -47,7 +49,8 @@ class AttendanceController extends GetxController {
   // Future getUsers() async {
   //   await firestore
   //       .collection('user')
-  //       .where("present", isEqualTo: true)
+  //       .doc()
+  //       .collection('presence')
   //       .get()
   //       .then((QuerySnapshot query) {
   //     PresentNumber = query.size;
@@ -64,5 +67,43 @@ class AttendanceController extends GetxController {
 
     print('number of presence$PresentNumber');
     update();
+  }
+
+  Future<List<Map<String, dynamic>>> getAllSubCollectionDocuments() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? uid = sharedPreferences.getString('userId');
+    List<Map<String, dynamic>> documents = [];
+
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await firestore
+          .collection("user")
+          .doc(uid)
+          .collection("presence")
+          .get();
+
+      for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
+          in querySnapshot.docs) {
+        QuerySnapshot<Map<String, dynamic>> subCollectionSnapshot =
+            await firestore
+                .collection("user")
+                .doc(uid)
+                .collection("presence")
+                .get();
+
+        // Process the sub-collection documents here
+        for (QueryDocumentSnapshot<Map<String, dynamic>> subDocumentSnapshot
+            in subCollectionSnapshot.docs) {
+          // Access the sub-collection document data here
+          Map<String, dynamic> data = subDocumentSnapshot.data();
+          documents.add(data);
+          print('result = $documents');
+        }
+        print('result = $documents');
+      }
+    } catch (e) {
+      print('error $e');
+    }
+    print('result = $documents');
+    return documents;
   }
 }

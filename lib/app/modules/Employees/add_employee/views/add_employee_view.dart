@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widgets/custom_input.dart';
@@ -75,8 +74,7 @@ class AddEmployeeView extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
-                                child:
-                                 Row(
+                                child: Row(
                                   children: [
                                     Text('Role'.tr),
                                     Padding(
@@ -185,30 +183,34 @@ class AddEmployeeView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                         
                             ],
                           ),
                           CustomInput(
+                            keyboardType: TextInputType.name,
                             controller: controller.nameC,
                             label: 'Full_Name'.tr,
                             hint: 'Johnn Doe',
                           ),
                           CustomInput(
+                            keyboardType: TextInputType.emailAddress,
                             controller: controller.emailC,
                             label: 'email'.tr,
                             hint: 'youremail@email.com',
                           ),
                           CustomInput(
+                            keyboardType: TextInputType.text,
                             controller: controller.jobC,
                             label: 'Job'.tr,
                             hint: 'Employee Job',
                           ),
                           CustomInput(
+                            keyboardType: TextInputType.streetAddress,
                             controller: controller.addressC,
                             label: 'Address'.tr,
                             hint: 'hail street',
                           ),
                           CustomInput(
+                            keyboardType: TextInputType.phone,
                             controller: controller.phoneC,
                             label: 'Phone'.tr,
                             hint: '7****',
