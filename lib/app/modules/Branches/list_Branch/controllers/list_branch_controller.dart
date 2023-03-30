@@ -17,6 +17,7 @@ class ListBranchController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> branch() async* {
     String? userId = sharedPreferences.getString('userId');
+    print('branchAdminId$userId');
     if (role == 'SuperAdmin') {
       yield* firestore.collection('branch').snapshots();
     } else {

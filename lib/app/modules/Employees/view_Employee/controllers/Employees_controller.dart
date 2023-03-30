@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
 class ListEmployeeController extends GetxController {
   void onInit() async {
@@ -16,6 +16,7 @@ class ListEmployeeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final branchesList = <DropdownMenuItem<String>>[].obs;
   String? branchValue;
+  dynamic userIfon = Get.arguments;
 
   Future getBranches() async {
     final branches = FirebaseFirestore.instance.collection('branch');
@@ -59,12 +60,19 @@ class ListEmployeeController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> Employee() async* {
     print("called");
     // String uid = sharedPreferences.getString('userId')!;
-    if (branchId == null) {
-      yield* firestore.collection("user").snapshots();
+    if (userIfon['role'] == 'SuperAdmin') {
+      if (branchId == null) {
+        yield* firestore.collection("user").snapshots();
+      } else {
+        yield* firestore
+            .collection("user")
+            .where('branchId', isEqualTo: branchId)
+            .snapshots();
+      }
     } else {
       yield* firestore
           .collection("user")
-          .where('branchId', isEqualTo: branchId)
+          .where('branchId', isEqualTo: userIfon['branchId'])
           .snapshots();
     }
   }

@@ -29,43 +29,50 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Text('branch'.tr),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, blurRadius: 5)
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: SizedBox(
-                        //  height: MediaQuery.of(context).size.height * 50,
-                        width: MediaQuery.of(context).size.width * 45 / 100,
-                        child: DropdownButtonHideUnderline(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: DropdownButton2(
-                              hint: Text('All'.tr),
-                              items: _controller.branchesList,
-                              value: _controller.branchValue,
-                              onChanged: (String? selectedValue) {
-                                _controller.changeBranchValue(selectedValue);
-                              },
+            _controller.userIfon['role'] == 'Employee'
+                ? SizedBox()
+                : _controller.userIfon['role'] == 'Admin'
+                    ? SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black12, blurRadius: 5)
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: SizedBox(
+                                  //  height: MediaQuery.of(context).size.height * 50,
+                                  width: MediaQuery.of(context).size.width *
+                                      45 /
+                                      100,
+                                  child: DropdownButtonHideUnderline(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: DropdownButton2(
+                                        hint: Text('All'.tr),
+                                        items: _controller.branchesList,
+                                        value: _controller.branchValue,
+                                        onChanged: (String? selectedValue) {
+                                          _controller
+                                              .changeBranchValue(selectedValue);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
           backgroundColor: Colors.white,
           elevation: 0,

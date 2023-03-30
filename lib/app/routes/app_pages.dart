@@ -57,11 +57,12 @@ import '../modules/profile/views/profile_view.dart';
 import '../modules/reports/allBranchesReports/binding/all_branches_reports_binding.dart';
 import '../modules/reports/allBranchesReports/view/all_branches_reports_views.dart';
 import '../modules/reports/allEmpsReports/binding/all_emps_reports_binding.dart';
-import '../modules/reports/allEmpsReports/view/all_emps_reports_view.dart';
+import '../modules/reports/allEmpsReports/view/all_emp_report_view.dart';
+
 import '../modules/reports/branchReports/binding/branch_reports_binding.dart';
 import '../modules/reports/branchReports/view/branch_reports_view.dart';
 import '../modules/reports/empReports/binding/emp_reports_binding.dart';
-import '../modules/reports/empReports/view/emp_reports_view.dart';
+
 import '../modules/reports/list_Branch_Rep/bindings/list_branchRep_binding.dart';
 import '../modules/reports/list_Branch_Rep/views/list_branchRep_view.dart';
 import '../modules/reports/my_report/binding/my_report_binding.dart';
@@ -300,7 +301,7 @@ class AppPages {
         binding: DeniedVacationBinding()),
     GetPage(
         name: _Paths.MY_REPORT,
-        page: () => MyReportView(),
+        page: () => EmpReportsView(),
         binding: MyReportBinding()),
     GetPage(
         name: _Paths.EDIT_VAC,
