@@ -27,6 +27,7 @@ class LoginController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isLoading2 = false.obs;
+  RxBool isActive = false.obs;
 
   RxBool obsecureText = true.obs;
   TextEditingController emailC = TextEditingController();
@@ -74,7 +75,14 @@ class LoginController extends GetxController {
         if (credential.user != null) {
           if (credential.user!.emailVerified) {
             isLoading.value = false;
-            checkDefaultPassword();
+            await updateUser();
+            await getUser();
+            if (isActive.isTrue) {
+              checkDefaultPassword();
+            } else {
+              CustomToast.errorToast(
+                  title: 'sorry ', "you are being stopt by the Admin".tr);
+            }
           } else {
             CustomAlertDialog.showPresenceAlert(
               title: "Email_not_yet_verified".tr,
@@ -94,8 +102,7 @@ class LoginController extends GetxController {
               },
             );
           }
-          await updateUser();
-          await getUser();
+
           update();
         }
         isLoading.value = false;
@@ -122,6 +129,9 @@ class LoginController extends GetxController {
         .get()
         .then((data) {
       role = data['role'];
+      data['status'] == 'Active'
+          ? isActive.value = true
+          : isActive.value = false;
       sharedPreferences.setString('role', role!);
       print('the role is :${sharedPreferences.getString('role')}');
     });

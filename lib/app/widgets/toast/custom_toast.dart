@@ -5,9 +5,8 @@ import 'package:get/get.dart';
 import '../../style/app_color.dart';
 import '../../util/styles.dart';
 
-
 class CustomToast {
-  static errorToast(String? message) {
+  static errorToast(String? message, {String? title}) {
     Get.rawSnackbar(
       duration: Duration(seconds: 4),
       dismissDirection: DismissDirection.horizontal,
@@ -25,7 +24,8 @@ class CustomToast {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 4),
-                  child: Text("error".tr, style: robotoMediumWhite),
+                  child: Text(title == null ? "error".tr : title,
+                      style: robotoMediumWhite),
                 ),
                 Text(
                   message ?? "Add your error message here",
