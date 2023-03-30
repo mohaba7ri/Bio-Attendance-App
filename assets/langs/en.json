@@ -138,7 +138,7 @@
 "emp_reports":"Employee Reports",
 "from":"From",
 "to":"To",
-"all_emps_rep":"All Employees Reports",
+"all_emps_rep":"Daily Report",
 "emp_rep":"Employee Reports",
 "branche_rep":"Branch Reports",
 "all_branches_rep":"All Branches Reports",
@@ -238,7 +238,8 @@
 "edit":"Edit",
 "generate_report":"My Reports",
 "zone":"Zone",
-"you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area"
+"you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area",
+"View_Cancel_Requests":"View Cancel Vacation Requests"
 
 
 

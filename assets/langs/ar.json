@@ -136,7 +136,8 @@
 "emp_reports":"تقارير الموظفين",
 "from":"من",
 "to":"الى",
-"all_emps_rep":"تقارير جميع الموظفين",
+"all_emps_rep":"تقرير يومي",
+
 "emp_rep":"تقاير موظف",
 "branche_rep":"تقاير فرع",
 "all_branches_rep":"تقارير جميع الفروع",
@@ -237,7 +238,8 @@
 "generate_report":"تقاريري",
 "zone":"المساحة",
 "cancel":"الغاء"
-,"you_cannot_check_in_you_are_out_area":"لا يمكنك تسجيل بصمة الحضور لانك خارج نطاق الحضور"
+,"you_cannot_check_in_you_are_out_area":"لا يمكنك تسجيل بصمة الحضور لانك خارج نطاق الحضور",
+"View_Cancel_Requests":"عرض طلبات الغاء الاجازات"
 
 
 
