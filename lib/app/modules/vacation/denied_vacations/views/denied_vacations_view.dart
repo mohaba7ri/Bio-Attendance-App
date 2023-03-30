@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../../style/app_color.dart';
@@ -8,12 +9,9 @@ import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../controllers/denied_vacations_controller.dart';
 
-final conttroler = Get.put(DeniedVacationController(), permanent: true);
-
 class DeniedVacationView extends GetView<DeniedVacationController> {
   @override
   Widget build(BuildContext context) {
-    DeniedVacationController _deniedVacationController = DeniedVacationController();
     return Scaffold(
       appBar: AppBar(
         title: Text('denied_vac'.tr),
@@ -25,7 +23,7 @@ class DeniedVacationView extends GetView<DeniedVacationController> {
       body: Container(
         color: Colors.grey[200],
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: _deniedVacationController.vacationRequests(),
+          stream: controller.vacationRequests(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -88,6 +86,31 @@ class DeniedVacationView extends GetView<DeniedVacationController> {
                                           margin: EdgeInsets.only(
                                               top: 4, bottom: 5),
                                           child: Text(data[index]['userName'],
+                                              style: robotoMedium),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                top: 4, bottom: 5),
+                                            child: Text(
+                                                'Request_Date'.tr + ' : ',
+                                                style: robotoMedium),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 4, bottom: 5),
+                                          child: Text(
+                                              "${DateFormat.yMd().format(DateTime.parse(data[index]['requestDate']))}",
                                               style: robotoMedium),
                                         ),
                                       ],
