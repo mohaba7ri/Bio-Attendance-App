@@ -57,9 +57,7 @@ void main() async {
     StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-         
-        }
+        if (snapshot.connectionState == ConnectionState.waiting) {}
         return GetBuilder<LanguagesController>(
           builder: (languageController) {
             return GetMaterialApp(

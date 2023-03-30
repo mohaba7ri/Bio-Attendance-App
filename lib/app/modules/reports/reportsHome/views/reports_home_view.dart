@@ -63,7 +63,8 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                               icon: Image.asset(
                                 Images.employess,
                               ),
-                              onTap: () => Get.toNamed(Routes.ALL_EMPS_REP),
+                              onTap: () => Get.toNamed(Routes.ALL_EMPS_REP,
+                                  arguments: userData),
                             ),
                       userData["role"] == 'Employee'
                           ? SizedBox()

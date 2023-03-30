@@ -24,7 +24,7 @@ class EmployeeDetailView extends GetView<EmployeeDetailController> {
               onPressed: () {
                 Get.toNamed(Routes.EMP_UPDATE,
                     arguments: updateEmp.EmpDetail['userId']);
-               // print(updateEmp.EmpDetail['userId']);
+                // print(updateEmp.EmpDetail['userId']);
               },
               icon: Icon(Icons.edit))
         ],

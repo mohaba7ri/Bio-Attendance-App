@@ -42,70 +42,82 @@ class VacationHomeView extends GetView<VacationHomeController> {
                       SizedBox(height: 16),
                       role == 'Employee'
                           ? SizedBox()
+                          : role == 'Admin'
+                              ? SizedBox()
+                              : CustomMenuTile(
+                                  isDanger: true,
+                                  title: 'Vacation_Types'.tr,
+                                  icon: Image.asset(
+                                    Images.vacationTypes,
+                                    color: AppColor.primarySoft,
+                                  ),
+                                  onTap: () =>
+                                      Get.toNamed(Routes.VIEW_Vacation_TYPES),
+                                ),
+                      role == 'SuperAdmin'
+                          ? SizedBox()
                           : CustomMenuTile(
                               isDanger: true,
-                              title: 'Vacation_Types'.tr,
+                              title: 'Add_Vacation_Request'.tr,
                               icon: Image.asset(
-                                Images.vacationTypes,
+                                Images.leave,
                                 color: AppColor.primarySoft,
                               ),
-                              onTap: () =>
-                                  Get.toNamed(Routes.VIEW_Vacation_TYPES),
+                              onTap: () {
+                                Get.toNamed(Routes.ADD_VACATION_REQUEST);
+                              },
                             ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'Add_Vacation_Request'.tr,
-                        icon: Image.asset(
-                          Images.leave,
-                          color: AppColor.primarySoft,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.ADD_VACATION_REQUEST);
-                        },
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'my_vacation'.tr,
-                        icon: Image.asset(
-                          Images.myVacations,
-                          color: AppColor.primarySoft,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.MY_VACATION);
-                        },
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'View_Vacation_Requests'.tr,
-                        icon: Image.asset(
-                          Images.viewVacations,
-                          color: AppColor.primarySoft,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.LIST_VIEW_REQUESTS);
-                        },
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'Employees_on_Vacation'.tr,
-                        icon: Image.asset(
-                          Images.empOnVac,
-                          color: AppColor.primarySoft,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.ON_VACATION);
-                        },
-                      ),
-                      CustomMenuTile(
-                        isDanger: true,
-                        title: 'denied_vac'.tr,
-                        icon: Image.asset(
-                          Images.deny,
-                        ),
-                        onTap: () {
-                          Get.toNamed(Routes.DEN_VAC);
-                        },
-                      ),
+                      role == 'SuperAdmin'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'my_vacation'.tr,
+                              icon: Image.asset(
+                                Images.myVacations,
+                                color: AppColor.primarySoft,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.MY_VACATION);
+                              },
+                            ),
+                      role == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'View_Vacation_Requests'.tr,
+                              icon: Image.asset(
+                                Images.viewVacations,
+                                color: AppColor.primarySoft,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.LIST_VIEW_REQUESTS);
+                              },
+                            ),
+                      role == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'Employees_on_Vacation'.tr,
+                              icon: Image.asset(
+                                Images.empOnVac,
+                                color: AppColor.primarySoft,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.ON_VACATION);
+                              },
+                            ),
+                      role == 'Employee'
+                          ? SizedBox()
+                          : CustomMenuTile(
+                              isDanger: true,
+                              title: 'denied_vac'.tr,
+                              icon: Image.asset(
+                                Images.deny,
+                              ),
+                              onTap: () {
+                                Get.toNamed(Routes.DEN_VAC);
+                              },
+                            ),
                       Container(
                         height: 1,
                         color: AppColor.primaryExtraSoft,

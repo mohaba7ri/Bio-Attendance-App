@@ -1,24 +1,25 @@
+import 'package:Biometric/app/modules/reports/my_report/view/pdf_my_report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
+import '../../../../controllers/pdf_controller.dart';
+import '../../../../helper/date_converter.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
-
 import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
 import '../controller/all_emps_reports_controller.dart';
 
 class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
+  // TODO: implement build
   @override
   Widget build(BuildContext context) {
-    AllEmpsReportsController _Controller = AllEmpsReportsController();
     return Scaffold(
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text(
-          'emp_reports'.tr,
+          'generate_report'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 18,
@@ -38,7 +39,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
         centerTitle: true,
       ),
       body: GetBuilder<AllEmpsReportsController>(
-        builder: (controller) => Container(
+        builder: (_controller) => Container(
           color: AppColor.greyShade200,
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -67,8 +68,17 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'select_the_dates'.tr,
+                              'name'.tr,
                               style: robotoHuge,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(0.8),
+                            child: SizedBox(
+                              child: Text(
+                                controller.userName,
+                                style: robotoHuge,
+                              ),
                             ),
                           ),
                         ],
@@ -83,7 +93,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -92,8 +102,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.startDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
@@ -101,16 +110,14 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                       DateTime startDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
+                                              controller
+                                                  .startDateController.text);
                                       if (startDate != null) {
-                                        controller.startDateController.value =
-                                            TextEditingController(
-                                                text: DateFormat.yMMMd()
-                                                    .format(startDate));
+                                        controller.changeStartDate(startDate);
+                                        // controller.start = startDate;
                                       } else {
-                                        controller.startDateController.value
-                                            .text = '';
+                                        controller.startDateController.text =
+                                            '';
                                       }
                                     },
                                     icon: Icon(Icons.date_range)),
@@ -129,7 +136,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               child: CustomInput(
                                 disabled: true,
                                 valdate: (value) {
@@ -138,8 +145,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                   }
                                   return null;
                                 },
-                                controller:
-                                    controller.startDateController.value,
+                                controller: controller.endDateController,
                                 label: '',
                                 hint: '',
                                 suffixIcon: IconButton(
@@ -147,16 +153,15 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                       DateTime endDate =
                                           await controller.showDatePickers(
                                               context,
-                                              controller.startDateController
-                                                  .value.text);
+                                              controller
+                                                  .endDateController.text);
                                       if (endDate != null) {
-                                        controller.startDateController.value =
-                                            TextEditingController(
-                                                text: DateFormat.yMMMd()
-                                                    .format(endDate));
+                                        controller.changeEndDate(endDate);
+
+                                        print('the endDate${controller.end}');
                                       } else {
-                                        controller.startDateController.value
-                                            .text = '';
+                                        controller.startDateController.text =
+                                            '';
                                       }
                                     },
                                     icon: Icon(Icons.date_range)),
@@ -169,11 +174,35 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                         Center(
                           child: Container(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await controller.getAllPresence();
+                                await controller.getData();
+                                // await controller.getAllPresenceWithUser();
+                                // await controller.getDataWithUser();
+                                double totalSalary =
+                                    await controller.calculateTotalSalary();
+                                print('the salary:${controller.totalSalary}');
+
+                                final pdfEmpReport = PdfMyReport(
+                                    totalSalary: totalSalary,
+                                    company: controller.company,
+                                    branch: controller.branchName,
+                                    start: controller.start,
+                                    user: controller.userName,
+                                    allPrecens: controller.allPrecens,
+                                    end: controller.end);
+                                final date =
+                                    DateConverter.estimatedDate(DateTime.now());
+                                final dueDate = DateTime.now();
+
+                                final pdfFile = await pdfEmpReport.generate();
+
+                                PdfController.openFile(pdfFile);
+                              },
                               icon: Icon(Icons.import_export_outlined),
                               label: Text("generate".tr),
                             ),
-                            width: MediaQuery.of(context).size.width * 0.8,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             height: 40,
                           ),
                         )

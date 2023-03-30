@@ -71,40 +71,75 @@ class MyReportController extends GetxController {
     }
   }
 
+  // Future<List<List<dynamic>>> getData() async {
+  //   QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
+  //   List<List<dynamic>> data = [];
+
+  //   snapshot.docs.forEach((doc) {
+  //     List<dynamic> row = [];
+  //     row.add(
+  //         DateFormat("M/d/yyyy").format(DateTime.parse(doc.data()["date"])));
+  //     row.add(
+  //         doc.data()["checkIn"] != null && doc.data()["checkIn"]["date"] != null
+  //             ? DateFormat.jm()
+  //                 .format(DateTime.parse(doc.data()["checkIn"]["date"]))
+  //             : '');
+  //     row.add(doc.data()["checkOut"] != null &&
+  //             doc.data()["checkOut"]["date"] != null
+  //         ? DateFormat.jm()
+  //             .format(DateTime.parse(doc.data()["checkOut"]["date"]))
+  //         : '');
+  //     row.add(doc.data()['timing'] != null ? doc.data()['timing'] : '');
+  //     row.add(doc.data()['status'] != null ? doc.data()['status'] : '');
+  //     row.add(doc.data()['hoursWork'] != null ? doc.data()['hoursWork'] : '');
+
+  //     data.add(row);
+  //   });
+  //   allPrecens = data;
+  //   update();
+  //   print('the all precens$data');
+  //   return data;
+  // }
+
   Future<List<List<dynamic>>> getData() async {
-    QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshots =
+        await getAllPresence();
     List<List<dynamic>> data = [];
 
-    snapshot.docs.forEach((doc) {
+    snapshots.forEach((snapshot) {
       List<dynamic> row = [];
-      row.add(
-          DateFormat("M/d/yyyy").format(DateTime.parse(doc.data()["date"])));
-      row.add(
-          doc.data()["checkIn"] != null && doc.data()["checkIn"]["date"] != null
-              ? DateFormat.jm()
-                  .format(DateTime.parse(doc.data()["checkIn"]["date"]))
-              : '');
-      row.add(doc.data()["checkOut"] != null &&
-              doc.data()["checkOut"]["date"] != null
+      row.add(snapshot.data()['name'] != null ? snapshot.data()['name'] : '');
+      row.add(DateFormat("M/d/yyyy")
+          .format(DateTime.parse(snapshot.data()["date"])));
+      row.add(snapshot.data()["checkIn"] != null &&
+              snapshot.data()["checkIn"]["date"] != null
           ? DateFormat.jm()
-              .format(DateTime.parse(doc.data()["checkOut"]["date"]))
+              .format(DateTime.parse(snapshot.data()["checkIn"]["date"]))
           : '');
-      row.add(doc.data()['timing'] != null ? doc.data()['timing'] : '');
-      row.add(doc.data()['status'] != null ? doc.data()['status'] : '');
-      row.add(doc.data()['hoursWork'] != null ? doc.data()['hoursWork'] : '');
+      row.add(snapshot.data()["checkOut"] != null &&
+              snapshot.data()["checkOut"]["date"] != null
+          ? DateFormat.jm()
+              .format(DateTime.parse(snapshot.data()["checkOut"]["date"]))
+          : '');
+      // row.add(
+      //     snapshot.data()['timing'] != null ? snapshot.data()['timing'] : '');
+      row.add(
+          snapshot.data()['status'] != null ? snapshot.data()['status'] : '');
+      row.add(snapshot.data()['hoursWork'] != null
+          ? snapshot.data()['hoursWork']
+          : '');
 
       data.add(row);
     });
-    allPrecens = data;
-    update();
+
     print('the all precens$data');
+    allPrecens = data;
     return data;
   }
 
   Future<double> calculateTotalSalary() async {
     List<List<dynamic>> data = await getData();
 
-    double totalSalary = 0;
     data.forEach(
       (row) {
         if (row.length >= 6 && row[5] != null && row[5] != '') {
@@ -122,42 +157,77 @@ class MyReportController extends GetxController {
     return totalSalary;
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-    String? uid = sharedPreferences.getString('userId');
+  // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
+  //   String? uid = sharedPreferences.getString('userId');
+  //   QuerySnapshot<Map<String, dynamic>>? query;
+  //   try {
+  //     if (startDateController == null) {
+  //       query = await firestore
+  //           .collection("user")
+  //           .doc(uid)
+  //           .collection("presence")
+  //           .where("date", isLessThan: end.toIso8601String())
+  //           .orderBy(
+  //             "date",
+  //             descending: true,
+  //           )
+  //           .get();
+
+  //       return query;
+  //     } else {
+  //       QuerySnapshot<Map<String, dynamic>> query = await firestore
+  //           .collection("user")
+  //           .doc(uid)
+  //           .collection("presence")
+  //           .where("date", isGreaterThan: start!.toIso8601String())
+  //           .where("date",
+  //               isLessThan: end.add(Duration(days: 1)).toIso8601String())
+  //           .orderBy(
+  //             "date",
+  //             descending: true,
+  //           )
+  //           .get();
+  //       return query;
+  //     }
+  //   } catch (e) {
+  //     print('error $e');
+  //   }
+  //   return query!;
+  // }
+
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
+      getAllPresence() async {
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
-      if (startDateController == null) {
-        query = await firestore
-            .collection("user")
-            .doc(uid)
-            .collection("presence")
-            .where("date", isLessThan: end.toIso8601String())
-            .orderBy(
-              "date",
-              descending: true,
-            )
-            .get();
+      query = await firestore.collection("user").get();
 
-        return query;
-      } else {
-        QuerySnapshot<Map<String, dynamic>> query = await firestore
+      List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
+      for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
+          in query.docs) {
+        futures.add(firestore
             .collection("user")
-            .doc(uid)
+            .doc(documentSnapshot.id)
             .collection("presence")
             .where("date", isGreaterThan: start!.toIso8601String())
             .where("date",
-                isLessThan: end.add(Duration(days: 1)).toIso8601String())
+                isLessThan: start!.add(Duration(days: 1)).toIso8601String())
             .orderBy(
               "date",
               descending: true,
             )
-            .get();
-        return query;
+            .get());
       }
+      List<QuerySnapshot<Map<String, dynamic>>> snapshots =
+          await Future.wait(futures);
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = [];
+      for (QuerySnapshot<Map<String, dynamic>> snapshot in snapshots) {
+        documents.addAll(snapshot.docs);
+      }
+      return documents;
     } catch (e) {
       print('error $e');
+      return [];
     }
-    return query!;
   }
 
   Future getUserDate() async {

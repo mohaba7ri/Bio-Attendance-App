@@ -51,46 +51,11 @@ class AddEmployeeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseFirestore role = FirebaseFirestore.instance;
   var rolesValues = {};
-  final List<RxString> roles = [
-    'Add Branch'.obs,
-    'Stop Branch'.obs,
-    'Modify Branch Setting'.obs,
-    'Add Employee'.obs,
-    'Stop Employee'.obs,
-    'Modify Employee'.obs,
-    'Employee Reports'.obs,
-    'Attendance Report'.obs,
-    'Manage Vacation'.obs,
-  ];
-  final Map<String, bool> allRolles = {
-    'Add Branch': true,
-    'Stop Branch': true,
-    'Modify Branch Setting': false,
-    'Add Employee': false,
-    'Stop Employee': true,
-    'Modify Employee': true,
-    'Employee Reports': true,
-    'Attendance Report': true,
-    'Manage Vacation': true,
-  };
+
 //this list of all roles  from type bool
   List<RxBool>? selectedPolicyValue;
   //this function to fill the selectedPolicyValue list with false value  and when you check any checkbox the
   //value will change to true
-  rolesValue() {
-    selectedPolicyValue = List.filled(roles.length, false.obs);
-  }
-
-  changePolicyValue(bool value, int index) {
-    selectedPolicyValue![index].value = value;
-    for (var i = 0; i < roles.length; i++) {
-      rolesValues[roles[i].value] = selectedPolicyValue![i].value;
-    }
-    print('roles${rolesValues}');
-    print(selectedPolicyValue![index].value);
-    // print(
-    //     'roles${rolesValues[roles[index].value] = selectedPolicyValue![index].value}');
-  }
 
   String getDefaultPassword() {
     return CompanyData.defaultPassword;
@@ -147,16 +112,6 @@ class AddEmployeeController extends GetxController {
 //this function to store the the selected roles base on the checked box
 //will store the name of the check box base on the index and only if the value is true means the checkbox
 //is being selected
-  storePolicyValue(int index, bool value) {
-    if (value) {
-      listSelectedPolicy.add(roles[index].obs.value);
-    } else {
-      listSelectedPolicy.remove(roles[index].obs.value);
-    }
-    // Get.defaultDialog(title: 'hello');
-
-    print(listSelectedPolicy.toList());
-  }
 
   Future<void> addEmployee() async {
     if (salaryPerHour.text.isNotEmpty &&
@@ -209,7 +164,7 @@ class AddEmployeeController extends GetxController {
   Future<void> createEmployeeData() async {
     isSelectedPolicy = true;
     update();
-    selectedPolicyValue = List.filled(roles.length, false.obs);
+
     if (adminPassC.text.isNotEmpty) {
       isLoadingCreatePegawai = true;
       String adminEmail = auth.currentUser!.email!;
@@ -268,9 +223,7 @@ class AddEmployeeController extends GetxController {
           // }
           if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
             var rolesValues = {};
-            for (var i = 0; i < roles.length; i++) {
-              rolesValues[roles[i].value] = selectedPolicyValue![i].value;
-            }
+
             await role
                 .collection('policy')
                 .doc(uid.value)

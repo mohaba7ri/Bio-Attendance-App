@@ -11,7 +11,7 @@ import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
 import '../controller/my_report_controller.dart';
 
-class MyReportView extends GetView<MyReportController> {
+class EmpReportsView extends GetView<MyReportController> {
   // TODO: implement build
   @override
   Widget build(BuildContext context) {
@@ -177,6 +177,8 @@ class MyReportView extends GetView<MyReportController> {
                               onPressed: () async {
                                 await controller.getAllPresence();
                                 await controller.getData();
+                                // await controller.getAllPresenceWithUser();
+                                // await controller.getDataWithUser();
                                 double totalSalary =
                                     await controller.calculateTotalSalary();
                                 print('the salary:${controller.totalSalary}');
