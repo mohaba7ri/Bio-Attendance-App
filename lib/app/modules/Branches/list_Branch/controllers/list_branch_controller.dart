@@ -7,7 +7,6 @@ class ListBranchController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    role = sharedPreferences.getString('role');
   }
 
   String? role;
@@ -16,6 +15,7 @@ class ListBranchController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> branch() async* {
+    role = sharedPreferences.getString('role');
     String? userId = sharedPreferences.getString('userId');
     print('branchAdminId$userId');
     if (role == 'SuperAdmin') {
