@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../../style/app_color.dart';
@@ -87,9 +88,13 @@ class OnVacationView extends GetView<OnVacationController> {
                                           child: Text(data[index]['userName'],
                                               style: robotoMedium),
                                         ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      children: [
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               left: 5, right: 5),
@@ -105,7 +110,7 @@ class OnVacationView extends GetView<OnVacationController> {
                                           margin: EdgeInsets.only(
                                               top: 4, bottom: 5),
                                           child: Text(
-                                              data[index]['requestDate'],
+                                              "${DateFormat.yMd().format(DateTime.parse(data[index]['requestDate']))}",
                                               style: robotoMedium),
                                         ),
                                       ],

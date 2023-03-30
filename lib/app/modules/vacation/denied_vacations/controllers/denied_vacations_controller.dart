@@ -2,6 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class DeniedVacationController extends GetxController {
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await vacationRequests();
+  }
+
   RxBool switchValue = false.obs;
   dynamic userInfo = Get.arguments;
 
@@ -18,7 +24,7 @@ class DeniedVacationController extends GetxController {
           .snapshots();
     } else {
       yield* firestore
-          .collection("user")
+          .collection("vacationRequest")
           .where("status", isEqualTo: "Denied")
           .where('branchId', isEqualTo: userInfo['branchId'])
           .snapshots();
