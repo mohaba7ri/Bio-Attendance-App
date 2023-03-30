@@ -24,6 +24,7 @@ class AllEmpsReportsController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+
   String? branchName;
   double totalSalary = 0;
   Map<String, dynamic>? company;
@@ -131,7 +132,14 @@ class AllEmpsReportsController extends GetxController {
       getAllPresence() async {
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
-      query = await firestore.collection("user").get();
+      if (userData['role'] == 'SuperAdmin') {
+        query = await firestore.collection("user").get();
+      } else {
+        query = await firestore
+            .collection("user")
+            .where('branchId', isEqualTo: userData['branchId'])
+            .get();
+      }
 
       List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
       for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
@@ -166,6 +174,7 @@ class AllEmpsReportsController extends GetxController {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+
       print('the user Name$userName');
     });
     update();
