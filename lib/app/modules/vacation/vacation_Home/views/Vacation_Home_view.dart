@@ -129,7 +129,8 @@ class VacationHomeView extends GetView<VacationHomeController> {
                                 Images.deny,
                               ),
                               onTap: () {
-                                Get.toNamed(Routes.DEN_VAC);
+                                Get.toNamed(Routes.DEN_VAC,
+                                    arguments: userData['userId']);
                               },
                             ),
                       Container(
