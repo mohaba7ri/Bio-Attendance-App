@@ -245,7 +245,8 @@
 "cancel_request_by":"طلب الغاء اجازة من ",
 "you_are_being_stop_by_the_Admin":"تم ايقاف حسابك من قبل المدير",
 "sorry":"المعذرة",
-"Request_Date":"تاريخ الطلب"
+"Request_Date":"تاريخ الطلب",
+"admin_branch":"مدير الفرع"
 
 
 
