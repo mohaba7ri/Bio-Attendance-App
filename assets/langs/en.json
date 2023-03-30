@@ -241,7 +241,9 @@
 "you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area",
 "View_Cancel_Requests":"View Vacation Cancelation Requests",
 "cancel_request_by":"Vacation cancelation request by ",
-"all_emp_report":"All Employee Report"
+"all_emp_report":"All Employee Report",
+"you_are_being_stop_by_the_Admin":"Your Account was Stopped by the Admin",
+"sorry":"Sorry"
 
 
 

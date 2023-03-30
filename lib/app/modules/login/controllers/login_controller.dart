@@ -81,7 +81,7 @@ class LoginController extends GetxController {
               checkDefaultPassword();
             } else {
               CustomToast.errorToast(
-                  title: 'sorry ', "you are being stopt by the Admin".tr);
+                  title: 'sorry'.tr, "you_are_being_stop_by_the_Admin".tr);
             }
           } else {
             CustomAlertDialog.showPresenceAlert(
