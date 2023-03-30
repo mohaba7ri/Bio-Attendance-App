@@ -40,6 +40,7 @@ class EmployeeHomeView extends GetView<EmployeeHomeController> {
                       SizedBox(height: 16),
 
                       Column(
+                        
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(

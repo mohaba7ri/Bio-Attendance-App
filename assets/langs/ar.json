@@ -235,8 +235,9 @@
 "Something_went_wrong":"هنالك خطأ في الاتصال",
 "edit_times":"تعديل الاوقات",
 "generate_report":"تقاريري",
-"zone":"المساحة"
-
+"zone":"المساحة",
+"cancel":"الغاء"
+,"you_cannot_check_in_you_are_out_area":"لا يمكنك تسجيل بصمة الحضور لانك خارج نطاق الحضور"
 
 
 

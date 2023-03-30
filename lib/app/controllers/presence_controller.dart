@@ -195,6 +195,7 @@ class PresenceController extends GetxController {
               {
                 "date": DateTime.now().toIso8601String(),
                 "status": 'Present',
+                "timing": 'On Time',
                 "checkIn": {
                   "status": timeStatus,
                   "date": DateTime.now().toIso8601String(),
@@ -337,7 +338,9 @@ class PresenceController extends GetxController {
             await presenceCollection.doc(todayDocId).set(
               {
                 "date": DateTime.now().toIso8601String(),
-                "status": 'present',
+                "status": 'Present',
+                "timing": 'On Time',
+                
                 "checkIn": {
                   "status": timeStatus,
                   "date": DateTime.now().toIso8601String(),
@@ -365,6 +368,7 @@ class PresenceController extends GetxController {
                   .tr,
           onConfirm: () {},
           onCancel: () => Get.back());
+        
     }
   }
 
