@@ -19,7 +19,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text(
-          'generate_report'.tr,
+          'all_emp_report'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 18,
@@ -38,176 +38,179 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: GetBuilder<AllEmpsReportsController>(
-        builder: (_controller) => Container(
-          color: AppColor.greyShade200,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: Colors.white,
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
-              ),
-              padding:
-                  EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Image.asset(
-                          Images.report_ani,
-                        )),
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'name'.tr,
+      body: Center(
+        child: GetBuilder<AllEmpsReportsController>(
+          builder: (_controller) => Container(
+            color: AppColor.greyShade200,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+                ),
+                padding:
+                    EdgeInsets.only(left: 24, top: 20, right: 24, bottom: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                              child: Image.asset(
+                            Images.report_ani,
+                          )),
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: Text(
+                        //         'name'.tr,
+                        //         style: robotoHuge,
+                        //       ),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(0.8),
+                        //       child: SizedBox(
+                        //         child: Text(
+                        //           controller.userName,
+                        //           style: robotoHuge,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        Row(
+                          children: [
+                            Text(
+                              'date'.tr,
                               style: robotoHuge,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(0.8),
-                            child: SizedBox(
-                              child: Text(
-                                controller.userName,
-                                style: robotoHuge,
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                child: CustomInput(
+                                  disabled: true,
+                                  valdate: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'please_start_date'.tr;
+                                    }
+                                    return null;
+                                  },
+                                  controller: controller.startDateController,
+                                  label: '',
+                                  hint: '',
+                                  suffixIcon: IconButton(
+                                      onPressed: () async {
+                                        DateTime startDate =
+                                            await controller.showDatePickers(
+                                                context,
+                                                controller
+                                                    .startDateController.text);
+                                        if (startDate != null) {
+                                          controller.changeStartDate(startDate);
+                                          // controller.start = startDate;
+                                        } else {
+                                          controller.startDateController.text =
+                                              '';
+                                        }
+                                      },
+                                      icon: Icon(Icons.date_range)),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'from'.tr,
-                            style: robotoHuge,
-                          ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomInput(
-                                disabled: true,
-                                valdate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please_start_date'.tr;
-                                  }
-                                  return null;
+                          ],
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Text(
+                        //       'to'.tr,
+                        //       style: robotoHuge,
+                        //     ),
+                        //     Spacer(),
+                        //     Padding(
+                        //       padding: const EdgeInsets.only(top: 10),
+                        //       child: SizedBox(
+                        //         width: MediaQuery.of(context).size.width * 0.5,
+                        //         child: CustomInput(
+                        //           disabled: true,
+                        //           valdate: (value) {
+                        //             if (value!.isEmpty) {
+                        //               return 'please_start_date'.tr;
+                        //             }
+                        //             return null;
+                        //           },
+                        //           controller: controller.endDateController,
+                        //           label: '',
+                        //           hint: '',
+                        //           suffixIcon: IconButton(
+                        //               onPressed: () async {
+                        //                 DateTime endDate =
+                        //                     await controller.showDatePickers(
+                        //                         context,
+                        //                         controller
+                        //                             .endDateController.text);
+                        //                 if (endDate != null) {
+                        //                   controller.changeEndDate(endDate);
+
+                        //                   print('the endDate${controller.end}');
+                        //                 } else {
+                        //                   controller.startDateController.text =
+                        //                       '';
+                        //                 }
+                        //               },
+                        //               icon: Icon(Icons.date_range)),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+
+                        Row(children: [
+                          Center(
+                            child: Container(
+                              child: ElevatedButton.icon(
+                                onPressed: () async {
+                                  await controller.getAllPresence();
+                                  await controller.getData();
+                                  // await controller.getAllPresenceWithUser();
+                                  // await controller.getDataWithUser();
+                                  double totalSalary =
+                                      await controller.calculateTotalSalary();
+                                  print('the salary:${controller.totalSalary}');
+
+                                  final pdfEmpReport = PdfMyReport(
+                                      totalSalary: totalSalary,
+                                      company: controller.company,
+                                      branch: controller.branchName,
+                                      start: controller.start,
+                                      user: controller.userName,
+                                      allPrecens: controller.allPrecens,
+                                      end: controller.end);
+                                  final date = DateConverter.estimatedDate(
+                                      DateTime.now());
+                                  final dueDate = DateTime.now();
+
+                                  final pdfFile = await pdfEmpReport.generate();
+
+                                  PdfController.openFile(pdfFile);
                                 },
-                                controller: controller.startDateController,
-                                label: '',
-                                hint: '',
-                                suffixIcon: IconButton(
-                                    onPressed: () async {
-                                      DateTime startDate =
-                                          await controller.showDatePickers(
-                                              context,
-                                              controller
-                                                  .startDateController.text);
-                                      if (startDate != null) {
-                                        controller.changeStartDate(startDate);
-                                        // controller.start = startDate;
-                                      } else {
-                                        controller.startDateController.text =
-                                            '';
-                                      }
-                                    },
-                                    icon: Icon(Icons.date_range)),
+                                icon: Icon(Icons.import_export_outlined),
+                                label: Text("generate".tr),
                               ),
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              height: 40,
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'to'.tr,
-                            style: robotoHuge,
-                          ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: CustomInput(
-                                disabled: true,
-                                valdate: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please_start_date'.tr;
-                                  }
-                                  return null;
-                                },
-                                controller: controller.endDateController,
-                                label: '',
-                                hint: '',
-                                suffixIcon: IconButton(
-                                    onPressed: () async {
-                                      DateTime endDate =
-                                          await controller.showDatePickers(
-                                              context,
-                                              controller
-                                                  .endDateController.text);
-                                      if (endDate != null) {
-                                        controller.changeEndDate(endDate);
-
-                                        print('the endDate${controller.end}');
-                                      } else {
-                                        controller.startDateController.text =
-                                            '';
-                                      }
-                                    },
-                                    icon: Icon(Icons.date_range)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(children: [
-                        Center(
-                          child: Container(
-                            child: ElevatedButton.icon(
-                              onPressed: () async {
-                                await controller.getAllPresence();
-                                await controller.getData();
-                                // await controller.getAllPresenceWithUser();
-                                // await controller.getDataWithUser();
-                                double totalSalary =
-                                    await controller.calculateTotalSalary();
-                                print('the salary:${controller.totalSalary}');
-
-                                final pdfEmpReport = PdfMyReport(
-                                    totalSalary: totalSalary,
-                                    company: controller.company,
-                                    branch: controller.branchName,
-                                    start: controller.start,
-                                    user: controller.userName,
-                                    allPrecens: controller.allPrecens,
-                                    end: controller.end);
-                                final date =
-                                    DateConverter.estimatedDate(DateTime.now());
-                                final dueDate = DateTime.now();
-
-                                final pdfFile = await pdfEmpReport.generate();
-
-                                PdfController.openFile(pdfFile);
-                              },
-                              icon: Icon(Icons.import_export_outlined),
-                              label: Text("generate".tr),
-                            ),
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            height: 40,
-                          ),
-                        )
-                      ])
-                    ]),
+                          )
+                        ])
+                      ]),
+                ),
               ),
             ),
           ),

@@ -239,7 +239,8 @@
 "generate_report":"My Reports",
 "zone":"Zone",
 "you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area",
-"View_Cancel_Requests":"View Cancel Vacation Requests"
+"View_Cancel_Requests":"View Vacation Cancelation Requests",
+"cancel_request_by":"Vacation cancelation request by "
 
 
 

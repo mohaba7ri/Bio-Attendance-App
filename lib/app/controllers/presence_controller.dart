@@ -213,7 +213,7 @@ class PresenceController extends GetxController {
         );
       }
     } else {
-      CustomAlertDialog.showPresenceAlert(
+      CustomAlertDialog.showVacationAlert(
           title: 'vacations'.tr,
           message:
               'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
@@ -340,7 +340,6 @@ class PresenceController extends GetxController {
                 "date": DateTime.now().toIso8601String(),
                 "status": 'Present',
                 "timing": 'On Time',
-                
                 "checkIn": {
                   "status": timeStatus,
                   "date": DateTime.now().toIso8601String(),
@@ -368,7 +367,6 @@ class PresenceController extends GetxController {
                   .tr,
           onConfirm: () {},
           onCancel: () => Get.back());
-        
     }
   }
 
