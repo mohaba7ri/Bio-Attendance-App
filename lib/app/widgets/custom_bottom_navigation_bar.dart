@@ -6,7 +6,6 @@ import '../controllers/page_index_controller.dart';
 import '../modules/menu/management_screen.dart';
 import '../style/app_color.dart';
 
-
 class CustomBottomNavigationBar extends GetView<PageIndexController> {
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,10 @@ class CustomBottomNavigationBar extends GetView<PageIndexController> {
                           onTap: () => controller.changePage(2),
                           child: IconButton(
                               onPressed: () {
-                                Get.bottomSheet(ManagementScreen(sharedPreferences: Get.find(),),
+                                Get.bottomSheet(
+                                    ManagementScreen(
+                                      sharedPreferences: Get.find(),
+                                    ),
                                     backgroundColor: Colors.transparent);
                               },
                               icon: Icon(Icons.menu))),

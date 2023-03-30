@@ -10,6 +10,10 @@ class UpdateEmployeeController extends GetxController {
   String? branchName;
   dynamic EmpDetail = Get.arguments;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String? roleValue;
+  String? branchValue;
+  String branchId = '123';
+  var roleList = ['Admin', 'Employee'];
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> employee() async* {
     //  yield* firestore.collection('branch').where('branchId', isEqualTo: branchId).snapshots();
@@ -22,16 +26,61 @@ class UpdateEmployeeController extends GetxController {
   TextEditingController addressC = TextEditingController();
   TextEditingController phoneC = TextEditingController();
   TextEditingController salaryPerHour = TextEditingController();
+  final branchesList = <DropdownMenuItem<String>>[].obs;
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
+  bool isActive = false;
 
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
     await getBranch();
+    await getBranches();
     print('branchName$branchName');
     bindData();
+  }
+
+  Future getBranches() async {
+    final branches = FirebaseFirestore.instance.collection('branch');
+    try {
+      await branches.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+
+          branchesList.add(
+            DropdownMenuItem(
+              child: Text(data['name']),
+              value: data['name'],
+            ),
+          );
+          update();
+        });
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  changeRoleValue(value) {
+    update();
+    roleValue = value;
+  }
+
+  changeBranchValue(value) async {
+    branchValue = value;
+    update();
+    await firestore
+        .collection('branch')
+        .where('name', isEqualTo: branchValue)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        branchId = data['branchId'];
+        update();
+      });
+    });
   }
 
   Future getBranch() async {
@@ -56,10 +105,27 @@ class UpdateEmployeeController extends GetxController {
     addressC.text = EmpDetail['address'];
     phoneC.text = EmpDetail['phone'];
     salaryPerHour.text = EmpDetail['salaryPerHour'];
+    EmpDetail['status'] == 'Active' ? isActive = true : isActive = false;
+    update();
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamUser() async* {
     yield* firestore.collection("user").doc(EmpDetail['userId']).snapshots();
+  }
+
+  Future changeEmpStatus(bool _isActive) async {
+    if (_isActive == true) {
+      await firestore.collection('user').doc(EmpDetail['userId']).update({
+        "status": 'Active',
+      });
+    } else {
+      await firestore.collection('user').doc(EmpDetail['userId']).update({
+        "status": 'deActive',
+      });
+    }
+
+    isActive = _isActive;
+    update();
   }
 
   Future<void> updateEmployee() async {
@@ -68,6 +134,16 @@ class UpdateEmployeeController extends GetxController {
       try {
         Map<String, dynamic> data = {
           "name": nameC.text,
+          "salaryPerHour": salaryPerHour.text,
+          "name": nameC.text,
+          "email": emailC.text,
+          "role": roleValue,
+          "job": jobC.text,
+          "phone": phoneC.text,
+          "address": addressC.text,
+          "status": "Active",
+          "createdAt": DateTime.now().toIso8601String(),
+          "branchId": branchId,
         };
 
         await firestore
@@ -156,4 +232,4 @@ class UpdateEmployeeController extends GetxController {
   //   } finally {
   //     update();
   //   }
-  // }
+ // }

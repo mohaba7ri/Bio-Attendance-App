@@ -41,15 +41,17 @@ Future<Map<String, Map<String, String>>> init() async {
       sharedPreferences: Get.find(), apiClient: Get.find()));
   Get.lazyPut(() =>
       LoginController(apiClient: Get.find(), sharedPreferences: Get.find()));
-  Get.put(
-    PresenceController(sharedPreferences: Get.find()),
-  );
+  Get.put(PresenceController(sharedPreferences: Get.find()));
+
+  //Get.lazyPut(() => PresenceController(sharedPreferences: Get.find()));
   Get.put(PageIndexController(), permanent: true);
+  //Get.lazyPut(() => PageIndexController());
   Get.put(ProfileController(sharedPreferences: Get.find()));
-  Get.put(LoadingConfig());
-  Get.put(
-    HomeController(sharedPreferences: Get.find()),
-  );
+  // Get.put(LoadingConfig());
+  Get.lazyPut(() => LoadingConfig());
+  //Get.put(HomeController(sharedPreferences: Get.find()));
+  Get.lazyPut(() => HomeController(sharedPreferences: Get.find()));
+
   Get.lazyPut(() => BranchHomeController(sharedPreferences: Get.find()));
 
   Get.lazyPut(() => BranchSettingController());

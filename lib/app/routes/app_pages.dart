@@ -26,7 +26,7 @@ import '../modules/Company/update_Company/bindings/update_company_binding.dart';
 import '../modules/Company/update_Company/views/update_company_view.dart';
 import '../modules/Employees/add_employee/bindings/add_employee_binding.dart';
 import '../modules/Employees/add_employee/views/add_employee_view.dart';
-import '../modules/Employees/add_employee/views/manage_Policies.dart';
+
 import '../modules/Employees/employee_Details/bindings/employee_details_binding.dart';
 import '../modules/Employees/employee_Details/views/employee_details_view.dart';
 import '../modules/Employees/employee_Home/bindings/Employee_Home_binding.dart';
@@ -57,11 +57,12 @@ import '../modules/profile/views/profile_view.dart';
 import '../modules/reports/allBranchesReports/binding/all_branches_reports_binding.dart';
 import '../modules/reports/allBranchesReports/view/all_branches_reports_views.dart';
 import '../modules/reports/allEmpsReports/binding/all_emps_reports_binding.dart';
-import '../modules/reports/allEmpsReports/view/all_emps_reports_view.dart';
+import '../modules/reports/allEmpsReports/view/all_emp_report_view.dart';
+
 import '../modules/reports/branchReports/binding/branch_reports_binding.dart';
 import '../modules/reports/branchReports/view/branch_reports_view.dart';
 import '../modules/reports/empReports/binding/emp_reports_binding.dart';
-import '../modules/reports/empReports/view/emp_reports_view.dart';
+
 import '../modules/reports/list_Branch_Rep/bindings/list_branchRep_binding.dart';
 import '../modules/reports/list_Branch_Rep/views/list_branchRep_view.dart';
 import '../modules/reports/my_report/binding/my_report_binding.dart';
@@ -258,10 +259,6 @@ class AppPages {
         page: () => AttendanceView(),
         binding: AttendanceBinding()),
     GetPage(
-        name: _Paths.MANAGE_POLICIES,
-        page: () => ManagePoliciesView(),
-        binding: AddEmployeeBinding()),
-    GetPage(
       name: _Paths.LANGUAGES,
       page: () => LanguagesView(),
     ),
@@ -302,15 +299,13 @@ class AppPages {
         name: _Paths.DEN_VAC,
         page: () => DeniedVacationView(),
         binding: DeniedVacationBinding()),
-            GetPage(
+    GetPage(
         name: _Paths.MY_REPORT,
-        page: () => MyReportView(),
+        page: () => EmpReportsView(),
         binding: MyReportBinding()),
-
-        GetPage(
+    GetPage(
         name: _Paths.EDIT_VAC,
         page: () => EditVacationTypeView(),
         binding: EditVacationTypeBinding()),
-
   ];
 }

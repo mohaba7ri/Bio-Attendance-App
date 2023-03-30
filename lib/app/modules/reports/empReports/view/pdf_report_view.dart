@@ -8,9 +8,6 @@ import 'package:pdf/widgets.dart';
 
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
-import '../controller/emp_reports_controller.dart';
-
-EmpReportsController employeeReport = EmpReportsController();
 
 class PdfEmpReport extends GetxController {
   @override
@@ -23,8 +20,18 @@ class PdfEmpReport extends GetxController {
   final start;
   final allPrecens;
   final end;
+  final double totalSalary;
+  final company;
+  final user;
+  final branch;
   PdfEmpReport(
-      {required this.start, required this.allPrecens, required this.end});
+      {required this.company,
+      required this.start,
+      required this.branch,
+      required this.allPrecens,
+      required this.end,
+      required this.user,
+      required this.totalSalary});
   Future<File> generate() async {
     final pdf = Document();
 
@@ -42,10 +49,10 @@ class PdfEmpReport extends GetxController {
     ));
 
     return PdfController.saveDocument(
-        name: '${employeeReport.user['name'] + 'Report'}.pdf', pdf: pdf);
+        name: '${user['name'] + 'Report'}.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader() => Column(
+  Widget buildHeader() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //  SizedBox(height: 1 * PdfPageFormat.cm),
@@ -56,7 +63,7 @@ class PdfEmpReport extends GetxController {
                 Text('Company Name :',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: 8),
-                Text('Lean Code',
+                Text('${company['name']}',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ]),
             ],
@@ -64,13 +71,13 @@ class PdfEmpReport extends GetxController {
           Row(children: [
             Text('Address :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('AL Zobairy Street ',
+            Text('${company['address']}',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           Row(children: [
             Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('+967 7777845788 ',
+            Text('${company['phone']} ',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -85,12 +92,12 @@ class PdfEmpReport extends GetxController {
         ],
       );
 
-  static Widget buildEmployee() => Column(
+  Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${employeeReport.user['name']}',
+          Text('Employee Name: ${user['name']}',
               style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('Branch Name: Tech Now'),
+          Text('Branch Name: ${branch['name']}'),
         ],
       );
 
@@ -98,19 +105,14 @@ class PdfEmpReport extends GetxController {
     final titles = <String>[
       'Report Date :${DateConverter.estimatedDate(DateTime.now())}',
     ];
-//  final data = <String>[
-//       info.number,
-//       Utils.formatDate(info.date),
-//       paymentTerms,
-//       Utils.formatDate(info.dueDate),
-//     ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(titles.length, (index) {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '555', width: 200);
+        return buildText(title: title, value: '', width: 200);
       }),
     );
   }
@@ -159,7 +161,7 @@ class PdfEmpReport extends GetxController {
     );
   }
 
-  static Widget buildTotal() {
+  Widget buildTotal() {
     // final netTotal = invoice.items
     //     .map((item) => item.unitPrice * item.quantity)
     //     .reduce((item1, item2) => item1 + item2);
@@ -179,7 +181,7 @@ class PdfEmpReport extends GetxController {
               children: [
                 buildText(
                   title: 'Salary',
-                  value: '120000',
+                  value: '${totalSalary}',
                   unite: true,
                 ),
                 buildText(

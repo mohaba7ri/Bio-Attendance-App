@@ -21,7 +21,7 @@ class BranchHomeView extends GetView<BranchHomeController> {
         backButton: true,
         backRout: () {
           Get.toNamed(Routes.HOME);
-          Get.delete<BranchHomeController>();
+          //  Get.delete<BranchHomeController>();
         },
         mainWidget: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: controller.streamUser(),
