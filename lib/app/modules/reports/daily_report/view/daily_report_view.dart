@@ -1,4 +1,5 @@
-import 'package:Biometric/app/modules/reports/my_report/view/pdf_my_report.dart';
+import 'package:Biometric/app/modules/reports/daily_report/view/pdf_daily_report.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -57,6 +58,63 @@ class DailyReportView extends GetView<DailyReportController> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        _controller.userData['role'] == 'Employee'
+                            ? SizedBox()
+                            : _controller.userData['role'] == 'Admin'
+                                ? SizedBox()
+                                : Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black12,
+                                                  blurRadius: 5)
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: SizedBox(
+                                              //  height: MediaQuery.of(context).size.height * 50,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  45 /
+                                                  100,
+                                              child:
+                                                  DropdownButtonHideUnderline(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15),
+                                                  child: DropdownButton2(
+                                                    hint:
+                                                        Text('chose branch'.tr),
+                                                    items: _controller
+                                                        .branchesList,
+                                                    value:
+                                                        _controller.branchValue,
+                                                    onChanged: (String?
+                                                        selectedValue) {
+                                                      _controller
+                                                          .changeBranchValue(
+                                                              selectedValue);
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
@@ -185,10 +243,10 @@ class DailyReportView extends GetView<DailyReportController> {
                                       await controller.calculateTotalSalary();
                                   print('the salary:${controller.totalSalary}');
 
-                                  final pdfEmpReport = PdfMyReport(
+                                  final pdfEmpReport = PdfDailyReport(
                                       totalSalary: totalSalary,
                                       company: controller.company,
-                                      branch: controller.branchName,
+                                      branch: controller.branchValue,
                                       start: controller.start,
                                       user: controller.userName,
                                       allPrecens: controller.allPrecens,

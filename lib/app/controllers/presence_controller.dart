@@ -228,7 +228,40 @@ class PresenceController extends GetxController {
             onCancel: () => Get.back());
       }
     } else {
-      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
+      CustomAlertDialog.showVacationAlert(
+          title: 'vacations'.tr,
+          message:
+              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                  .tr,
+          onConfirm: () {
+            Future cancel(data) async {
+              final inputString = data['startDate'];
+              final inputFormat = DateFormat('MMM dd, yyyy');
+              final inputDate = inputFormat.parse(inputString);
+
+              try {
+                await firestore
+                    .collection('vacationRequest')
+                    .doc(data['vacationId'])
+                    .delete();
+
+                await firestore
+                    .collection('user')
+                    .doc(data['userId'])
+                    .collection('presence')
+                    .where('date', isGreaterThanOrEqualTo: inputDate)
+                    .get()
+                    .then((snapshot) {
+                  for (DocumentSnapshot doc in snapshot.docs) {
+                    doc.reference.delete();
+                  }
+                });
+              } catch (e) {
+                print('the error$e');
+              }
+            }
+          },
+          onCancel: () => Get.back());
     }
   }
 
@@ -387,53 +420,57 @@ class PresenceController extends GetxController {
     double distance,
     bool in_area,
   ) async {
-    bool allowCheckOut =
-        await checkVacationStatus(sharedPreferences.getString('userId')!);
+    if (in_area == true) {
+      bool allowCheckOut =
+          await checkVacationStatus(sharedPreferences.getString('userId')!);
 
-    if (allowCheckOut) {
-      bool chechOut = await calCheckOut();
-      if (chechOut) {
-        int currentHour = currentTime!.hour * 60 + currentTime!.minute;
-        int startHour = startTime!.hour * 60 + startTime!.minute;
-        int lateHour = lateTime!.hour * 60 + lateTime!.minute;
-        int endHour = endTime!.hour * 60 + endTime!.minute;
-        if (currentHour < endHour) {
-          print("Check-out time has not arrived yet.");
-        } else {
-          print("Check-out time has passed.");
-        }
-        CustomAlertDialog.showPresenceAlert(
-          title: "do_you_want_to_check_out".tr,
-          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-          onCancel: () => Get.back(),
-          onConfirm: () async {
-            await presenceCollection.doc(todayDocId).update(
-              {
-                "checkOut": {
-                  "status": timeStatus,
-                  "date": DateTime.now().toIso8601String(),
-                  "latitude": position.latitude,
-                  "longitude": position.longitude,
-                  "address": address,
-                  "in_area": in_area,
-                  "distance": distance,
+      if (allowCheckOut) {
+        bool chechOut = await calCheckOut();
+        if (chechOut) {
+          int currentHour = currentTime!.hour * 60 + currentTime!.minute;
+          int startHour = startTime!.hour * 60 + startTime!.minute;
+          int lateHour = lateTime!.hour * 60 + lateTime!.minute;
+          int endHour = endTime!.hour * 60 + endTime!.minute;
+          if (currentHour < endHour) {
+            print("Check-out time has not arrived yet.");
+          } else {
+            print("Check-out time has passed.");
+          }
+          CustomAlertDialog.showPresenceAlert(
+            title: "do_you_want_to_check_out".tr,
+            message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+            onCancel: () => Get.back(),
+            onConfirm: () async {
+              await presenceCollection.doc(todayDocId).update(
+                {
+                  "checkOut": {
+                    "status": timeStatus,
+                    "date": DateTime.now().toIso8601String(),
+                    "latitude": position.latitude,
+                    "longitude": position.longitude,
+                    "address": address,
+                    "in_area": in_area,
+                    "distance": distance,
+                  },
+                  'hoursWork': hoursWork
                 },
-                'hoursWork': hoursWork
-              },
-            );
-            Get.back();
-            CustomToast.successToast("success_check_out".tr);
-          },
-        );
+              );
+              Get.back();
+              CustomToast.successToast("success_check_out".tr);
+            },
+          );
+        }
+      } else {
+        CustomAlertDialog.showPresenceAlert(
+            title: 'vacations'.tr,
+            message:
+                'sorry_you_cant_check_out_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
+                    .tr,
+            onConfirm: () {},
+            onCancel: () => Get.back());
       }
     } else {
-      CustomAlertDialog.showPresenceAlert(
-          title: 'vacations'.tr,
-          message:
-              'sorry_you_cant_check_out_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                  .tr,
-          onConfirm: () {},
-          onCancel: () => Get.back());
+      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
     }
   }
 

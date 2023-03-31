@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
@@ -9,7 +8,7 @@ import 'package:pdf/widgets.dart';
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 
-class PdfMyReport extends GetxController {
+class PdfDailyReport extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
@@ -24,7 +23,7 @@ class PdfMyReport extends GetxController {
   final company;
   final branch;
   final totalSalary;
-  PdfMyReport(
+  PdfDailyReport(
       {required this.start,
       required this.totalSalary,
       required this.allPrecens,
@@ -34,16 +33,15 @@ class PdfMyReport extends GetxController {
       required this.branch});
   Future<File> generate() async {
     final pdf = Document();
-
-    pdf.addPage(MultiPage(
+     
+    pdf.addPage(
+      MultiPage(
       build: (context) => [
         buildHeader(),
         SizedBox(height: 2 * PdfPageFormat.cm),
-        buildTitle(),
         SizedBox(height: 5 * PdfPageFormat.mm),
         buildAttendance(),
-        Divider(),
-        buildTotal(),
+        //  Divider(),
       ],
       footer: (context) => buildFooter(),
     ));
@@ -121,22 +119,6 @@ class PdfMyReport extends GetxController {
     );
   }
 
-  Widget buildTitle() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            SizedBox(width: 30 * PdfPageFormat.mm),
-            Text('Date From : '),
-            Text('${DateFormat("M/d/yyyy").format(start)}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 15 * PdfPageFormat.mm),
-            Text('Date To : '),
-            Text('${DateFormat("M/d/yyyy").format(end)}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ]),
-        ],
-      );
-
   Widget buildAttendance() {
     final headers = [
       'Name',
@@ -146,14 +128,6 @@ class PdfMyReport extends GetxController {
       'Status',
       'Hours Work',
     ];
-    // final List<List<dynamic>> data = [
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
-    // ];
 
     return Table.fromTextArray(
       headers: headers,
@@ -170,46 +144,6 @@ class PdfMyReport extends GetxController {
         4: Alignment.centerRight,
         5: Alignment.centerRight,
       },
-    );
-  }
-
-  Widget buildTotal() {
-    // final netTotal = invoice.items
-    //     .map((item) => item.unitPrice * item.quantity)
-    //     .reduce((item1, item2) => item1 + item2);
-    // final vatPercent = invoice.items.first.vat;
-    // final vat = netTotal * vatPercent;
-    // final total = netTotal + vat;
-
-    return Container(
-      alignment: Alignment.centerRight,
-      child: Row(
-        children: [
-          Spacer(flex: 6),
-          Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildText(
-                  title: 'Salary',
-                  value: '$totalSalary',
-                  unite: true,
-                ),
-                buildText(
-                  title: 'Total Hours Work',
-                  value: '',
-                  unite: true,
-                ),
-                SizedBox(height: 2 * PdfPageFormat.mm),
-                Container(height: 1, color: PdfColors.grey400),
-                SizedBox(height: 0.5 * PdfPageFormat.mm),
-                Container(height: 1, color: PdfColors.grey400),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

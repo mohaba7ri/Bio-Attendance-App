@@ -73,6 +73,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                           ],
                         ),
                       ),
+         
           ],
           backgroundColor: Colors.white,
           elevation: 0,

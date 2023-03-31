@@ -11,7 +11,8 @@ class DailyReportController extends GetxController {
     super.onInit();
     await getUserDate();
     await getCompanyData();
-    await getBranchData();
+
+    await getBranches();
   }
 
   dynamic userData = Get.arguments;
@@ -24,8 +25,10 @@ class DailyReportController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+  String? branchValue;
+  String? branchId;
+  final branchesList = <DropdownMenuItem<String>>[].obs;
 
-  String? branchName;
   double totalSalary = 0;
   Map<String, dynamic>? company;
   Future<DateTime> showDatePickers(
@@ -69,6 +72,43 @@ class DailyReportController extends GetxController {
     var startDateController;
     if (startDateController.value.text.isEmpty) {
       return 'pick date';
+    }
+  }
+
+  changeBranchValue(value) async {
+    branchValue = value;
+    update();
+    await firestore
+        .collection('branch')
+        .where('name', isEqualTo: branchValue)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        branchId = data['branchId'];
+        update();
+      });
+    });
+  }
+
+  Future getBranches() async {
+    final branches = FirebaseFirestore.instance.collection('branch');
+    try {
+      await branches.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+
+          branchesList.add(
+            DropdownMenuItem(
+              child: Text(data['name']),
+              value: data['name'],
+            ),
+          );
+          update();
+        });
+      });
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -133,7 +173,10 @@ class DailyReportController extends GetxController {
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
       if (userData['role'] == 'SuperAdmin') {
-        query = await firestore.collection("user").get();
+        query = await firestore
+            .collection("user")
+            .where('branchId', isEqualTo: branchId)
+            .get();
       } else {
         query = await firestore
             .collection("user")
@@ -185,16 +228,6 @@ class DailyReportController extends GetxController {
       query.docs.forEach((data) {
         company = data.data();
       });
-    });
-  }
-
-  Future getBranchData() async {
-    await firestore
-        .collection('branch')
-        .doc(userData['branchId'])
-        .get()
-        .then((data) {
-      branchName = data['name'];
     });
   }
 }

@@ -5,7 +5,6 @@ import '../controller/daily_report_controller.dart';
 class DailyReportBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(DailyReportController(sharedPreferences: Get.find()),
-        permanent: true);
+    Get.lazyPut(() => DailyReportController(sharedPreferences: Get.find()));
   }
 }
