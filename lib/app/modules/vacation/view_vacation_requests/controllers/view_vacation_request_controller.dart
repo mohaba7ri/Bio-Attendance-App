@@ -76,6 +76,7 @@ class ViewVacationRequestsController extends GetxController {
             .collection('presence')
             .doc(dateString)
             .set({
+          'name': data['userName'],
           'date': formattedDate,
           'status': 'onVacation',
           // 'checkIn': {
@@ -86,7 +87,7 @@ class ViewVacationRequestsController extends GetxController {
           //   'latitude': '',
           //   'longitude': '',
           // },
-          'hoursWork': '0'
+          'hoursWork': '0',
         });
       }
     } catch (e) {

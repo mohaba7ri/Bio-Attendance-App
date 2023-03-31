@@ -9,7 +9,7 @@ import 'package:pdf/widgets.dart';
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 
-class PdfEmpReport extends GetxController {
+class PdfMyReport extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
@@ -20,18 +20,18 @@ class PdfEmpReport extends GetxController {
   final start;
   final allPrecens;
   final end;
-  final double totalSalary;
-  final company;
   final user;
+  final company;
   final branch;
-  PdfEmpReport(
-      {required this.company,
-      required this.start,
-      required this.branch,
+  final totalSalary;
+  PdfMyReport(
+      {required this.start,
+      required this.totalSalary,
       required this.allPrecens,
       required this.end,
       required this.user,
-      required this.totalSalary});
+      required this.company,
+      required this.branch});
   Future<File> generate() async {
     final pdf = Document();
 
@@ -48,8 +48,7 @@ class PdfEmpReport extends GetxController {
       footer: (context) => buildFooter(),
     ));
 
-    return PdfController.saveDocument(
-        name: '${user['name'] + 'Report'}.pdf', pdf: pdf);
+    return PdfController.saveDocument(name: '${user + 'Report'}.pdf', pdf: pdf);
   }
 
   Widget buildHeader() => Column(
@@ -77,7 +76,7 @@ class PdfEmpReport extends GetxController {
           Row(children: [
             Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('${company['phone']} ',
+            Text('+967 7777845788 ',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -95,9 +94,9 @@ class PdfEmpReport extends GetxController {
   Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${user['name']}',
+          Text('Employee Name: ${user}',
               style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('Branch Name: ${branch['name']}'),
+          Text('Branch Name: ${branch}'),
         ],
       );
 
@@ -105,14 +104,19 @@ class PdfEmpReport extends GetxController {
     final titles = <String>[
       'Report Date :${DateConverter.estimatedDate(DateTime.now())}',
     ];
-
+//  final data = <String>[
+//       info.number,
+//       Utils.formatDate(info.date),
+//       paymentTerms,
+//       Utils.formatDate(info.dueDate),
+//     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(titles.length, (index) {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '', width: 200);
+        return buildText(title: title, value: '555', width: 200);
       }),
     );
   }
@@ -135,13 +139,21 @@ class PdfEmpReport extends GetxController {
 
   Widget buildAttendance() {
     final headers = [
+      'name',
       'Date',
       'Check In ',
       'Check Out',
-      'Timing',
       'Status',
       'Hours Work',
     ];
+    // final List<List<dynamic>> data = [
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    //   ['2/28/2023', '8:00 AM', '2:00 PM', 'In Area', 'On Time', '8'],
+    // ];
 
     return Table.fromTextArray(
       headers: headers,
@@ -181,7 +193,7 @@ class PdfEmpReport extends GetxController {
               children: [
                 buildText(
                   title: 'Salary',
-                  value: '${totalSalary}',
+                  value: '$totalSalary',
                   unite: true,
                 ),
                 buildText(

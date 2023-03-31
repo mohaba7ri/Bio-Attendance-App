@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EmpReportsController extends GetxController {
+class DailyReportController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -16,7 +16,7 @@ class EmpReportsController extends GetxController {
 
   dynamic userData = Get.arguments;
   final SharedPreferences sharedPreferences;
-  EmpReportsController({required this.sharedPreferences});
+  DailyReportController({required this.sharedPreferences});
   List<List<dynamic>>? allPrecens;
   final firestore = FirebaseFirestore.instance;
   var startDateController = TextEditingController();
@@ -24,6 +24,7 @@ class EmpReportsController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+
   String? branchName;
   double totalSalary = 0;
   Map<String, dynamic>? company;
@@ -71,36 +72,6 @@ class EmpReportsController extends GetxController {
     }
   }
 
-  // Future<List<List<dynamic>>> getData() async {
-  //   QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
-  //   List<List<dynamic>> data = [];
-
-  //   snapshot.docs.forEach((doc) {
-  //     List<dynamic> row = [];
-  //     row.add(
-  //         DateFormat("M/d/yyyy").format(DateTime.parse(doc.data()["date"])));
-  //     row.add(
-  //         doc.data()["checkIn"] != null && doc.data()["checkIn"]["date"] != null
-  //             ? DateFormat.jm()
-  //                 .format(DateTime.parse(doc.data()["checkIn"]["date"]))
-  //             : '');
-  //     row.add(doc.data()["checkOut"] != null &&
-  //             doc.data()["checkOut"]["date"] != null
-  //         ? DateFormat.jm()
-  //             .format(DateTime.parse(doc.data()["checkOut"]["date"]))
-  //         : '');
-  //     row.add(doc.data()['timing'] != null ? doc.data()['timing'] : '');
-  //     row.add(doc.data()['status'] != null ? doc.data()['status'] : '');
-  //     row.add(doc.data()['hoursWork'] != null ? doc.data()['hoursWork'] : '');
-
-  //     data.add(row);
-  //   });
-  //   allPrecens = data;
-  //   update();
-  //   print('the all precens$data');
-  //   return data;
-  // }
-
   Future<List<List<dynamic>>> getData() async {
     List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshots =
         await getAllPresence();
@@ -136,71 +107,6 @@ class EmpReportsController extends GetxController {
     allPrecens = data;
     return data;
   }
-  // Future<List<Map<String, dynamic>>> getAllPresenceWithUser() async {
-  //   QuerySnapshot<Map<String, dynamic>>? query;
-  //   try {
-  //     query = await firestore.collection("user").get();
-
-  //     List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
-  //     for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
-  //         in query.docs) {
-  //       futures.add(firestore
-  //           .collection("user")
-  //           .doc(documentSnapshot.id)
-  //           .collection("presence")
-  //           .where("date", isGreaterThan: start!.toIso8601String())
-  //           .where("date",
-  //               isLessThan: end.add(Duration(days: 1)).toIso8601String())
-  //           .orderBy(
-  //             "date",
-  //             descending: true,
-  //           )
-  //           .get());
-  //     }
-  //     List<QuerySnapshot<Map<String, dynamic>>> snapshots =
-  //         await Future.wait(futures);
-  //     List<Map<String, dynamic>> documents = [];
-  //     for (QuerySnapshot<Map<String, dynamic>> snapshot in snapshots) {
-  //       for (QueryDocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
-  //         Map<String, dynamic> data = doc.data();
-  //         QueryDocumentSnapshot<Map<String, dynamic>> userDoc =
-  //             query.docs.firstWhere((userDoc) => userDoc.id == data['userId']);
-  //         data['name'] = userDoc.data()['name'];
-  //         documents.add(data);
-  //       }
-  //     }
-  //     return documents;
-  //   } catch (e) {
-  //     print('error $e');
-  //     return [];
-  //   }
-  // }
-
-  // Future<List<List<dynamic>>> getDataWithUser() async {
-  //   List<Map<String, dynamic>> snapshots = await getAllPresenceWithUser();
-  //   List<List<dynamic>> data = [];
-
-  //   snapshots.forEach((snapshot) {
-  //     List<dynamic> row = [];
-  //     row.add(snapshot['name'] ?? '');
-  //     row.add(DateFormat("M/d/yyyy").format(DateTime.parse(snapshot["date"])));
-  //     row.add(snapshot["checkIn"] != null && snapshot["checkIn"]["date"] != null
-  //         ? DateFormat.jm().format(DateTime.parse(snapshot["checkIn"]["date"]))
-  //         : '');
-  //     row.add(snapshot["checkOut"] != null &&
-  //             snapshot["checkOut"]["date"] != null
-  //         ? DateFormat.jm().format(DateTime.parse(snapshot["checkOut"]["date"]))
-  //         : '');
-  //     row.add(snapshot['status'] != null ? snapshot['status'] : '');
-  //     row.add(snapshot['hoursWork'] != null ? snapshot['hoursWork'] : '');
-
-  //     data.add(row);
-  //   });
-
-  //   print('the all precens$data');
-  //   allPrecens = data;
-  //   return data;
-  // }
 
   Future<double> calculateTotalSalary() async {
     List<List<dynamic>> data = await getData();
@@ -222,49 +128,18 @@ class EmpReportsController extends GetxController {
     return totalSalary;
   }
 
-  // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
-  //   String? uid = sharedPreferences.getString('userId');
-  //   QuerySnapshot<Map<String, dynamic>>? query;
-  //   try {
-  //     if (startDateController == null) {
-  //       query = await firestore
-  //           .collection("user")
-  //           .doc(uid)
-  //           .collection("presence")
-  //           .where("date", isLessThan: end.toIso8601String())
-  //           .orderBy(
-  //             "date",
-  //             descending: true,
-  //           )
-  //           .get();
-
-  //       return query;
-  //     } else {
-  //       QuerySnapshot<Map<String, dynamic>> query = await firestore
-  //           .collection("user")
-  //           .doc(uid)
-  //           .collection("presence")
-  //           .where("date", isGreaterThan: start!.toIso8601String())
-  //           .where("date",
-  //               isLessThan: end.add(Duration(days: 1)).toIso8601String())
-  //           .orderBy(
-  //             "date",
-  //             descending: true,
-  //           )
-  //           .get();
-  //       return query;
-  //     }
-  //   } catch (e) {
-  //     print('error $e');
-  //   }
-  //   return query!;
-  // }
-
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
       getAllPresence() async {
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
-      query = await firestore.collection("user").get();
+      if (userData['role'] == 'SuperAdmin') {
+        query = await firestore.collection("user").get();
+      } else {
+        query = await firestore
+            .collection("user")
+            .where('branchId', isEqualTo: userData['branchId'])
+            .get();
+      }
 
       List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
       for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
@@ -299,6 +174,7 @@ class EmpReportsController extends GetxController {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+
       print('the user Name$userName');
     });
     update();

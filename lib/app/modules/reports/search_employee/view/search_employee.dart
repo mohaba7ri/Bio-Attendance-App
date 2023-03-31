@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/reports/search_employee/controller/search_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,9 +7,9 @@ import '../../../../routes/app_pages.dart';
 import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../languages/controller/languages_controller.dart';
-import '../controllers/EmployeesRep_controller.dart';
+import '../../view_EmployeeRep/controllers/EmployeesRep_controller.dart';
 
-class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
+class SearchEmployeeView extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
         ),
         leading: IconButton(
           onPressed: () {
-            Get.delete<ListEmployeeRepController>();
+            Get.delete<EmployeeReportController>();
             Get.back();
           },
           icon: Icon(
@@ -49,7 +50,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
           ),
         ),
       ),
-      body: GetBuilder<ListEmployeeRepController>(
+      body: GetBuilder<SearchController>(
         builder: (_controller) => Column(
           children: [
             Padding(
@@ -75,7 +76,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
                 color: AppColor.greyShade200,
                 height: MediaQuery.of(context).size.height,
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: _controller.Employee(),
+                  stream: _controller.employee(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
                       print('the error${snapshot.error}');
@@ -105,7 +106,7 @@ class ListEmployeeRepView extends GetView<ListEmployeeRepController> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(Routes.EMP_REPORTS,
+                                        Get.toNamed(Routes.LIST_EMPLOYEES_REP,
                                             arguments: data);
                                       },
                                       child: Container(

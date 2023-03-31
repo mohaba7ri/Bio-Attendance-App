@@ -9,9 +9,9 @@ import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
-import '../controller/my_report_controller.dart';
+import '../controllers/EmployeesRep_controller.dart';
 
-class MyReportView extends GetView<MyReportController> {
+class EmpReportsView extends GetView<EmployeeReportController> {
   // TODO: implement build
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class MyReportView extends GetView<MyReportController> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: GetBuilder<MyReportController>(
+      body: GetBuilder<EmployeeReportController>(
         builder: (_controller) => Container(
           color: AppColor.greyShade200,
           child: Padding(

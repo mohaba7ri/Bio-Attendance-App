@@ -45,16 +45,17 @@ abstract class Routes {
   static const LANGUAGES = _Paths.LANGUAGES;
   static const MY_VACATION = _Paths.MY_VACATION;
   static const MANAGE_VACATION = _Paths.MANAGE_VACATION;
-  static const EMP_REPORTS = _Paths.EMP_REPORTS;
+ 
   static const REP_HOME = _Paths.REP_HOME;
   static const LIST_EMPLOYEES_REP = _Paths.LIST_EMPLOYEES_REP;
-  static const ALL_EMPS_REP = _Paths.ALL_EMPS_REP;
+  static const DAILY_REPORT = _Paths.DAILY_REPORT;
   static const ALL_BRANCHES_REP = _Paths.ALL_BRANCHES_REP;
   static const LIST_BRANCHES_REP = _Paths.LIST_BRANCHES_REP;
   static const BRANCH_REP = _Paths.BRANCH_REP;
   static const DEN_VAC = _Paths.DEN_VAC;
   static const MY_REPORT = _Paths.MY_REPORT;
   static const EDIT_VAC = _Paths.EDIT_VAC;
+  static const SEARCH_EMPLOYEE = _Paths.SEARCH_EMPLOYEE;
 }
 
 abstract class _Paths {
@@ -100,14 +101,15 @@ abstract class _Paths {
   static const LANGUAGES = '/LANGUAGES';
   static const MY_VACATION = '/MY_VACATION';
   static const MANAGE_VACATION = '/MANAGE_VACATION';
-  static const EMP_REPORTS = '/EMP_REPORTS';
+ 
   static const REP_HOME = '/REP_HOME';
   static const LIST_EMPLOYEES_REP = '/LIST_EMPLOYEES_REP';
-  static const ALL_EMPS_REP = '/ALL_EMPS_REP';
+  static const DAILY_REPORT = '/DAILY_REPORT';
   static const ALL_BRANCHES_REP = '/ALL_BRANCHES_REP';
   static const LIST_BRANCHES_REP = '/LIST_BRANCHES_REP';
   static const BRANCH_REP = '/BRANCH_REP';
   static const DEN_VAC = '/DEN_VAC';
   static const MY_REPORT = '/MY_REPORT';
   static const EDIT_VAC = '/EDIT_VAC';
+  static const SEARCH_EMPLOYEE = '/SEARCH_EMPLOYEE';
 }
