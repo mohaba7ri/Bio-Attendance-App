@@ -218,7 +218,34 @@ class PresenceController extends GetxController {
           message:
               'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
                   .tr,
-          onConfirm: () {},
+          onConfirm: () {
+            Future cancel(data) async {
+              final inputString = data['startDate'];
+              final inputFormat = DateFormat('MMM dd, yyyy');
+              final inputDate = inputFormat.parse(inputString);
+
+              try {
+                await firestore
+                    .collection('vacationRequest')
+                    .doc(data['vacationId'])
+                    .delete();
+
+                await firestore
+                    .collection('user')
+                    .doc(data['userId'])
+                    .collection('presence')
+                    .where('date', isGreaterThanOrEqualTo: inputDate)
+                    .get()
+                    .then((snapshot) {
+                  for (DocumentSnapshot doc in snapshot.docs) {
+                    doc.reference.delete();
+                  }
+                });
+              } catch (e) {
+                print('the error$e');
+              }
+            }
+          },
           onCancel: () => Get.back());
     }
   }

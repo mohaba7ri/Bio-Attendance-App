@@ -86,7 +86,7 @@ class ViewVacationRequestsController extends GetxController {
           //   'latitude': '',
           //   'longitude': '',
           // },
-          'hoursWork': '0'
+          
         });
       }
     } catch (e) {
