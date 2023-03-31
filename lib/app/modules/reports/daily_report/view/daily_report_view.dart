@@ -58,6 +58,14 @@ class DailyReportView extends GetView<DailyReportController> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                              child: Image.asset(
+                            Images.report_ani,
+                          )),
+                        ),
+
                         _controller.userData['role'] == 'Employee'
                             ? SizedBox()
                             : _controller.userData['role'] == 'Admin'
@@ -94,7 +102,7 @@ class DailyReportView extends GetView<DailyReportController> {
                                                           left: 15),
                                                   child: DropdownButton2(
                                                     hint:
-                                                        Text('chose branch'.tr),
+                                                        Text('chose_branch'.tr),
                                                     items: _controller
                                                         .branchesList,
                                                     value:
@@ -115,33 +123,7 @@ class DailyReportView extends GetView<DailyReportController> {
                                     ),
                                   ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                              child: Image.asset(
-                            Images.report_ani,
-                          )),
-                        ),
-                        // Row(
-                        //   children: [
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(8.0),
-                        //       child: Text(
-                        //         'name'.tr,
-                        //         style: robotoHuge,
-                        //       ),
-                        //     ),
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(0.8),
-                        //       child: SizedBox(
-                        //         child: Text(
-                        //           controller.userName,
-                        //           style: robotoHuge,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                    
                         Row(
                           children: [
                             Text(

@@ -246,7 +246,9 @@
 "you_are_being_stop_by_the_Admin":"تم ايقاف حسابك من قبل المدير",
 "sorry":"المعذرة",
 "Request_Date":"تاريخ الطلب",
-"admin_branch":"مدير الفرع"
+"admin_branch":"مدير الفرع",
+"chose_branch":"اختر فرع",
+"date":"حدد التاريخ"
 
 
 

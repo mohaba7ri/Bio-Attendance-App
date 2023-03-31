@@ -245,7 +245,9 @@
 "you_are_being_stop_by_the_Admin":"Your Account was Stopped by the Admin",
 "sorry":"Sorry",
 "Request_Date":"Request Date",
-"admin_branch":"Branch Admin"
+"admin_branch":"Branch Admin",
+"chose_branch":"Select Branch",
+"date":"Choose Date"
 
 
 
