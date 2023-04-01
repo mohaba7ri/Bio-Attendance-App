@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../../util/styles.dart';
 import '../controllers/view_vacation_request_controller.dart';
 

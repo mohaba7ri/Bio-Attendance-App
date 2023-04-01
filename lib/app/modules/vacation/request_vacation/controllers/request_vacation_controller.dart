@@ -170,11 +170,23 @@ class VacationRequestController extends GetxController {
     String uid = sharedPreferences.getString('userId')!;
     isloading!.value = true;
     String vacationId = const Uuid().v4();
+    // parse the date string to a DateTime object
+    DateTime startDate =
+        DateFormat("MMM d, y").parse(startDateController.value.text);
+
+    DateTime endDate =
+        DateFormat("MMM d, y").parse(endDateController.value.text);
+// format the DateTime object to the desired string format
+    String formatEedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS").format(endDate);
+    String formatStartDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS").format(startDate);
+
     await firebase.collection('vacationRequest').doc(vacationId).set({
       'vacationId': vacationId,
       'vacationType': leaveTypeValue,
-      'startDate': startDateController.value.text,
-      'endDate': endDateController.value.text,
+      'startDate': formatStartDate,
+      'endDate': formatEedDate,
       'requestDate': DateTime.now().toIso8601String(),
       'userId': uid,
       'userName': userName,

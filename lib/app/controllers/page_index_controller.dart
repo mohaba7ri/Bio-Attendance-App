@@ -1,8 +1,6 @@
 import 'package:Biometric/app/controllers/presence_controller.dart';
 import 'package:get/get.dart';
 
-
-
 import '../routes/app_pages.dart';
 import 'biometric_controller.dart';
 
@@ -24,6 +22,7 @@ class PageIndexController extends GetxController {
         } else {
           presenceController
             ..checkTime()
+            ..getVacationRequest()
             ..presence();
         }
 

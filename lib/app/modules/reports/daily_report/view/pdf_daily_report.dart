@@ -33,9 +33,9 @@ class PdfDailyReport extends GetxController {
       required this.branch});
   Future<File> generate() async {
     final pdf = Document();
-     
-    pdf.addPage(
-      MultiPage(
+
+    pdf.addPage(MultiPage(
+      margin: EdgeInsets.all(20),
       build: (context) => [
         buildHeader(),
         SizedBox(height: 2 * PdfPageFormat.cm),
@@ -74,7 +74,7 @@ class PdfDailyReport extends GetxController {
           Row(children: [
             Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('+967 7777845788 ',
+            Text('${company['phone']}',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),

@@ -43,14 +43,10 @@ class ViewVacationRequestsController extends GetxController {
   }
 
   Future accept(data) async {
-    final inputString = data['startDate'];
-    final inputFormat = DateFormat('MMM dd, yyyy');
+    final inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSSSS');
     final outputFormat = DateFormat('M-d-yyyy');
 
-    final inputDate = inputFormat.parse(inputString);
-    final outputString = outputFormat.format(inputDate);
-
-    final startDate = inputDate;
+    final startDate = inputFormat.parse(data['startDate']);
     final endDate = inputFormat.parse(data['endDate']);
 
     final duration = endDate.difference(startDate);

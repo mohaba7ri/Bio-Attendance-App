@@ -23,6 +23,7 @@ class PresenceController extends GetxController {
   RxString companyId = ''.obs;
   RxString branchId = ''.obs;
   RxString onTimig = ''.obs;
+  Map<String, dynamic>? reQuestVacationData;
   RxBool inArea = false.obs;
   final SharedPreferences sharedPreferences;
   RxMap office = {}.obs;
@@ -34,6 +35,7 @@ class PresenceController extends GetxController {
     // await getCompany();
     await getBranch();
     await getCompanySetting();
+    //  await getVacationRequest();
   }
 
   @override
@@ -158,8 +160,8 @@ class PresenceController extends GetxController {
     final documents = vacationSnapshot.docs;
     for (var doc in documents) {
       var status = doc.data()['status'];
-      var startDate = DateFormat("MMM dd, yyyy").parse(doc.data()['startDate']);
-      var endDate = DateFormat("MMM dd, yyyy").parse(doc.data()['endDate']);
+      var startDate = DateTime.parse(doc.data()['startDate']);
+      var endDate = DateTime.parse(doc.data()['endDate']);
       print('thesartDate$startDate');
       var currentTime = DateTime.now();
       if (status == 'Approved' &&
@@ -219,49 +221,44 @@ class PresenceController extends GetxController {
           );
         }
       } else {
-        CustomAlertDialog.showPresenceAlert(
+        CustomAlertDialog.showVacationAlert(
             title: 'vacations'.tr,
             message:
                 'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
                     .tr,
-            onConfirm: () {},
+            onConfirm: () {
+              Future cancel(data) async {
+                data = reQuestVacationData;
+                final inputString = data['startDate'];
+                final inputFormat = DateFormat('MMM dd, yyyy');
+                final inputDate = inputFormat.parse(inputString);
+
+                try {
+                  await firestore
+                      .collection('vacationRequest')
+                      .doc(data['vacationId'])
+                      .delete();
+
+                  await firestore
+                      .collection('user')
+                      .doc(data['userId'])
+                      .collection('presence')
+                      .where('date', isGreaterThanOrEqualTo: inputDate)
+                      .get()
+                      .then((snapshot) {
+                    for (DocumentSnapshot doc in snapshot.docs) {
+                      doc.reference.delete();
+                    }
+                  });
+                } catch (e) {
+                  print('the error$e');
+                }
+              }
+            },
             onCancel: () => Get.back());
       }
     } else {
-      CustomAlertDialog.showVacationAlert(
-          title: 'vacations'.tr,
-          message:
-              'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
-                  .tr,
-          onConfirm: () {
-            Future cancel(data) async {
-              final inputString = data['startDate'];
-              final inputFormat = DateFormat('MMM dd, yyyy');
-              final inputDate = inputFormat.parse(inputString);
-
-              try {
-                await firestore
-                    .collection('vacationRequest')
-                    .doc(data['vacationId'])
-                    .delete();
-
-                await firestore
-                    .collection('user')
-                    .doc(data['userId'])
-                    .collection('presence')
-                    .where('date', isGreaterThanOrEqualTo: inputDate)
-                    .get()
-                    .then((snapshot) {
-                  for (DocumentSnapshot doc in snapshot.docs) {
-                    doc.reference.delete();
-                  }
-                });
-              } catch (e) {
-                print('the error$e');
-              }
-            }
-          },
-          onCancel: () => Get.back());
+      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
     }
   }
 
@@ -404,7 +401,32 @@ class PresenceController extends GetxController {
             message:
                 'sorry_you_cant_check_in_because_you_have_vacation_do_you_want_to_cancel_vacation_request'
                     .tr,
-            onConfirm: () {},
+            onConfirm: () async {
+              final inputString = reQuestVacationData!['startDate'];
+              final inputFormat = DateFormat('MMM dd, yyyy');
+              final inputDate = inputFormat.parse(inputString);
+
+              try {
+                await firestore
+                    .collection('vacationRequest')
+                    .doc(reQuestVacationData!['vacationId'])
+                    .delete();
+
+                await firestore
+                    .collection('user')
+                    .doc(reQuestVacationData!['userId'])
+                    .collection('presence')
+                    .where('date', isGreaterThanOrEqualTo: inputDate)
+                    .get()
+                    .then((snapshot) {
+                  for (DocumentSnapshot doc in snapshot.docs) {
+                    doc.reference.delete();
+                  }
+                });
+              } catch (e) {
+                print('the error$e');
+              }
+            },
             onCancel: () => Get.back());
       }
     } else {
@@ -470,7 +492,7 @@ class PresenceController extends GetxController {
             onCancel: () => Get.back());
       }
     } else {
-      CustomToast.errorToast('you_cannot_check_in_you_are_out_area'.tr);
+      CustomToast.errorToast('you_cannot_check_out_you_are_out_area'.tr);
     }
   }
 
@@ -500,9 +522,12 @@ class PresenceController extends GetxController {
       DocumentSnapshot<Map<String, dynamic>> todayDoc =
           await presenceCollection.doc(todayDocId).get();
       // already presence before ( another day ) -> have been check in today or check out?
-      if (todayDoc.exists == true) {
+      bool allowCheckIn =
+          await checkVacationStatus(sharedPreferences.getString('userId')!);
+      if (todayDoc.exists == true && allowCheckIn) {
         Map<String, dynamic>? dataPresenceToday = todayDoc.data();
         // case : already check in
+
         if (dataPresenceToday?["checkOut"] != null) {
           // case : already check in and check out
           CustomToast.successToast("you_already_check_in_and_check_out".tr);
@@ -583,6 +608,47 @@ class PresenceController extends GetxController {
       "error": false,
     };
   }
+
+  Future getVacationRequest() async {
+    DateTime end = DateTime.now();
+    try {
+      await firestore
+          .collection('vacationRequest')
+          .where('userId', isEqualTo: sharedPreferences.getString('userId'))
+          .where("endDate",
+              isGreaterThanOrEqualTo: DateTime.now().toIso8601String())
+          .orderBy(
+            "endDate",
+            descending: true,
+          )
+          .get()
+          .then((doc) {
+        doc.docs.forEach((data) {
+          reQuestVacationData = data.data();
+          print('the reQuestVacationData$reQuestVacationData ');
+        });
+      });
+    } catch (e) {
+      print('the problem $e');
+    }
+  }
+  // Future<Map<String, dynamic>?> getVacationRequest() async {
+  //   var querySnapshot = await firestore
+  //       .collection('vacationRequest')
+  //       .where('userId', isEqualTo: sharedPreferences.getString('userId'))
+  //       .where('endTime', isGreaterThan: DateTime.now())
+  //       // .orderBy('requestDate', descending: true)
+  //       // .limit(1)
+  //       .get();
+
+  //   if (querySnapshot.docs.isEmpty) {
+  //     return null;
+  //   }
+
+  //   var data = querySnapshot.docs.first.data();
+  //   print('data$data');
+  //   return data;
+  // }
 }
 
 class PresenceUpdater {
@@ -604,9 +670,5 @@ class PresenceUpdater {
         }
       });
     }
-  }
-
-  void stop() {
-    _timer?.cancel();
   }
 }
