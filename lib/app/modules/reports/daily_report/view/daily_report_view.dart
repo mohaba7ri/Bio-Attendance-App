@@ -20,7 +20,7 @@ class DailyReportView extends GetView<DailyReportController> {
       backgroundColor: AppColor.greyShade200,
       appBar: AppBar(
         title: Text(
-          'all_emp_report'.tr,
+          'daily_report'.tr,
           style: TextStyle(
             color: AppColor.secondary,
             fontSize: 18,
@@ -123,7 +123,6 @@ class DailyReportView extends GetView<DailyReportController> {
                                     ),
                                   ),
 
-                    
                         Row(
                           children: [
                             Text(
@@ -224,7 +223,8 @@ class DailyReportView extends GetView<DailyReportController> {
                                   double totalSalary =
                                       await controller.calculateTotalSalary();
                                   print('the salary:${controller.totalSalary}');
-
+ dynamic totalHoursWork =
+                                    await controller.calculateTotalHoursWork();
                                   final pdfEmpReport = PdfDailyReport(
                                       totalSalary: totalSalary,
                                       company: controller.company,

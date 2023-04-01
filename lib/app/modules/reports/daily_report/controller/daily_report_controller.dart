@@ -25,6 +25,8 @@ class DailyReportController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+  dynamic salary;
+  dynamic totalHoursWork;
   String? branchValue;
   String? branchId;
   final branchesList = <DropdownMenuItem<String>>[].obs;
@@ -132,8 +134,8 @@ class DailyReportController extends GetxController {
           ? DateFormat.jm()
               .format(DateTime.parse(snapshot.data()["checkOut"]["date"]))
           : '');
-      // row.add(
-      //     snapshot.data()['timing'] != null ? snapshot.data()['timing'] : '');
+      row.add(
+          snapshot.data()['timing'] != null ? snapshot.data()['timing'] : '');
       row.add(
           snapshot.data()['status'] != null ? snapshot.data()['status'] : '');
       row.add(snapshot.data()['hoursWork'] != null
@@ -159,13 +161,44 @@ class DailyReportController extends GetxController {
             int hours = int.parse(hoursAndMinutes[0]);
             int minutes = int.parse(hoursAndMinutes[1]);
             double hoursWorked = hours + (minutes / 60);
-            totalSalary += hoursWorked * 750;
+            double userSalary = double.tryParse(salary) ?? 0.0;
+
+            totalSalary += hoursWorked * userSalary;
           }
         }
       },
     );
 
     return totalSalary;
+  }
+
+  Future calculateTotalHoursWork() async {
+    List<List<dynamic>> data = await getData();
+    Duration totalDuration = Duration();
+
+    data.forEach(
+      (row) {
+        if (row.length >= 6 && row[5] != null && row[5] != '') {
+          List<String> hoursAndMinutes = row[5].split(':');
+          if (hoursAndMinutes.length == 2) {
+            int hours = int.parse(hoursAndMinutes[0]);
+            int minutes = int.parse(hoursAndMinutes[1]);
+            //  double hoursWorked = hours + (minutes / 60);
+
+            Duration duration = Duration(hours: hours, minutes: minutes);
+            totalDuration += duration;
+          }
+        }
+      },
+    );
+    String hours = totalDuration.inHours.toString().padLeft(2, '0');
+    String minutes =
+        (totalDuration.inMinutes.remainder(60)).toString().padLeft(2, '0');
+    totalHoursWork = '$hours:$minutes';
+
+    print('Total hours worked: $totalHoursWork');
+
+    return totalHoursWork;
   }
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
@@ -217,8 +250,10 @@ class DailyReportController extends GetxController {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+      salary = data['salaryPerHour'];
 
       print('the user Name$userName');
+      print('the user salay $salary');
     });
     update();
   }

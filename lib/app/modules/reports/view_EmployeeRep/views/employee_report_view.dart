@@ -1,4 +1,4 @@
-import 'package:Biometric/app/modules/reports/my_report/view/pdf_my_report.dart';
+import 'package:Biometric/app/modules/reports/view_EmployeeRep/views/pdf_employee_report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -182,12 +182,14 @@ class EmpReportsView extends GetView<EmployeeReportController> {
                                 double totalSalary =
                                     await controller.calculateTotalSalary();
                                 print('the salary:${controller.totalSalary}');
-
-                                final pdfEmpReport = PdfMyReport(
+                                dynamic totalHoursWork =
+                                    await controller.calculateTotalHoursWork();
+                                final pdfEmpReport = PdfEmployeeReport(
                                     totalSalary: totalSalary,
                                     company: controller.company,
                                     branch: controller.branchName,
                                     start: controller.start,
+                                    totalHoursWork: controller.totalHoursWork,
                                     user: controller.userName,
                                     allPrecens: controller.allPrecens,
                                     end: controller.end);

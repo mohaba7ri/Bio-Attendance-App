@@ -9,11 +9,16 @@ class MyVacationController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-
   }
 
   String requestValue = 'All';
-  List<String> requestItems = ['All', 'Pending', 'Approved', 'Denied'];
+  List<String> requestItems = [
+    'All',
+    'Pending',
+    'Approved',
+    'Denied',
+    'Canceled'
+  ];
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -37,7 +42,6 @@ class MyVacationController extends GetxController {
   String? vacationsNumber = '';
   String? approvedNumber = '';
   String? deniedNumber = '';
-
 
   changeRequestValue(String value) {
     requestValue = value;

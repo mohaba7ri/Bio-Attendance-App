@@ -361,8 +361,9 @@ class PresenceController extends GetxController {
     if (in_area == true) {
       bool allowCheckIn =
           await checkVacationStatus(sharedPreferences.getString('userId')!);
-      bool checkIn = await calCheckIn();
+
       if (allowCheckIn) {
+        bool checkIn = await calCheckIn();
         print('the area$in_area');
         if (checkIn) {
           CustomAlertDialog.showPresenceAlert(
@@ -403,28 +404,35 @@ class PresenceController extends GetxController {
                     .tr,
             onConfirm: () async {
               final inputString = reQuestVacationData!['startDate'];
-              final inputFormat = DateFormat('MMM dd, yyyy');
-              final inputDate = inputFormat.parse(inputString);
-
               try {
                 await firestore
                     .collection('vacationRequest')
                     .doc(reQuestVacationData!['vacationId'])
-                    .delete();
-
+                    .update({'status': 'Canceled'});
                 await firestore
                     .collection('user')
                     .doc(reQuestVacationData!['userId'])
                     .collection('presence')
-                    .where('date', isGreaterThanOrEqualTo: inputDate)
+                    .where('date', isGreaterThanOrEqualTo: inputString)
                     .get()
                     .then((snapshot) {
                   for (DocumentSnapshot doc in snapshot.docs) {
-                    doc.reference.delete();
+                    if (doc.exists) {
+                      print('yes');
+                      Map<String, dynamic> data =
+                          doc.data() as Map<String, dynamic>;
+                      print('date${data['date']}');
+                      print('inputDate$inputString');
+                      doc.reference.delete();
+                    } else {
+                      print(doc.data());
+                      print('no');
+                      doc.reference.delete();
+                    }
                   }
                 });
               } catch (e) {
-                print('the error$e');
+                print('the error $e');
               }
             },
             onCancel: () => Get.back());
@@ -453,11 +461,9 @@ class PresenceController extends GetxController {
           int startHour = startTime!.hour * 60 + startTime!.minute;
           int lateHour = lateTime!.hour * 60 + lateTime!.minute;
           int endHour = endTime!.hour * 60 + endTime!.minute;
-          if (currentHour < endHour) {
-            print("Check-out time has not arrived yet.");
-          } else {
-            print("Check-out time has passed.");
-          }
+
+          print("Check-out time has passed.");
+
           CustomAlertDialog.showPresenceAlert(
             title: "do_you_want_to_check_out".tr,
             message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
@@ -632,6 +638,7 @@ class PresenceController extends GetxController {
       print('the problem $e');
     }
   }
+
   // Future<Map<String, dynamic>?> getVacationRequest() async {
   //   var querySnapshot = await firestore
   //       .collection('vacationRequest')

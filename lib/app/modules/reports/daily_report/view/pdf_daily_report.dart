@@ -125,6 +125,7 @@ class PdfDailyReport extends GetxController {
       'Date',
       'Check In ',
       'Check Out',
+      'Timing',
       'Status',
       'Hours Work',
     ];

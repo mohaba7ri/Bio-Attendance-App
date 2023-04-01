@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../style/app_color.dart';
 import '../../../../util/styles.dart';
@@ -150,7 +151,7 @@ class MyVacationView extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Text(
-                                                    data[index]['startDate'],
+                                                    "${DateFormat.yMMMd().format(DateTime.parse(data[index]["startDate"]))}",
                                                     style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
@@ -181,7 +182,7 @@ class MyVacationView extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Text(
-                                                    data[index]['endDate'],
+                                                    "${DateFormat.yMMMd().format(DateTime.parse(data[index]["endDate"]))}",
                                                     style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:

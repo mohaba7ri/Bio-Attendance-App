@@ -300,7 +300,8 @@ class DeniedVacationView extends GetView<DeniedVacationController> {
                                                   child: Text("start_date".tr,
                                                       style: robotoMediumWhite),
                                                 ),
-                                                Text(data[index]['startDate'],
+                                                Text(
+                                                    "${DateFormat.yMMMd().format(DateTime.parse(data[index]["startDate"]))}",
                                                     style: robotoMediumWhite),
                                               ],
                                             ),
@@ -319,7 +320,8 @@ class DeniedVacationView extends GetView<DeniedVacationController> {
                                                   child: Text("end_date".tr,
                                                       style: robotoMediumWhite),
                                                 ),
-                                                Text(data[index]['endDate'],
+                                                Text(
+                                                    "${DateFormat.yMMMd().format(DateTime.parse(data[index]["endDate"]))}",
                                                     style: robotoMediumWhite),
                                               ],
                                             ),

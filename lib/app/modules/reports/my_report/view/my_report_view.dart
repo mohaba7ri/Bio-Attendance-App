@@ -182,9 +182,11 @@ class MyReportView extends GetView<MyReportController> {
                                 double totalSalary =
                                     await controller.calculateTotalSalary();
                                 print('the salary:${controller.totalSalary}');
-
+                                dynamic totalHoursWork =
+                                    await controller.calculateTotalHoursWork();
                                 final pdfEmpReport = PdfMyReport(
                                     totalSalary: totalSalary,
+                                    totalHoursWork: totalHoursWork,
                                     company: controller.company,
                                     branch: controller.branchName,
                                     start: controller.start,

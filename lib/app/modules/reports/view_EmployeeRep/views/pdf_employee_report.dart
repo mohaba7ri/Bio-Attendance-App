@@ -9,7 +9,7 @@ import 'package:pdf/widgets.dart';
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 
-class PdfMyReport extends GetxController {
+class PdfEmployeeReport extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
@@ -24,9 +24,11 @@ class PdfMyReport extends GetxController {
   final company;
   final branch;
   final totalSalary;
-  PdfMyReport(
+  final totalHoursWork;
+  PdfEmployeeReport(
       {required this.start,
       required this.totalSalary,
+      required this.totalHoursWork,
       required this.allPrecens,
       required this.end,
       required this.user,
@@ -76,7 +78,7 @@ class PdfMyReport extends GetxController {
           Row(children: [
             Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('+967 7777845788 ',
+            Text('${company['phone']}',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -116,7 +118,7 @@ class PdfMyReport extends GetxController {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '555', width: 200);
+        return buildText(title: title, value: '', width: 200);
       }),
     );
   }
@@ -139,10 +141,10 @@ class PdfMyReport extends GetxController {
 
   Widget buildAttendance() {
     final headers = [
-      'name',
       'Date',
       'Check In ',
       'Check Out',
+      'Timing',
       'Status',
       'Hours Work',
     ];
@@ -198,7 +200,7 @@ class PdfMyReport extends GetxController {
                 ),
                 buildText(
                   title: 'Total Hours Work',
-                  value: '120',
+                  value: '$totalHoursWork',
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),

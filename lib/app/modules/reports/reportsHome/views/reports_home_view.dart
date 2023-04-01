@@ -62,29 +62,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                                     arguments: userData);
                               },
                             ),
-                      userData["role"] == 'Employee'
-                          ? SizedBox()
-                          : CustomMenuTile(
-                              isDanger: true,
-                              title: 'all_branches_rep'.tr,
-                              icon: Image.asset(
-                                Images.branches,
-                              ),
-                              onTap: () => Get.toNamed(Routes.ALL_BRANCHES_REP),
-                            ),
-                      userData["role"] == 'Employee'
-                          ? SizedBox()
-                          : CustomMenuTile(
-                              isDanger: true,
-                              title: 'branche_rep'.tr,
-                              icon: Image.asset(
-                                Images.branch,
-                              ),
-                              onTap: () {
-                                Get.toNamed(Routes.LIST_BRANCHES_REP,
-                                    arguments: userData);
-                              },
-                            ),
+
                       CustomMenuTile(
                         isDanger: true,
                         title: 'generate_report'.tr,

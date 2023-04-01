@@ -18,6 +18,7 @@ class PageIndexController extends GetxController {
           biometricController.bioMetricPresence();
           presenceController
             ..checkTime()
+            ..getVacationRequest()
             ..presence();
         } else {
           presenceController

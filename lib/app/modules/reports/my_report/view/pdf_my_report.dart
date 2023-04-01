@@ -24,9 +24,11 @@ class PdfMyReport extends GetxController {
   final company;
   final branch;
   final totalSalary;
+  final totalHoursWork;
   PdfMyReport(
       {required this.start,
       required this.totalSalary,
+      required this.totalHoursWork,
       required this.allPrecens,
       required this.end,
       required this.user,
@@ -116,7 +118,7 @@ class PdfMyReport extends GetxController {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '555', width: 200);
+        return buildText(title: title, value: '', width: 200);
       }),
     );
   }
@@ -139,10 +141,10 @@ class PdfMyReport extends GetxController {
 
   Widget buildAttendance() {
     final headers = [
-      'name',
       'Date',
       'Check In ',
       'Check Out',
+      'Timing',
       'Status',
       'Hours Work',
     ];
@@ -192,13 +194,13 @@ class PdfMyReport extends GetxController {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildText(
-                  title: 'Salary',
+                  title: 'Salary ',
                   value: '$totalSalary',
                   unite: true,
                 ),
                 buildText(
-                  title: 'Total Hours Work',
-                  value: '120',
+                  title: 'Total Hours Work ',
+                  value: '$totalHoursWork',
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +24,8 @@ class EmployeeReportController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+  dynamic salary;
+  dynamic totalHoursWork;
   String? branchName;
   double totalSalary = 0;
   Map<String, dynamic>? company;
@@ -104,38 +104,32 @@ class EmployeeReportController extends GetxController {
   // }
 
   Future<List<List<dynamic>>> getData() async {
-    List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshots =
-        await getAllPresence();
+    QuerySnapshot<Map<String, dynamic>> snapshot = await getAllPresence();
     List<List<dynamic>> data = [];
 
-    snapshots.forEach((snapshot) {
+    snapshot.docs.forEach((doc) {
       List<dynamic> row = [];
-      row.add(snapshot.data()['name'] != null ? snapshot.data()['name'] : '');
-      row.add(DateFormat("M/d/yyyy")
-          .format(DateTime.parse(snapshot.data()["date"])));
-      row.add(snapshot.data()["checkIn"] != null &&
-              snapshot.data()["checkIn"]["date"] != null
-          ? DateFormat.jm()
-              .format(DateTime.parse(snapshot.data()["checkIn"]["date"]))
-          : '');
-      row.add(snapshot.data()["checkOut"] != null &&
-              snapshot.data()["checkOut"]["date"] != null
-          ? DateFormat.jm()
-              .format(DateTime.parse(snapshot.data()["checkOut"]["date"]))
-          : '');
-      // row.add(
-      //     snapshot.data()['timing'] != null ? snapshot.data()['timing'] : '');
       row.add(
-          snapshot.data()['status'] != null ? snapshot.data()['status'] : '');
-      row.add(snapshot.data()['hoursWork'] != null
-          ? snapshot.data()['hoursWork']
+          DateFormat("M/d/yyyy").format(DateTime.parse(doc.data()["date"])));
+      row.add(
+          doc.data()["checkIn"] != null && doc.data()["checkIn"]["date"] != null
+              ? DateFormat.jm()
+                  .format(DateTime.parse(doc.data()["checkIn"]["date"]))
+              : '');
+      row.add(doc.data()["checkOut"] != null &&
+              doc.data()["checkOut"]["date"] != null
+          ? DateFormat.jm()
+              .format(DateTime.parse(doc.data()["checkOut"]["date"]))
           : '');
+      row.add(doc.data()['timing'] != null ? doc.data()['timing'] : '');
+      row.add(doc.data()['status'] != null ? doc.data()['status'] : '');
+      row.add(doc.data()['hoursWork'] != null ? doc.data()['hoursWork'] : '');
 
       data.add(row);
     });
-
-    print('the all precens$data');
     allPrecens = data;
+    update();
+    print('the all precens$data');
     return data;
   }
 
@@ -150,13 +144,44 @@ class EmployeeReportController extends GetxController {
             int hours = int.parse(hoursAndMinutes[0]);
             int minutes = int.parse(hoursAndMinutes[1]);
             double hoursWorked = hours + (minutes / 60);
-            totalSalary += hoursWorked * 750;
+            double userSalary = double.tryParse(salary) ?? 0.0;
+
+            totalSalary += hoursWorked * userSalary;
           }
         }
       },
     );
 
     return totalSalary;
+  }
+
+  Future calculateTotalHoursWork() async {
+    List<List<dynamic>> data = await getData();
+    Duration totalDuration = Duration();
+
+    data.forEach(
+      (row) {
+        if (row.length >= 6 && row[5] != null && row[5] != '') {
+          List<String> hoursAndMinutes = row[5].split(':');
+          if (hoursAndMinutes.length == 2) {
+            int hours = int.parse(hoursAndMinutes[0]);
+            int minutes = int.parse(hoursAndMinutes[1]);
+            //  double hoursWorked = hours + (minutes / 60);
+
+            Duration duration = Duration(hours: hours, minutes: minutes);
+            totalDuration += duration;
+          }
+        }
+      },
+    );
+    String hours = totalDuration.inHours.toString().padLeft(2, '0');
+    String minutes =
+        (totalDuration.inMinutes.remainder(60)).toString().padLeft(2, '0');
+    totalHoursWork = '$hours:$minutes';
+
+    print('Total hours worked: $totalHoursWork');
+
+    return totalHoursWork;
   }
 
   // Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
@@ -197,46 +222,51 @@ class EmployeeReportController extends GetxController {
   //   return query!;
   // }
 
-  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
-      getAllPresence() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
+    String? uid = sharedPreferences.getString('userId');
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
-      query = await firestore.collection("user").get();
-
-      List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
-      for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
-          in query.docs) {
-        futures.add(firestore
+      if (startDateController == null) {
+        query = await firestore
             .collection("user")
-            .doc(documentSnapshot.id)
+            .doc(uid)
             .collection("presence")
-            .where("date", isGreaterThan: start!.toIso8601String())
-            .where("date",
-                isLessThan: start!.add(Duration(days: 1)).toIso8601String())
+            .where("date", isLessThan: end.toIso8601String())
             .orderBy(
               "date",
               descending: true,
             )
-            .get());
+            .get();
+
+        return query;
+      } else {
+        QuerySnapshot<Map<String, dynamic>> query = await firestore
+            .collection("user")
+            .doc(uid)
+            .collection("presence")
+            .where("date", isGreaterThan: start!.toIso8601String())
+            .where("date",
+                isLessThan: end.add(Duration(days: 1)).toIso8601String())
+            .orderBy(
+              "date",
+              descending: true,
+            )
+            .get();
+        return query;
       }
-      List<QuerySnapshot<Map<String, dynamic>>> snapshots =
-          await Future.wait(futures);
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = [];
-      for (QuerySnapshot<Map<String, dynamic>> snapshot in snapshots) {
-        documents.addAll(snapshot.docs);
-      }
-      return documents;
     } catch (e) {
       print('error $e');
-      return [];
     }
+    return query!;
   }
 
   Future getUserDate() async {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+      salary = data['salaryPerHour'];
       print('the user Name$userName');
+      print('salary $salary');
     });
     update();
   }

@@ -24,8 +24,10 @@ class MyReportController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
+  dynamic salary;
   String? branchName;
   double totalSalary = 0;
+  dynamic totalHoursWork;
   Map<String, dynamic>? company;
   Future<DateTime> showDatePickers(
       BuildContext context, String initialDateString) async {
@@ -112,13 +114,44 @@ class MyReportController extends GetxController {
             int hours = int.parse(hoursAndMinutes[0]);
             int minutes = int.parse(hoursAndMinutes[1]);
             double hoursWorked = hours + (minutes / 60);
-            totalSalary += hoursWorked * 750;
+            double userSalary = double.tryParse(salary) ?? 0.0;
+
+            totalSalary += hoursWorked * userSalary;
           }
         }
       },
     );
 
     return totalSalary;
+  }
+
+  Future calculateTotalHoursWork() async {
+    List<List<dynamic>> data = await getData();
+    Duration totalDuration = Duration();
+
+    data.forEach(
+      (row) {
+        if (row.length >= 6 && row[5] != null && row[5] != '') {
+          List<String> hoursAndMinutes = row[5].split(':');
+          if (hoursAndMinutes.length == 2) {
+            int hours = int.parse(hoursAndMinutes[0]);
+            int minutes = int.parse(hoursAndMinutes[1]);
+            //  double hoursWorked = hours + (minutes / 60);
+
+            Duration duration = Duration(hours: hours, minutes: minutes);
+            totalDuration += duration;
+          }
+        }
+      },
+    );
+    String hours = totalDuration.inHours.toString().padLeft(2, '0');
+    String minutes =
+        (totalDuration.inMinutes.remainder(60)).toString().padLeft(2, '0');
+    totalHoursWork = '$hours:$minutes';
+
+    print('Total hours worked: $totalHoursWork');
+
+    return totalHoursWork;
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getAllPresence() async {
@@ -163,7 +196,9 @@ class MyReportController extends GetxController {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+      salary = data['salaryPerHour'];
       print('the user Name$userName');
+      print('the user Salary $salary');
     });
     update();
   }

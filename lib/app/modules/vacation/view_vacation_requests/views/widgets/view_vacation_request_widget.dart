@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -237,8 +238,8 @@ class ViewVacationRequestWidget extends StatelessWidget {
                           ),
                           Text(
                               isIndex == true
-                                  ? data[index]['startDate']
-                                  : data['startDate'],
+                                  ? "${DateFormat.yMMMd().format(DateTime.parse(data[index]["startDate"]))}"
+                                  : "${DateFormat.yMMMd().format(DateTime.parse(data["startDate"]))}",
                               style: robotoMediumWhite),
                         ],
                       ),
@@ -258,8 +259,8 @@ class ViewVacationRequestWidget extends StatelessWidget {
                           ),
                           Text(
                               isIndex == true
-                                  ? data[index]['endDate']
-                                  : data['endDate'],
+                                  ? "${DateFormat.yMMMd().format(DateTime.parse(data[index]["endDate"]))}"
+                                  : "${DateFormat.yMMMd().format(DateTime.parse(data["endDate"]))}",
                               style: robotoMediumWhite),
                         ],
                       ),

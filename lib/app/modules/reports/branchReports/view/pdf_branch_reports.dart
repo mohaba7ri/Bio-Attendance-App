@@ -117,7 +117,7 @@ class PdfBranchReport extends GetxController {
         final title = titles[index];
         //   final value = data[index];
 
-        return buildText(title: title, value: '555', width: 200);
+        return buildText(title: title, value: '', width: 200);
       }),
     );
   }

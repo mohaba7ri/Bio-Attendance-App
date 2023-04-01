@@ -29,7 +29,10 @@ class VacationRequestController extends GetxController {
   String? branchId;
   String? adminDeviceToken;
   String? userRole;
+  String? superAdminToken;
+  RxBool isPrevious = false.obs;
   DateTime date = DateTime.now();
+
   // FilePickerResult? vacationFile;
 
   String? leaveTypeValue;
@@ -44,6 +47,8 @@ class VacationRequestController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     await returnVacationType();
+    await getSuperAdmin();
+    await getPreviousRequest();
     await getUserData();
     await getAdminData();
   }
@@ -140,11 +145,18 @@ class VacationRequestController extends GetxController {
     } else if (selectedDays > vacationDays!) {
       CustomToast.errorToast('you_exceeded_the_allowed_days_number'.tr);
     } else if (formKey.currentState!.validate()) {
-      if (filePath != null) {
-        await storeFile(filePath!, fileName!)
-            .whenComplete(() => storeVacationData());
+      print('isPrevios${isPrevious.value}');
+      if (isPrevious.value == true) {
+        CustomToast.errorToast(
+            title: 'sorry'.tr,
+            'you_cannot'.tr);
       } else {
-        await storeVacationData();
+        if (filePath != null) {
+          await storeFile(filePath!, fileName!)
+              .whenComplete(() => storeVacationData());
+        } else {
+          await storeVacationData();
+        }
       }
     }
   }
@@ -194,12 +206,14 @@ class VacationRequestController extends GetxController {
       'days': daysController.value.text,
       'file': vacationUrl,
       'status': 'Pending',
-      'cancelled': '',
       'branchId': branchId
     }).whenComplete(() async {
       String userDevice = sharedPreferences.getString('deviceToken')!;
+      String adminToken;
+
       storeNotefications(
-          adminDeviceToken: adminDeviceToken,
+          adminDeviceToken:
+              userRole == 'Admin' ? superAdminToken : adminDeviceToken,
           body: userName,
           docId: vacationId,
           title: 'vacation_request_by'.tr,
@@ -229,7 +243,7 @@ class VacationRequestController extends GetxController {
         'title': title,
         'adminDeviceToken': adminDeviceToken,
         'date': date
-      }).whenComplete(() async {});
+      });
     } catch (e) {}
   }
 
@@ -268,6 +282,55 @@ class VacationRequestController extends GetxController {
   startDayValdate() {
     if (startDateController.value.text.isEmpty) {
       return 'pick date';
+    }
+  }
+
+  Future getSuperAdmin() async {
+    try {
+      await firebase
+          .collection('user')
+          .where('role', isEqualTo: 'SuperAdmin')
+          .get()
+          .then((query) {
+        query.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+          print('super:${data['name']}');
+          superAdminToken = data['deviceToken'];
+          update();
+        });
+      });
+    } catch (e) {
+      print('error is$e');
+    }
+  }
+
+  Future getPreviousRequest() async {
+    DateTime end = DateTime.now();
+    try {
+      await firebase
+          .collection('vacationRequest')
+          .where('userId', isEqualTo: sharedPreferences.getString('userId'))
+          .where("status", isEqualTo: "Approved")
+          .where("endDate",
+              isGreaterThanOrEqualTo: DateTime.now().toIso8601String())
+          .limit(1)
+          .orderBy(
+            "endDate",
+            descending: true,
+          )
+          .get()
+          .then((doc) {
+        if (doc.docs.isEmpty) {
+          isPrevious.value = false;
+        } else {
+          doc.docs.forEach((data) {
+            print('the reQuestVacationData${data.data()} ');
+          });
+          isPrevious.value = true;
+        }
+      });
+    } catch (e) {
+      print('the problem $e');
     }
   }
 }

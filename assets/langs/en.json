@@ -247,11 +247,10 @@
 "Request_Date":"Request Date",
 "admin_branch":"Branch Admin",
 "chose_branch":"Select Branch",
-"date":"Choose Date"
-
-
-
-
+"date":"Choose Date",
+"you_cannot":"You have already taken a vacation and it is not currently available for additional time off"
+,"you_cannot_check_out_you_are_out_area":"You cannot check out, you are outside presence area"
+,"generate":"Generate"
 
 
 
