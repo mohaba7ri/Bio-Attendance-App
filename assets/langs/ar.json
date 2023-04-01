@@ -136,7 +136,7 @@
 "emp_reports":"تقارير الموظفين",
 "from":"من",
 "to":"الى",
-"all_emps_rep":"تقرير يومي",
+"daily_report":"تقرير يومي",
 
 "emp_rep":"تقاير موظف",
 "branche_rep":"تقاير فرع",
@@ -242,8 +242,13 @@
 "cancel":"الغاء"
 ,"you_cannot_check_in_you_are_out_area":"لا يمكنك تسجيل بصمة الحضور لانك خارج نطاق الحضور",
 "View_Cancel_Requests":"عرض طلبات الغاء الاجازات",
-"cancel_request_by":"طلب الغاء اجازة من "
-
+"cancel_request_by":"طلب الغاء اجازة من ",
+"you_are_being_stop_by_the_Admin":"تم ايقاف حسابك من قبل المدير",
+"sorry":"المعذرة",
+"Request_Date":"تاريخ الطلب",
+"admin_branch":"مدير الفرع",
+"chose_branch":"اختر فرع",
+"date":"حدد التاريخ"
 
 
 

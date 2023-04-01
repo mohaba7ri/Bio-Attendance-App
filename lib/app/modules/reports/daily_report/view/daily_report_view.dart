@@ -1,4 +1,5 @@
-import 'package:Biometric/app/modules/reports/my_report/view/pdf_my_report.dart';
+import 'package:Biometric/app/modules/reports/daily_report/view/pdf_daily_report.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +10,9 @@ import '../../../../style/app_color.dart';
 import '../../../../util/images.dart';
 import '../../../../util/styles.dart';
 import '../../../../widgets/custom_input.dart';
-import '../controller/all_emps_reports_controller.dart';
+import '../controller/daily_report_controller.dart';
 
-class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
+class DailyReportView extends GetView<DailyReportController> {
   // TODO: implement build
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
         centerTitle: true,
       ),
       body: Center(
-        child: GetBuilder<AllEmpsReportsController>(
+        child: GetBuilder<DailyReportController>(
           builder: (_controller) => Container(
             color: AppColor.greyShade200,
             child: Padding(
@@ -64,26 +65,65 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                             Images.report_ani,
                           )),
                         ),
-                        // Row(
-                        //   children: [
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(8.0),
-                        //       child: Text(
-                        //         'name'.tr,
-                        //         style: robotoHuge,
-                        //       ),
-                        //     ),
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(0.8),
-                        //       child: SizedBox(
-                        //         child: Text(
-                        //           controller.userName,
-                        //           style: robotoHuge,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+
+                        _controller.userData['role'] == 'Employee'
+                            ? SizedBox()
+                            : _controller.userData['role'] == 'Admin'
+                                ? SizedBox()
+                                : Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black12,
+                                                  blurRadius: 5)
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: SizedBox(
+                                              //  height: MediaQuery.of(context).size.height * 50,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  45 /
+                                                  100,
+                                              child:
+                                                  DropdownButtonHideUnderline(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15),
+                                                  child: DropdownButton2(
+                                                    hint:
+                                                        Text('chose_branch'.tr),
+                                                    items: _controller
+                                                        .branchesList,
+                                                    value:
+                                                        _controller.branchValue,
+                                                    onChanged: (String?
+                                                        selectedValue) {
+                                                      _controller
+                                                          .changeBranchValue(
+                                                              selectedValue);
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                    
                         Row(
                           children: [
                             Text(
@@ -185,10 +225,10 @@ class AllEmpsReportsView extends GetView<AllEmpsReportsController> {
                                       await controller.calculateTotalSalary();
                                   print('the salary:${controller.totalSalary}');
 
-                                  final pdfEmpReport = PdfMyReport(
+                                  final pdfEmpReport = PdfDailyReport(
                                       totalSalary: totalSalary,
                                       company: controller.company,
-                                      branch: controller.branchName,
+                                      branch: controller.branchValue,
                                       start: controller.start,
                                       user: controller.userName,
                                       allPrecens: controller.allPrecens,

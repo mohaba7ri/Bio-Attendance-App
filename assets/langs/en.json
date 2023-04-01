@@ -138,7 +138,7 @@
 "emp_reports":"Employee Reports",
 "from":"From",
 "to":"To",
-"all_emps_rep":"Daily Report",
+"daily_report":"Daily Report",
 "emp_rep":"Employee Reports",
 "branche_rep":"Branch Reports",
 "all_branches_rep":"All Branches Reports",
@@ -240,7 +240,14 @@
 "zone":"Zone",
 "you_cannot_check_in_you_are_out_area":"You cannot check in because you are outside presence area",
 "View_Cancel_Requests":"View Vacation Cancelation Requests",
-"cancel_request_by":"Vacation cancelation request by "
+"cancel_request_by":"Vacation cancelation request by ",
+"all_emp_report":"All Employee Report",
+"you_are_being_stop_by_the_Admin":"Your Account was Stopped by the Admin",
+"sorry":"Sorry",
+"Request_Date":"Request Date",
+"admin_branch":"Branch Admin",
+"chose_branch":"Select Branch",
+"date":"Choose Date"
 
 
 

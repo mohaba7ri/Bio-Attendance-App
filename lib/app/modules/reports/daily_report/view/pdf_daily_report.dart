@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
@@ -9,7 +8,7 @@ import 'package:pdf/widgets.dart';
 import '../../../../controllers/pdf_controller.dart';
 import '../../../../helper/date_converter.dart';
 
-class PdfEmpReport extends GetxController {
+class PdfDailyReport extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
@@ -20,36 +19,34 @@ class PdfEmpReport extends GetxController {
   final start;
   final allPrecens;
   final end;
-  final double totalSalary;
-  final company;
   final user;
+  final company;
   final branch;
-  PdfEmpReport(
-      {required this.company,
-      required this.start,
-      required this.branch,
+  final totalSalary;
+  PdfDailyReport(
+      {required this.start,
+      required this.totalSalary,
       required this.allPrecens,
       required this.end,
       required this.user,
-      required this.totalSalary});
+      required this.company,
+      required this.branch});
   Future<File> generate() async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
+      margin: EdgeInsets.all(20),
       build: (context) => [
         buildHeader(),
         SizedBox(height: 2 * PdfPageFormat.cm),
-        buildTitle(),
         SizedBox(height: 5 * PdfPageFormat.mm),
         buildAttendance(),
-        Divider(),
-        buildTotal(),
+        //  Divider(),
       ],
       footer: (context) => buildFooter(),
     ));
 
-    return PdfController.saveDocument(
-        name: '${user['name'] + 'Report'}.pdf', pdf: pdf);
+    return PdfController.saveDocument(name: '${user + 'Report'}.pdf', pdf: pdf);
   }
 
   Widget buildHeader() => Column(
@@ -77,7 +74,7 @@ class PdfEmpReport extends GetxController {
           Row(children: [
             Text('Phone :', style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: 8),
-            Text('${company['phone']} ',
+            Text('${company['phone']}',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -95,9 +92,9 @@ class PdfEmpReport extends GetxController {
   Widget buildEmployee() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Employee Name: ${user['name']}',
+          Text('Employee Name: ${user}',
               style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('Branch Name: ${branch['name']}'),
+          Text('Branch Name: ${branch}'),
         ],
       );
 
@@ -105,7 +102,12 @@ class PdfEmpReport extends GetxController {
     final titles = <String>[
       'Report Date :${DateConverter.estimatedDate(DateTime.now())}',
     ];
-
+//  final data = <String>[
+//       info.number,
+//       Utils.formatDate(info.date),
+//       paymentTerms,
+//       Utils.formatDate(info.dueDate),
+//     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(titles.length, (index) {
@@ -117,28 +119,12 @@ class PdfEmpReport extends GetxController {
     );
   }
 
-  Widget buildTitle() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            SizedBox(width: 30 * PdfPageFormat.mm),
-            Text('Date From : '),
-            Text('${DateFormat("M/d/yyyy").format(start)}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 15 * PdfPageFormat.mm),
-            Text('Date To : '),
-            Text('${DateFormat("M/d/yyyy").format(end)}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ]),
-        ],
-      );
-
   Widget buildAttendance() {
     final headers = [
+      'Name',
       'Date',
       'Check In ',
       'Check Out',
-      'Timing',
       'Status',
       'Hours Work',
     ];
@@ -158,46 +144,6 @@ class PdfEmpReport extends GetxController {
         4: Alignment.centerRight,
         5: Alignment.centerRight,
       },
-    );
-  }
-
-  Widget buildTotal() {
-    // final netTotal = invoice.items
-    //     .map((item) => item.unitPrice * item.quantity)
-    //     .reduce((item1, item2) => item1 + item2);
-    // final vatPercent = invoice.items.first.vat;
-    // final vat = netTotal * vatPercent;
-    // final total = netTotal + vat;
-
-    return Container(
-      alignment: Alignment.centerRight,
-      child: Row(
-        children: [
-          Spacer(flex: 6),
-          Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildText(
-                  title: 'Salary',
-                  value: '${totalSalary}',
-                  unite: true,
-                ),
-                buildText(
-                  title: 'Total Hours Work',
-                  value: '120',
-                  unite: true,
-                ),
-                SizedBox(height: 2 * PdfPageFormat.mm),
-                Container(height: 1, color: PdfColors.grey400),
-                SizedBox(height: 0.5 * PdfPageFormat.mm),
-                Container(height: 1, color: PdfColors.grey400),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

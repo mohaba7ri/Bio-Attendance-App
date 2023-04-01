@@ -4,19 +4,20 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AllEmpsReportsController extends GetxController {
+class DailyReportController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
     await getUserDate();
     await getCompanyData();
-    await getBranchData();
+
+    await getBranches();
   }
 
   dynamic userData = Get.arguments;
   final SharedPreferences sharedPreferences;
-  AllEmpsReportsController({required this.sharedPreferences});
+  DailyReportController({required this.sharedPreferences});
   List<List<dynamic>>? allPrecens;
   final firestore = FirebaseFirestore.instance;
   var startDateController = TextEditingController();
@@ -24,7 +25,10 @@ class AllEmpsReportsController extends GetxController {
   DateTime end = DateTime.now();
   DateTime? start;
   String userName = '';
-  String? branchName;
+  String? branchValue;
+  String? branchId;
+  final branchesList = <DropdownMenuItem<String>>[].obs;
+
   double totalSalary = 0;
   Map<String, dynamic>? company;
   Future<DateTime> showDatePickers(
@@ -68,6 +72,43 @@ class AllEmpsReportsController extends GetxController {
     var startDateController;
     if (startDateController.value.text.isEmpty) {
       return 'pick date';
+    }
+  }
+
+  changeBranchValue(value) async {
+    branchValue = value;
+    update();
+    await firestore
+        .collection('branch')
+        .where('name', isEqualTo: branchValue)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data();
+        branchId = data['branchId'];
+        update();
+      });
+    });
+  }
+
+  Future getBranches() async {
+    final branches = FirebaseFirestore.instance.collection('branch');
+    try {
+      await branches.get().then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> data = doc.data();
+
+          branchesList.add(
+            DropdownMenuItem(
+              child: Text(data['name']),
+              value: data['name'],
+            ),
+          );
+          update();
+        });
+      });
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -131,7 +172,17 @@ class AllEmpsReportsController extends GetxController {
       getAllPresence() async {
     QuerySnapshot<Map<String, dynamic>>? query;
     try {
-      query = await firestore.collection("user").get();
+      if (userData['role'] == 'SuperAdmin') {
+        query = await firestore
+            .collection("user")
+            .where('branchId', isEqualTo: branchId)
+            .get();
+      } else {
+        query = await firestore
+            .collection("user")
+            .where('branchId', isEqualTo: userData['branchId'])
+            .get();
+      }
 
       List<Future<QuerySnapshot<Map<String, dynamic>>>> futures = [];
       for (QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot
@@ -166,6 +217,7 @@ class AllEmpsReportsController extends GetxController {
     String? userId = sharedPreferences.getString('userId');
     await firestore.collection('user').doc(userId).get().then((data) {
       userName = data['name'];
+
       print('the user Name$userName');
     });
     update();
@@ -176,16 +228,6 @@ class AllEmpsReportsController extends GetxController {
       query.docs.forEach((data) {
         company = data.data();
       });
-    });
-  }
-
-  Future getBranchData() async {
-    await firestore
-        .collection('branch')
-        .doc(userData['branchId'])
-        .get()
-        .then((data) {
-      branchName = data['name'];
     });
   }
 }

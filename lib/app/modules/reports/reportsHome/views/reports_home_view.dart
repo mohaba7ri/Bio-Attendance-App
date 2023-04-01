@@ -36,34 +36,17 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                     children: [
                       SizedBox(height: 16),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 16, bottom: 30),
-                            child: Text(
-                              userData["name"],
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Text(
-                            userData["job"],
-                            style: TextStyle(color: AppColor.secondarySoft),
-                          ),
-                        ],
-                      ),
                       // section 2 - menu
 
                       userData["role"] == 'Employee'
                           ? SizedBox()
                           : CustomMenuTile(
                               isDanger: true,
-                              title: 'all_emps_rep'.tr,
+                              title: 'daily_report'.tr,
                               icon: Image.asset(
                                 Images.employess,
                               ),
-                              onTap: () => Get.toNamed(Routes.ALL_EMPS_REP,
+                              onTap: () => Get.toNamed(Routes.DAILY_REPORT,
                                   arguments: userData),
                             ),
                       userData["role"] == 'Employee'
@@ -75,7 +58,7 @@ class ReportsHomeView extends GetView<ReportsHomeController> {
                                 Images.emp_one,
                               ),
                               onTap: () {
-                                Get.toNamed(Routes.LIST_EMPLOYEES_REP,
+                                Get.toNamed(Routes.SEARCH_EMPLOYEE,
                                     arguments: userData);
                               },
                             ),

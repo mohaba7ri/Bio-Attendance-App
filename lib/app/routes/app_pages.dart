@@ -1,3 +1,4 @@
+import 'package:Biometric/app/modules/reports/search_employee/view/search_employee.dart';
 import 'package:Biometric/app/modules/vacation/edit_vacation_type/views/edit_vacation_type_view.dart';
 import 'package:get/get.dart';
 
@@ -56,22 +57,24 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/reports/allBranchesReports/binding/all_branches_reports_binding.dart';
 import '../modules/reports/allBranchesReports/view/all_branches_reports_views.dart';
-import '../modules/reports/allEmpsReports/binding/all_emps_reports_binding.dart';
-import '../modules/reports/allEmpsReports/view/all_emp_report_view.dart';
+import '../modules/reports/daily_report/binding/daily_report_binding.dart';
+import '../modules/reports/daily_report/view/daily_report_view.dart';
 
 import '../modules/reports/branchReports/binding/branch_reports_binding.dart';
 import '../modules/reports/branchReports/view/branch_reports_view.dart';
-import '../modules/reports/empReports/binding/emp_reports_binding.dart';
 
 import '../modules/reports/list_Branch_Rep/bindings/list_branchRep_binding.dart';
 import '../modules/reports/list_Branch_Rep/views/list_branchRep_view.dart';
+
 import '../modules/reports/my_report/binding/my_report_binding.dart';
 import '../modules/reports/my_report/view/my_report_view.dart';
 import '../modules/reports/reportsHome/bindings/reports_home_binding.dart';
 import '../modules/reports/reportsHome/views/reports_home_view.dart';
 
+import '../modules/reports/search_employee/binding/EmployeesRep_binding.dart';
 import '../modules/reports/view_EmployeeRep/bindings/EmployeesRep_binding.dart';
-import '../modules/reports/view_EmployeeRep/views/EmployeesRep_view.dart';
+
+import '../modules/reports/view_EmployeeRep/views/employee_report_view.dart';
 import '../modules/sign_up/admin/bindings/admin_sign_up_binding.dart';
 import '../modules/sign_up/admin/views/admin_sign_up_view.dart';
 
@@ -268,21 +271,17 @@ class AppPages {
       binding: MyVacationBinding(),
     ),
     GetPage(
-        name: _Paths.EMP_REPORTS,
-        page: () => EmpReportsView(),
-        binding: EmpReportsBinding()),
-    GetPage(
         name: _Paths.REP_HOME,
         page: () => ReportsHomeView(),
         binding: ReportsHomeBinding()),
     GetPage(
         name: _Paths.LIST_EMPLOYEES_REP,
-        page: () => ListEmployeeRepView(),
-        binding: ListEmployeeRepBinding()),
+        page: () => EmpReportsView(),
+        binding: EmployeeReportBinding()),
     GetPage(
-        name: _Paths.ALL_EMPS_REP,
-        page: () => AllEmpsReportsView(),
-        binding: AllEmpsReportsBinding()),
+        name: _Paths.DAILY_REPORT,
+        page: () => DailyReportView(),
+        binding: DailyReportBinding()),
     GetPage(
         name: _Paths.ALL_BRANCHES_REP,
         page: () => AllBranchesReportsView(),
@@ -301,11 +300,15 @@ class AppPages {
         binding: DeniedVacationBinding()),
     GetPage(
         name: _Paths.MY_REPORT,
-        page: () => EmpReportsView(),
+        page: () => MyReportView(),
         binding: MyReportBinding()),
     GetPage(
         name: _Paths.EDIT_VAC,
         page: () => EditVacationTypeView(),
         binding: EditVacationTypeBinding()),
+    GetPage(
+        name: _Paths.SEARCH_EMPLOYEE,
+        page: () => SearchEmployeeView(),
+        binding: SearchEmployeeBinding()),
   ];
 }
