@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../company_data.dart';
 import '../../../../widgets/dialog/custom_alert_dialog.dart';
@@ -25,16 +26,21 @@ class AddEmployeeController extends GetxController {
     adminPassC.dispose();
   }
 
+  final SharedPreferences sharedPreferences;
+  AddEmployeeController({required this.sharedPreferences});
   GetStorage store = new GetStorage();
 
   String? roleValue;
   String? branchValue;
-  var roleList = ['Admin', 'Employee'];
+
+  var roleList = ['Employee', 'Admin'];
+
   bool isLoading = false;
   bool isLoadingCreatePegawai = false;
   bool isSelectedPolicy = false;
 
   String branchId = '123';
+  dynamic userData = Get.arguments;
   //this list to store the roles in firebase for each user
   final List<RxString> listSelectedPolicy = [];
   final branchesList = <DropdownMenuItem<String>>[].obs;
@@ -49,7 +55,7 @@ class AddEmployeeController extends GetxController {
 
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  FirebaseFirestore role = FirebaseFirestore.instance;
+
   var rolesValues = {};
 
 //this list of all roles  from type bool
@@ -148,19 +154,6 @@ class AddEmployeeController extends GetxController {
     }
   }
 
-  changeid() async {
-    print('object');
-    if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
-      print('hi');
-      try {
-        print('hi');
-        await role.collection('policy').doc('555').set({'roles': rolesValues});
-      } catch (e) {
-        print('error${e.toString()}');
-      }
-    }
-  }
-
   Future<void> createEmployeeData() async {
     isSelectedPolicy = true;
     update();
@@ -192,14 +185,16 @@ class AddEmployeeController extends GetxController {
             "salaryPerHour": salaryPerHour.text,
             "name": nameC.text,
             "email": emailC.text,
-            "role": roleValue,
+            "role": userData['role'] == 'SuperAdmin' ? roleValue : 'Employee',
             "job": jobC.text,
             "phone": phoneC.text,
             "address": addressC.text,
             "status": "Active",
             "userId": uid.value,
             "createdAt": DateTime.now().toIso8601String(),
-            "branchId": branchId,
+            "branchId": userData['role'] == 'SuperAdmin'
+                ? branchId
+                : userData['branchId'],
           }).whenComplete(() {
             if (isSelectedPolicy == true) {
               store.write('userID', uid.value);
@@ -223,11 +218,6 @@ class AddEmployeeController extends GetxController {
           // }
           if (selectedPolicyValue != null && selectedPolicyValue!.length > 0) {
             var rolesValues = {};
-
-            await role
-                .collection('policy')
-                .doc(uid.value)
-                .set({'roles': rolesValues});
           }
 
           await employeeCredential.user!.sendEmailVerification();

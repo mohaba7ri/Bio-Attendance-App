@@ -11,7 +11,7 @@ class DailyReportController extends GetxController {
     super.onInit();
     await getUserDate();
     await getCompanyData();
-
+    await getBranchData();
     await getBranches();
   }
 
@@ -29,6 +29,7 @@ class DailyReportController extends GetxController {
   dynamic totalHoursWork;
   String? branchValue;
   String? branchId;
+  String? branchName;
   final branchesList = <DropdownMenuItem<String>>[].obs;
 
   double totalSalary = 0;
@@ -51,6 +52,16 @@ class DailyReportController extends GetxController {
     );
 
     return date!;
+  }
+
+  Future getBranchData() async {
+    await firestore
+        .collection('branch')
+        .doc(userData['branchId'])
+        .get()
+        .then((data) {
+      branchName = data['name'];
+    });
   }
 
   changeStartDate(startDate) {

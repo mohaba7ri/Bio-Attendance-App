@@ -38,6 +38,7 @@ class PdfMyReport extends GetxController {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
+      margin: EdgeInsets.all(20),
       build: (context) => [
         buildHeader(),
         SizedBox(height: 2 * PdfPageFormat.cm),
