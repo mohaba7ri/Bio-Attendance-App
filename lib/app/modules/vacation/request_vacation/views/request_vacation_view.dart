@@ -100,7 +100,8 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                         controller.startDateController.value,
                                     label: '',
                                     hint: '',
-                                    suffixIcon: IconButton(
+                                    suffixIcon: 
+                                    IconButton(
                                         onPressed: () async {
                                           DateTime? startDate =
                                               await controller.showDatePickers(

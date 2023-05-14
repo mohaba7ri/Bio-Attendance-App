@@ -122,6 +122,7 @@ class ManagementScreen extends StatelessWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           InkWell(
             onTap: () => Get.back(),
+            
             child: Icon(Icons.keyboard_arrow_down_rounded, size: 30),
           ),
           GridView.builder(
