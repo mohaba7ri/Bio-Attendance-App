@@ -6,7 +6,7 @@ class AddEmployeeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AddEmployeeController>(
-      () => AddEmployeeController(),
+      () => AddEmployeeController(sharedPreferences: Get.find()),
     );
   }
 }

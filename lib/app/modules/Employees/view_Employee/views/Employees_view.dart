@@ -101,7 +101,7 @@ class ListEmployeeView extends GetView<ListEmployeeController> {
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       var date = snapshot.data!.docs;
-
+                    
                       return date[index]['name'] == 'name'
                           ? SizedBox()
                           : Padding(

@@ -77,6 +77,7 @@ void main() async {
               theme: ThemeData(
                 scaffoldBackgroundColor: Colors.white,
                 fontFamily: 'inter',
+                //   useMaterial3: true,
               ),
             );
           },

@@ -223,12 +223,14 @@ class DailyReportView extends GetView<DailyReportController> {
                                   double totalSalary =
                                       await controller.calculateTotalSalary();
                                   print('the salary:${controller.totalSalary}');
- dynamic totalHoursWork =
-                                    await controller.calculateTotalHoursWork();
+                                  dynamic totalHoursWork = await controller
+                                      .calculateTotalHoursWork();
                                   final pdfEmpReport = PdfDailyReport(
                                       totalSalary: totalSalary,
                                       company: controller.company,
-                                      branch: controller.branchValue,
+                                      branch: controller.branchValue == null
+                                          ? controller.branchName
+                                          : controller.branchValue,
                                       start: controller.start,
                                       user: controller.userName,
                                       allPrecens: controller.allPrecens,

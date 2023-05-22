@@ -455,39 +455,38 @@ class PresenceController extends GetxController {
           await checkVacationStatus(sharedPreferences.getString('userId')!);
 
       if (allowCheckOut) {
-        bool chechOut = await calCheckOut();
-        if (chechOut) {
-          int currentHour = currentTime!.hour * 60 + currentTime!.minute;
-          int startHour = startTime!.hour * 60 + startTime!.minute;
-          int lateHour = lateTime!.hour * 60 + lateTime!.minute;
-          int endHour = endTime!.hour * 60 + endTime!.minute;
+        // bool chechOut = await calCheckOut();
 
-          print("Check-out time has passed.");
+        int currentHour = currentTime!.hour * 60 + currentTime!.minute;
+        int startHour = startTime!.hour * 60 + startTime!.minute;
+        int lateHour = lateTime!.hour * 60 + lateTime!.minute;
+        int endHour = endTime!.hour * 60 + endTime!.minute;
 
-          CustomAlertDialog.showPresenceAlert(
-            title: "do_you_want_to_check_out".tr,
-            message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
-            onCancel: () => Get.back(),
-            onConfirm: () async {
-              await presenceCollection.doc(todayDocId).update(
-                {
-                  "checkOut": {
-                    "status": timeStatus,
-                    "date": DateTime.now().toIso8601String(),
-                    "latitude": position.latitude,
-                    "longitude": position.longitude,
-                    "address": address,
-                    "in_area": in_area,
-                    "distance": distance,
-                  },
-                  'hoursWork': hoursWork
+        print("Check-out time has passed.");
+
+        CustomAlertDialog.showPresenceAlert(
+          title: "do_you_want_to_check_out".tr,
+          message: "you_need_to_confirm_before_you_can_do_presence_now".tr,
+          onCancel: () => Get.back(),
+          onConfirm: () async {
+            await presenceCollection.doc(todayDocId).update(
+              {
+                "checkOut": {
+                  "status": timeStatus,
+                  "date": DateTime.now().toIso8601String(),
+                  "latitude": position.latitude,
+                  "longitude": position.longitude,
+                  "address": address,
+                  "in_area": in_area,
+                  "distance": distance,
                 },
-              );
-              Get.back();
-              CustomToast.successToast("success_check_out".tr);
-            },
-          );
-        }
+                'hoursWork': hoursWork
+              },
+            );
+            Get.back();
+            CustomToast.successToast("success_check_out".tr);
+          },
+        );
       } else {
         CustomAlertDialog.showPresenceAlert(
             title: 'vacations'.tr,
