@@ -55,8 +55,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                               ),
                               Spacer(),
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
+                                padding: EdgeInsets.symmetric(horizontal: 8),
                                 child: GetBuilder<VacationRequestController>(
                                   builder: (_controller) => DropdownButton2(
                                     hint: Text('Please Select'),
@@ -100,8 +99,7 @@ class RequestVacationView extends GetView<VacationRequestController> {
                                         controller.startDateController.value,
                                     label: '',
                                     hint: '',
-                                    suffixIcon: 
-                                    IconButton(
+                                    suffixIcon: IconButton(
                                         onPressed: () async {
                                           DateTime? startDate =
                                               await controller.showDatePickers(
