@@ -12,9 +12,11 @@ import 'firebase_options.dart';
 import 'package:get/get.dart';
 import 'app/helper/get_di.dart' as di;
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'app/helper/current_time.dart' as time;
 
 import 'app/routes/app_pages.dart';
 
+late DateTime currentTime;
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -30,6 +32,8 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   Map<String, Map<String, String>> _languages = await di.init();
   final sharedPreferences = await SharedPreferences.getInstance();
+  currentTime = await time.fetchInternetTime();
+  print('the intent Time : $currentTime');
 
   var fbm = FirebaseMessaging.instance;
   fbm.getToken().then((token) async {
