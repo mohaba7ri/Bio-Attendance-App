@@ -34,7 +34,6 @@ class MyVacationAppBar extends StatelessWidget with PreferredSizeWidget {
                     ),
                     child: DropdownButton2(
                       value: controller.requestValue,
-                     
                       items: controller.requestItems
                           .map((items) => DropdownMenuItem(
                                 child: Text(
